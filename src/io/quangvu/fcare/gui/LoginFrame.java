@@ -94,11 +94,9 @@ public class LoginFrame extends JFrame {
 	
 	private void success() {
 		this.dispose();
+		DBHelper.cnt();
 		DashboardFrame dashboard = new DashboardFrame();
 		dashboard.loadPanel(new CloneMainPanel(dashboard), "Quản lý clone - FCARE");
 		dashboard.display();
-		//DBHelper.cnt();
-		TagController tagController = new TagController();
-		System.out.println(tagController.get(1).toString());
 	}
 }

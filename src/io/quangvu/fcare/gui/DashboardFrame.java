@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 import org.apache.commons.io.IOUtils;
 
+import io.quangvu.fcare.helper.DBHelper;
 import io.quangvu.fcare.helper.IOHelper;
 
 import java.awt.Toolkit;
@@ -184,6 +185,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
 						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[1]);
 				if (PromptResult == JOptionPane.YES_OPTION) {
 					IOHelper.delete(".session/.temp");
+					DBHelper.disconnect();
 					System.exit(0);
 				}
 			}

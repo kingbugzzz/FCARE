@@ -10,7 +10,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-			public void run() {			
+			public void run() {		
+				
 				if (KeyHelper.validKey()) {
 					new LoginFrame();
 				} else {

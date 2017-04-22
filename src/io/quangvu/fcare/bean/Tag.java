@@ -8,14 +8,12 @@ public class Tag {
 	public Tag(){}
 	
 	public Tag(int id, String code, String name) {
-		super();
 		this.id = id;
 		this.code = code;
 		this.name = name;
 	}
 
 	public Tag(String code, String name) {
-		super();
 		this.code = code;
 		this.name = name;
 	}

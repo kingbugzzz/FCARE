@@ -1,48 +1,63 @@
 package io.quangvu.fcare.model;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import io.quangvu.fcare.bean.Tag;
 import io.quangvu.fcare.helper.BeanPaserHelper;
 import io.quangvu.fcare.helper.DBHelper;
+import io.quangvu.fcare.helper.SessionHelper;
 
-public class TagModel  {
-	
+public class TagModel {
+
 	public TagModel() {
 	}
-	
+
 	public Tag get(int id) {
 		Tag tag = null;
-		String query = "SELECT * FROM tags WHERE id=" + id ;
+		String query = "SELECT * FROM tags WHERE id=" + id;
 		System.out.println(query);
-		DBHelper.cnt();
 		tag = BeanPaserHelper.parseTag(DBHelper.executeQuery(query));
-		DBHelper.disconnect();
 		return tag;
 	}
-	
+
 	public ArrayList<Tag> all() {
-		String query = "SELECT * FROM tags";
+		String query = "SELECT * FROM tags WHERE username = '" + SessionHelper.getSessionUser() + "'";
 		System.out.println(query);
-		DBHelper.cnt();
 		ArrayList<Tag> tags = BeanPaserHelper.parseTags(DBHelper.executeQuery(query));
-		DBHelper.disconnect();
 		return tags;
 	}
-	
+
 	public boolean add(Tag tag) {
-		return false;
+		String query = "INSERT INTO tags(username, code, name) VALUES('" + SessionHelper.getSessionUser() + "','"
+				+ tag.getCode() + "','" + tag.getName() + "')";
+		System.out.println(query);
+		return DBHelper.execute(query);
 	}
-	
+
 	public boolean update(Tag oldTag, Tag newTag) {
 		return false;
 	}
-	
+
 	public boolean delete(int id) {
 		return false;
 	}
-	
+
 	public void deleteAll() {
-		
+
+	}
+
+	public Vector<Vector<String>> getTagTableDataModel() {
+		ArrayList<Tag> tags = this.all();
+		Vector<Vector<String>> data = new Vector<Vector<String>>();
+		Vector<String> row = null;
+		for (Tag tag : tags) {
+			row = new Vector<String>();
+			row.add(tag.getId() + "");
+			row.add(tag.getCode());
+			row.add(tag.getName());
+			data.add(row);
+		}
+		return data;
 	}
 }

@@ -4,8 +4,7 @@ public class SessionHelper {
 	
 	private SessionHelper(){}
 	
-	public static boolean validSession() {
-		
-		return false;
+	public static String getSessionUser() {
+		return (IOHelper.read(".session/.temp").split("#"))[3];
 	}
 }

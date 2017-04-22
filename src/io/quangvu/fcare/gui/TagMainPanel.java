@@ -2,6 +2,8 @@ package io.quangvu.fcare.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,17 +12,26 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import io.quangvu.fcare.controller.TagController;
 
 public class TagMainPanel extends JPanel {
-
+	
+	private TagController controller;
+	private JTable table;
+	
 	public TagMainPanel(DashboardFrame container) {
 		setLayout(null);
+		
+		this.controller = new TagController();
+		
 		JButton btnNew = new JButton("");
 		btnNew.setToolTipText("Thêm mới");
 		btnNew.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/additem.png")));
 		btnNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CloneCreateDialog(container, "Thêm mới clone", 520, 480).display();
+				new TagCreateDialog(container, "Thêm tag", 450, 350).display();
 			}
 		});
 		btnNew.setBounds(35, 34, 49, 23);
@@ -30,6 +41,11 @@ public class TagMainPanel extends JPanel {
 		btnXa.setToolTipText("Xóa");
 		btnXa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int[] selectedRowIndexes = table.getSelectedRows();
+				for(int i : selectedRowIndexes) {
+					System.out.println(i);
+				}
+				
 			}
 		});
 		btnXa.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash2.png")));
@@ -54,31 +70,17 @@ public class TagMainPanel extends JPanel {
 		btnCpNht.setBounds(153, 34, 49, 23);
 		add(btnCpNht);
 				
-		String cols[] = {"Stt","Key", "Name"};
-		String[][] data = {
-			{"1", "fashion", "Thời trang"},
-			{"2", "fashion", "Thời trang"},
-			{"3", "fashion", "Thời trang"},
-			{"4", "fashion", "Thời trang"},
-			{"5", "fashion", "Thời trang"},
-			{"6", "fashion", "Thời trang"},
-			{"7", "fashion", "Thời trang"},
-			{"8", "fashion", "Thời trang"},
-			{"9", "fashion", "Thời trang"},
-			{"10", "fashion", "Thời trang"}
-		};
-		
-		JTable table = new JTable(data, cols);
+		Vector<String> columnNames = new Vector<String>();
+		columnNames.add("Id");columnNames.add("Mã");columnNames.add("Tên");
+		Vector<Vector<String>> data = this.controller.getTagTableDataModel();
+		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
+		table = new JTable(tableModel);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getColumnModel().getColumn(0).setPreferredWidth(50);
 		table.getColumnModel().getColumn(2).setPreferredWidth(803);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(35, 86, 930, 419);
+		scrollPane.setBounds(35, 86, 930, 312);
 		add(scrollPane);
-		
-		JLabel lblangNui = new JLabel("Tổng: 55");
-		lblangNui.setBounds(35, 529, 104, 14);
-		add(lblangNui);
 	}
 }

@@ -89,8 +89,7 @@ public class DBHelper {
 				return false;
 			}
 			statement = connection.createStatement();
-			statement.execute(sql);
-			return true;
+			return statement.execute(sql);
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 			return false;
