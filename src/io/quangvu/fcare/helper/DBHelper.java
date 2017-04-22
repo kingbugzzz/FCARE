@@ -25,7 +25,7 @@ public class DBHelper {
 				Class.forName("com.mysql.jdbc.Driver");
 				connection = DriverManager.getConnection(connectionString, sessionData[1],sessionData[2]);
 				if (connection != null) {
-					System.out.println("Connection was created!");
+					System.out.println(">>Connection was created!");
 					return true;
 				}
 				return false;
@@ -70,7 +70,7 @@ public class DBHelper {
 				connection = DriverManager.getConnection(connectionString, user, pass);
 
 				if (connection != null) {
-					System.out.println("Connection was created!");
+					System.out.println(">>Connection was created!");
 					return true;
 				}
 				return false;
@@ -112,7 +112,7 @@ public class DBHelper {
 		if (connection != null) {
 			try {
 				connection.close();
-				System.out.println("##Connection was closed!");
+				System.out.println(">>Connection was closed!");
 			} catch (SQLException ex) {
 				System.out.println(ex.getMessage());
 			}

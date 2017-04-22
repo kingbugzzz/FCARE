@@ -31,7 +31,7 @@ public class LoginService {
 			HttpEntity entity = response.getEntity();
 			String content = EntityUtils.toString(entity, "UTF-8");
 			EntityUtils.consume(entity);
-			System.out.println(content);
+//			System.out.println(content);
 			if(content.startsWith("ok")) {
 				IOHelper.writeToFile(content, ".session/.temp");
 				result = true;
