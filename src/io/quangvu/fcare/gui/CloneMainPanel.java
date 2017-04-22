@@ -20,7 +20,7 @@ public class CloneMainPanel extends JPanel {
 		btnNew.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/additem.png")));
 		btnNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CloneCreateDialog(container, "Thêm mới clone", 520, 480).display();
+				new CloneCreateDialog(container, "Thêm mới clone", 520, 380).display();
 			}
 		});
 		btnNew.setBounds(35, 34, 49, 23);

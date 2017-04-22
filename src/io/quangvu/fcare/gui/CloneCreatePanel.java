@@ -45,52 +45,24 @@ public class CloneCreatePanel extends JPanel {
 		editorPane.setBounds(123, 93, 355, 42);
 		add(editorPane);
 		
-		JLabel lblToken = new JLabel("Token");
-		lblToken.setBounds(36, 143, 96, 14);
-		add(lblToken);
-		
-		JEditorPane editorPane_1 = new JEditorPane();
-		editorPane_1.setBounds(123, 146, 355, 42);
-		add(editorPane_1);
-		
-		JButton btnCheckToken = new JButton("Check token");
-		btnCheckToken.setBounds(123, 199, 116, 23);
-		add(btnCheckToken);
-		
 		JButton btnNewButton = new JButton("Check cookie");
-		btnNewButton.setBounds(362, 199, 116, 23);
+		btnNewButton.setBounds(123, 148, 116, 23);
 		add(btnNewButton);
 		
 		String[] tags = {"fashion", "food", "music", "sport", "movie", "trading", "dogs", "cats"};
-		JList list = new JList(tags);
-		JScrollPane scrollPane = new JScrollPane(list);
-		scrollPane.setBounds(123, 253, 116, 64);
-		add(scrollPane);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(362, 253, 116, 64);
-		add(scrollPane_1);
-		
-		JButton btnNewButton_1 = new JButton(">");
-		btnNewButton_1.setBounds(277, 253, 46, 23);
-		add(btnNewButton_1);
-		
-		JButton button = new JButton("<");
-		button.setBounds(277, 294, 46, 23);
-		add(button);
-		
-		JLabel lblTags = new JLabel("Tags");
-		lblTags.setBounds(36, 253, 46, 14);
+		JLabel lblTags = new JLabel("Tag");
+		lblTags.setBounds(36, 197, 46, 14);
 		add(lblTags);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(123, 340, 116, 20);
+		comboBox.setBounds(123, 238, 116, 20);
 		comboBox.addItem("Active");
 		comboBox.addItem("Deactive");
 		add(comboBox);
 		
 		JLabel lblTrngThi = new JLabel("Trạng thái");
-		lblTrngThi.setBounds(36, 340, 77, 14);
+		lblTrngThi.setBounds(36, 238, 77, 14);
 		add(lblTrngThi);
 		
 		JButton btnNewButton_2 = new JButton("Thêm");
@@ -100,16 +72,24 @@ public class CloneCreatePanel extends JPanel {
 				dashboardFrame.loadPanel(new CloneMainPanel(dashboardFrame), "Quản lý clone");
 			}
 		});
-		btnNewButton_2.setBounds(123, 387, 116, 23);
+		btnNewButton_2.setBounds(123, 289, 116, 23);
 		add(btnNewButton_2);
 		
 		JButton btnReset = new JButton("Nhập lại");
-		btnReset.setBounds(277, 387, 116, 23);
+		btnReset.setBounds(277, 289, 116, 23);
 		add(btnReset);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(123, 59, 355, 20);
 		add(passwordField);
+		
+		JLabel cookieStatus = new JLabel("cookie status");
+		cookieStatus.setBounds(277, 152, 201, 14);
+		add(cookieStatus);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(123, 197, 355, 20);
+		add(comboBox_1);
 
 	}
 }

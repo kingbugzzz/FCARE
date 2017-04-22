@@ -16,6 +16,28 @@ public class DBHelper {
 	private DBHelper() {
 	}
 
+	public static boolean cnt() {
+		if (connection == null) {
+			try {
+				String[] sessionData = IOHelper.read(".session/.temp").split("#");
+				String connectionString = "jdbc:mysql://" + AppConfig.get("server") + ":3306/" + AppConfig.get("server")
+						+ "?useUnicode=true&characterEncoding=utf-8";
+				Class.forName("com.mysql.jdbc.Driver");
+				connection = DriverManager.getConnection(connectionString, sessionData[1],sessionData[2]);
+				if (connection != null) {
+					System.out.println("Connection was created!");
+					return true;
+				}
+				return false;
+			} catch (Exception ex) {
+				System.out.println(ex.getMessage());
+				return false;
+			}
+		} else {
+			return true;
+		}
+	}
+
 	public static boolean connect() {
 		if (connection == null) {
 			try {

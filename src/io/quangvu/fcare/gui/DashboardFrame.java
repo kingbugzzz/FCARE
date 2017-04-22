@@ -13,6 +13,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import org.apache.commons.io.IOUtils;
+
+import io.quangvu.fcare.helper.IOHelper;
+
 import java.awt.Toolkit;
 
 public class DashboardFrame extends JFrame implements ActionListener {
@@ -178,6 +183,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
 				int PromptResult = JOptionPane.showOptionDialog(null, "Thoát khỏi hệ thống?", "Dashboard - Facabot 1.0",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[1]);
 				if (PromptResult == JOptionPane.YES_OPTION) {
+					IOHelper.delete(".session/.temp");
 					System.exit(0);
 				}
 			}

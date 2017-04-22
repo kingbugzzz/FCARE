@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import io.quangvu.fcare.helper.DBHelper;
+import io.quangvu.fcare.helper.SystemStaticHelper;
 import io.quangvu.fcare.service.LoginService;
 
 public class LoginFrame extends JFrame {
@@ -93,5 +95,6 @@ public class LoginFrame extends JFrame {
 		DashboardFrame dashboard = new DashboardFrame();
 		dashboard.loadPanel(new CloneMainPanel(dashboard), "Quản lý clone - FCARE");
 		dashboard.display();
+		DBHelper.cnt();
 	}
 }

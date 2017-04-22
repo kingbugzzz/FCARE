@@ -13,7 +13,7 @@ public class IOHelper {
 
 	private IOHelper() {
 	}
-
+	
 	public static String read(String path) {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(new File(path)));
@@ -128,6 +128,15 @@ public class IOHelper {
 			writer.flush();
 			writer.close();
 		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public static void delete(String path) {
+		try {
+			File f = new File(path);
+			f.delete();
+		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
 	}

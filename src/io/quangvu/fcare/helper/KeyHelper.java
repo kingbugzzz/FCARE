@@ -2,8 +2,6 @@ package io.quangvu.fcare.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -18,7 +16,9 @@ import org.apache.http.util.EntityUtils;
 import io.quangvu.fcare.config.AppConfig;
 
 public class KeyHelper {
-
+	
+	private KeyHelper(){}
+	
 	public static boolean validKey() {
 		try {
 			boolean result = false;
