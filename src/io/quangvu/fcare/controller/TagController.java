@@ -14,28 +14,27 @@ public class TagController {
 		this.model = new TagModel();
 	}
 	
-	public Tag get(int id) {
-		return this.model.get(id);
-	}
-	
-	public boolean add(Tag tag) {
-		return this.model.add(tag);
-	}
-	
-	
-	public boolean update(Tag tag) {
-		return this.model.update(tag);
+	public Tag get(String name) {
+		return this.model.get(name);
 	}
 	
 	public ArrayList<Tag> all() {
 		return this.model.all();
 	}
 	
-	public Vector<Vector<String>> getTagTableDataModel() {
-		return this.model.getTagTableDataModel();
+	public boolean add(Tag tag) {
+		return this.model.add(tag);
 	}
 	
-	public boolean delete(int id) {
-		return this.model.delete(id);
+	public boolean update(Tag tag) {
+		return this.model.update(tag);
+	}
+	
+	public boolean delete(String name) {
+		return this.model.delete(name);
+	}
+	
+	public Vector<Vector<String>> getTagTableDataModel() {
+		return this.model.getTagTableDataModel();
 	}
 }

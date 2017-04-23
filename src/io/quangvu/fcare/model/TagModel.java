@@ -13,36 +13,35 @@ public class TagModel {
 	public TagModel() {
 	}
 
-	public Tag get(int id) {
-		Tag tag = null;
-		String query = "SELECT * FROM tags WHERE id=" + id;
+	public Tag get(String name) {
+		String query = "SELECT * FROM tags WHERE name='" + name + "'";
 		System.out.println(query);
-		tag = BeanPaserHelper.parseTag(DBHelper.executeQuery(query));
-		return tag;
+		return BeanPaserHelper.parseTag(DBHelper.executeQuery(query));
 	}
 
 	public ArrayList<Tag> all() {
-		String query = "SELECT * FROM tags WHERE username = '" + SessionHelper.getSessionUser() + "'";
+		String query = "SELECT * FROM tags WHERE owner = '" + SessionHelper.getSessionUser() + "'";
 		System.out.println(query);
 		ArrayList<Tag> tags = BeanPaserHelper.parseTags(DBHelper.executeQuery(query));
 		return tags;
 	}
 
 	public boolean add(Tag tag) {
-		String query = "INSERT INTO tags(username, code, name) VALUES('" + SessionHelper.getSessionUser() + "','"
-				+ tag.getCode() + "','" + tag.getName() + "')";
-		System.out.println(query);
-		return DBHelper.execute(query);
-	}
-	
-	public boolean update(Tag newTag) {
-		String query = "UPDATE tags SET code='" + newTag.getCode() + "', name='" + newTag.getName() + "' WHERE id = " + newTag.getId();
+		String query = "INSERT INTO tags(owner, name, description) VALUES('" + SessionHelper.getSessionUser() + "','"
+				 + tag.getName() + "','" + tag.getDescription() + "')";
 		System.out.println(query);
 		return DBHelper.execute(query);
 	}
 
-	public boolean delete(int id) {
-		String query = "DELETE FROM tags WHERE id=" + id;
+	public boolean update(Tag newTag) {
+		String query = "UPDATE tags SET description='" + newTag.getDescription() + "' WHERE name = '"
+				+ newTag.getName() + "' AND owner='" + SessionHelper.getSessionUser() + "'";
+		System.out.println(query);
+		return DBHelper.execute(query);
+	}
+
+	public boolean delete(String name) {
+		String query = "DELETE FROM tags WHERE name='" + name + "'";
 		return DBHelper.execute(query);
 	}
 
@@ -56,9 +55,8 @@ public class TagModel {
 		Vector<String> row = null;
 		for (Tag tag : tags) {
 			row = new Vector<String>();
-			row.add(tag.getId() + "");
-			row.add(tag.getCode());
 			row.add(tag.getName());
+			row.add(tag.getDescription());
 			data.add(row);
 		}
 		return data;

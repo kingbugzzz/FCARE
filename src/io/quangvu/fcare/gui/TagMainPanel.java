@@ -48,7 +48,7 @@ public class TagMainPanel extends JPanel {
 				int[] selectedRowIndexes = table.getSelectedRows();
 				for(int i : selectedRowIndexes) {
 					System.out.println(table.getValueAt(i, 0));
-					controller.delete(Integer.parseInt(table.getValueAt(i, 0).toString()));
+					controller.delete(table.getValueAt(i, 0).toString());
 					updateTable();
 				}
 				
@@ -75,10 +75,9 @@ public class TagMainPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				int[] selectedRowIndexes = table.getSelectedRows();
 				if(selectedRowIndexes.length == 1) {
-					int id = Integer.parseInt(table.getValueAt(selectedRowIndexes[0], 0).toString());
-					String code = table.getValueAt(selectedRowIndexes[0], 1).toString();
-					String name = table.getValueAt(selectedRowIndexes[0], 2).toString();
-					new TagUpdateDialog(container, "Thêm tag", 450, 350, new Tag(id, code, name)).display();
+					String name = table.getValueAt(selectedRowIndexes[0], 0).toString();
+					String description = table.getValueAt(selectedRowIndexes[0], 1).toString();
+					new TagUpdateDialog(container, "Thêm tag", 450, 350, new Tag(name, description)).display();
 				}else {
 					JOptionPane.showMessageDialog(new JFrame(), "Chọn 1 thôi!");
 				}
@@ -105,9 +104,8 @@ public class TagMainPanel extends JPanel {
 	}
 	
 	private void initTableHeader() {
-		this.columnNames.add("Id");
-		this.columnNames.add("Mã");
-		this.columnNames.add("Tên");
+		this.columnNames.add("Tên thẻ");
+		this.columnNames.add("Mô tả");
 	}
 	
 	private void loadTableData() {

@@ -2,33 +2,20 @@ package io.quangvu.fcare.bean;
 
 public class Tag {
 	
-	private int id;
-	private String code, name;
+	private String owner, name, description;
 	
 	public Tag(){}
 	
-	public Tag(int id, String code, String name) {
-		this.id = id;
-		this.code = code;
+	public Tag(String name, String description) {
 		this.name = name;
+		this.description = description;
 	}
 
-	public Tag(String code, String name) {
-		this.code = code;
-		this.name = name;
+	public String getDescription() {
+		return this.description;
 	}
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getName() {
 		return name;
@@ -39,6 +26,6 @@ public class Tag {
 
 	@Override
 	public String toString() {
-		return "Tag [id=" + id + ", code=" + code + ", name=" + name + "]";
+		return "Tag [name=" + name + ", description=" + description + "]";
 	}
 }

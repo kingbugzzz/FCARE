@@ -83,23 +83,23 @@ public class DBHelper {
 		}
 	}
 
-	public static boolean execute(String sql) {
+	public static boolean execute(String query) {
 		try {
-			if (sql == null || sql == "") {
+			if (query == null || query == "") {
 				return false;
 			}
 			statement = connection.createStatement();
-			return statement.execute(sql);
+			return statement.execute(query);
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 			return false;
 		}
 	}
 
-	public static ResultSet executeQuery(String sql) {
+	public static ResultSet executeQuery(String query) {
 		try {
 			statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(sql);
+			ResultSet rs = statement.executeQuery(query);
 			return rs;
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());

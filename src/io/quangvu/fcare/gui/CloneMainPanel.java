@@ -2,6 +2,7 @@ package io.quangvu.fcare.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,17 +11,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import io.quangvu.fcare.controller.CloneController;
 
 public class CloneMainPanel extends JPanel {
-
+	
+	private CloneController controller;
+	private JTable table;
+	private DefaultTableModel tabelModel;
+	private Vector<String> tableHeader;
+	private Vector<Vector<String>> tableData; 
+	
 	public CloneMainPanel(DashboardFrame container) {
 		setLayout(null);
+				
 		JButton btnNew = new JButton("");
 		btnNew.setToolTipText("Thêm mới");
 		btnNew.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/additem.png")));
 		btnNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CloneCreateDialog(container, "Thêm mới clone", 520, 380).display();
+				new CloneCreateDialog(container, "Thêm mới clone", 530, 460).display();
 			}
 		});
 		btnNew.setBounds(35, 34, 49, 23);
@@ -54,54 +65,25 @@ public class CloneMainPanel extends JPanel {
 		btnCpNht.setBounds(153, 34, 49, 23);
 		add(btnCpNht);
 				
-		String cols[] = {"Stt","Uid", "Tên clone", "Tag", "Friends", "F.req", "F.acp", "Gma", "Lin", "Shn", "Hiện trạng", "Lat" };
-		String[][] data = {
-			{"1", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "active", "18-Apr-2017 08:32 AM"},
-			{"2", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "active", "18-Apr-2017 08:32 AM"},
-			{"3", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "active", "18-Apr-2017 08:32 AM"},
-			{"4", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "active", "18-Apr-2017 08:32 AM"},
-			{"5", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "active", "18-Apr-2017 08:32 AM"},
-			{"6", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "active", "18-Apr-2017 08:32 AM"},
-			{"7", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "active", "18-Apr-2017 08:32 AM"},
-			{"8", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "active", "18-Apr-2017 08:32 AM"},
-			{"9", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "active", "18-Apr-2017 08:32 AM"},
-			{"10", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "active", "18-Apr-2017 08:32 AM"},
-			
-			{"11", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"12", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"13", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"14", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"15", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"16", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"17", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"18", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"19", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"20", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"21", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"22", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"23", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"24", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"25", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"26", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"27", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"28", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"29", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"},
-			{"30", "214235678679789", "KingBugz", "Thả thính", "120", "100", "69", "80", "138", "22", "inactive", "18-Apr-2017 08:32 AM"}
-		};
 		
-		JTable table = new JTable(data, cols);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getColumnModel().getColumn(0).setPreferredWidth(40);
+		this.controller = new CloneController();
+		this.tableHeader = this.controller.getTableHeader();
+		this.tableData = this.controller.getTableDataModel();
+		this.tabelModel = new DefaultTableModel(this.tableData, this.tableHeader);
+		this.table = new JTable(this.tabelModel);
+		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//		table.getColumnModel().getColumn(0).setPreferredWidth(40);
 		table.getColumnModel().getColumn(1).setPreferredWidth(125);
 		table.getColumnModel().getColumn(2).setPreferredWidth(135);
-		table.getColumnModel().getColumn(4).setPreferredWidth(55);
-		table.getColumnModel().getColumn(5).setPreferredWidth(55);
-		table.getColumnModel().getColumn(6).setPreferredWidth(55);
-		table.getColumnModel().getColumn(7).setPreferredWidth(55);
-		table.getColumnModel().getColumn(8).setPreferredWidth(55);
-		table.getColumnModel().getColumn(9).setPreferredWidth(55);
-		table.getColumnModel().getColumn(10).setPreferredWidth(75);
-		table.getColumnModel().getColumn(11).setPreferredWidth(130);
+//		table.getColumnModel().getColumn(4).setPreferredWidth(55);
+//		table.getColumnModel().getColumn(5).setPreferredWidth(55);
+//		table.getColumnModel().getColumn(6).setPreferredWidth(55);
+//		table.getColumnModel().getColumn(7).setPreferredWidth(55);
+//		table.getColumnModel().getColumn(8).setPreferredWidth(55);
+//		table.getColumnModel().getColumn(9).setPreferredWidth(55);
+//		table.getColumnModel().getColumn(10).setPreferredWidth(75);
+		table.getColumnModel().getColumn(12).setPreferredWidth(120);
+		table.getColumnModel().getColumn(13).setPreferredWidth(120);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(35, 86, 930, 422);
@@ -152,5 +134,11 @@ public class CloneMainPanel extends JPanel {
 		button.setToolTipText("Kéo like page");
 		button.setBounds(587, 34, 42, 23);
 		add(button);
+	}
+	
+	private void updateTable() {
+		this.tableData = this.controller.getTableDataModel();
+		this.tabelModel.setDataVector(this.tableData, this.tableHeader);
+		this.table.setModel(this.tabelModel);
 	}
 }

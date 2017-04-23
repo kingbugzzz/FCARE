@@ -75,7 +75,6 @@ public class WebDriverManager {
 		return phantomjsDriver;
 	}
 
-	
 	public FirefoxDriver getFirefoxDriver(String profileName) {
 		if (!profileName.equals(null) || !profileName.equals("")) {
 			System.setProperty("webdriver.gecko.driver", AppConfig.get("gecko_driver"));
@@ -89,7 +88,6 @@ public class WebDriverManager {
 		}
 		return null;
 	}
-	
 	
 	public FirefoxDriver getFirefoxDriver() {
 		System.setProperty("webdriver.gecko.driver", AppConfig.get("gecko_driver"));
