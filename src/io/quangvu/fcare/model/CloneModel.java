@@ -25,7 +25,7 @@ public class CloneModel {
 	}
 
 	public ArrayList<Clone> all() {
-		String query = "SELECT * FROM clones WHERE owner = '" + SessionHelper.getSessionUser() + "'";
+		String query = "SELECT * FROM clones WHERE owner = '" + SessionHelper.getSessionUser() + "' order by created_at";
 		System.out.println(query);
 		return BeanPaserHelper.parseClones(DBHelper.executeQuery(query));
 	}

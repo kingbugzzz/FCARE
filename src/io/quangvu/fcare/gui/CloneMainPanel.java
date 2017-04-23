@@ -100,13 +100,13 @@ public class CloneMainPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnKtBn.setBounds(476, 34, 49, 23);
+		btnKtBn.setBounds(575, 34, 49, 23);
 		add(btnKtBn);
 		
 		JButton btnAddMem = new JButton("");
 		btnAddMem.setToolTipText("Kéo mem group");
 		btnAddMem.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/group.png")));
-		btnAddMem.setBounds(535, 34, 42, 23);
+		btnAddMem.setBounds(634, 34, 42, 23);
 		add(btnAddMem);
 		
 		JComboBox comboBox = new JComboBox();
@@ -116,7 +116,7 @@ public class CloneMainPanel extends JPanel {
 		comboBox.addItem("Đang active");
 		comboBox.addItem("Đang deactive");
 		comboBox.addItem("Checkpoint");
-		comboBox.setBounds(811, 37, 151, 20);
+		comboBox.setBounds(858, 37, 104, 20);
 		add(comboBox);
 		
 		JButton btnPlanlist = new JButton("");
@@ -126,14 +126,20 @@ public class CloneMainPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnPlanlist.setBounds(417, 34, 49, 23);
+		btnPlanlist.setBounds(516, 34, 49, 23);
 		add(btnPlanlist);
 		
 		JButton button = new JButton("");
 		button.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/like.png")));
 		button.setToolTipText("Kéo like page");
-		button.setBounds(587, 34, 42, 23);
+		button.setBounds(686, 34, 42, 23);
 		add(button);
+		
+		JButton btnCheck = new JButton("");
+		btnCheck.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/cl.png")));
+		btnCheck.setToolTipText("Check live");
+		btnCheck.setBounds(395, 34, 49, 23);
+		add(btnCheck);
 	}
 	
 	private void updateTable() {
