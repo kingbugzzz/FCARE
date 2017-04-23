@@ -22,11 +22,20 @@ public class TagController {
 		return this.model.add(tag);
 	}
 	
+	
+	public boolean update(Tag tag) {
+		return this.model.update(tag);
+	}
+	
 	public ArrayList<Tag> all() {
 		return this.model.all();
 	}
 	
 	public Vector<Vector<String>> getTagTableDataModel() {
 		return this.model.getTagTableDataModel();
+	}
+	
+	public boolean delete(int id) {
+		return this.model.delete(id);
 	}
 }

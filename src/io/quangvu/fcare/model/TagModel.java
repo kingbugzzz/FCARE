@@ -34,13 +34,16 @@ public class TagModel {
 		System.out.println(query);
 		return DBHelper.execute(query);
 	}
-
-	public boolean update(Tag oldTag, Tag newTag) {
-		return false;
+	
+	public boolean update(Tag newTag) {
+		String query = "UPDATE tags SET code='" + newTag.getCode() + "', name='" + newTag.getName() + "' WHERE id = " + newTag.getId();
+		System.out.println(query);
+		return DBHelper.execute(query);
 	}
 
 	public boolean delete(int id) {
-		return false;
+		String query = "DELETE FROM tags WHERE id=" + id;
+		return DBHelper.execute(query);
 	}
 
 	public void deleteAll() {

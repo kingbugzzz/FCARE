@@ -1,18 +1,16 @@
 package io.quangvu.fcare.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class CloneCreatePanel extends JPanel {
 	
@@ -45,9 +43,9 @@ public class CloneCreatePanel extends JPanel {
 		editorPane.setBounds(123, 93, 355, 42);
 		add(editorPane);
 		
-		JButton btnNewButton = new JButton("Check cookie");
-		btnNewButton.setBounds(123, 148, 116, 23);
-		add(btnNewButton);
+		JButton btnCheckLive = new JButton("Check live");
+		btnCheckLive.setBounds(123, 148, 160, 23);
+		add(btnCheckLive);
 		
 		String[] tags = {"fashion", "food", "music", "sport", "movie", "trading", "dogs", "cats"};
 		
@@ -56,7 +54,7 @@ public class CloneCreatePanel extends JPanel {
 		add(lblTags);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(123, 238, 116, 20);
+		comboBox.setBounds(123, 238, 160, 20);
 		comboBox.addItem("Active");
 		comboBox.addItem("Deactive");
 		add(comboBox);
@@ -72,24 +70,24 @@ public class CloneCreatePanel extends JPanel {
 				dashboardFrame.loadPanel(new CloneMainPanel(dashboardFrame), "Quản lý clone");
 			}
 		});
-		btnNewButton_2.setBounds(123, 289, 116, 23);
+		btnNewButton_2.setBounds(123, 289, 160, 23);
 		add(btnNewButton_2);
 		
 		JButton btnReset = new JButton("Nhập lại");
-		btnReset.setBounds(277, 289, 116, 23);
+		btnReset.setBounds(304, 289, 174, 23);
 		add(btnReset);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(123, 59, 355, 20);
 		add(passwordField);
 		
-		JLabel cookieStatus = new JLabel("cookie status");
-		cookieStatus.setBounds(277, 152, 201, 14);
-		add(cookieStatus);
-		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setBounds(123, 197, 355, 20);
 		add(comboBox_1);
+		
+		JButton btnNewCookie = new JButton("New cookie");
+		btnNewCookie.setBounds(304, 148, 174, 23);
+		add(btnNewCookie);
 
 	}
 }
