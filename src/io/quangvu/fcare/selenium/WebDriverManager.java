@@ -3,6 +3,7 @@ package io.quangvu.fcare.selenium;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
@@ -11,8 +12,6 @@ import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.quangvu.fcare.config.AppConfig;
-
-
 
 public class WebDriverManager {
 
@@ -51,23 +50,15 @@ public class WebDriverManager {
 		return phantomjsDriver;
 	}
 
-	public PhantomJSDriver getPhantomJSDriver(String referer, String userAgent, ArrayList<String> cliArgsCap) {
+	public PhantomJSDriver getPhantomJSDriver(String userAgent) {
 		if (phantomjsDriver == null) {
 			DesiredCapabilities desireCaps = DesiredCapabilities.phantomjs();
 			desireCaps.setJavascriptEnabled(true);
 			desireCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
 					AppConfig.get("phantomjs_execution_path"));
 
-			if (referer != null) {
-				desireCaps.setCapability("phantomjs.page.customHeaders.Referer", referer);
-			}
-
 			if (userAgent != null) {
 				desireCaps.setCapability("phantomjs.page.settings.userAgent", userAgent);
-			}
-
-			if (cliArgsCap != null) {
-				desireCaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, cliArgsCap);
 			}
 
 			phantomjsDriver = new PhantomJSDriver(desireCaps);
@@ -88,10 +79,19 @@ public class WebDriverManager {
 		}
 		return null;
 	}
-	
+
 	public FirefoxDriver getFirefoxDriver() {
 		System.setProperty("webdriver.gecko.driver", AppConfig.get("gecko_driver"));
-		FirefoxDriver driver = new FirefoxDriver();
+		DesiredCapabilities dc = DesiredCapabilities.firefox();
+		dc.setCapability("marionette", true);
+		FirefoxDriver driver = new FirefoxDriver(dc);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		return driver;
+	}
+
+	public ChromeDriver getChromeDriver() {
+		System.setProperty("webdriver.chrome.driver", AppConfig.get("chrome_driver"));
+		ChromeDriver driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
 	}
