@@ -38,8 +38,16 @@ public class CloneController {
 		return this.model.updateField(field, value);
 	}
 	
+	public void updateStatus(ArrayList<String> ids, String status) {
+		this.model.updateStatus(ids, status);
+	}
+	
 	public boolean delete(String id) {
 		return this.model.delete(id);
+	}
+	
+	public void delete(ArrayList<String> ids) {
+		this.model.delete(ids);
 	}
 
 	public Vector<String> getTableHeader() {

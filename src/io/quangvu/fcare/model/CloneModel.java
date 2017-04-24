@@ -49,7 +49,8 @@ public class CloneModel {
 		query += "name='" + clone.getName() + "',";
 		query += "cookie='" + clone.getCookie() + "',";
 		query += "status='" + clone.getStatus() + "'";
-		query += " WHERE id='" + clone.getId() + "' AND owner =' " + SessionHelper.getSessionUser() + "'";
+		query += " WHERE id='" + clone.getId() + "' AND owner ='" + SessionHelper.getSessionUser() + "'";
+		System.out.println(query);
 		return DBHelper.execute(query);
 	}
 
@@ -71,12 +72,37 @@ public class CloneModel {
 		String query = "DELETE FROM clones WHERE id='" + id + "' AND owner='" + SessionHelper.getSessionUser() + "'";
 		return DBHelper.execute(query);
 	}
-
+	
+	public void delete(ArrayList<String> ids) {
+		String strIds = "";
+		for(String id : ids) {
+			strIds += "'" + id + "',";
+		}
+		System.out.println(strIds);
+		strIds = strIds.substring(0, strIds.length()-1);
+		String query = "DELETE FROM clones WHERE id in (" + strIds + ") AND owner='" + SessionHelper.getSessionUser() + "'";
+		System.out.println(query);
+		DBHelper.execute(query);
+	}
+	
+	public void updateStatus(ArrayList<String> ids, String status) {
+		String strIds = "";
+		for(String id : ids) {
+			strIds += "'" + id + "',";
+		}
+		System.out.println(strIds);
+		strIds = strIds.substring(0, strIds.length()-1);
+		String query = "UPDATE clones set status='" + status + "' WHERE id in (" + strIds + ") AND owner='" + SessionHelper.getSessionUser() + "'";
+		System.out.println(query);
+		DBHelper.execute(query);
+	}
+	
 	public Vector<String> getTableHeader() {
 		Vector<String> header = new Vector<String>();
 		header.add("tag");
 		header.add("id");
 		header.add("tên");
+		header.add("status");
 		header.add("friend");
 		header.add("f.req");
 		header.add("f.acp");
@@ -85,8 +111,7 @@ public class CloneModel {
 		header.add("số comment");
 		header.add("số mem add");
 		header.add("số page load");
-		header.add("status");
-		header.add("ngày tạo");
+		header.add("ngày vào tool");
 		header.add("lần hoạt động cuối");
 		return header;
 	}
@@ -100,6 +125,7 @@ public class CloneModel {
 			row.add(clone.getTag()); //tag
 			row.add(clone.getId());//id
 			row.add(clone.getName());//name
+			row.add(clone.getStatus()); //status
 			row.add(String.valueOf(clone.getNumFriend())); //num friend
 			row.add(String.valueOf(clone.getNumFriendReq())); //f.req
 			row.add(String.valueOf(clone.getNumFriendAcp())); // f.acp
@@ -108,7 +134,6 @@ public class CloneModel {
 			row.add(String.valueOf(clone.getNumComment()));//số comment
 			row.add(String.valueOf(clone.getNumGma())); //số gma
 			row.add(String.valueOf(clone.getNumPll()));//số pl
-			row.add(clone.getStatus()); //status
 			row.add(clone.getCreatedAt());// created at
 			row.add(clone.getUpdateAt());//last active
 			data.add(row);

@@ -2,17 +2,22 @@ package io.quangvu.fcare.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import io.quangvu.fcare.bean.Clone;
+import io.quangvu.fcare.bean.Tag;
 import io.quangvu.fcare.controller.CloneController;
 
 public class CloneMainPanel extends JPanel {
@@ -22,6 +27,7 @@ public class CloneMainPanel extends JPanel {
 	private DefaultTableModel tabelModel;
 	private Vector<String> tableHeader;
 	private Vector<Vector<String>> tableData; 
+	private JLabel sum;
 	
 	public CloneMainPanel(DashboardFrame container) {
 		setLayout(null);
@@ -41,6 +47,14 @@ public class CloneMainPanel extends JPanel {
 		btnXa.setToolTipText("Xóa");
 		btnXa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int[] selectedRowIndexes = table.getSelectedRows();
+				ArrayList<String> ids = new ArrayList<String>();
+				for(int i : selectedRowIndexes) {
+					System.out.println(table.getValueAt(i, 1));
+					ids.add(table.getValueAt(i, 1).toString());
+				}
+				controller.delete(ids);
+				updateTable();
 			}
 		});
 		btnXa.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash2.png")));
@@ -48,18 +62,55 @@ public class CloneMainPanel extends JPanel {
 		add(btnXa);
 		
 		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int[] selectedRowIndexes = table.getSelectedRows();
+				ArrayList<String> ids = new ArrayList<String>();
+				for(int i : selectedRowIndexes) {
+					System.out.println(table.getValueAt(i, 1));
+					ids.add(table.getValueAt(i, 1).toString());
+				}
+				controller.updateStatus(ids, "active");
+				updateTable();
+			}
+		});
 		btnNewButton.setToolTipText("Tạm khóa");
 		btnNewButton.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/active.png")));
 		btnNewButton.setBounds(250, 34, 42, 23);
 		add(btnNewButton);
 		
 		JButton btnDeactive = new JButton("");
+		btnDeactive.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int[] selectedRowIndexes = table.getSelectedRows();
+				ArrayList<String> ids = new ArrayList<String>();
+				for(int i : selectedRowIndexes) {
+					System.out.println(table.getValueAt(i, 1));
+					ids.add(table.getValueAt(i, 1).toString());
+				}
+				controller.updateStatus(ids, "deactive");
+				updateTable();
+			}
+		});
 		btnDeactive.setToolTipText("Mở khóa");
 		btnDeactive.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/block.png")));
 		btnDeactive.setBounds(302, 34, 42, 23);
 		add(btnDeactive);
 		
 		JButton btnCpNht = new JButton("");
+		btnCpNht.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int[] selectedRowIndexes = table.getSelectedRows();
+				if(selectedRowIndexes.length == 1) {
+					
+					Clone clone = controller.get(String.valueOf(table.getValueAt(selectedRowIndexes[0], 1)));
+					
+					new CloneUpdateDialog(container, "Cập nhật clone", 530, 450, clone).display();
+				}else {
+					JOptionPane.showMessageDialog(new JFrame(), "Chọn 1 thôi!");
+				}
+			}
+		});
 		btnCpNht.setToolTipText("Chỉnh sửa");
 		btnCpNht.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/edit_40b.png")));
 		btnCpNht.setBounds(153, 34, 49, 23);
@@ -89,9 +140,10 @@ public class CloneMainPanel extends JPanel {
 		scrollPane.setBounds(35, 86, 930, 422);
 		add(scrollPane);
 		
-		JLabel lblangNui = new JLabel("Tổng: 55");
-		lblangNui.setBounds(35, 529, 104, 14);
-		add(lblangNui);
+		sum = new JLabel("Tổng:");
+		sum.setBounds(35, 529, 85, 14);
+		sum.setText("Tổng:" + this.table.getRowCount());
+		add(sum);
 		
 		JButton btnKtBn = new JButton("");
 		btnKtBn.setToolTipText("Kéo friends");
@@ -136,9 +188,9 @@ public class CloneMainPanel extends JPanel {
 		add(button);
 		
 		JButton btnCheck = new JButton("");
-		btnCheck.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/cl.png")));
+		btnCheck.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/death2-16.png")));
 		btnCheck.setToolTipText("Check live");
-		btnCheck.setBounds(395, 34, 49, 23);
+		btnCheck.setBounds(395, 34, 70, 23);
 		add(btnCheck);
 	}
 	
@@ -146,5 +198,10 @@ public class CloneMainPanel extends JPanel {
 		this.tableData = this.controller.getTableDataModel();
 		this.tabelModel.setDataVector(this.tableData, this.tableHeader);
 		this.table.setModel(this.tabelModel);
+		table.getColumnModel().getColumn(1).setPreferredWidth(125);
+		table.getColumnModel().getColumn(2).setPreferredWidth(135);
+		table.getColumnModel().getColumn(12).setPreferredWidth(120);
+		table.getColumnModel().getColumn(13).setPreferredWidth(120);
+		this.sum.setText("Tổng:" + this.table.getRowCount());
 	}
 }

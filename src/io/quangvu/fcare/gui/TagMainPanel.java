@@ -51,7 +51,6 @@ public class TagMainPanel extends JPanel {
 					controller.delete(table.getValueAt(i, 0).toString());
 					updateTable();
 				}
-				
 			}
 		});
 		btnXa.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash2.png")));

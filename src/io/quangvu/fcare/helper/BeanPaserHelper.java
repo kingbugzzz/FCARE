@@ -44,7 +44,9 @@ public class BeanPaserHelper {
 			while (rs.next()) {
 				clone.setTag(rs.getString("tag"));
 				clone.setId(rs.getString("id"));
+				clone.setPassword(rs.getString("password"));
 				clone.setName(rs.getString("name"));
+				clone.setCookie(rs.getString("cookie"));
 				clone.setNumFriend(Integer.parseInt(rs.getString("num_friend")));
 				clone.setNumFriendReq(Integer.parseInt(rs.getString("num_friend_req")));
 				clone.setNumFriendAcp(Integer.parseInt(rs.getString("num_friend_acp")));
