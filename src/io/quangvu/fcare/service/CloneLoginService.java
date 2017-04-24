@@ -15,8 +15,6 @@ public class CloneLoginService {
 		PhantomJSDriver driver = WebDriverManager.getInstance().getPhantomJSDriver();
 		driver.get("https://mbasic.facebook.com/");
 		System.out.println(driver.getTitle() + "-" + driver.getCurrentUrl());
-		
-		
 		driver.findElement(By.name("email")).clear();
 		driver.findElement(By.name("email")).sendKeys(id);
 		driver.findElement(By.name("pass")).clear();
@@ -26,6 +24,7 @@ public class CloneLoginService {
 			System.out.println("got checkpoint!");
 		}
 		else {
+			System.out.println(driver.getTitle() + " - " + driver.getCurrentUrl());
 			/**upload avatar
 			driver.get("https://mbasic.facebook.com/profile_picture/?returnuri=profile.php");
 			System.out.println(driver.getCurrentUrl());
@@ -67,7 +66,7 @@ public class CloneLoginService {
 			System.out.println("done!");
 			*/
 			
-			/** add suggestion friend*/
+			/** add suggestion friend
 			driver.get("https://mbasic.facebook.com/friends/center/suggestions/?fb_ref=psa&_rdr");
 			System.out.println(driver.getTitle());
 			List<WebElement> addFriendButtons = driver.findElementsByXPath("//*[@id='friends_center_main']/div[1]/div/table/tbody/tr/td[2]/div[2]/a[1]");
@@ -84,7 +83,7 @@ public class CloneLoginService {
 					ex.printStackTrace();
 					continue;
 				}
-			}
+			}*/
 		}
 		driver.quit();
 	}
