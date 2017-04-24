@@ -12,15 +12,13 @@ public class Main {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {		
-//				if (KeyHelper.validKey()) {
-//					new LoginFrame();
-//				} else {
-//					new KeyCheckerFrame();
-//				}
+				if (KeyHelper.validKey()) {
+					new LoginFrame();
+				} else {
+					new KeyCheckerFrame();
+				}
 				
-				CloneLoginService.login("100016383018168", "Lol686868", "");
-				
-				
+//				CloneLoginService.login("100016383018168", "Lol686868", "");
 			}
 		});
 	}
