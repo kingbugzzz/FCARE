@@ -18,7 +18,6 @@ public class Main {
 //					new KeyCheckerFrame();
 //				}
 				
-				
 				CloneLoginService.login("100016383018168", "Lol686868", "");
 				
 				
