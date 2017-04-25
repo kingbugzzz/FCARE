@@ -78,6 +78,7 @@ public class CloneCareService {
 		WebElement fileInput = driver.findElement(By.name("file1"));
 		System.out.println("choosing image to upload");
 		fileInput.sendKeys(imagePath);
+		System.out.println(imagePath);
 		System.out.println("uploading...");
 		driver.findElementByXPath("//*[@id='root']/table/tbody/tr/td/form/div[3]/input[1]").click();
 		System.out.println("Writing status");
@@ -180,6 +181,46 @@ public class CloneCareService {
 		driver.get("https://mbasic.facebook.com/" + uid);
 		driver.findElementByXPath("//*[@id='root']/div[1]/div[1]/div[3]/table/tbody/tr/td[1]/a").click();
 		System.out.println("added");
+	}
+	
+	public void acceptFriendByUid(String uid) {
+		System.out.println("accept friend[" + uid + "]");
+		driver.get("https://mbasic.facebook.com/" + uid);
+		driver.findElementByXPath("//*[@id='root']/div[1]/div[1]/div[3]/table/tbody/tr/td[1]/a").click();
+		System.out.println("accept");
+	}
+	
+	private ArrayList<String> getAcceptFriendUid() {
+		this.driver.get("https://mbasic.facebook.com/friends/center/requests/#friends_center_main");
+		ArrayList<String> listUid = new ArrayList<String>();
+		List<WebElement> addLinks = driver
+				.findElementsByXPath("//*[@id='friends_center_main']/div[1]/div/table/tbody/tr/td[2]/div[2]/a[1]");
+		for(WebElement link : addLinks) {
+			String uid = ((link.getAttribute("href").split("confirm=")[1]).split("&"))[0];
+			listUid.add(uid);
+		}
+		return listUid;
+	}
+	
+	public void acceptFriends(int limit) {
+		System.out.println(">>>accept friends<<<");
+		int count = 0;
+		for(String uid : this.getAcceptFriendUid()) {
+			if(count == limit) {
+				System.out.println("reached to limit [" + limit + "]-> done!");
+				break;
+			}else {
+				this.acceptFriendByUid(uid);
+				count++;
+				System.out.println("wait 5 seconds for next one");
+				try {
+					Thread.sleep(5000);
+				}catch(Exception ex) {
+					ex.printStackTrace();
+					continue;
+				}
+			}
+		}
 	}
 	
 	public void logout() {

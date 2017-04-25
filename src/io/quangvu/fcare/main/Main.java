@@ -48,7 +48,14 @@ public class Main {
 		
 		//cloneCareService.addFriendByUid("phong.tran.2010");
 		
-		cloneCareService.addSuggesFriends(5);
+		//cloneCareService.addSuggesFriends(5);
+		
+//		cloneCareService.acceptFriends(5);
+		
+		//cloneCareService.postImageStatus(IOHelper.getRandomImagePath("resource/img/tha-thinh"), "Em buồn em nhớ, một ngày trong veo...");
+		
+//		cloneCareService.postLinkStatus("https://www.youtube.com/watch?v=JhWmRVwNhO4&t=2355s",
+//									"Trong Người Phán Xử Tập 7, Kẻ giấu mặt đã đứng sau vụ ám sát Phan Quân sẽ xuất hiện. Đó là một nhân vật khét tiếng trong giới giang hồ.");
 		
 		cloneCareService.logout();
 		
