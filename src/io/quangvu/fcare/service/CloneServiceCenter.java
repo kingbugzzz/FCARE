@@ -11,7 +11,7 @@ import io.quangvu.fcare.bean.Clone;
 import io.quangvu.fcare.model.CloneModel;
 import io.quangvu.fcare.selenium.WebDriverManager;
 
-public class CloneCareService {
+public class CloneServiceCenter {
 
 	private Clone clone;
 	private CloneModel cloneModel;
@@ -19,7 +19,7 @@ public class CloneCareService {
 	private String userAgent;
 	private boolean isLoggedIn = false;
 
-	public CloneCareService(Clone clone) {
+	public CloneServiceCenter(Clone clone) {
 		this.cloneModel = new CloneModel();
 		this.clone = clone;
 		this.userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36 Windows";

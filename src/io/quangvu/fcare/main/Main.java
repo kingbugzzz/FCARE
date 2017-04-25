@@ -10,7 +10,7 @@ import io.quangvu.fcare.helper.DBHelper;
 import io.quangvu.fcare.helper.IOHelper;
 import io.quangvu.fcare.helper.KeyHelper;
 import io.quangvu.fcare.model.CloneModel;
-import io.quangvu.fcare.service.CloneCareService;
+import io.quangvu.fcare.service.CloneServiceCenter;
 
 public class Main {
 	
@@ -19,11 +19,11 @@ public class Main {
 	}
 	
 	public Main() {
-//		this.run();
-		this.cloneServiceDebugger();
+		this.start();
+		//this.cloneServiceDebugger();
 	}
 	
-	private void run() {
+	private void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				if (KeyHelper.validKey()) {
@@ -41,7 +41,7 @@ public class Main {
 		CloneModel cloneModel = new CloneModel();
 		//Test Clone 6 - Ngô Hữu Tường
 		Clone clone = cloneModel.get("100016413638900");
-		CloneCareService cloneCareService = new CloneCareService(clone);
+		CloneServiceCenter cloneCareService = new CloneServiceCenter(clone);
 		cloneCareService.login();
 		
 		//cloneCareService.changeAvatar(IOHelper.getRandomImagePath("resource/avatar/girls"));

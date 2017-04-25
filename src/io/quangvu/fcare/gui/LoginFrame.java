@@ -78,7 +78,7 @@ public class LoginFrame extends JFrame {
 		btnNewButton.setBounds(119, 112, 129, 23);
 		contentPane.add(btnNewButton);
 		
-		setTitle("Đăng nhập hệ thống - Facebot 1.0");
+		setTitle("Đăng nhập hệ thống - FCARE");
 		setBounds(100, 100, 414, 202);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,7 +96,7 @@ public class LoginFrame extends JFrame {
 		this.dispose();
 		DBHelper.cnt();
 		DashboardFrame dashboard = new DashboardFrame();
-		dashboard.loadPanel(new CloneMainPanel(dashboard), "Quản lý clone - FCARE");
+		dashboard.loadPanel(new CloneMainPanel(dashboard), "Quản lý clone");
 		dashboard.display();
 	}
 }

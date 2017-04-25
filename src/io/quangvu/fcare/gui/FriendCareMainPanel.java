@@ -20,7 +20,6 @@ public class FriendCareMainPanel extends JPanel {
 		btnNew.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/additem.png")));
 		btnNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CloneCareCreateDialog(container, "Tạo một chiến dịch nuôi", 760, 360).display();
 			}
 		});
 		btnNew.setBounds(35, 34, 49, 23);

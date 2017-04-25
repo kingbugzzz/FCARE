@@ -176,6 +176,7 @@ public class CloneMainPanel extends JPanel {
 		btnPlanlist.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/baby.png")));
 		btnPlanlist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new CloneCareCreateDialog(container, "Tạo một chiến dịch nuôi", 830, 495, getSelectedCloneIds()).display();
 			}
 		});
 		btnPlanlist.setBounds(516, 34, 49, 23);
@@ -192,6 +193,15 @@ public class CloneMainPanel extends JPanel {
 		btnCheck.setToolTipText("Check live");
 		btnCheck.setBounds(395, 34, 70, 23);
 		add(btnCheck);
+	}
+	
+	private Vector<String> getSelectedCloneIds() {
+		Vector<String> selectedList = new Vector<String>();
+		int selectedRows[] = this.table.getSelectedRows();
+		for(int selectedRow : selectedRows) {
+			selectedList.add(String.valueOf(this.table.getValueAt(selectedRow, 2)) + "<" + String.valueOf(this.table.getValueAt(selectedRow, 1)) + ">");
+		}
+		return selectedList;
 	}
 	
 	private void updateTable() {
