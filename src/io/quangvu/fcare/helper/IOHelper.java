@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class IOHelper {
 
@@ -138,6 +139,22 @@ public class IOHelper {
 			f.delete();
 		}catch(Exception ex) {
 			ex.printStackTrace();
+		}
+	}
+
+	public static String getRandomImagePath(String folder) {
+		try {
+			String imgPath = null;
+			File file = new File(folder);
+			if(file.isDirectory()) {
+				File[] imgPaths = file.listFiles();
+				Random random = new Random();
+				int randomNumber = random.nextInt((imgPaths.length-1) - 0) + 0;
+				imgPath = imgPaths[randomNumber].getAbsolutePath();
+			}
+			return imgPath.replace("\\", "/");
+		}catch(Exception ex) {
+			return null;
 		}
 	}
 }

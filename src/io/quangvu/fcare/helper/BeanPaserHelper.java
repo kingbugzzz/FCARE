@@ -43,6 +43,7 @@ public class BeanPaserHelper {
 			Clone clone = new Clone();
 			while (rs.next()) {
 				clone.setTag(rs.getString("tag"));
+				clone.setOwner(rs.getString("owner"));
 				clone.setId(rs.getString("id"));
 				clone.setPassword(rs.getString("password"));
 				clone.setName(rs.getString("name"));

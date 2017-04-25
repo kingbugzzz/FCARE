@@ -7,6 +7,10 @@ public class Clone {
 
 	public Clone(){}
 	
+	public Clone(String id) {
+		
+	}
+	
 	public Clone(String tag, String id, String password, String name, String cookie, String status) {
 		super();
 		this.tag = tag;
