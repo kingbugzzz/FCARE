@@ -84,6 +84,35 @@ public class CloneLoginService {
 					continue;
 				}
 			}*/
+			
+			/** add mem group*/
+			int count = 0;
+			int maxMem = 20;
+			
+			for(int i=0; i<20; i++) {
+				System.out.println("prepaering to add mem to group");
+				List<WebElement> checkboxes = driver.findElementsByXPath("//*[@id='root']/table/tbody/tr/td/div[1]/div[1]/form/div/div/div/label/input");
+				System.out.println(checkboxes.size() + " mem will be add in this round");
+				System.out.println("found" + checkboxes.size());
+				for(WebElement cb : checkboxes) {
+					if(count == maxMem) {
+						System.out.println("reached to 20 mem -> stop adding");
+						break;
+					}else {
+						cb.click();
+						count++;
+					}
+				}
+				System.out.println("add mem");
+				driver.findElementByXPath("//*[@id='root']/table/tbody/tr/td/div[1]/div[1]/form/div/input[2]/").click();
+				System.out.println("wait 3 seconds for next round...");
+				try{
+					Thread.sleep(3000);
+				}catch(Exception ex) {
+					ex.printStackTrace();
+					continue;
+				}
+			}
 		}
 		driver.quit();
 	}
