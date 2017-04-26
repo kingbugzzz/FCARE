@@ -57,18 +57,6 @@ public class TagMainPanel extends JPanel {
 		btnXa.setBounds(94, 34, 49, 23);
 		add(btnXa);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setToolTipText("Tạm khóa");
-		btnNewButton.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/active.png")));
-		btnNewButton.setBounds(250, 34, 42, 23);
-		add(btnNewButton);
-		
-		JButton btnDeactive = new JButton("");
-		btnDeactive.setToolTipText("Mở khóa");
-		btnDeactive.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/block.png")));
-		btnDeactive.setBounds(302, 34, 42, 23);
-		add(btnDeactive);
-		
 		JButton btnCpNht = new JButton("");
 		btnCpNht.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

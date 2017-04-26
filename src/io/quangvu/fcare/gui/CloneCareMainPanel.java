@@ -2,17 +2,22 @@ package io.quangvu.fcare.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import io.quangvu.fcare.bean.Clone;
+import io.quangvu.fcare.bean.CloneCareCampaign;
 import io.quangvu.fcare.controller.CloneCareCampaignController;
 
 public class CloneCareMainPanel extends JPanel {
@@ -26,46 +31,45 @@ public class CloneCareMainPanel extends JPanel {
 	
 	public CloneCareMainPanel(DashboardFrame container) {
 		setLayout(null);
-		JButton btnNew = new JButton("");
-		btnNew.setToolTipText("Thêm mới");
-		btnNew.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/additem.png")));
-		btnNew.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//new CloneCareCreateDialog(container, "Tạo một chiến dịch nuôi", 760, 360).display();
-			}
-		});
-		btnNew.setBounds(35, 34, 49, 23);
-		add(btnNew);
+		this.controller = new CloneCareCampaignController();
 		
 		JButton btnXa = new JButton("");
 		btnXa.setToolTipText("Xóa");
 		btnXa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int[] selectedRowIndexes = table.getSelectedRows();
+				ArrayList<String> ids = new ArrayList<String>();
+				for(int i : selectedRowIndexes) {
+					System.out.println(table.getValueAt(i, 0));
+					ids.add(table.getValueAt(i, 0).toString());
+				}
+				controller.delete(ids);
+				updateTable();
 			}
 		});
 		btnXa.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash2.png")));
-		btnXa.setBounds(94, 34, 49, 23);
+		btnXa.setBounds(35, 34, 49, 23);
 		add(btnXa);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setToolTipText("Tạm khóa");
-		btnNewButton.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/active.png")));
-		btnNewButton.setBounds(250, 34, 42, 23);
-		add(btnNewButton);
-		
-		JButton btnDeactive = new JButton("");
-		btnDeactive.setToolTipText("Mở khóa");
-		btnDeactive.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/block.png")));
-		btnDeactive.setBounds(302, 34, 42, 23);
-		add(btnDeactive);
-		
 		JButton btnCpNht = new JButton("");
+		btnCpNht.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int[] selectedRowIndexes = table.getSelectedRows();
+				if(selectedRowIndexes.length == 1) {
+					
+					CloneCareCampaign campaign = controller.get(String.valueOf(table.getValueAt(selectedRowIndexes[0], 0)));
+					
+					new CloneCareUpdateDialog(container, "Cập nhật chiến dịch nuôi [id:" + campaign.getId() + "]", 830, 585, campaign).display();
+				}else {
+					JOptionPane.showMessageDialog(new JFrame(), "Chọn 1 thôi!");
+				}
+			}
+		});
 		btnCpNht.setToolTipText("Chỉnh sửa");
 		btnCpNht.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/edit_40b.png")));
-		btnCpNht.setBounds(153, 34, 49, 23);
+		btnCpNht.setBounds(94, 34, 49, 23);
 		add(btnCpNht);
 				
-		this.controller = new CloneCareCampaignController();
 		this.tableHeader = this.controller.getTableHeader();
 		this.tableData = this.controller.getTableDataModel();
 		this.tabelModel = new DefaultTableModel(this.tableData, this.tableHeader);
@@ -82,10 +86,10 @@ public class CloneCareMainPanel extends JPanel {
 		scrollPane.setBounds(35, 86, 930, 427);
 		add(scrollPane);
 		
-		JLabel lbSum = new JLabel("Tổng: 50");
-		lbSum.setText("Tổng:" + this.table.getRowCount());
-		lbSum.setBounds(35, 534, 66, 14);
-		add(lbSum);
+		sum = new JLabel();
+		sum.setText("Tổng:" + this.table.getRowCount());
+		sum.setBounds(35, 534, 66, 14);
+		add(sum);
 		
 		JButton btnKtBn = new JButton("");
 		btnKtBn.setToolTipText("Nghỉ");
@@ -94,13 +98,13 @@ public class CloneCareMainPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnKtBn.setBounds(476, 34, 49, 23);
+		btnKtBn.setBounds(273, 34, 49, 23);
 		add(btnKtBn);
 		
 		JButton btnAddMem = new JButton("");
 		btnAddMem.setToolTipText("Dừng chạy");
 		btnAddMem.setIcon(new ImageIcon(CloneCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/stop.png")));
-		btnAddMem.setBounds(535, 34, 42, 23);
+		btnAddMem.setBounds(332, 34, 42, 23);
 		add(btnAddMem);
 		
 		JComboBox comboBox = new JComboBox();
@@ -118,8 +122,9 @@ public class CloneCareMainPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnPlanlist.setBounds(417, 34, 49, 23);
+		btnPlanlist.setBounds(214, 34, 49, 23);
 		add(btnPlanlist);
+		updateTable();
 	}
 	
 	private void updateTable() {

@@ -1,5 +1,6 @@
 package io.quangvu.fcare.model;
 
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -139,5 +140,26 @@ public class CloneModel {
 			data.add(row);
 		}
 		return data;
+	}
+	
+	public Vector<String> getCloneUpdateCampaignUid(String uid) {
+		Vector<String> listUid = new Vector<String>();
+		String paramQuery = "";
+		String temp[] = uid.split(",");
+		for(String id : temp) {
+			paramQuery += "'" + id + "',";
+		}
+		paramQuery = paramQuery.substring(0, paramQuery.length()-1);
+		String query = "SELECT name, id from clones WHERE id in (" + paramQuery + ")";
+		ResultSet rs = DBHelper.executeQuery(query);
+		try {
+			while(rs.next()) {
+				listUid.add(rs.getString("name") + "<" + rs.getString("id") + ">");
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return listUid;
 	}
 }

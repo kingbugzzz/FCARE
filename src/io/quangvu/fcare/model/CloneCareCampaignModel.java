@@ -93,12 +93,13 @@ public class CloneCareCampaignModel {
 		query +=  "wait_clone_share=" + cloneCC.getWaitCloneShare() + ",";
 		
 		query +=  "num_thread=" + cloneCC.getNumThread() + ",";
-		query +=  "status='" + cloneCC.getStatus() + "',";
-		query +=  "updated_at='" + dateFormater.format(now)  + "'";
+		query +=  "status='" + cloneCC.getStatus() + "'";
+		//query +=  "updated_at='" + dateFormater.format(now)  + "'";
 		
-		query += " WHERE id='" + cloneCC.getId() + "' AND owner ='" + SessionHelper.getSessionUser() + "'";
+		query += " WHERE id=" + cloneCC.getId() + " AND owner ='" + SessionHelper.getSessionUser() + "'";
 		
 		System.out.println(query);
+		
 		return DBHelper.execute(query);
 	}
 	
