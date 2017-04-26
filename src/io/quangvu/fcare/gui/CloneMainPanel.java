@@ -157,6 +157,11 @@ public class CloneMainPanel extends JPanel {
 		add(btnKtBn);
 		
 		JButton btnAddMem = new JButton("");
+		btnAddMem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new GroupCareCreateDialog(container, "Tạo một chiến dịch kéo mem group", 830, 405, getSelectedCloneIds()).display();
+			}
+		});
 		btnAddMem.setToolTipText("Kéo mem group");
 		btnAddMem.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/group.png")));
 		btnAddMem.setBounds(634, 34, 42, 23);

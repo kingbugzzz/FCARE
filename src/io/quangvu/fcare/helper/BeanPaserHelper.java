@@ -7,6 +7,7 @@ import java.util.Vector;
 import io.quangvu.fcare.bean.Clone;
 import io.quangvu.fcare.bean.CloneCareCampaign;
 import io.quangvu.fcare.bean.FriendCareCampaign;
+import io.quangvu.fcare.bean.GroupCareCampaign;
 import io.quangvu.fcare.bean.Tag;
 
 public class BeanPaserHelper {
@@ -163,7 +164,6 @@ public class BeanPaserHelper {
 		}
 	}
 	
-
 	public static FriendCareCampaign parseFriendCareCampaign(ResultSet rs) {
 		try {
 			FriendCareCampaign fcc = new FriendCareCampaign();
@@ -226,5 +226,57 @@ public class BeanPaserHelper {
 			return null;
 		}
 	}
-
+	
+	public static GroupCareCampaign parseGroupCareCampaign(ResultSet rs) {
+		try {
+			GroupCareCampaign gcc = new GroupCareCampaign();
+			while (rs.next()) {
+				gcc.setOwner(rs.getString("owner"));
+				gcc.setId(rs.getInt("id"));
+				gcc.setName(rs.getString("name"));
+				gcc.setCloneIdList(rs.getString("clone_ids"));
+				
+				gcc.setMinAdd(rs.getInt("min_add"));
+				gcc.setMaxAdd(rs.getInt("max_add"));
+				gcc.setWaitAdd(rs.getInt("wait_add"));
+				gcc.setWaitCloneAdd(rs.getInt("wait_clone_add"));
+				
+				gcc.setNumThread(rs.getInt("num_thread"));
+				gcc.setStatus(rs.getString("status"));
+				gcc.setCreatedAt(rs.getString("created_at"));
+				gcc.setUpdatedAt(rs.getString("updated_at"));
+			}
+			return gcc;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public static ArrayList<GroupCareCampaign> parseGroupCareCampaigns(ResultSet rs) {
+		try {
+			ArrayList<GroupCareCampaign> gccList = new ArrayList<GroupCareCampaign>();
+			GroupCareCampaign gcc = null;
+			while (rs.next()) {
+				gcc = new GroupCareCampaign();
+				gcc.setOwner(rs.getString("owner"));
+				gcc.setId(rs.getInt("id"));
+				gcc.setName(rs.getString("name"));
+				gcc.setCloneIdList(rs.getString("clone_ids"));
+				
+				gcc.setMinAdd(rs.getInt("min_add"));
+				gcc.setMaxAdd(rs.getInt("max_add"));
+				gcc.setWaitAdd(rs.getInt("wait_add"));
+				gcc.setWaitCloneAdd(rs.getInt("wait_clone_add"));
+				
+				gcc.setNumThread(rs.getInt("num_thread"));
+				gcc.setStatus(rs.getString("status"));
+				gcc.setCreatedAt(rs.getString("created_at"));
+				gcc.setUpdatedAt(rs.getString("updated_at"));
+				gccList.add(gcc);
+			}
+			return gccList;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
 }

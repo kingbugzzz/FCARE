@@ -22,122 +22,62 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import io.quangvu.fcare.bean.FriendCareCampaign;
-import io.quangvu.fcare.controller.FriendCareCampaignController;
+import io.quangvu.fcare.bean.GroupCareCampaign;
+import io.quangvu.fcare.controller.GroupCareCampaignController;
 import io.quangvu.fcare.model.CloneModel;
 
-public class FriendCareUpdatePanel extends JPanel {
+public class GroupCareUpdatePanel extends JPanel {
 
 	private JTextField name;
 	private JList<String> cloneList;
-	private JLabel title, cloneCount, lbMinReq, lbMaxReq, lbMinAcp, lbMaxAcp, lbRam,
+	private JLabel title, cloneCount, lbMinAdd, lbMaxAdd, lbRam,
 			lbTimeExec;
-	private JSpinner minReq, maxReq, waitReq, waitCloneReq;
-	private JSpinner minAcp, maxAcp, waitAcp, waitCloneAcp;
+	private JSpinner minAdd, maxAdd, waitAdd, waitCloneAdd;
 	private JComboBox numThread;
 	private Vector<String> cloneIds;
 	
 	private CloneModel cloneModel;
 	
-	private FriendCareCampaignController controller;
+	private GroupCareCampaignController controller;
 	
-	public FriendCareUpdatePanel(JDialog container, DashboardFrame dashboardFrame, FriendCareCampaign campaign) {
+	public GroupCareUpdatePanel(JDialog container, DashboardFrame dashboardFrame, GroupCareCampaign campaign) {
 		setLayout(null);
 		this.cloneModel = new CloneModel();
 		this.cloneIds = this.cloneModel.getCloneUpdateCampaignUid(campaign.getCloneIdList());
 		
-		minReq = new JSpinner();
-		minReq.addChangeListener(new ChangeListener() {
+		minAdd = new JSpinner();
+		minAdd.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				updateMinReqStatus();
+				updateMinAddStatus();
 				updateTimeExec();
 			}
 		});
-		minReq.setBounds(106, 326, 40, 20);
-		add(minReq);
+		minAdd.setBounds(106, 326, 40, 20);
+		add(minAdd);
 
 		JLabel lblMax = new JLabel("đến");
 		lblMax.setBounds(165, 332, 29, 14);
 		add(lblMax);
 
-		maxReq = new JSpinner();
-		maxReq.addChangeListener(new ChangeListener() {
+		maxAdd = new JSpinner();
+		maxAdd.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				updateMaxReqStatus();
+				updateMaxAddStatus();
 				updateTimeExec();
 			}
 		});
-		maxReq.setBounds(204, 326, 40, 20);
-		add(maxReq);
+		maxAdd.setBounds(204, 326, 40, 20);
+		add(maxAdd);
 
-		JLabel lblSReq = new JLabel("Gửi");
-		lblSReq.setBounds(36, 329, 60, 14);
-		add(lblSReq);
+		JLabel lblSAdd = new JLabel("Gửi");
+		lblSAdd.setBounds(36, 329, 60, 14);
+		add(lblSAdd);
 
-		JLabel lblNghGiaReq = new JLabel("nghỉ giữa lượt");
-		lblNghGiaReq.setBounds(302, 329, 104, 14);
-		add(lblNghGiaReq);
-
-		JLabel lblSCmtT = new JLabel("Nhận");
-		lblSCmtT.setBounds(36, 360, 60, 14);
-		add(lblSCmtT);
-
-		minAcp = new JSpinner();
-		minAcp.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateMinAcpStatus();
-				updateTimeExec();
-			}
-		});
-		
-		minAcp.setBounds(106, 357, 40, 20);
-		add(minAcp);
-
-		JLabel label_2 = new JLabel("đến");
-		label_2.setBounds(165, 363, 29, 14);
-		add(label_2);
-
-		maxAcp = new JSpinner();
-		maxAcp.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateMaxAcpStatus();
-				updateTimeExec();
-			}
-		});
-		maxAcp.setBounds(204, 357, 40, 20);
-		add(maxAcp);
-
-		JLabel lblNghGiaCmt = new JLabel("nghỉ giữa lượt");
-		lblNghGiaCmt.setBounds(302, 360, 98, 14);
-		add(lblNghGiaCmt);
-
-		waitAcp = new JSpinner();
-		waitAcp.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateTimeExec();
-			}
-		});
-		waitAcp.setBounds(416, 354, 40, 20);
-		add(waitAcp);
-
-		JLabel lblNghGiaClone_1 = new JLabel("nghỉ giữa clone");
-		lblNghGiaClone_1.setBounds(567, 360, 96, 14);
-		add(lblNghGiaClone_1);
-
-		waitCloneAcp = new JSpinner();
-		waitCloneAcp.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateTimeExec();
-			}
-		});
-		waitCloneAcp.setBounds(673, 354, 42, 20);
-		add(waitCloneAcp);
+		JLabel lblNghGiaAdd = new JLabel("nghỉ giữa lượt");
+		lblNghGiaAdd.setBounds(302, 329, 104, 14);
+		add(lblNghGiaAdd);
 
 		numThread = new JComboBox();
 		numThread.addItem("1");
@@ -180,10 +120,10 @@ public class FriendCareUpdatePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				updateCareCampaignHandler();
 				container.dispose();
-				dashboardFrame.loadPanel(new FriendCareMainPanel(dashboardFrame), "Quản lý chiến dịch nuôi");
+				dashboardFrame.loadPanel(new GroupCareMainPanel(dashboardFrame), "Quản lý chiến dịch nuôi");
 			}
 		});
-		btnLuChySau.setBounds(321, 420, 124, 23);
+		btnLuChySau.setBounds(321, 379, 124, 23);
 		add(btnLuChySau);
 		
 		this.cloneList = new JList<String>(this.cloneIds);
@@ -192,7 +132,7 @@ public class FriendCareUpdatePanel extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				cloneCount.setText(String.valueOf(cloneList.getSelectedIndices().length));
-				updateMinReqStatus();updateMaxReqStatus();
+				updateMinAddStatus();updateMaxAddStatus();
 				updateMinAcpStatus();updateMaxAcpStatus();
 				updateTimeExec();
 			}
@@ -215,15 +155,11 @@ public class FriendCareUpdatePanel extends JPanel {
 		lblNewLabel_2.setBounds(465, 116, 158, 14);
 		add(lblNewLabel_2);
 
-		lbMinReq = new JLabel("0");
-		lbMinReq.setForeground(new Color(0, 100, 0));
-		lbMinReq.setHorizontalAlignment(SwingConstants.RIGHT);
-		lbMinReq.setBounds(633, 116, 53, 14);
-		add(lbMinReq);
-
-		JLabel lblSAcp = new JLabel("Tổng nhận");
-		lblSAcp.setBounds(465, 130, 158, 14);
-		add(lblSAcp);
+		lbMinAdd = new JLabel("0");
+		lbMinAdd.setForeground(new Color(0, 100, 0));
+		lbMinAdd.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbMinAdd.setBounds(633, 116, 53, 14);
+		add(lbMinAdd);
 
 		JLabel lblThiGianHon = new JLabel("Thời gian hoàn thành(dự tính)");
 		lblThiGianHon.setBounds(465, 205, 224, 14);
@@ -245,46 +181,38 @@ public class FriendCareUpdatePanel extends JPanel {
 		lbRam.setBounds(685, 191, 80, 14);
 		add(lbRam);
 
-		waitReq = new JSpinner();
-		waitReq.addChangeListener(new ChangeListener() {
+		waitAdd = new JSpinner();
+		waitAdd.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				updateTimeExec();
 			}
 		});
-		waitReq.setBounds(416, 323, 40, 20);
-		add(waitReq);
+		waitAdd.setBounds(416, 323, 40, 20);
+		add(waitAdd);
 
 		JLabel label_1 = new JLabel("nghỉ giữa clone");
 		label_1.setBounds(567, 329, 96, 14);
 		add(label_1);
 
-		waitCloneReq = new JSpinner();
-		waitCloneReq.addChangeListener(new ChangeListener() {
+		waitCloneAdd = new JSpinner();
+		waitCloneAdd.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				updateTimeExec();
 			}
 		});
-		waitCloneReq.setBounds(673, 326, 42, 20);
+		waitCloneAdd.setBounds(673, 326, 42, 20);
 		
-		add(waitCloneReq);
+		add(waitCloneAdd);
 
 		JLabel lblGiy = new JLabel("(+10)");
 		lblGiy.setBounds(466, 326, 60, 14);
 		add(lblGiy);
 
-		JLabel label_5 = new JLabel("(+10)");
-		label_5.setBounds(466, 357, 40, 14);
-		add(label_5);
-
 		JLabel label_8 = new JLabel("(+10)");
 		label_8.setBounds(725, 329, 40, 14);
 		add(label_8);
-
-		JLabel label_9 = new JLabel("(+10)");
-		label_9.setBounds(725, 360, 40, 14);
-		add(label_9);
 
 		JLabel label_4 = new JLabel("-");
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
@@ -292,32 +220,14 @@ public class FriendCareUpdatePanel extends JPanel {
 		label_4.setBounds(708, 116, 18, 14);
 		add(label_4);
 
-		lbMaxReq = new JLabel("0");
-		lbMaxReq.setHorizontalAlignment(SwingConstants.RIGHT);
-		lbMaxReq.setForeground(new Color(0, 100, 0));
-		lbMaxReq.setBounds(725, 116, 40, 14);
-		add(lbMaxReq);
-
-		lbMinAcp = new JLabel("0");
-		lbMinAcp.setHorizontalAlignment(SwingConstants.RIGHT);
-		lbMinAcp.setForeground(new Color(0, 100, 0));
-		lbMinAcp.setBounds(633, 130, 53, 14);
-		add(lbMinAcp);
-
-		JLabel label_7 = new JLabel("-");
-		label_7.setHorizontalAlignment(SwingConstants.CENTER);
-		label_7.setForeground(new Color(0, 100, 0));
-		label_7.setBounds(708, 130, 18, 14);
-		add(label_7);
-
-		lbMaxAcp = new JLabel("0");
-		lbMaxAcp.setHorizontalAlignment(SwingConstants.RIGHT);
-		lbMaxAcp.setForeground(new Color(0, 100, 0));
-		lbMaxAcp.setBounds(725, 130, 40, 14);
-		add(lbMaxAcp);
+		lbMaxAdd = new JLabel("0");
+		lbMaxAdd.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbMaxAdd.setForeground(new Color(0, 100, 0));
+		lbMaxAdd.setBounds(725, 116, 40, 14);
+		add(lbMaxAdd);
 		
 		
-		updateMinReqStatus();updateMaxReqStatus();
+		updateMinAddStatus();updateMaxAddStatus();
 		updateMinAcpStatus();updateMaxAcpStatus();
 		lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 150) + " MB");
 		
@@ -328,60 +238,49 @@ public class FriendCareUpdatePanel extends JPanel {
 		updateTimeExec();
 	}
 	
-	private void initUpdateFormValues(FriendCareCampaign campaign) {
+	private void initUpdateFormValues(GroupCareCampaign campaign) {
 		this.name.setText(campaign.getName());
 		this.numThread.setSelectedItem(String.valueOf(campaign.getNumThread()));
 		
-		this.minReq.setValue(campaign.getMinReq());
-		this.maxReq.setValue(campaign.getMaxReq());
-		this.waitReq.setValue(campaign.getWaitReq());
-		this.waitCloneReq.setValue(campaign.getWaitCloneReq());
-		
-		this.minAcp.setValue(campaign.getMinAcp());
-		this.maxAcp.setValue(campaign.getMaxAcp());
-		this.waitAcp.setValue(campaign.getWaitAcp());
-		this.waitCloneAcp.setValue(campaign.getWaitCloneAcp());
+		this.minAdd.setValue(campaign.getMinAdd());
+		this.maxAdd.setValue(campaign.getMaxAdd());
+		this.waitAdd.setValue(campaign.getWaitAdd());
+		this.waitCloneAdd.setValue(campaign.getWaitCloneAdd());
+
 	}
 	
-	private void updateMinReqStatus() {
-		int num = Integer.parseInt(minReq.getValue().toString().trim());
+	private void updateMinAddStatus() {
+		int num = Integer.parseInt(minAdd.getValue().toString().trim());
 		int csize  = cloneList.getSelectedIndices().length;
-		lbMinReq.setText(String.valueOf(num * csize));
+		lbMinAdd.setText(String.valueOf(num * csize));
 	}
 	
-	private void updateMaxReqStatus() {
-		int num = Integer.parseInt(maxReq.getValue().toString().trim());
+	private void updateMaxAddStatus() {
+		int num = Integer.parseInt(maxAdd.getValue().toString().trim());
 		int csize  = cloneList.getSelectedIndices().length;
-		lbMaxReq.setText(String.valueOf(num * csize));
+		lbMaxAdd.setText(String.valueOf(num * csize));
 	}
 	
 	private void updateMinAcpStatus() {
-		int num = Integer.parseInt(minAcp.getValue().toString().trim());
 		int csize  = cloneList.getSelectedIndices().length;
-		lbMinAcp.setText(String.valueOf(num * csize));
 	}
 	
 	private void updateMaxAcpStatus() {
-		int num = Integer.parseInt(maxAcp.getValue().toString().trim());
 		int csize  = cloneList.getSelectedIndices().length;
-		lbMaxAcp.setText(String.valueOf(num * csize));
 	}
 		
 	private void updateTimeExec() {
-		int mediReq = Integer.parseInt(maxReq.getValue().toString());
-		int mediAcp = Integer.parseInt(maxAcp.getValue().toString());
+		int mediAdd = Integer.parseInt(maxAdd.getValue().toString());
 		
-		int mediReqWait = Integer.parseInt(waitReq.getValue().toString());
-		int mediAcpWait = Integer.parseInt(waitAcp.getValue().toString());
+		int mediAddWait = Integer.parseInt(waitAdd.getValue().toString());
 		
-		int mediReqCloneWait = Integer.parseInt(waitCloneReq.getValue().toString());
-		int mediAcpCloneWait = Integer.parseInt(waitCloneAcp.getValue().toString());
+		int mediAddCloneWait = Integer.parseInt(waitCloneAdd.getValue().toString());
 		
 		int csize = this.cloneList.getSelectedIndices().length;
 		
 		int numThread = Integer.parseInt(this.numThread.getSelectedItem().toString());
 		
-		int timeExecution = (csize * (mediReq + mediReqWait + 5 + mediReqCloneWait + 5 + mediAcp + mediAcpWait + 5 + mediAcpCloneWait + 5 + 45 + 45))/60;
+		int timeExecution = (csize * (mediAdd + mediAddWait + 5 + mediAddCloneWait + 5 + 45 + 45))/60;
 		this.lbTimeExec.setText(timeExecution/numThread + " mins");
 	}
 	
@@ -390,21 +289,16 @@ public class FriendCareUpdatePanel extends JPanel {
 	}
 	
 	private void updateCareCampaignHandler() {
-		this.controller = new FriendCareCampaignController();
-		FriendCareCampaign campaign = new FriendCareCampaign();
+		this.controller = new GroupCareCampaignController();
+		GroupCareCampaign campaign = new GroupCareCampaign();
 		campaign.setId(Integer.parseInt((this.title.getText().split(":")[1]).trim()));
 		campaign.setName(name.getText().trim());
 		campaign.setCloneIdList(this.getSelectedCloneIds());
 		
-		campaign.setMinReq(Integer.parseInt(String.valueOf(minReq.getValue())));
-		campaign.setMaxReq(Integer.parseInt(String.valueOf(maxReq.getValue())));
-		campaign.setWaitReq(Integer.parseInt(String.valueOf(waitReq.getValue())));
-		campaign.setWaitCloneReq(Integer.parseInt(String.valueOf(waitCloneReq.getValue())));
-		
-		campaign.setMinAcp(Integer.parseInt(String.valueOf(minAcp.getValue())));
-		campaign.setMaxAcp(Integer.parseInt(String.valueOf(maxAcp.getValue())));
-		campaign.setWaitAcp(Integer.parseInt(String.valueOf(waitAcp.getValue())));
-		campaign.setWaitCloneAcp(Integer.parseInt(String.valueOf(waitCloneAcp.getValue())));
+		campaign.setMinAdd(Integer.parseInt(String.valueOf(minAdd.getValue())));
+		campaign.setMaxAdd(Integer.parseInt(String.valueOf(maxAdd.getValue())));
+		campaign.setWaitAdd(Integer.parseInt(String.valueOf(waitAdd.getValue())));
+		campaign.setWaitCloneAdd(Integer.parseInt(String.valueOf(waitCloneAdd.getValue())));
 		
 		
 		campaign.setNumThread(Integer.parseInt(numThread.getSelectedItem().toString()));
