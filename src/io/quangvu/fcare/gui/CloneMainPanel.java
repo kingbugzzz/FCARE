@@ -37,7 +37,7 @@ public class CloneMainPanel extends JPanel {
 		btnNew.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/additem.png")));
 		btnNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CloneCreateDialog(container, "Thêm mới clone", 530, 460).display();
+				new CloneCreateDialog(container, "Thêm mới clone", 530, 520).display();
 			}
 		});
 		btnNew.setBounds(35, 34, 49, 23);
@@ -146,7 +146,7 @@ public class CloneMainPanel extends JPanel {
 		add(sum);
 		
 		JButton btnKtBn = new JButton("");
-		btnKtBn.setToolTipText("Kéo friends");
+		btnKtBn.setToolTipText("Kéo friends đề xuất");
 		btnKtBn.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/friend_add.png")));
 		btnKtBn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -164,7 +164,7 @@ public class CloneMainPanel extends JPanel {
 		});
 		btnAddMem.setToolTipText("Kéo mem group");
 		btnAddMem.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/group.png")));
-		btnAddMem.setBounds(634, 34, 42, 23);
+		btnAddMem.setBounds(692, 34, 42, 23);
 		add(btnAddMem);
 		
 		JComboBox comboBox = new JComboBox();
@@ -178,7 +178,7 @@ public class CloneMainPanel extends JPanel {
 		add(comboBox);
 		
 		JButton btnPlanlist = new JButton("");
-		btnPlanlist.setToolTipText("Chiến dịch nuôi");
+		btnPlanlist.setToolTipText("Tạo chiến dịch nuôi");
 		btnPlanlist.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/baby.png")));
 		btnPlanlist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -191,7 +191,7 @@ public class CloneMainPanel extends JPanel {
 		JButton button = new JButton("");
 		button.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/like.png")));
 		button.setToolTipText("Kéo like page");
-		button.setBounds(686, 34, 42, 23);
+		button.setBounds(744, 34, 42, 23);
 		add(button);
 		
 		JButton btnCheck = new JButton("");
@@ -199,6 +199,12 @@ public class CloneMainPanel extends JPanel {
 		btnCheck.setToolTipText("Check live");
 		btnCheck.setBounds(395, 34, 70, 23);
 		add(btnCheck);
+		
+		JButton button_1 = new JButton("");
+		button_1.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/friend.png")));
+		button_1.setToolTipText("Add friend từ list uid");
+		button_1.setBounds(634, 34, 49, 23);
+		add(button_1);
 	}
 	
 	private Vector<String> getSelectedCloneIds() {
