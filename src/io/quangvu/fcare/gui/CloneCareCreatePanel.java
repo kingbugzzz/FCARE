@@ -25,6 +25,8 @@ import javax.swing.event.ListSelectionListener;
 
 import com.sun.jna.IntegerType;
 
+import io.quangvu.fcare.bean.CloneCareCampaign;
+import io.quangvu.fcare.controller.CloneCareCampaignController;
 import io.quangvu.fcare.helper.NumberHelper;
 
 import java.awt.Color;
@@ -32,15 +34,17 @@ import java.awt.Font;
 
 public class CloneCareCreatePanel extends JPanel {
 
-	private JTextField textField;
+	private JTextField name;
 	private JList<String> cloneList;
 	private JLabel cloneCount, lbMinLike, lbMaxLike, lbMinComment, lbMaxComment, lbMinShare, lbMaxShare, lbRam,
 			lbTimeExec;
 	private JSpinner minLike, maxLike, waitLike, waitCloneLike;
 	private JSpinner minComment, maxComment, waitComment, waitCloneComment;
 	private JSpinner minShare, maxShare, waitShare, waitCloneShare;
-	private JComboBox numThread;
-
+	private JComboBox numThread, statusType;
+	
+	private CloneCareCampaignController controller;
+	
 	public CloneCareCreatePanel(JDialog container, DashboardFrame dashboardFrame, Vector<String> cloneIds) {
 		setLayout(null);
 
@@ -226,23 +230,24 @@ public class CloneCareCreatePanel extends JPanel {
 		lblPlan.setBounds(36, 181, 60, 14);
 		add(lblPlan);
 
-		textField = new JTextField();
-		textField.setBounds(106, 178, 659, 20);
-		add(textField);
-		textField.setColumns(10);
+		name = new JTextField();
+		name.setBounds(106, 178, 659, 20);
+		add(name);
+		name.setColumns(10);
 
 		JLabel lblKiuStatus = new JLabel("Kiểu status");
 		lblKiuStatus.setBounds(302, 216, 73, 14);
 		add(lblKiuStatus);
 
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.addItem("text + image");
-		comboBox_2.addItem("text");
-		comboBox_2.addItem("text + link");
-		comboBox_2.addItem("link");
-		comboBox_2.addItem("không post status");
-		comboBox_2.setBounds(416, 210, 129, 20);
-		add(comboBox_2);
+		statusType = new JComboBox();
+		statusType.addItem("text+image");
+		statusType.addItem("text");
+		statusType.addItem("text+link");
+		statusType.addItem("link");
+		statusType.addItem("random");
+		statusType.addItem("no status");
+		statusType.setBounds(416, 210, 129, 20);
+		add(statusType);
 
 		JButton btnNewButton = new JButton("Bắt đầu ngay");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -256,8 +261,10 @@ public class CloneCareCreatePanel extends JPanel {
 		JButton btnLuChySau = new JButton("Lưu chạy sau");
 		btnLuChySau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Save data
+				createCareCampaignHandler();
 				container.dispose();
+				dashboardFrame.loadPanel(new CloneCareMainPanel(dashboardFrame), "Quản lý chiến dịch nuôi");
+				
 			}
 		});
 		btnLuChySau.setBounds(190, 440, 124, 23);
@@ -504,5 +511,46 @@ public class CloneCareCreatePanel extends JPanel {
 		
 		int timeExecution = (csize * (mediLike + mediLikeWait + 5 + mediLikeCloneWait + 5 + mediShare + mediShareWait + 5 + mediShareCloneWait + 5 + mediComment + mediCommentWait + 5 + mediCommentCloneWait + 5 + 45 + 45))/60;
 		this.lbTimeExec.setText(timeExecution/numThread + " mins");
+	}
+	
+	private void createCareCampaignHandler() {
+		this.controller = new CloneCareCampaignController();
+		CloneCareCampaign campaign = new CloneCareCampaign();
+		campaign.setName(name.getText().trim());
+		campaign.setCloneIdList(this.getSelectedCloneIds());
+		campaign.setStatusType(statusType.getSelectedItem().toString());
+		
+		campaign.setMinLike(Integer.parseInt(String.valueOf(minLike.getValue())));
+		campaign.setMaxLike(Integer.parseInt(String.valueOf(maxLike.getValue())));
+		campaign.setWaitLike(Integer.parseInt(String.valueOf(waitLike.getValue())));
+		campaign.setWaitCloneLike(Integer.parseInt(String.valueOf(waitCloneLike.getValue())));
+		
+		campaign.setMinComment(Integer.parseInt(String.valueOf(minComment.getValue())));
+		campaign.setMaxComment(Integer.parseInt(String.valueOf(maxComment.getValue())));
+		campaign.setWaitComment(Integer.parseInt(String.valueOf(waitComment.getValue())));
+		campaign.setWaitCloneComment(Integer.parseInt(String.valueOf(waitCloneComment.getValue())));
+		
+		campaign.setMinShare(Integer.parseInt(String.valueOf(minShare.getValue())));
+		campaign.setMaxShare(Integer.parseInt(String.valueOf(maxShare.getValue())));
+		campaign.setWaitShare(Integer.parseInt(String.valueOf(waitShare.getValue())));
+		campaign.setWaitCloneShare(Integer.parseInt(String.valueOf(waitCloneShare.getValue())));
+		
+		campaign.setNumThread(Integer.parseInt(numThread.getSelectedItem().toString()));
+		campaign.setStatus("off");
+		
+//		System.out.println(campaign.toString());
+		
+		this.controller.add(campaign);
+	}
+	
+	private String getSelectedCloneIds() {
+		String ids = "";
+		int selectedIndexes[] = this.cloneList.getSelectedIndices();
+		String id=null;
+		for(int selectedIndex : selectedIndexes) {
+			id = this.cloneList.getModel().getElementAt(selectedIndex).toString().split("<")[1];
+			ids +=  id.substring(0, id.length()-1) + ",";
+		}
+		return ids.substring(0, ids.length()-1);
 	}
 }

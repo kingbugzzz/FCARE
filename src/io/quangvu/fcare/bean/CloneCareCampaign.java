@@ -4,7 +4,7 @@ public class CloneCareCampaign {
 	
 	private String owner;
 	private int id;
-	private String name, cloneIdList;
+	private String name, cloneIdList, statusType;
 	private int minLike, maxLike, waitLike, waitCloneLike;
 	private int minComment, maxComment, waitComment, waitCloneComment;
 	private int minShare, maxShare, waitShare, waitCloneShare;
@@ -38,6 +38,14 @@ public class CloneCareCampaign {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.status = status;
+	}
+	
+	public String getStatusType() {
+		return statusType;
+	}
+
+	public void setStatusType(String statusType) {
+		this.statusType = statusType;
 	}
 
 	public String getCloneIdList() {
@@ -202,12 +210,13 @@ public class CloneCareCampaign {
 
 	@Override
 	public String toString() {
-		return "CloneCareCampaign [cloneIdList=" + cloneIdList + ", id=" + id + ", owner=" + owner + ", name=" + name
-				+ ", minLike=" + minLike + ", maxLike=" + maxLike + ", waitLike=" + waitLike + ", waitCloneLike="
-				+ waitCloneLike + ", minComment=" + minComment + ", maxComment=" + maxComment + ", waitComment="
-				+ waitComment + ", waitCloneComment=" + waitCloneComment + ", minShare=" + minShare + ", maxShare="
-				+ maxShare + ", waitShare=" + waitShare + ", waitCloneShare=" + waitCloneShare + ", numThread="
-				+ numThread + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", status=" + status + "]";
+		return "CloneCareCampaign [owner=" + owner + ", id=" + id + ", name=" + name + ", cloneIdList=" + cloneIdList
+				+ ", statusType=" + statusType + ", minLike=" + minLike + ", maxLike=" + maxLike + ", waitLike="
+				+ waitLike + ", waitCloneLike=" + waitCloneLike + ", minComment=" + minComment + ", maxComment="
+				+ maxComment + ", waitComment=" + waitComment + ", waitCloneComment=" + waitCloneComment + ", minShare="
+				+ minShare + ", maxShare=" + maxShare + ", waitShare=" + waitShare + ", waitCloneShare="
+				+ waitCloneShare + ", numThread=" + numThread + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", status=" + status + "]";
 	}
-	
+
 }

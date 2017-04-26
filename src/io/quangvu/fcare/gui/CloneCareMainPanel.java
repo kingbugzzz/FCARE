@@ -2,6 +2,7 @@ package io.quangvu.fcare.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,9 +11,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import io.quangvu.fcare.controller.CloneCareCampaignController;
 
 public class CloneCareMainPanel extends JPanel {
-
+	
+	private CloneCareCampaignController controller;
+	private JTable table;
+	private DefaultTableModel tabelModel;
+	private Vector<String> tableHeader;
+	private Vector<Vector<String>> tableData; 
+	private JLabel sum;
+	
 	public CloneCareMainPanel(DashboardFrame container) {
 		setLayout(null);
 		JButton btnNew = new JButton("");
@@ -54,56 +65,27 @@ public class CloneCareMainPanel extends JPanel {
 		btnCpNht.setBounds(153, 34, 49, 23);
 		add(btnCpNht);
 				
-		String cols[] = {"No.","Tên chiến dịch", "Ngày tạo", "Số like", "Số comment", "Số share", "Số nick chạy", "Số lần chạy", "Lần chạy cuối", "Hiện trạng"};
-		String[][] data = {
-				{"1","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"2","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"3","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"4","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"5","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"6","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"7","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"8","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"9","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"10","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"11","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"12","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"13","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"14","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"15","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"16","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"17","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"18","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"19","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"20","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"21","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"22","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"23","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"24","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"25","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"26","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"27","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"28","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"29","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"}
-		};
+		this.controller = new CloneCareCampaignController();
+		this.tableHeader = this.controller.getTableHeader();
+		this.tableData = this.controller.getTableDataModel();
+		this.tabelModel = new DefaultTableModel(this.tableData, this.tableHeader);
+		table = new JTable(this.tabelModel);
 		
-		JTable table = new JTable(data, cols);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getColumnModel().getColumn(0).setPreferredWidth(30);
-		table.getColumnModel().getColumn(1).setPreferredWidth(170);
-		table.getColumnModel().getColumn(2).setPreferredWidth(140);
-		table.getColumnModel().getColumn(3).setPreferredWidth(60);
-		table.getColumnModel().getColumn(5).setPreferredWidth(60);
-		table.getColumnModel().getColumn(6).setPreferredWidth(80);
-		table.getColumnModel().getColumn(8).setPreferredWidth(140);
-		table.getColumnModel().getColumn(9).setPreferredWidth(80);
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(2).setPreferredWidth(60);
+		table.getColumnModel().getColumn(3).setPreferredWidth(125);
+		table.getColumnModel().getColumn(4).setPreferredWidth(125);
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(35, 86, 930, 427);
 		add(scrollPane);
 		
-		JLabel lblangNui = new JLabel("Tổng: 50");
-		lblangNui.setBounds(35, 534, 104, 14);
-		add(lblangNui);
+		JLabel lbSum = new JLabel("Tổng: 50");
+		lbSum.setText("Tổng:" + this.table.getRowCount());
+		lbSum.setBounds(35, 534, 66, 14);
+		add(lbSum);
 		
 		JButton btnKtBn = new JButton("");
 		btnKtBn.setToolTipText("Nghỉ");
@@ -138,5 +120,17 @@ public class CloneCareMainPanel extends JPanel {
 		});
 		btnPlanlist.setBounds(417, 34, 49, 23);
 		add(btnPlanlist);
+	}
+	
+	private void updateTable() {
+		this.tableData = this.controller.getTableDataModel();
+		this.tabelModel.setDataVector(this.tableData, this.tableHeader);
+		this.table.setModel(this.tabelModel);
+		table.getColumnModel().getColumn(0).setPreferredWidth(30);
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(2).setPreferredWidth(60);
+		table.getColumnModel().getColumn(3).setPreferredWidth(125);
+		table.getColumnModel().getColumn(4).setPreferredWidth(125);
+		this.sum.setText("Tổng:" + this.table.getRowCount());
 	}
 }

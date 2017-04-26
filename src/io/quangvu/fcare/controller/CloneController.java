@@ -30,12 +30,12 @@ public class CloneController {
 		return this.model.update(clone);
 	}
 	
-	public boolean updateStringField(String field, String value) {
-		return this.model.updateStringField(field, value);
+	public boolean updateStringField(String id, String field, String value) {
+		return this.model.updateStringField(id, field, value);
 	}
 	
-	public boolean updateField(String field, String value) {
-		return this.model.updateField(field, value);
+	public boolean updateField(String id, String field, String value) {
+		return this.model.updateField(id, field, value);
 	}
 	
 	public void updateStatus(ArrayList<String> ids, String status) {

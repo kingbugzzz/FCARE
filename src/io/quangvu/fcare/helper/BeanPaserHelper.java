@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import io.quangvu.fcare.bean.Clone;
+import io.quangvu.fcare.bean.CloneCareCampaign;
 import io.quangvu.fcare.bean.Tag;
 
 public class BeanPaserHelper {
@@ -89,6 +90,73 @@ public class BeanPaserHelper {
 				list.add(clone);
 			}
 			return list;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+
+	public static CloneCareCampaign parseCloneCareCampaign(ResultSet rs) {
+		try {
+			CloneCareCampaign clonecc = new CloneCareCampaign();
+			while (rs.next()) {
+				clonecc.setOwner(rs.getString("owner"));
+				clonecc.setId(rs.getInt("id"));
+				clonecc.setName(rs.getString("name"));
+				clonecc.setCloneIdList(rs.getString("clone_ids"));
+				clonecc.setStatusType(rs.getString("status_type"));
+				clonecc.setMinLike(rs.getInt("min_like"));
+				clonecc.setMaxLike(rs.getInt("max_like"));
+				clonecc.setWaitLike(rs.getInt("wait_like"));
+				clonecc.setWaitCloneLike(rs.getInt("wait_clone_like"));
+				clonecc.setMinComment(rs.getInt("min_comment"));
+				clonecc.setMaxComment(rs.getInt("max_comment"));
+				clonecc.setWaitComment(rs.getInt("wait_comment"));
+				clonecc.setWaitCloneComment(rs.getInt("wait_clone_comment"));
+				clonecc.setMinShare(rs.getInt("min_share"));
+				clonecc.setMaxShare(rs.getInt("max_share"));
+				clonecc.setWaitShare(rs.getInt("wait_share"));
+				clonecc.setWaitCloneShare(rs.getInt("wait_clone_share"));
+				clonecc.setNumThread(rs.getInt("num_thread"));
+				clonecc.setStatus(rs.getString("status"));
+				clonecc.setCreatedAt(rs.getString("created_at"));
+				clonecc.setUpdatedAt(rs.getString("updated_at"));
+			}
+			return clonecc;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public static ArrayList<CloneCareCampaign> parseCloneCareCampaigns(ResultSet rs) {
+		try {
+			ArrayList<CloneCareCampaign> cloneCCList = new ArrayList<CloneCareCampaign>();
+			CloneCareCampaign clonecc = null;
+			while (rs.next()) {
+				clonecc = new CloneCareCampaign();
+				clonecc.setOwner(rs.getString("owner"));
+				clonecc.setId(rs.getInt("id"));
+				clonecc.setName(rs.getString("name"));
+				clonecc.setCloneIdList(rs.getString("clone_ids"));
+				clonecc.setStatusType(rs.getString("status_type"));
+				clonecc.setMinLike(rs.getInt("min_like"));
+				clonecc.setMaxLike(rs.getInt("max_like"));
+				clonecc.setWaitLike(rs.getInt("wait_like"));
+				clonecc.setWaitCloneLike(rs.getInt("wait_clone_like"));
+				clonecc.setMinComment(rs.getInt("min_comment"));
+				clonecc.setMaxComment(rs.getInt("max_comment"));
+				clonecc.setWaitComment(rs.getInt("wait_comment"));
+				clonecc.setWaitCloneComment(rs.getInt("wait_clone_comment"));
+				clonecc.setMinShare(rs.getInt("min_share"));
+				clonecc.setMaxShare(rs.getInt("max_share"));
+				clonecc.setWaitShare(rs.getInt("wait_share"));
+				clonecc.setWaitCloneShare(rs.getInt("wait_clone_share"));
+				clonecc.setNumThread(rs.getInt("num_thread"));
+				clonecc.setStatus(rs.getString("status"));
+				clonecc.setCreatedAt(rs.getString("created_at"));
+				clonecc.setUpdatedAt(rs.getString("updated_at"));
+				cloneCCList.add(clonecc);
+			}
+			return cloneCCList;
 		}catch(Exception ex) {
 			return null;
 		}
