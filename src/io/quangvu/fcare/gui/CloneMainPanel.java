@@ -150,6 +150,7 @@ public class CloneMainPanel extends JPanel {
 		btnKtBn.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/friend_add.png")));
 		btnKtBn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new FriendCareCreateDialog(container, "Tạo một chiến dịch kéo friends", 830, 475, getSelectedCloneIds()).display();
 			}
 		});
 		btnKtBn.setBounds(575, 34, 49, 23);

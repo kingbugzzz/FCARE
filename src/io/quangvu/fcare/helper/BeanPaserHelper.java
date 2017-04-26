@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import io.quangvu.fcare.bean.Clone;
 import io.quangvu.fcare.bean.CloneCareCampaign;
+import io.quangvu.fcare.bean.FriendCareCampaign;
 import io.quangvu.fcare.bean.Tag;
 
 public class BeanPaserHelper {
@@ -161,4 +162,69 @@ public class BeanPaserHelper {
 			return null;
 		}
 	}
+	
+
+	public static FriendCareCampaign parseFriendCareCampaign(ResultSet rs) {
+		try {
+			FriendCareCampaign fcc = new FriendCareCampaign();
+			while (rs.next()) {
+				fcc.setOwner(rs.getString("owner"));
+				fcc.setId(rs.getInt("id"));
+				fcc.setName(rs.getString("name"));
+				fcc.setCloneIdList(rs.getString("clone_ids"));
+				
+				fcc.setMinReq(rs.getInt("min_req"));
+				fcc.setMaxReq(rs.getInt("max_req"));
+				fcc.setWaitReq(rs.getInt("wait_req"));
+				fcc.setWaitCloneReq(rs.getInt("wait_clone_req"));
+				
+				fcc.setMinAcp(rs.getInt("min_acp"));
+				fcc.setMaxAcp(rs.getInt("max_acp"));
+				fcc.setWaitAcp(rs.getInt("wait_acp"));
+				fcc.setWaitCloneAcp(rs.getInt("wait_clone_acp"));
+				
+				fcc.setNumThread(rs.getInt("num_thread"));
+				fcc.setStatus(rs.getString("status"));
+				fcc.setCreatedAt(rs.getString("created_at"));
+				fcc.setUpdatedAt(rs.getString("updated_at"));
+			}
+			return fcc;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public static ArrayList<FriendCareCampaign> parseFriendCareCampaigns(ResultSet rs) {
+		try {
+			ArrayList<FriendCareCampaign> fccList = new ArrayList<FriendCareCampaign>();
+			FriendCareCampaign fcc = null;
+			while (rs.next()) {
+				fcc = new FriendCareCampaign();
+				fcc.setOwner(rs.getString("owner"));
+				fcc.setId(rs.getInt("id"));
+				fcc.setName(rs.getString("name"));
+				fcc.setCloneIdList(rs.getString("clone_ids"));
+				
+				fcc.setMinReq(rs.getInt("min_req"));
+				fcc.setMaxReq(rs.getInt("max_req"));
+				fcc.setWaitReq(rs.getInt("wait_req"));
+				fcc.setWaitCloneReq(rs.getInt("wait_clone_req"));
+				
+				fcc.setMinAcp(rs.getInt("min_acp"));
+				fcc.setMaxAcp(rs.getInt("max_acp"));
+				fcc.setWaitAcp(rs.getInt("wait_acp"));
+				fcc.setWaitCloneAcp(rs.getInt("wait_clone_acp"));
+				
+				fcc.setNumThread(rs.getInt("num_thread"));
+				fcc.setStatus(rs.getString("status"));
+				fcc.setCreatedAt(rs.getString("created_at"));
+				fcc.setUpdatedAt(rs.getString("updated_at"));
+				fccList.add(fcc);
+			}
+			return fccList;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+
 }

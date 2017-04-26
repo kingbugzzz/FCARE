@@ -22,7 +22,7 @@ public class AbstractDialog extends JDialog {
 			public void windowClosing(WindowEvent we) {
 				String ObjButtons[] = { "Yes", "No" };
 				int PromptResult = JOptionPane.showOptionDialog(null, "Đóng",
-						"Facebot 1.0", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
+						"FCARE 1.0", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
 						ObjButtons, ObjButtons[1]);
 				if (PromptResult == JOptionPane.YES_OPTION) {
 					dispose();

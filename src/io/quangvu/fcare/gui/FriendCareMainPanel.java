@@ -2,122 +2,109 @@ package io.quangvu.fcare.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import io.quangvu.fcare.bean.Clone;
+import io.quangvu.fcare.bean.FriendCareCampaign;
+import io.quangvu.fcare.controller.FriendCareCampaignController;
 
 public class FriendCareMainPanel extends JPanel {
-
+	
+	private FriendCareCampaignController controller;
+	private JTable table;
+	private DefaultTableModel tabelModel;
+	private Vector<String> tableHeader;
+	private Vector<Vector<String>> tableData; 
+	private JLabel sum;
+	
 	public FriendCareMainPanel(DashboardFrame container) {
 		setLayout(null);
-		JButton btnNew = new JButton("");
-		btnNew.setToolTipText("Thêm mới");
-		btnNew.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/additem.png")));
-		btnNew.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNew.setBounds(35, 34, 49, 23);
-		add(btnNew);
+		this.controller = new FriendCareCampaignController();
 		
 		JButton btnXa = new JButton("");
 		btnXa.setToolTipText("Xóa");
 		btnXa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int[] selectedRowIndexes = table.getSelectedRows();
+				ArrayList<String> ids = new ArrayList<String>();
+				for(int i : selectedRowIndexes) {
+					System.out.println(table.getValueAt(i, 0));
+					ids.add(table.getValueAt(i, 0).toString());
+				}
+				controller.delete(ids);
+				updateTable();
 			}
 		});
 		btnXa.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash2.png")));
-		btnXa.setBounds(94, 34, 49, 23);
+		btnXa.setBounds(35, 34, 49, 23);
 		add(btnXa);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setToolTipText("Tạm khóa");
-		btnNewButton.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/active.png")));
-		btnNewButton.setBounds(250, 34, 42, 23);
-		add(btnNewButton);
-		
-		JButton btnDeactive = new JButton("");
-		btnDeactive.setToolTipText("Mở khóa");
-		btnDeactive.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/block.png")));
-		btnDeactive.setBounds(302, 34, 42, 23);
-		add(btnDeactive);
-		
 		JButton btnCpNht = new JButton("");
+		btnCpNht.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int[] selectedRowIndexes = table.getSelectedRows();
+				if(selectedRowIndexes.length == 1) {
+					
+					FriendCareCampaign campaign = controller.get(String.valueOf(table.getValueAt(selectedRowIndexes[0], 0)));
+					
+					new FriendCareUpdateDialog(container, "Cập nhật chiến dịch kéo friends [id:" + campaign.getId() + "]", 830, 585, campaign).display();
+				}else {
+					JOptionPane.showMessageDialog(new JFrame(), "Chọn 1 thôi!");
+				}
+			}
+		});
 		btnCpNht.setToolTipText("Chỉnh sửa");
 		btnCpNht.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/edit_40b.png")));
-		btnCpNht.setBounds(153, 34, 49, 23);
+		btnCpNht.setBounds(94, 34, 49, 23);
 		add(btnCpNht);
 				
-		String cols[] = {"No.","Tên chiến dịch", "Ngày tạo", "Số like", "Số comment", "Số share", "Số nick chạy", "Số lần chạy", "Lần chạy cuối", "Hiện trạng"};
-		String[][] data = {
-				{"1","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"2","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"3","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"4","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"5","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"6","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"7","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"8","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"9","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"10","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"11","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"12","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"13","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"14","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"15","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"16","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"17","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"18","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"19","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"20","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"21","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"22","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"23","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"24","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"25","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"26","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"27","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"28","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"},
-				{"29","Nuôi 50 nick thả thính", "10-Apr-2017 09:15 AM", "135", "78", "36", "48", "7", "19-Apr-2017 10:46 PM", "Đang nghỉ"}
-		};
+		this.tableHeader = this.controller.getTableHeader();
+		this.tableData = this.controller.getTableDataModel();
+		this.tabelModel = new DefaultTableModel(this.tableData, this.tableHeader);
+		table = new JTable(this.tabelModel);
 		
-		JTable table = new JTable(data, cols);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getColumnModel().getColumn(0).setPreferredWidth(30);
-		table.getColumnModel().getColumn(1).setPreferredWidth(170);
-		table.getColumnModel().getColumn(2).setPreferredWidth(140);
-		table.getColumnModel().getColumn(3).setPreferredWidth(60);
-		table.getColumnModel().getColumn(5).setPreferredWidth(60);
-		table.getColumnModel().getColumn(6).setPreferredWidth(80);
-		table.getColumnModel().getColumn(8).setPreferredWidth(140);
-		table.getColumnModel().getColumn(9).setPreferredWidth(80);
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(2).setPreferredWidth(60);
+		table.getColumnModel().getColumn(3).setPreferredWidth(125);
+		table.getColumnModel().getColumn(4).setPreferredWidth(125);
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(35, 86, 930, 427);
 		add(scrollPane);
 		
-		JLabel lblangNui = new JLabel("Tổng: 50");
-		lblangNui.setBounds(35, 534, 104, 14);
-		add(lblangNui);
+		sum = new JLabel();
+		sum.setText("Tổng:" + this.table.getRowCount());
+		sum.setBounds(35, 534, 66, 14);
+		add(sum);
 		
 		JButton btnKtBn = new JButton("");
 		btnKtBn.setToolTipText("Nghỉ");
-		btnKtBn.setIcon(new ImageIcon(CloneCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/pause.png")));
+		btnKtBn.setIcon(new ImageIcon(FriendCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/pause.png")));
 		btnKtBn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnKtBn.setBounds(476, 34, 49, 23);
+		btnKtBn.setBounds(273, 34, 49, 23);
 		add(btnKtBn);
 		
 		JButton btnAddMem = new JButton("");
 		btnAddMem.setToolTipText("Dừng chạy");
-		btnAddMem.setIcon(new ImageIcon(CloneCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/stop.png")));
-		btnAddMem.setBounds(535, 34, 42, 23);
+		btnAddMem.setIcon(new ImageIcon(FriendCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/stop.png")));
+		btnAddMem.setBounds(332, 34, 42, 23);
 		add(btnAddMem);
 		
 		JComboBox comboBox = new JComboBox();
@@ -130,12 +117,25 @@ public class FriendCareMainPanel extends JPanel {
 		
 		JButton btnPlanlist = new JButton("");
 		btnPlanlist.setToolTipText("Bắt đầu chạy");
-		btnPlanlist.setIcon(new ImageIcon(CloneCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/play.png")));
+		btnPlanlist.setIcon(new ImageIcon(FriendCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/play.png")));
 		btnPlanlist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnPlanlist.setBounds(417, 34, 49, 23);
+		btnPlanlist.setBounds(214, 34, 49, 23);
 		add(btnPlanlist);
+		updateTable();
+	}
+	
+	private void updateTable() {
+		this.tableData = this.controller.getTableDataModel();
+		this.tabelModel.setDataVector(this.tableData, this.tableHeader);
+		this.table.setModel(this.tabelModel);
+		table.getColumnModel().getColumn(0).setPreferredWidth(30);
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(2).setPreferredWidth(60);
+		table.getColumnModel().getColumn(3).setPreferredWidth(125);
+		table.getColumnModel().getColumn(4).setPreferredWidth(125);
+		this.sum.setText("Tổng:" + this.table.getRowCount());
 	}
 }
