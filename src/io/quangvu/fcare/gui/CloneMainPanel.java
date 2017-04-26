@@ -176,7 +176,7 @@ public class CloneMainPanel extends JPanel {
 		btnPlanlist.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/baby.png")));
 		btnPlanlist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CloneCareCreateDialog(container, "Tạo một chiến dịch nuôi", 830, 495, getSelectedCloneIds()).display();
+				new CloneCareCreateDialog(container, "Tạo một chiến dịch nuôi", 830, 525, getSelectedCloneIds()).display();
 			}
 		});
 		btnPlanlist.setBounds(516, 34, 49, 23);

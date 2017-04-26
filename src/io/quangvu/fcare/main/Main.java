@@ -9,6 +9,7 @@ import io.quangvu.fcare.gui.LoginFrame;
 import io.quangvu.fcare.helper.DBHelper;
 import io.quangvu.fcare.helper.IOHelper;
 import io.quangvu.fcare.helper.KeyHelper;
+import io.quangvu.fcare.helper.NumberHelper;
 import io.quangvu.fcare.model.CloneModel;
 import io.quangvu.fcare.service.CloneServiceCenter;
 
@@ -21,6 +22,7 @@ public class Main {
 	public Main() {
 		this.start();
 		//this.cloneServiceDebugger();
+		
 	}
 	
 	private void start() {
