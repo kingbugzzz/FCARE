@@ -24,21 +24,21 @@ public class TagUpdatePanel extends JPanel {
 		this.controller = new TagController();
 
 		JLabel lblNewLabel = new JLabel("Tên thẻ");
-		lblNewLabel.setBounds(55, 57, 57, 14);
+		lblNewLabel.setBounds(55, 40, 57, 14);
 		add(lblNewLabel);
 
 		name = new JTextField();
-		name.setBounds(125, 54, 230, 20);
+		name.setBounds(125, 37, 230, 20);
 		add(name);
 		name.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("Mô tả");
-		lblNewLabel_1.setBounds(55, 106, 57, 14);
+		lblNewLabel_1.setBounds(55, 89, 57, 14);
 		add(lblNewLabel_1);
 
 		description = new JTextField();
 		description.setColumns(10);
-		description.setBounds(125, 103, 230, 20);
+		description.setBounds(125, 86, 230, 20);
 		add(description);
 
 		JButton btnUpdate = new JButton("Cập nhật");
@@ -48,7 +48,7 @@ public class TagUpdatePanel extends JPanel {
 				dashboardFrame.loadPanel(new TagMainPanel(dashboardFrame), "Quản lý tag");
 			}
 		});
-		btnUpdate.setBounds(125, 157, 89, 23);
+		btnUpdate.setBounds(125, 134, 89, 23);
 		add(btnUpdate);
 		this.name.setText(tag.getName());
 		this.name.setEditable(false);

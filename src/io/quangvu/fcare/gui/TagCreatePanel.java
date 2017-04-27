@@ -24,21 +24,21 @@ public class TagCreatePanel extends JPanel {
 		this.controller = new TagController();
 
 		JLabel lblNewLabel = new JLabel("Tên thẻ");
-		lblNewLabel.setBounds(48, 73, 57, 14);
+		lblNewLabel.setBounds(48, 40, 57, 14);
 		add(lblNewLabel);
 
 		name = new JTextField();
-		name.setBounds(118, 70, 230, 20);
+		name.setBounds(118, 37, 232, 20);
 		add(name);
 		name.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("Mô tả");
-		lblNewLabel_1.setBounds(48, 122, 57, 14);
+		lblNewLabel_1.setBounds(48, 82, 57, 14);
 		add(lblNewLabel_1);
 
 		description = new JTextField();
 		description.setColumns(10);
-		description.setBounds(118, 119, 230, 20);
+		description.setBounds(118, 79, 232, 20);
 		add(description);
 
 		JButton btnNewButton = new JButton("Thêm");
@@ -49,7 +49,7 @@ public class TagCreatePanel extends JPanel {
 				dashboardFrame.loadPanel(new TagMainPanel(dashboardFrame), "Quản lý tag");
 			}
 		});
-		btnNewButton.setBounds(118, 173, 89, 23);
+		btnNewButton.setBounds(118, 122, 89, 23);
 		add(btnNewButton);
 
 	}

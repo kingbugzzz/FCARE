@@ -41,12 +41,8 @@ public class TagModel {
 	}
 
 	public boolean delete(String name) {
-		String query = "DELETE FROM tags WHERE name='" + name + "'";
+		String query = "DELETE FROM tags WHERE name in (" + name + ")";
 		return DBHelper.execute(query);
-	}
-
-	public void deleteAll() {
-
 	}
 
 	public Vector<Vector<String>> getTagTableDataModel() {

@@ -35,7 +35,7 @@ public class TagMainPanel extends JPanel {
 		btnNew.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/additem.png")));
 		btnNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new TagCreateDialog(container, "Thêm tag", 450, 350).display();
+				new TagCreateDialog(container, "Thêm tag", 420, 225).display();
 			}
 		});
 		btnNew.setBounds(35, 34, 49, 23);
@@ -46,11 +46,14 @@ public class TagMainPanel extends JPanel {
 		btnXa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int[] selectedRowIndexes = table.getSelectedRows();
+				String strIds = "";
 				for(int i : selectedRowIndexes) {
 					System.out.println(table.getValueAt(i, 0));
-					controller.delete(table.getValueAt(i, 0).toString());
-					updateTable();
+					strIds += "'" + table.getValueAt(i, 0).toString() + "',";
 				}
+				strIds = strIds.substring(0, strIds.length()-1);
+				controller.delete(strIds);
+				updateTable();
 			}
 		});
 		btnXa.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash2.png")));
@@ -64,7 +67,7 @@ public class TagMainPanel extends JPanel {
 				if(selectedRowIndexes.length == 1) {
 					String name = table.getValueAt(selectedRowIndexes[0], 0).toString();
 					String description = table.getValueAt(selectedRowIndexes[0], 1).toString();
-					new TagUpdateDialog(container, "Thêm tag", 450, 350, new Tag(name, description)).display();
+					new TagUpdateDialog(container, "Thêm tag", 420, 225, new Tag(name, description)).display();
 				}else {
 					JOptionPane.showMessageDialog(new JFrame(), "Chọn 1 thôi!");
 				}
