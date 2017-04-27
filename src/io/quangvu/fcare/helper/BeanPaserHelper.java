@@ -8,6 +8,7 @@ import io.quangvu.fcare.bean.Clone;
 import io.quangvu.fcare.bean.CloneCareCampaign;
 import io.quangvu.fcare.bean.FriendCareCampaign;
 import io.quangvu.fcare.bean.GroupCareCampaign;
+import io.quangvu.fcare.bean.GroupJoinCampaign;
 import io.quangvu.fcare.bean.RStatus;
 import io.quangvu.fcare.bean.Tag;
 
@@ -243,11 +244,12 @@ public class BeanPaserHelper {
 				gcc.setId(rs.getInt("id"));
 				gcc.setName(rs.getString("name"));
 				gcc.setCloneIdList(rs.getString("clone_ids"));
+				gcc.setGroupIds(rs.getString("group_ids"));
 				
-				gcc.setMinAdd(rs.getInt("min_add"));
-				gcc.setMaxAdd(rs.getInt("max_add"));
-				gcc.setWaitAdd(rs.getInt("wait_add"));
-				gcc.setWaitCloneAdd(rs.getInt("wait_clone_add"));
+				gcc.setMinMem(rs.getInt("min_mem"));
+				gcc.setMaxMem(rs.getInt("max_mem"));
+				gcc.setWaitMem(rs.getInt("wait_mem"));
+				gcc.setWaitClone(rs.getInt("wait_clone"));
 				
 				gcc.setNumThread(rs.getInt("num_thread"));
 				gcc.setStatus(rs.getString("status"));
@@ -270,11 +272,65 @@ public class BeanPaserHelper {
 				gcc.setId(rs.getInt("id"));
 				gcc.setName(rs.getString("name"));
 				gcc.setCloneIdList(rs.getString("clone_ids"));
+				gcc.setGroupIds(rs.getString("group_ids"));
 				
-				gcc.setMinAdd(rs.getInt("min_add"));
-				gcc.setMaxAdd(rs.getInt("max_add"));
-				gcc.setWaitAdd(rs.getInt("wait_add"));
-				gcc.setWaitCloneAdd(rs.getInt("wait_clone_add"));
+				gcc.setMinMem(rs.getInt("min_mem"));
+				gcc.setMaxMem(rs.getInt("max_mem"));
+				gcc.setWaitMem(rs.getInt("wait_mem"));
+				gcc.setWaitClone(rs.getInt("wait_clone"));
+				
+				gcc.setNumThread(rs.getInt("num_thread"));
+				gcc.setStatus(rs.getString("status"));
+				gcc.setCreatedAt(rs.getString("created_at"));
+				gcc.setUpdatedAt(rs.getString("updated_at"));
+				gccList.add(gcc);
+			}
+			return gccList;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public static GroupJoinCampaign parseGroupJoinCampaign(ResultSet rs) {
+		try {
+			GroupJoinCampaign gcc = new GroupJoinCampaign();
+			while (rs.next()) {
+				gcc.setOwner(rs.getString("owner"));
+				gcc.setId(rs.getInt("id"));
+				gcc.setName(rs.getString("name"));
+				gcc.setCloneIdList(rs.getString("clone_ids"));
+				gcc.setGroupIds(rs.getString("group_ids"));
+				
+				gcc.setMinWait(rs.getInt("min_wait"));
+				gcc.setMaxWait(rs.getInt("max_wait"));
+				gcc.setWaitClone(rs.getInt("wait_clone"));
+				
+				gcc.setNumThread(rs.getInt("num_thread"));
+				gcc.setStatus(rs.getString("status"));
+				gcc.setCreatedAt(rs.getString("created_at"));
+				gcc.setUpdatedAt(rs.getString("updated_at"));
+			}
+			return gcc;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public static ArrayList<GroupJoinCampaign> parseGroupJoinCampaigns(ResultSet rs) {
+		try {
+			ArrayList<GroupJoinCampaign> gccList = new ArrayList<GroupJoinCampaign>();
+			GroupJoinCampaign gcc = null;
+			while (rs.next()) {
+				gcc = new GroupJoinCampaign();
+				gcc.setOwner(rs.getString("owner"));
+				gcc.setId(rs.getInt("id"));
+				gcc.setName(rs.getString("name"));
+				gcc.setCloneIdList(rs.getString("clone_ids"));
+				gcc.setGroupIds(rs.getString("group_ids"));
+				
+				gcc.setMinWait(rs.getInt("min_wait"));
+				gcc.setMaxWait(rs.getInt("max_wait"));
+				gcc.setWaitClone(rs.getInt("wait_clone"));
 				
 				gcc.setNumThread(rs.getInt("num_thread"));
 				gcc.setStatus(rs.getString("status"));

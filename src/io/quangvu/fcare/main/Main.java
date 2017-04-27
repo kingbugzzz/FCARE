@@ -11,7 +11,7 @@ import io.quangvu.fcare.helper.IOHelper;
 import io.quangvu.fcare.helper.KeyHelper;
 import io.quangvu.fcare.helper.NumberHelper;
 import io.quangvu.fcare.model.CloneModel;
-import io.quangvu.fcare.service.CloneServiceCenter;
+import io.quangvu.fcare.service.CloneCareService;
 
 public class Main {
 	
@@ -43,7 +43,7 @@ public class Main {
 		CloneModel cloneModel = new CloneModel();
 		//Test Clone 6 - Ngô Hữu Tường
 		Clone clone = cloneModel.get("100016413638900");
-		CloneServiceCenter cloneCareService = new CloneServiceCenter(clone);
+		CloneCareService cloneCareService = new CloneCareService(clone);
 		cloneCareService.login();
 		
 		//cloneCareService.changeAvatar(IOHelper.getRandomImagePath("resource/avatar/girls"));

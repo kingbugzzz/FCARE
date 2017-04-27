@@ -59,20 +59,14 @@ public class CloneModel {
 		return DBHelper.execute(query);
 	}
 
-	public boolean updateStringField(String id, String field, String value) {
-		String query = "UPDATE clones SET " + field + "='" + value + "' WHERE id='" + id + "' ADN owner = '"
+	
+	public boolean updateTags(String ids, String tag) {
+		String query = "UPDATE clones SET tag='" + tag + "' WHERE id IN(" + ids + ") AND owner = '"
 				+ SessionHelper.getSessionUser() + "'";
 		System.out.println(query);
 		return DBHelper.execute(query);
 	}
-
-	public boolean updateField(String id, String field, String value) {
-		String query = "UPDATE clones SET " + field + "=" + value + " WHERE id='" + id + "' ADN owner = '"
-				+ SessionHelper.getSessionUser() + "'";
-		System.out.println(query);
-		return DBHelper.execute(query);
-	}
-
+	
 	public boolean delete(String id) {
 		String query = "DELETE FROM clones WHERE id='" + id + "' AND owner='" + SessionHelper.getSessionUser() + "'";
 		return DBHelper.execute(query);

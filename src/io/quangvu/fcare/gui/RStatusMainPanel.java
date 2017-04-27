@@ -94,7 +94,7 @@ public class RStatusMainPanel extends JPanel {
 		table.getColumnModel().getColumn(2).setPreferredWidth(250);
 		table.getColumnModel().getColumn(3).setPreferredWidth(520);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(35, 86, 930, 419);
+		scrollPane.setBounds(35, 86, 1106, 419);
 		add(scrollPane);
 		
 		sum = new JLabel("Tổng: " + String.valueOf(this.table.getModel().getRowCount()));
@@ -107,7 +107,7 @@ public class RStatusMainPanel extends JPanel {
 		for(Tag tag : tags) {
 			cbTags.addItem(tag.getName());
 		}
-		cbTags.setBounds(776, 34, 189, 20);
+		cbTags.setBounds(952, 37, 189, 20);
 		add(cbTags);
 	}
 	

@@ -1,29 +1,28 @@
 package io.quangvu.fcare.bean;
 
-public class GroupCareCampaign {
+public class GroupJoinCampaign {
 	
 	private String owner;
 	private int id;
 	private String name, cloneIdList, groupIds;
-	private int minMem, maxMem, waitMem, waitClone;
+	private int minWait, maxWait, waitClone;
 	private int numThread;
 	private String createdAt, updatedAt, status;
 	
-	public GroupCareCampaign(){}
+	public GroupJoinCampaign(){}
 	
 	
 
-	public GroupCareCampaign(String owner, int id, String name, String cloneIdList, String groupIds, int minMem,
-			int maxMem, int waitMem, int waitClone, int numThread, String createdAt, String updatedAt, String status) {
+	public GroupJoinCampaign(String owner, int id, String name, String cloneIdList, String groupIds, int minWait,
+			int maxWait, int waitClone, int numThread, String createdAt, String updatedAt, String status) {
 		super();
 		this.owner = owner;
 		this.id = id;
 		this.name = name;
 		this.cloneIdList = cloneIdList;
 		this.groupIds = groupIds;
-		this.minMem = minMem;
-		this.maxMem = maxMem;
-		this.waitMem = waitMem;
+		this.minWait = minWait;
+		this.maxWait = maxWait;
 		this.waitClone = waitClone;
 		this.numThread = numThread;
 		this.createdAt = createdAt;
@@ -71,28 +70,20 @@ public class GroupCareCampaign {
 		this.cloneIdList = cloneIdList;
 	}
 
-	public int getMinMem() {
-		return minMem;
+	public int getMinWait() {
+		return minWait;
 	}
 
-	public void setMinMem(int minMem) {
-		this.minMem = minMem;
+	public void setMinWait(int minWait) {
+		this.minWait = minWait;
 	}
 
-	public int getMaxMem() {
-		return maxMem;
+	public int getMaxWait() {
+		return maxWait;
 	}
 
-	public void setMaxMem(int maxMem) {
-		this.maxMem = maxMem;
-	}
-
-	public int getWaitMem() {
-		return waitMem;
-	}
-
-	public void setWaitMem(int waitMem) {
-		this.waitMem = waitMem;
+	public void setMaxWait(int maxWait) {
+		this.maxWait = maxWait;
 	}
 
 	public int getWaitClone() {
@@ -137,9 +128,9 @@ public class GroupCareCampaign {
 
 	@Override
 	public String toString() {
-		return "GroupCareCampaign [owner=" + owner + ", id=" + id + ", name=" + name + ", cloneIdList=" + cloneIdList
-				+ ", groupIds=" + groupIds + ", minMem=" + minMem + ", maxMem=" + maxMem + ", waitMem=" + waitMem
-				+ ", waitClone=" + waitClone + ", numThread=" + numThread + ", createdAt=" + createdAt + ", updatedAt="
-				+ updatedAt + ", status=" + status + "]";
+		return "GroupJoinCampaign [owner=" + owner + ", id=" + id + ", name=" + name + ", cloneIdList=" + cloneIdList
+				+ ", groupIds=" + groupIds + ", minWait=" + minWait + ", maxWait=" + maxWait + ", waitClone="
+				+ waitClone + ", numThread=" + numThread + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", status=" + status + "]";
 	}
 }

@@ -7,42 +7,41 @@ import java.util.Date;
 import java.util.Vector;
 
 import io.quangvu.fcare.bean.Clone;
-import io.quangvu.fcare.bean.GroupCareCampaign;
+import io.quangvu.fcare.bean.GroupJoinCampaign;
 import io.quangvu.fcare.helper.BeanPaserHelper;
 import io.quangvu.fcare.helper.DBHelper;
 import io.quangvu.fcare.helper.SessionHelper;
 
-public class GroupCareCampaignModel {
+public class GroupJoinCampaignModel {
 	
-	public GroupCareCampaignModel(){}
+	public GroupJoinCampaignModel(){}
 	
-	public GroupCareCampaign get(String id) {
-		String query = "SELECT * FROM group_care_campaigns WHERE id=" + id + " AND owner = '" + SessionHelper.getSessionUser()
+	public GroupJoinCampaign get(String id) {
+		String query = "SELECT * FROM group_join_campaigns WHERE id=" + id + " AND owner = '" + SessionHelper.getSessionUser()
 				+ "'";
 		System.out.println(query);
-		return BeanPaserHelper.parseGroupCareCampaign(DBHelper.executeQuery(query));
+		return BeanPaserHelper.parseGroupJoinCampaign(DBHelper.executeQuery(query));
 	}
 
-	public ArrayList<GroupCareCampaign> all() {
-		String query = "SELECT * FROM group_care_campaigns WHERE owner = '" + SessionHelper.getSessionUser() + "' order by created_at";
+	public ArrayList<GroupJoinCampaign> all() {
+		String query = "SELECT * FROM group_join_campaigns WHERE owner = '" + SessionHelper.getSessionUser() + "' order by created_at";
 		System.out.println(query);
-		return BeanPaserHelper.parseGroupCareCampaigns(DBHelper.executeQuery(query));
+		return BeanPaserHelper.parseGroupJoinCampaigns(DBHelper.executeQuery(query));
 	}
 	
-	public boolean add(GroupCareCampaign gcc) {
+	public boolean add(GroupJoinCampaign gcc) {
 		Date now =  new Date();
 		DateFormat dateFormater = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		
-		String query = "INSERT INTO group_care_campaigns(owner, name, clone_ids, group_ids, min_mem, max_mem, wait_mem, wait_clone,";
+		String query = "INSERT INTO group_join_campaigns(owner, name, clone_ids, group_ids, min_wait, max_wait,  wait_clone,";
 		query += "num_thread, status, created_at) VALUES(";
 		
 		query += "'" + SessionHelper.getSessionUser() + "',";
 		query += "'" + gcc.getName() + "',";
 		query += "'" + gcc.getCloneIdList() + "',";
 		query += "'" + gcc.getGroupIds() + "',";
-		query +=  gcc.getMinMem() + ",";
-		query +=  gcc.getMaxMem() + ",";
-		query +=  gcc.getWaitMem() + ",";
+		query +=  gcc.getMinWait() + ",";
+		query +=  gcc.getMaxWait() + ",";
 		query +=  gcc.getWaitClone() + ",";
 		
 		query +=  gcc.getNumThread() + ",";
@@ -55,18 +54,17 @@ public class GroupCareCampaignModel {
 		return DBHelper.execute(query);
 	}
 	
-	public boolean update(GroupCareCampaign gcc) {
+	public boolean update(GroupJoinCampaign gcc) {
 		Date now =  new Date();
 		DateFormat dateFormater = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		
-		String query = "UPDATE group_care_campaigns SET ";
+		String query = "UPDATE group_join_campaigns SET ";
 		query += "name='" + gcc.getName() + "',";
 		query += "clone_ids='" + gcc.getCloneIdList() + "',";
 		query += "group_ids='" + gcc.getGroupIds() + "',";
 		
-		query +=  "min_mem=" + gcc.getMinMem() + ",";
-		query +=  "max_mem=" + gcc.getMaxMem() + ",";
-		query +=  "wait_mem=" + gcc.getWaitMem() + ",";
+		query +=  "min_wait=" + gcc.getMinWait() + ",";
+		query +=  "max_wait=" + gcc.getMaxWait() + ",";
 		query +=  "wait_clone=" + gcc.getWaitClone() + ",";
 		
 		query +=  "num_thread=" + gcc.getNumThread() + ",";
@@ -82,7 +80,7 @@ public class GroupCareCampaignModel {
 	
 		
 	public boolean delete(int id) {
-		String query = "DELETE FROM group_care_campaigns WHERE id=" + id + " AND owner='" + SessionHelper.getSessionUser() + "'";
+		String query = "DELETE FROM group_join_campaigns WHERE id=" + id + " AND owner='" + SessionHelper.getSessionUser() + "'";
 		return DBHelper.execute(query);
 	}
 	
@@ -93,7 +91,7 @@ public class GroupCareCampaignModel {
 		}
 		System.out.println(strIds);
 		strIds = strIds.substring(0, strIds.length()-1);
-		String query = "DELETE FROM group_care_campaigns WHERE id in (" + strIds + ") AND owner='" + SessionHelper.getSessionUser() + "'";
+		String query = "DELETE FROM group_join_campaigns WHERE id in (" + strIds + ") AND owner='" + SessionHelper.getSessionUser() + "'";
 		System.out.println(query);
 		DBHelper.execute(query);
 	}
@@ -105,7 +103,7 @@ public class GroupCareCampaignModel {
 		}
 		System.out.println(strIds);
 		strIds = strIds.substring(0, strIds.length()-1);
-		String query = "UPDATE group_care_campaigns set status='" + status + "' WHERE id in (" + strIds + ") AND owner='" + SessionHelper.getSessionUser() + "'";
+		String query = "UPDATE group_join_campaigns set status='" + status + "' WHERE id in (" + strIds + ") AND owner='" + SessionHelper.getSessionUser() + "'";
 		System.out.println(query);
 		DBHelper.execute(query);
 	}
@@ -120,9 +118,8 @@ public class GroupCareCampaignModel {
 		header.add("lần chạy cuối");
 		header.add("hiện trạng");
 		
-		header.add("min_mem");
-		header.add("max_mem");
-		header.add("wait_mem");
+		header.add("min_wait");
+		header.add("max_wait");
 		header.add("wait_clone");
 	
 		header.add("số luồng");
@@ -131,10 +128,10 @@ public class GroupCareCampaignModel {
 	}
 
 	public Vector<Vector<String>> getTableDataModel() {
-		ArrayList<GroupCareCampaign> campaigns = this.all();
+		ArrayList<GroupJoinCampaign> campaigns = this.all();
 		Vector<Vector<String>> data = new Vector<Vector<String>>();
 		Vector<String> row = null;
-		for (GroupCareCampaign gcc : campaigns) {
+		for (GroupJoinCampaign gcc : campaigns) {
 			row = new Vector<String>();
 			row.add(String.valueOf(gcc.getId()));  //id
 			row.add(gcc.getName()); //name
@@ -144,9 +141,8 @@ public class GroupCareCampaignModel {
 			row.add(gcc.getUpdatedAt());
 			row.add(gcc.getStatus());
 
-			row.add(String.valueOf(gcc.getMinMem()));
-			row.add(String.valueOf(gcc.getMaxMem()));
-			row.add(String.valueOf(gcc.getWaitMem()));
+			row.add(String.valueOf(gcc.getMinWait()));
+			row.add(String.valueOf(gcc.getMaxWait()));
 			row.add(String.valueOf(gcc.getWaitClone()));
 					
 			row.add(String.valueOf(gcc.getNumThread()));

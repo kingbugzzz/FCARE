@@ -27,9 +27,11 @@ public class DashboardFrame extends JFrame implements ActionListener {
 	private JMenu mnSystem, mnClone, mnCampaign, mnSourceData, mnUtil;
 	private JMenuItem miTag, miAbout;
 	private JMenuItem miManageClone;
-	private JMenuItem miCloneCare, miFriendCare, miGroupCare, miPageCare;
+	private JMenuItem miCloneCare, miFriendCare, miGroupCare,  miPageCare;
 	private JMenuItem miSourceStatus, miSourceGroup, miSourcePage, miSourceUID;
 	private JMenuItem miExportUID, miExportGroup, miExportPage, miExportPhone, miExportEmail;
+	private JMenuItem miGroupJoin;
+	private JMenuItem miFriendCareByUid;
 
 	public DashboardFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/favicon.png")));
@@ -59,7 +61,6 @@ public class DashboardFrame extends JFrame implements ActionListener {
 		
 		this.miManageClone = new JMenuItem("Quản lý chung");
 		this.miManageClone.addActionListener(this);
-		this.miManageClone.addActionListener(this);
 		this.mnClone.add(this.miManageClone);
 
 		this.mnCampaign = new JMenu("Chiến dịch");
@@ -67,19 +68,25 @@ public class DashboardFrame extends JFrame implements ActionListener {
 
 		this.miCloneCare = new JMenuItem("Nuôi clone");
 		this.miCloneCare.addActionListener(this);
-		this.miCloneCare.addActionListener(this);
 		this.mnCampaign.add(this.miCloneCare);
 		this.mnCampaign.addSeparator();
 
 		this.miFriendCare = new JMenuItem("Kéo friend");
 		this.miFriendCare.addActionListener(this);
-		this.miFriendCare.addActionListener(this);
 		this.mnCampaign.add(this.miFriendCare);
+		
+		miFriendCareByUid = new JMenuItem("Kéo friend từ uid");
+		miFriendCareByUid.addActionListener(this);
+		mnCampaign.add(miFriendCareByUid);
 		this.mnCampaign.addSeparator();
 		
 		this.miGroupCare = new JMenuItem("Kéo mem group");
 		this.miGroupCare.addActionListener(this);
 		this.mnCampaign.add(this.miGroupCare);
+		
+		miGroupJoin = new JMenuItem("Join group");
+		miGroupJoin.addActionListener(this);
+		mnCampaign.add(miGroupJoin);
 		this.mnCampaign.addSeparator();
 		
 		this.miPageCare = new JMenuItem("Kéo like page");
@@ -161,7 +168,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
 
 	public void display() {
 		this.initWindowCloseEventHandle();
-		this.setBounds(100, 100, 1019, 619);
+		this.setBounds(100, 100, 1200, 619);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
@@ -210,25 +217,31 @@ public class DashboardFrame extends JFrame implements ActionListener {
 			this.loadPanel(new CloneCareMainPanel(this), "Quản lý chiến dịch nuôi");
 		}
 		if(event.getSource().equals(this.miFriendCare)) {
-			this.loadPanel(new FriendCareMainPanel(this), "Quanr lý kéo friend");
+			this.loadPanel(new FriendCareMainPanel(this), "Quản lý kéo friend");
+		}
+		if(event.getSource().equals(this.miFriendCareByUid)) {
+//			this.loadPanel(new FriendCareMainPanel(this), "Quản lý kéo friend");
 		}
 		if(event.getSource().equals(this.miGroupCare)) {
-			this.loadPanel(new GroupCareMainPanel(this), "Quanr lý kéo mem group");
+			this.loadPanel(new GroupCareMainPanel(this), "Quản lý kéo mem group");
+		}
+		if(event.getSource().equals(this.miGroupJoin)) {
+			this.loadPanel(new GroupJoinMainPanel(this), "Quản lý join group");
 		}
 		if(event.getSource().equals(this.miPageCare)) {
-			this.loadPanel(new PageCareMainPanel(this), "Quanr lý kéo like page");
+			this.loadPanel(new PageCareMainPanel(this), "Quản lý kéo like page");
 		}
 		
 		//Datasource menu event handler
 		if(event.getSource().equals(this.miSourceStatus)) {
-			this.loadPanel(new RStatusMainPanel(this), "Quanr lý status nguồn");
+			this.loadPanel(new RStatusMainPanel(this), "Quản lý status nguồn");
 		}
 		if(event.getSource().equals(this.miSourceUID)) {
 		}
 		if(event.getSource().equals(this.miSourceGroup)) {
 		}
 		if(event.getSource().equals(this.miSourcePage)) {
-			this.loadPanel(new RPageMainPanel(this), "Quanr lý page nguồn");
+			this.loadPanel(new RPageMainPanel(this), "Quản lý page nguồn");
 		}
 		
 		//Util exporter menu event handler

@@ -83,7 +83,7 @@ public class FriendCareMainPanel extends JPanel {
 		table.getColumnModel().getColumn(4).setPreferredWidth(125);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(35, 86, 930, 427);
+		scrollPane.setBounds(35, 86, 1106, 427);
 		add(scrollPane);
 		
 		sum = new JLabel();
@@ -112,7 +112,7 @@ public class FriendCareMainPanel extends JPanel {
 		comboBox.addItem("Đang chạy");
 		comboBox.addItem("Đang nghỉ");
 		comboBox.addItem("Đã hoàn thành");
-		comboBox.setBounds(811, 37, 151, 20);
+		comboBox.setBounds(990, 34, 151, 20);
 		add(comboBox);
 		
 		JButton btnPlanlist = new JButton("");

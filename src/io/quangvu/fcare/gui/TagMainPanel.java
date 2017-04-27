@@ -90,7 +90,7 @@ public class TagMainPanel extends JPanel {
 		table.getColumnModel().getColumn(1).setPreferredWidth(820);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(35, 86, 930, 402);
+		scrollPane.setBounds(35, 86, 1106, 402);
 		add(scrollPane);
 	}
 	
