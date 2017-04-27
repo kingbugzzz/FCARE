@@ -66,7 +66,7 @@ public class RStatusCreatePanel extends JPanel {
 				JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 				int returnValue = jfc.showOpenDialog(null);
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
-					src.setText(jfc.getSelectedFile().getAbsolutePath());
+					src.setText(jfc.getSelectedFile().getAbsolutePath().replace("\\", "/"));
 				}
 			}
 		});

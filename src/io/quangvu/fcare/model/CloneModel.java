@@ -106,6 +106,7 @@ public class CloneModel {
 
 	public Vector<String> getTableHeader() {
 		Vector<String> header = new Vector<String>();
+		header.add("stt");
 		header.add("tag");
 		header.add("id");
 		header.add("tên");
@@ -130,8 +131,10 @@ public class CloneModel {
 		ArrayList<Clone> clones = this.all();
 		Vector<Vector<String>> data = new Vector<Vector<String>>();
 		Vector<String> row = null;
+		int count = 1;
 		for (Clone clone : clones) {
 			row = new Vector<String>();
+			row.add(String.valueOf(count));
 			row.add(clone.getTag()); // tag
 			row.add(clone.getId());// id
 			row.add(clone.getName());// name
@@ -150,6 +153,7 @@ public class CloneModel {
 			row.add(clone.getCreatedAt());// created at
 			row.add(clone.getUpdateAt());// last active
 			data.add(row);
+			count++;
 		}
 		return data;
 	}

@@ -56,11 +56,11 @@ public class CloneCareCreatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		minLike.setBounds(106, 257, 40, 20);
+		minLike.setBounds(106, 295, 40, 20);
 		add(minLike);
 
 		JLabel lblMax = new JLabel("đến");
-		lblMax.setBounds(165, 263, 29, 14);
+		lblMax.setBounds(165, 301, 29, 14);
 		add(lblMax);
 
 		maxLike = new JSpinner();
@@ -71,19 +71,19 @@ public class CloneCareCreatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		maxLike.setBounds(204, 257, 40, 20);
+		maxLike.setBounds(204, 295, 40, 20);
 		add(maxLike);
 
 		JLabel lblSLike = new JLabel("Số like");
-		lblSLike.setBounds(36, 260, 60, 14);
+		lblSLike.setBounds(36, 298, 60, 14);
 		add(lblSLike);
 
 		JLabel lblNghGiaLike = new JLabel("nghỉ giữa lượt");
-		lblNghGiaLike.setBounds(302, 260, 104, 14);
+		lblNghGiaLike.setBounds(302, 298, 104, 14);
 		add(lblNghGiaLike);
 
 		JLabel lblSCmtT = new JLabel("Số cmt");
-		lblSCmtT.setBounds(36, 294, 60, 14);
+		lblSCmtT.setBounds(36, 337, 60, 14);
 		add(lblSCmtT);
 
 		minComment = new JSpinner();
@@ -95,11 +95,11 @@ public class CloneCareCreatePanel extends JPanel {
 			}
 		});
 		
-		minComment.setBounds(106, 291, 40, 20);
+		minComment.setBounds(106, 334, 40, 20);
 		add(minComment);
 
 		JLabel label_2 = new JLabel("đến");
-		label_2.setBounds(165, 297, 29, 14);
+		label_2.setBounds(165, 340, 29, 14);
 		add(label_2);
 
 		maxComment = new JSpinner();
@@ -110,11 +110,11 @@ public class CloneCareCreatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		maxComment.setBounds(204, 291, 40, 20);
+		maxComment.setBounds(204, 334, 40, 20);
 		add(maxComment);
 
 		JLabel lblNghGiaCmt = new JLabel("nghỉ giữa lượt");
-		lblNghGiaCmt.setBounds(302, 294, 98, 14);
+		lblNghGiaCmt.setBounds(302, 337, 98, 14);
 		add(lblNghGiaCmt);
 
 		waitComment = new JSpinner();
@@ -124,11 +124,11 @@ public class CloneCareCreatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		waitComment.setBounds(416, 288, 40, 20);
+		waitComment.setBounds(416, 331, 40, 20);
 		add(waitComment);
 
 		JLabel lblNghGiaClone_1 = new JLabel("nghỉ giữa clone");
-		lblNghGiaClone_1.setBounds(567, 294, 96, 14);
+		lblNghGiaClone_1.setBounds(567, 337, 96, 14);
 		add(lblNghGiaClone_1);
 
 		waitCloneComment = new JSpinner();
@@ -138,11 +138,11 @@ public class CloneCareCreatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		waitCloneComment.setBounds(673, 288, 42, 20);
+		waitCloneComment.setBounds(673, 331, 42, 20);
 		add(waitCloneComment);
 
 		JLabel lblSShareT = new JLabel("Số share");
-		lblSShareT.setBounds(36, 325, 66, 14);
+		lblSShareT.setBounds(36, 371, 66, 14);
 		add(lblSShareT);
 
 		minShare = new JSpinner();
@@ -153,11 +153,11 @@ public class CloneCareCreatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		minShare.setBounds(106, 322, 40, 20);
+		minShare.setBounds(106, 368, 40, 20);
 		add(minShare);
 
 		JLabel label_3 = new JLabel("đến");
-		label_3.setBounds(165, 328, 29, 14);
+		label_3.setBounds(165, 374, 29, 14);
 		add(label_3);
 
 		maxShare = new JSpinner();
@@ -168,11 +168,11 @@ public class CloneCareCreatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		maxShare.setBounds(204, 322, 40, 20);
+		maxShare.setBounds(204, 368, 40, 20);
 		add(maxShare);
 
 		JLabel lblNghGiaShare = new JLabel("nghỉ giữa lượt");
-		lblNghGiaShare.setBounds(302, 325, 98, 14);
+		lblNghGiaShare.setBounds(302, 371, 98, 14);
 		add(lblNghGiaShare);
 
 		waitShare = new JSpinner();
@@ -182,11 +182,11 @@ public class CloneCareCreatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		waitShare.setBounds(416, 319, 40, 20);
+		waitShare.setBounds(416, 365, 40, 20);
 		add(waitShare);
 
 		JLabel lblNghGiaClone_2 = new JLabel("nghỉ giữa clone");
-		lblNghGiaClone_2.setBounds(567, 325, 96, 14);
+		lblNghGiaClone_2.setBounds(567, 371, 96, 14);
 		add(lblNghGiaClone_2);
 
 		waitCloneShare = new JSpinner();
@@ -196,7 +196,7 @@ public class CloneCareCreatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		waitCloneShare.setBounds(673, 319, 42, 20);
+		waitCloneShare.setBounds(673, 365, 42, 20);
 		add(waitCloneShare);
 
 		numThread = new JComboBox();
@@ -219,34 +219,32 @@ public class CloneCareCreatePanel extends JPanel {
 			}
 		});
 		
-		numThread.setBounds(106, 213, 138, 20);
+		numThread.setBounds(106, 247, 138, 20);
 		add(numThread);
 
 		JLabel lblKiuChy = new JLabel("Số luồng");
-		lblKiuChy.setBounds(36, 216, 60, 14);
+		lblKiuChy.setBounds(36, 250, 60, 14);
 		add(lblKiuChy);
 
 		JLabel lblPlan = new JLabel("Camp");
-		lblPlan.setBounds(36, 181, 60, 14);
+		lblPlan.setBounds(36, 201, 60, 14);
 		add(lblPlan);
 
 		name = new JTextField();
-		name.setBounds(106, 178, 659, 20);
+		name.setBounds(106, 198, 659, 20);
 		add(name);
 		name.setColumns(10);
 
 		JLabel lblKiuStatus = new JLabel("Kiểu status");
-		lblKiuStatus.setBounds(302, 216, 73, 14);
+		lblKiuStatus.setBounds(302, 250, 73, 14);
 		add(lblKiuStatus);
 
 		statusType = new JComboBox();
 		statusType.addItem("text+image");
 		statusType.addItem("text");
-		statusType.addItem("text+link");
-		statusType.addItem("link");
 		statusType.addItem("random");
 		statusType.addItem("no status");
-		statusType.setBounds(416, 210, 129, 20);
+		statusType.setBounds(416, 244, 129, 20);
 		add(statusType);
 
 		JButton btnNewButton = new JButton("Bắt đầu ngay");
@@ -255,7 +253,7 @@ public class CloneCareCreatePanel extends JPanel {
 
 			}
 		});
-		btnNewButton.setBounds(343, 440, 131, 23);
+		btnNewButton.setBounds(343, 445, 131, 23);
 		add(btnNewButton);
 
 		JButton btnLuChySau = new JButton("Lưu chạy sau");
@@ -267,11 +265,11 @@ public class CloneCareCreatePanel extends JPanel {
 				
 			}
 		});
-		btnLuChySau.setBounds(190, 440, 124, 23);
+		btnLuChySau.setBounds(190, 445, 124, 23);
 		add(btnLuChySau);
 
 		JButton btnNhpLi = new JButton("Nhập lại");
-		btnNhpLi.setBounds(506, 440, 98, 23);
+		btnNhpLi.setBounds(506, 445, 98, 23);
 		add(btnNhpLi);
 
 		this.cloneList = new JList<String>(cloneIds);
@@ -328,13 +326,6 @@ public class CloneCareCreatePanel extends JPanel {
 		lbTimeExec.setBounds(685, 142, 80, 14);
 		add(lbTimeExec);
 
-		JLabel lblNewLabel_3 = new JLabel(
-				"(*) Lưu ý: Cấu hình like, comment, share là của từng clone chứ không phải là tổng cho cả chiến dịch.");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_3.setForeground(new Color(0, 0, 139));
-		lblNewLabel_3.setBounds(34, 371, 731, 14);
-		add(lblNewLabel_3);
-
 		JLabel lblTiNguynRamd = new JLabel("Tài nguyên RAM(dự tính)");
 		lblTiNguynRamd.setBounds(465, 128, 158, 14);
 		add(lblTiNguynRamd);
@@ -352,11 +343,11 @@ public class CloneCareCreatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		waitLike.setBounds(416, 254, 40, 20);
+		waitLike.setBounds(416, 292, 40, 20);
 		add(waitLike);
 
 		JLabel label_1 = new JLabel("nghỉ giữa clone");
-		label_1.setBounds(567, 260, 96, 14);
+		label_1.setBounds(567, 298, 96, 14);
 		add(label_1);
 
 		waitCloneLike = new JSpinner();
@@ -366,32 +357,32 @@ public class CloneCareCreatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		waitCloneLike.setBounds(673, 257, 42, 20);
+		waitCloneLike.setBounds(673, 295, 42, 20);
 		
 		add(waitCloneLike);
 
 		JLabel lblGiy = new JLabel("(+10)");
-		lblGiy.setBounds(466, 257, 60, 14);
+		lblGiy.setBounds(466, 295, 60, 14);
 		add(lblGiy);
 
 		JLabel label_5 = new JLabel("(+10)");
-		label_5.setBounds(466, 291, 40, 14);
+		label_5.setBounds(466, 334, 40, 14);
 		add(label_5);
 
 		JLabel label_6 = new JLabel("(+10)");
-		label_6.setBounds(466, 322, 40, 14);
+		label_6.setBounds(466, 368, 40, 14);
 		add(label_6);
 
 		JLabel label_8 = new JLabel("(+10)");
-		label_8.setBounds(725, 260, 40, 14);
+		label_8.setBounds(725, 298, 40, 14);
 		add(label_8);
 
 		JLabel label_9 = new JLabel("(+10)");
-		label_9.setBounds(725, 294, 40, 14);
+		label_9.setBounds(725, 337, 40, 14);
 		add(label_9);
 
 		JLabel label_10 = new JLabel("(+10)");
-		label_10.setBounds(725, 325, 40, 14);
+		label_10.setBounds(725, 371, 40, 14);
 		add(label_10);
 
 		JLabel label_4 = new JLabel("-");
@@ -447,12 +438,6 @@ public class CloneCareCreatePanel extends JPanel {
 		updateMinCommentStatus();updateMaxCommentStatus();
 		updateMinShareStatus();updateMaxShareStatus();
 		lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 150) + " MB");
-		
-		JLabel lblPhnThngTin = new JLabel("Phần thông tin của chiến dịch được tổng kết ở phần góc trên, bên phải");
-		lblPhnThngTin.setForeground(new Color(0, 0, 139));
-		lblPhnThngTin.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblPhnThngTin.setBounds(88, 396, 426, 14);
-		add(lblPhnThngTin);
 		updateTimeExec();
 	}
 	

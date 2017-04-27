@@ -54,6 +54,7 @@ public class CloneCareUpdatePanel extends JPanel {
 	
 	public CloneCareUpdatePanel(JDialog container, DashboardFrame dashboardFrame, CloneCareCampaign campaign) {
 		setLayout(null);
+		
 		this.cloneModel = new CloneModel();
 		this.cloneIds = this.cloneModel.getCloneUpdateCampaignUid(campaign.getCloneIdList());
 		
@@ -251,8 +252,6 @@ public class CloneCareUpdatePanel extends JPanel {
 		statusType = new JComboBox();
 		statusType.addItem("text+image");
 		statusType.addItem("text");
-		statusType.addItem("text+link");
-		statusType.addItem("link");
 		statusType.addItem("random");
 		statusType.addItem("no status");
 		statusType.setBounds(416, 283, 129, 20);
@@ -267,7 +266,7 @@ public class CloneCareUpdatePanel extends JPanel {
 				
 			}
 		});
-		btnLuChySau.setBounds(332, 502, 124, 23);
+		btnLuChySau.setBounds(332, 452, 124, 23);
 		add(btnLuChySau);
 		
 		
@@ -325,13 +324,6 @@ public class CloneCareUpdatePanel extends JPanel {
 		lbTimeExec.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbTimeExec.setBounds(685, 205, 80, 14);
 		add(lbTimeExec);
-
-		JLabel lblNewLabel_3 = new JLabel(
-				"(*) Lưu ý: Cấu hình like, comment, share là của từng clone chứ không phải là tổng cho cả chiến dịch.");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_3.setForeground(new Color(0, 0, 139));
-		lblNewLabel_3.setBounds(34, 433, 731, 14);
-		add(lblNewLabel_3);
 
 		JLabel lblTiNguynRamd = new JLabel("Tài nguyên RAM(dự tính)");
 		lblTiNguynRamd.setBounds(465, 191, 158, 14);
@@ -445,12 +437,6 @@ public class CloneCareUpdatePanel extends JPanel {
 		updateMinCommentStatus();updateMaxCommentStatus();
 		updateMinShareStatus();updateMaxShareStatus();
 		lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 150) + " MB");
-		
-		JLabel lblPhnThngTin = new JLabel("Phần thông tin của chiến dịch được tổng kết ở phần góc trên, bên phải");
-		lblPhnThngTin.setForeground(new Color(0, 0, 139));
-		lblPhnThngTin.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblPhnThngTin.setBounds(88, 458, 426, 14);
-		add(lblPhnThngTin);
 		
 		title = new JLabel("Camp Id: " + campaign.getId());
 		title.setBounds(106, 43, 311, 14);

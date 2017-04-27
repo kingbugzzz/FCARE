@@ -50,8 +50,8 @@ public class CloneMainPanel extends JPanel {
 				int[] selectedRowIndexes = table.getSelectedRows();
 				ArrayList<String> ids = new ArrayList<String>();
 				for(int i : selectedRowIndexes) {
-					System.out.println(table.getValueAt(i, 1));
-					ids.add(table.getValueAt(i, 1).toString());
+					System.out.println(table.getValueAt(i, 2));
+					ids.add(table.getValueAt(i, 2).toString());
 				}
 				controller.delete(ids);
 				updateTable();
@@ -103,7 +103,7 @@ public class CloneMainPanel extends JPanel {
 				int[] selectedRowIndexes = table.getSelectedRows();
 				if(selectedRowIndexes.length == 1) {
 					
-					Clone clone = controller.get(String.valueOf(table.getValueAt(selectedRowIndexes[0], 1)));
+					Clone clone = controller.get(String.valueOf(table.getValueAt(selectedRowIndexes[0], 2)));
 					
 					new CloneUpdateDialog(container, "Cập nhật clone", 545, 630, clone).display();
 				}else {
@@ -123,18 +123,10 @@ public class CloneMainPanel extends JPanel {
 		this.tabelModel = new DefaultTableModel(this.tableData, this.tableHeader);
 		this.table = new JTable(this.tabelModel);
 		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//		table.getColumnModel().getColumn(0).setPreferredWidth(40);
-		table.getColumnModel().getColumn(1).setPreferredWidth(125);
-		table.getColumnModel().getColumn(2).setPreferredWidth(135);
-//		table.getColumnModel().getColumn(4).setPreferredWidth(55);
-//		table.getColumnModel().getColumn(5).setPreferredWidth(55);
-//		table.getColumnModel().getColumn(6).setPreferredWidth(55);
-//		table.getColumnModel().getColumn(7).setPreferredWidth(55);
-//		table.getColumnModel().getColumn(8).setPreferredWidth(55);
-//		table.getColumnModel().getColumn(9).setPreferredWidth(55);
-//		table.getColumnModel().getColumn(10).setPreferredWidth(75);
-		table.getColumnModel().getColumn(12).setPreferredWidth(120);
-		table.getColumnModel().getColumn(13).setPreferredWidth(120);
+		table.getColumnModel().getColumn(0).setPreferredWidth(30);
+		table.getColumnModel().getColumn(1).setPreferredWidth(60);
+		table.getColumnModel().getColumn(2).setPreferredWidth(125);
+		table.getColumnModel().getColumn(3).setPreferredWidth(135);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(35, 86, 930, 422);
@@ -211,7 +203,7 @@ public class CloneMainPanel extends JPanel {
 		Vector<String> selectedList = new Vector<String>();
 		int selectedRows[] = this.table.getSelectedRows();
 		for(int selectedRow : selectedRows) {
-			selectedList.add(String.valueOf(this.table.getValueAt(selectedRow, 2)) + "<" + String.valueOf(this.table.getValueAt(selectedRow, 1)) + ">");
+			selectedList.add(String.valueOf(this.table.getValueAt(selectedRow, 3)) + "<" + String.valueOf(this.table.getValueAt(selectedRow, 2)) + ">");
 		}
 		return selectedList;
 	}
@@ -220,10 +212,10 @@ public class CloneMainPanel extends JPanel {
 		this.tableData = this.controller.getTableDataModel();
 		this.tabelModel.setDataVector(this.tableData, this.tableHeader);
 		this.table.setModel(this.tabelModel);
-		table.getColumnModel().getColumn(1).setPreferredWidth(125);
-		table.getColumnModel().getColumn(2).setPreferredWidth(135);
-		table.getColumnModel().getColumn(12).setPreferredWidth(120);
-		table.getColumnModel().getColumn(13).setPreferredWidth(120);
+		table.getColumnModel().getColumn(0).setPreferredWidth(30);
+		table.getColumnModel().getColumn(1).setPreferredWidth(60);
+		table.getColumnModel().getColumn(2).setPreferredWidth(125);
+		table.getColumnModel().getColumn(3).setPreferredWidth(135);
 		this.sum.setText("Tổng:" + this.table.getRowCount());
 	}
 }

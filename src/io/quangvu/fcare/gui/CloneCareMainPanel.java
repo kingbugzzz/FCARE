@@ -59,7 +59,9 @@ public class CloneCareMainPanel extends JPanel {
 					
 					CloneCareCampaign campaign = controller.get(String.valueOf(table.getValueAt(selectedRowIndexes[0], 0)));
 					
-					new CloneCareUpdateDialog(container, "Cập nhật chiến dịch nuôi [id:" + campaign.getId() + "]", 830, 585, campaign).display();
+					System.out.println(campaign.toString());
+					
+					new CloneCareUpdateDialog(container, "Cập nhật chiến dịch nuôi [id:" + campaign.getId() + "]", 830, 535, campaign).display();
 				}else {
 					JOptionPane.showMessageDialog(new JFrame(), "Chọn 1 thôi!");
 				}

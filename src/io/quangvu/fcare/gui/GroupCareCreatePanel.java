@@ -123,7 +123,7 @@ public class GroupCareCreatePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				createCareCampaignHandler();
 				container.dispose();
-				dashboardFrame.loadPanel(new GroupCareMainPanel(dashboardFrame), "Quản lý chiến dịch kéo friend");
+				dashboardFrame.loadPanel(new GroupCareMainPanel(dashboardFrame), "Quản lý chiến dịch kéo mem group");
 			}
 		});
 		btnLuChySau.setBounds(204, 311, 124, 23);
