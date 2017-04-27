@@ -17,16 +17,17 @@ import io.quangvu.fcare.bean.Clone;
 import io.quangvu.fcare.bean.Tag;
 import io.quangvu.fcare.controller.CloneController;
 import io.quangvu.fcare.controller.TagController;
+import io.quangvu.fcare.helper.IOHelper;
 
 public class CloneCreatePanel extends JPanel {
 	
 	private JTextField id;
 	private JLabel lblCookie;
 	private JPasswordField password;
-	private JComboBox cbTags, status;
+	private JComboBox cbTags, status, userAgent;
 	private CloneController controller;
 	private JTextField name;
-	
+	private JEditorPane token, cookie;
 	public CloneCreatePanel(JDialog container, DashboardFrame dashboardFrame) {
 		
 		setLayout(null);
@@ -47,30 +48,30 @@ public class CloneCreatePanel extends JPanel {
 		add(lblPassword);
 		
 		lblCookie = new JLabel("Cookie");
-		lblCookie.setBounds(42, 154, 77, 14);
+		lblCookie.setBounds(42, 275, 77, 14);
 		add(lblCookie);
 		
-		JEditorPane cookie = new JEditorPane();
-		cookie.setBounds(129, 154, 355, 35);
+		cookie = new JEditorPane();
+		cookie.setBounds(129, 272, 355, 66);
 		add(cookie);
 		
 		JButton btnCheckLive = new JButton("Check live");
-		btnCheckLive.setBounds(129, 259, 355, 23);
+		btnCheckLive.setBounds(129, 366, 355, 23);
 		add(btnCheckLive);
 		
 				
 		JLabel lblTags = new JLabel("Tag");
-		lblTags.setBounds(42, 352, 46, 14);
+		lblTags.setBounds(42, 454, 46, 14);
 		add(lblTags);
 		
 		status = new JComboBox();
-		status.setBounds(129, 393, 160, 20);
+		status.setBounds(129, 495, 160, 20);
 		status.addItem("active");
 		status.addItem("deactive");
 		add(status);
 		
 		JLabel lblTrngThi = new JLabel("Trạng thái");
-		lblTrngThi.setBounds(42, 393, 77, 14);
+		lblTrngThi.setBounds(42, 495, 77, 14);
 		add(lblTrngThi);
 		
 		JButton btnAdd = new JButton("Thêm");
@@ -79,7 +80,9 @@ public class CloneCreatePanel extends JPanel {
 				Clone clone = new Clone();
 				clone.setId(id.getText());
 				clone.setPassword(String.valueOf(password.getPassword()));
+				clone.setUserAgent(userAgent.getSelectedItem().toString());
 				clone.setCookie(cookie.getText());
+				clone.setToken(token.getText());
 				clone.setName(name.getText());
 				clone.setTag(cbTags.getSelectedItem().toString());
 				clone.setStatus(status.getSelectedItem().toString());
@@ -88,11 +91,11 @@ public class CloneCreatePanel extends JPanel {
 				dashboardFrame.loadPanel(new CloneMainPanel(dashboardFrame), "Quản lý clone");
 			}
 		});
-		btnAdd.setBounds(129, 444, 160, 23);
+		btnAdd.setBounds(129, 546, 160, 23);
 		add(btnAdd);
 		
 		JButton btnReset = new JButton("Nhập lại");
-		btnReset.setBounds(310, 444, 174, 23);
+		btnReset.setBounds(310, 546, 174, 23);
 		add(btnReset);
 		
 		password = new JPasswordField();
@@ -105,32 +108,36 @@ public class CloneCreatePanel extends JPanel {
 		for(Tag tag : tags) {
 			cbTags.addItem(tag.getName());
 		}
-		cbTags.setBounds(129, 352, 355, 20);
+		cbTags.setBounds(129, 454, 355, 20);
 		add(cbTags);
 		
 		JLabel lblTnClone = new JLabel("Tên clone");
-		lblTnClone.setBounds(42, 309, 77, 14);
+		lblTnClone.setBounds(42, 411, 77, 14);
 		add(lblTnClone);
 		
 		name = new JTextField();
 		name.setColumns(10);
-		name.setBounds(129, 309, 355, 20);
+		name.setBounds(129, 411, 355, 20);
 		add(name);
 		
 		JLabel lblUseragent = new JLabel("UserAgent");
 		lblUseragent.setBounds(42, 113, 77, 14);
 		add(lblUseragent);
 		
-		JComboBox userAgent = new JComboBox();
+		ArrayList<String> ugentList = IOHelper.readLines("config/uagents.dat");
+		userAgent = new JComboBox();
+		for(String agent : ugentList) {
+			userAgent.addItem(agent);
+		}
 		userAgent.setBounds(129, 110, 355, 20);
 		add(userAgent);
 		
-		JEditorPane token = new JEditorPane();
-		token.setBounds(129, 213, 355, 35);
+		token = new JEditorPane();
+		token.setBounds(129, 154, 355, 94);
 		add(token);
 		
 		JLabel lblToken = new JLabel("Token");
-		lblToken.setBounds(42, 213, 77, 14);
+		lblToken.setBounds(42, 154, 77, 14);
 		add(lblToken);
 
 	}

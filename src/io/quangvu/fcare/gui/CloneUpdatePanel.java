@@ -17,12 +17,13 @@ import io.quangvu.fcare.bean.Clone;
 import io.quangvu.fcare.bean.Tag;
 import io.quangvu.fcare.controller.CloneController;
 import io.quangvu.fcare.controller.TagController;
+import io.quangvu.fcare.helper.IOHelper;
 
 public class CloneUpdatePanel extends JPanel {
 	
 	private JTextField id;
 	private JLabel lblCookie;
-	private JComboBox cbTags, status;
+	private JComboBox cbTags, status, userAgent;
 	private CloneController controller;
 	private JTextField name;
 	private JTextField newPass;
@@ -50,32 +51,40 @@ public class CloneUpdatePanel extends JPanel {
 		add(lblPassword);
 		
 		lblCookie = new JLabel("Cookie");
-		lblCookie.setBounds(42, 142, 77, 14);
+		lblCookie.setBounds(42, 276, 77, 14);
 		add(lblCookie);
 		
 		JEditorPane cookie = new JEditorPane();
-		cookie.setBounds(129, 146, 355, 36);
+		cookie.setBounds(129, 276, 355, 57);
 		cookie.setText(clone.getCookie());
 		add(cookie);
 		
+		JLabel lblToken = new JLabel("Token");
+		lblToken.setBounds(42, 152, 77, 14);
+		add(lblToken);
+		JEditorPane token = new JEditorPane();
+		token.setText(clone.getToken());
+		token.setBounds(129, 152, 355, 102);
+		add(token);
+		
 		JButton btnCheckLive = new JButton("Check live");
-		btnCheckLive.setBounds(129, 260, 355, 23);
+		btnCheckLive.setBounds(129, 359, 355, 23);
 		add(btnCheckLive);
 		
 				
 		JLabel lblTags = new JLabel("Tag");
-		lblTags.setBounds(42, 355, 46, 14);
+		lblTags.setBounds(42, 449, 46, 14);
 		add(lblTags);
 		
 		status = new JComboBox();
-		status.setBounds(129, 396, 160, 20);
+		status.setBounds(129, 490, 160, 20);
 		status.addItem("active");
 		status.addItem("deactive");
 		status.setSelectedItem(clone.getStatus());
 		add(status);
 		
 		JLabel lblTrngThi = new JLabel("Trạng thái");
-		lblTrngThi.setBounds(42, 396, 77, 14);
+		lblTrngThi.setBounds(42, 490, 77, 14);
 		add(lblTrngThi);
 		
 		JButton btnAdd = new JButton("Cập nhật");
@@ -88,7 +97,9 @@ public class CloneUpdatePanel extends JPanel {
 				}else {
 					clone.setPassword(newPass.getText());
 				}
+				clone.setUserAgent(userAgent.getSelectedItem().toString());
 				clone.setCookie(cookie.getText());
+				clone.setToken(token.getText());
 				clone.setName(name.getText());
 				clone.setTag(cbTags.getSelectedItem().toString());
 				clone.setStatus(status.getSelectedItem().toString());
@@ -97,11 +108,11 @@ public class CloneUpdatePanel extends JPanel {
 				dashboardFrame.loadPanel(new CloneMainPanel(dashboardFrame), "Quản lý clone");
 			}
 		});
-		btnAdd.setBounds(129, 447, 160, 23);
+		btnAdd.setBounds(129, 541, 160, 23);
 		add(btnAdd);
 		
 		JButton btnReset = new JButton("Nhập lại");
-		btnReset.setBounds(310, 447, 174, 23);
+		btnReset.setBounds(310, 541, 174, 23);
 		add(btnReset);
 				
 		cbTags = new JComboBox();
@@ -111,17 +122,17 @@ public class CloneUpdatePanel extends JPanel {
 			cbTags.addItem(tag.getName());
 		}
 		cbTags.setSelectedItem(clone.getTag());
-		cbTags.setBounds(129, 355, 355, 20);
+		cbTags.setBounds(129, 449, 355, 20);
 		add(cbTags);
 		
 		JLabel lblTnClone = new JLabel("Tên clone");
-		lblTnClone.setBounds(42, 312, 77, 14);
+		lblTnClone.setBounds(42, 406, 77, 14);
 		add(lblTnClone);
 		
 		name = new JTextField();
 		name.setText(clone.getName());
 		name.setColumns(10);
-		name.setBounds(129, 312, 355, 20);
+		name.setBounds(129, 406, 355, 20);
 		add(name);
 		
 		newPass = new JTextField();
@@ -136,18 +147,14 @@ public class CloneUpdatePanel extends JPanel {
 		oldPass.setBounds(129, 68, 160, 20);
 		add(oldPass);
 		
-		JLabel lblToken = new JLabel("Token");
-		lblToken.setBounds(42, 201, 77, 14);
-		add(lblToken);
-		
-		JEditorPane token = new JEditorPane();
-		token.setText((String) null);
-		token.setBounds(129, 201, 355, 36);
-		add(token);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(129, 106, 355, 20);
-		add(comboBox);
+		ArrayList<String> ugentList = IOHelper.readLines("config/uagents.dat");
+		userAgent = new JComboBox();
+		for(String agent : ugentList) {
+			userAgent.addItem(agent);
+		}
+		userAgent.setSelectedItem(clone.getUserAgent());
+		userAgent.setBounds(129, 106, 355, 20);
+		add(userAgent);
 		
 		JLabel lblUseragent = new JLabel("UserAgent");
 		lblUseragent.setBounds(42, 106, 77, 14);

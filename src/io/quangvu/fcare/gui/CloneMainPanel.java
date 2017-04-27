@@ -37,7 +37,7 @@ public class CloneMainPanel extends JPanel {
 		btnNew.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/additem.png")));
 		btnNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CloneCreateDialog(container, "Thêm mới clone", 530, 520).display();
+				new CloneCreateDialog(container, "Thêm mới clone", 545, 630).display();
 			}
 		});
 		btnNew.setBounds(35, 34, 49, 23);
@@ -105,7 +105,7 @@ public class CloneMainPanel extends JPanel {
 					
 					Clone clone = controller.get(String.valueOf(table.getValueAt(selectedRowIndexes[0], 1)));
 					
-					new CloneUpdateDialog(container, "Cập nhật clone", 530, 450, clone).display();
+					new CloneUpdateDialog(container, "Cập nhật clone", 545, 630, clone).display();
 				}else {
 					JOptionPane.showMessageDialog(new JFrame(), "Chọn 1 thôi!");
 				}

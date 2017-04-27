@@ -26,18 +26,20 @@ public class CloneModel {
 	}
 
 	public ArrayList<Clone> all() {
-		String query = "SELECT * FROM clones WHERE owner = '" + SessionHelper.getSessionUser() + "' order by created_at";
+		String query = "SELECT * FROM clones WHERE owner = '" + SessionHelper.getSessionUser()
+				+ "' order by created_at";
 		System.out.println(query);
 		return BeanPaserHelper.parseClones(DBHelper.executeQuery(query));
 	}
 
 	public boolean add(Clone clone) {
-		Date now =  new Date();
+		Date now = new Date();
 		DateFormat dateFormater = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-		
-		String query = "INSERT INTO clones(owner, tag, id, password, name, cookie, status, created_at) VALUES('"
+
+		String query = "INSERT INTO clones(owner, tag, id, password, name, user_agent, cookie, token, status, created_at) VALUES('"
 				+ SessionHelper.getSessionUser() + "','" + clone.getTag() + "','" + clone.getId() + "','"
-				+ clone.getPassword() + "','" + clone.getName() + "','" + clone.getCookie() + "','" + clone.getStatus() + "','"
+				+ clone.getPassword() + "','" + clone.getName() + "','" + clone.getUserAgent() + "','"
+				+ clone.getCookie() + "','" + clone.getToken() + "','" + clone.getStatus() + "','"
 				+ dateFormater.format(now) + "')";
 		System.out.println(query);
 		return DBHelper.execute(query);
@@ -48,7 +50,9 @@ public class CloneModel {
 		query += "tag='" + clone.getTag() + "',";
 		query += "password='" + clone.getPassword() + "',";
 		query += "name='" + clone.getName() + "',";
+		query += "user_agent='" + clone.getUserAgent() + "',";
 		query += "cookie='" + clone.getCookie() + "',";
+		query += "token='" + clone.getToken() + "',";
 		query += "status='" + clone.getStatus() + "'";
 		query += " WHERE id='" + clone.getId() + "' AND owner ='" + SessionHelper.getSessionUser() + "'";
 		System.out.println(query);
@@ -73,31 +77,33 @@ public class CloneModel {
 		String query = "DELETE FROM clones WHERE id='" + id + "' AND owner='" + SessionHelper.getSessionUser() + "'";
 		return DBHelper.execute(query);
 	}
-	
+
 	public void delete(ArrayList<String> ids) {
 		String strIds = "";
-		for(String id : ids) {
+		for (String id : ids) {
 			strIds += "'" + id + "',";
 		}
 		System.out.println(strIds);
-		strIds = strIds.substring(0, strIds.length()-1);
-		String query = "DELETE FROM clones WHERE id in (" + strIds + ") AND owner='" + SessionHelper.getSessionUser() + "'";
+		strIds = strIds.substring(0, strIds.length() - 1);
+		String query = "DELETE FROM clones WHERE id in (" + strIds + ") AND owner='" + SessionHelper.getSessionUser()
+				+ "'";
 		System.out.println(query);
 		DBHelper.execute(query);
 	}
-	
+
 	public void updateStatus(ArrayList<String> ids, String status) {
 		String strIds = "";
-		for(String id : ids) {
+		for (String id : ids) {
 			strIds += "'" + id + "',";
 		}
 		System.out.println(strIds);
-		strIds = strIds.substring(0, strIds.length()-1);
-		String query = "UPDATE clones set status='" + status + "' WHERE id in (" + strIds + ") AND owner='" + SessionHelper.getSessionUser() + "'";
+		strIds = strIds.substring(0, strIds.length() - 1);
+		String query = "UPDATE clones set status='" + status + "' WHERE id in (" + strIds + ") AND owner='"
+				+ SessionHelper.getSessionUser() + "'";
 		System.out.println(query);
 		DBHelper.execute(query);
 	}
-	
+
 	public Vector<String> getTableHeader() {
 		Vector<String> header = new Vector<String>();
 		header.add("tag");
@@ -112,6 +118,9 @@ public class CloneModel {
 		header.add("số comment");
 		header.add("số mem add");
 		header.add("số page load");
+		header.add("cookie");
+		header.add("token");
+		header.add("user_agent");
 		header.add("ngày vào tool");
 		header.add("lần hoạt động cuối");
 		return header;
@@ -123,43 +132,46 @@ public class CloneModel {
 		Vector<String> row = null;
 		for (Clone clone : clones) {
 			row = new Vector<String>();
-			row.add(clone.getTag()); //tag
-			row.add(clone.getId());//id
-			row.add(clone.getName());//name
-			row.add(clone.getStatus()); //status
-			row.add(String.valueOf(clone.getNumFriend())); //num friend
-			row.add(String.valueOf(clone.getNumFriendReq())); //f.req
+			row.add(clone.getTag()); // tag
+			row.add(clone.getId());// id
+			row.add(clone.getName());// name
+			row.add(clone.getStatus()); // status
+			row.add(String.valueOf(clone.getNumFriend())); // num friend
+			row.add(String.valueOf(clone.getNumFriendReq())); // f.req
 			row.add(String.valueOf(clone.getNumFriendAcp())); // f.acp
 			row.add(String.valueOf(clone.getNumLike())); // số like
-			row.add(String.valueOf(clone.getNumShare())); //số share
-			row.add(String.valueOf(clone.getNumComment()));//số comment
-			row.add(String.valueOf(clone.getNumGma())); //số gma
-			row.add(String.valueOf(clone.getNumPll()));//số pl
+			row.add(String.valueOf(clone.getNumShare())); // số share
+			row.add(String.valueOf(clone.getNumComment()));// số comment
+			row.add(String.valueOf(clone.getNumGma())); // số gma
+			row.add(String.valueOf(clone.getNumPll()));// số pl
+			row.add(clone.getCookie());// cookie
+			row.add(clone.getToken());// token
+			row.add(clone.getUserAgent());// user_agent
 			row.add(clone.getCreatedAt());// created at
-			row.add(clone.getUpdateAt());//last active
+			row.add(clone.getUpdateAt());// last active
 			data.add(row);
 		}
 		return data;
 	}
-	
+
 	public Vector<String> getCloneUpdateCampaignUid(String uid) {
 		Vector<String> listUid = new Vector<String>();
 		String paramQuery = "";
 		String temp[] = uid.split(",");
-		for(String id : temp) {
+		for (String id : temp) {
 			paramQuery += "'" + id + "',";
 		}
-		paramQuery = paramQuery.substring(0, paramQuery.length()-1);
+		paramQuery = paramQuery.substring(0, paramQuery.length() - 1);
 		String query = "SELECT name, id from clones WHERE id in (" + paramQuery + ")";
 		ResultSet rs = DBHelper.executeQuery(query);
 		try {
-			while(rs.next()) {
+			while (rs.next()) {
 				listUid.add(rs.getString("name") + "<" + rs.getString("id") + ">");
 			}
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
 		return listUid;
 	}
 }

@@ -50,7 +50,9 @@ public class BeanPaserHelper {
 				clone.setId(rs.getString("id"));
 				clone.setPassword(rs.getString("password"));
 				clone.setName(rs.getString("name"));
+				clone.setUserAgent(rs.getString("user_agent"));
 				clone.setCookie(rs.getString("cookie"));
+				clone.setToken(rs.getString("token"));
 				clone.setNumFriend(Integer.parseInt(rs.getString("num_friend")));
 				clone.setNumFriendReq(Integer.parseInt(rs.getString("num_friend_req")));
 				clone.setNumFriendAcp(Integer.parseInt(rs.getString("num_friend_acp")));
@@ -76,8 +78,13 @@ public class BeanPaserHelper {
 			while (rs.next()) {
 				clone = new Clone();
 				clone.setTag(rs.getString("tag"));
+				clone.setOwner(rs.getString("owner"));
 				clone.setId(rs.getString("id"));
+				clone.setPassword(rs.getString("password"));
 				clone.setName(rs.getString("name"));
+				clone.setUserAgent(rs.getString("user_agent"));
+				clone.setCookie(rs.getString("cookie"));
+				clone.setToken(rs.getString("token"));
 				clone.setNumFriend(Integer.parseInt(rs.getString("num_friend")));
 				clone.setNumFriendReq(Integer.parseInt(rs.getString("num_friend_req")));
 				clone.setNumFriendAcp(Integer.parseInt(rs.getString("num_friend_acp")));
