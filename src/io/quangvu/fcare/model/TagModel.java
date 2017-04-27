@@ -41,7 +41,7 @@ public class TagModel {
 	}
 
 	public boolean delete(String name) {
-		String query = "DELETE FROM tags WHERE name in (" + name + ")";
+		String query = "DELETE FROM tags WHERE name in (" + name + ")  AND owner='" + SessionHelper.getSessionUser() + "'";
 		return DBHelper.execute(query);
 	}
 

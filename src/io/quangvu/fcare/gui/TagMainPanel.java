@@ -87,9 +87,10 @@ public class TagMainPanel extends JPanel {
 		this.table = new JTable(tableModel);
 		this.table = new JTable(tableModel);
 		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getColumnModel().getColumn(1).setPreferredWidth(820);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(35, 86, 930, 312);
+		scrollPane.setBounds(35, 86, 930, 402);
 		add(scrollPane);
 	}
 	
@@ -106,5 +107,6 @@ public class TagMainPanel extends JPanel {
 		this.data = this.controller.getTagTableDataModel();
 		this.tableModel.setDataVector(this.data, this.columnNames);
 		this.table.setModel(this.tableModel);
+		table.getColumnModel().getColumn(1).setPreferredWidth(820);
 	}
 }

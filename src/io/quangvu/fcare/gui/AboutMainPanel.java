@@ -2,12 +2,12 @@ package io.quangvu.fcare.gui;
 
 import javax.swing.JPanel;
 
-public class SystemAboutMainPanel extends JPanel {
+public class AboutMainPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public SystemAboutMainPanel() {
+	public AboutMainPanel() {
 
 	}
 

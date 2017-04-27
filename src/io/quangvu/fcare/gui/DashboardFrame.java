@@ -221,16 +221,14 @@ public class DashboardFrame extends JFrame implements ActionListener {
 		
 		//Datasource menu event handler
 		if(event.getSource().equals(this.miSourceStatus)) {
-			this.loadPanel(new StatusDatasourceMainPanel(this), "Quanr lý status nguồn");
+			this.loadPanel(new RStatusMainPanel(this), "Quanr lý status nguồn");
 		}
 		if(event.getSource().equals(this.miSourceUID)) {
-			this.loadPanel(new UidDatasourceMainPanel(this), "Quanr lý dữ liệu UID nguồn");
 		}
 		if(event.getSource().equals(this.miSourceGroup)) {
-			this.loadPanel(new GroupDatasourceMainPanel(this), "Quanr lý group nguồn");
 		}
 		if(event.getSource().equals(this.miSourcePage)) {
-			this.loadPanel(new PageDatasourceMainPanel(this), "Quanr lý page nguồn");
+			this.loadPanel(new RPageMainPanel(this), "Quanr lý page nguồn");
 		}
 		
 		//Util exporter menu event handler

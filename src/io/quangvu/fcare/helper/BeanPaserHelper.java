@@ -8,6 +8,7 @@ import io.quangvu.fcare.bean.Clone;
 import io.quangvu.fcare.bean.CloneCareCampaign;
 import io.quangvu.fcare.bean.FriendCareCampaign;
 import io.quangvu.fcare.bean.GroupCareCampaign;
+import io.quangvu.fcare.bean.RStatus;
 import io.quangvu.fcare.bean.Tag;
 
 public class BeanPaserHelper {
@@ -282,6 +283,41 @@ public class BeanPaserHelper {
 				gccList.add(gcc);
 			}
 			return gccList;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+
+	public static RStatus parseRStatus(ResultSet rs) {
+		try {
+			RStatus status = new RStatus();
+			while (rs.next()) {
+				status.setOwner(rs.getString("owner"));
+				status.setTag(rs.getString("tag"));
+				status.setId(rs.getInt("id"));
+				status.setName(rs.getString("name"));
+				status.setSrc(rs.getString("src_file"));
+			}
+			return status;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public static ArrayList<RStatus> parseAllRStatus(ResultSet rs) {
+		try {
+			ArrayList<RStatus> list = new ArrayList<RStatus>();
+			RStatus status = null;
+			while (rs.next()) {
+				status =  new RStatus();
+				status.setOwner(rs.getString("owner"));
+				status.setTag(rs.getString("tag"));
+				status.setId(rs.getInt("id"));
+				status.setName(rs.getString("name"));
+				status.setSrc(rs.getString("src_file"));
+				list.add(status);
+			}
+			return list;
 		}catch(Exception ex) {
 			return null;
 		}
