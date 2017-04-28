@@ -28,6 +28,7 @@ public class CloneCareMainPanel extends JPanel {
 	private Vector<String> tableHeader;
 	private Vector<Vector<String>> tableData; 
 	private JLabel sum;
+	private CloneCareRunningDialog cloneCRD;
 	
 	public CloneCareMainPanel(DashboardFrame container) {
 		setLayout(null);
@@ -122,6 +123,16 @@ public class CloneCareMainPanel extends JPanel {
 		btnPlanlist.setIcon(new ImageIcon(CloneCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/play.png")));
 		btnPlanlist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int[] selectedRowIndexes = table.getSelectedRows();
+				if (selectedRowIndexes.length == 1) {
+					String campId = String.valueOf(table.getValueAt(selectedRowIndexes[0], 0));
+					cloneCRD = new CloneCareRunningDialog(container, "Chạy chiến dịch nuôi <" + campId + ">", 510, 290, campId);
+					cloneCRD.setModal(false);
+					cloneCRD.display();
+
+				} else {
+					JOptionPane.showMessageDialog(new JFrame(), "Chọn 1!");
+				}
 			}
 		});
 		btnPlanlist.setBounds(214, 34, 49, 23);

@@ -253,7 +253,7 @@ public class CloneCareCreatePanel extends JPanel {
 
 			}
 		});
-		btnNewButton.setBounds(343, 445, 131, 23);
+		btnNewButton.setBounds(347, 428, 131, 23);
 		add(btnNewButton);
 
 		JButton btnLuChySau = new JButton("Lưu chạy sau");
@@ -265,11 +265,11 @@ public class CloneCareCreatePanel extends JPanel {
 				
 			}
 		});
-		btnLuChySau.setBounds(190, 445, 124, 23);
+		btnLuChySau.setBounds(194, 428, 124, 23);
 		add(btnLuChySau);
 
 		JButton btnNhpLi = new JButton("Nhập lại");
-		btnNhpLi.setBounds(506, 445, 98, 23);
+		btnNhpLi.setBounds(510, 428, 98, 23);
 		add(btnNhpLi);
 
 		this.cloneList = new JList<String>(cloneIds);
