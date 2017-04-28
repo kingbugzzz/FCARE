@@ -10,6 +10,7 @@ import io.quangvu.fcare.bean.FriendCareByUidCampaign;
 import io.quangvu.fcare.bean.FriendCareCampaign;
 import io.quangvu.fcare.bean.GroupCareCampaign;
 import io.quangvu.fcare.bean.GroupJoinCampaign;
+import io.quangvu.fcare.bean.RComment;
 import io.quangvu.fcare.bean.RStatus;
 import io.quangvu.fcare.bean.Tag;
 
@@ -426,6 +427,41 @@ public class BeanPaserHelper {
 				status.setName(rs.getString("name"));
 				status.setSrc(rs.getString("src_file"));
 				list.add(status);
+			}
+			return list;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public static RComment parseRComment(ResultSet rs) {
+		try {
+			RComment comment = new RComment();
+			while (rs.next()) {
+				comment.setOwner(rs.getString("owner"));
+				comment.setTag(rs.getString("tag"));
+				comment.setId(rs.getInt("id"));
+				comment.setName(rs.getString("name"));
+				comment.setSrc(rs.getString("src_file"));
+			}
+			return comment;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public static ArrayList<RComment> parseAllRComment(ResultSet rs) {
+		try {
+			ArrayList<RComment> list = new ArrayList<RComment>();
+			RComment comment = null;
+			while (rs.next()) {
+				comment =  new RComment();
+				comment.setOwner(rs.getString("owner"));
+				comment.setTag(rs.getString("tag"));
+				comment.setId(rs.getInt("id"));
+				comment.setName(rs.getString("name"));
+				comment.setSrc(rs.getString("src_file"));
+				list.add(comment);
 			}
 			return list;
 		}catch(Exception ex) {

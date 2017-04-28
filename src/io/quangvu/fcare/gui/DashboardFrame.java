@@ -241,6 +241,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
 		if(event.getSource().equals(this.miSourceImage)) {
 		}
 		if(event.getSource().equals(this.miSourceComment)) {
+			this.loadPanel(new RCommentMainPanel(this), "Quản lý comment nguồn");
 		}
 		if(event.getSource().equals(this.miSourcePage)) {
 			this.loadPanel(new RPageMainPanel(this), "Quản lý page nguồn");
