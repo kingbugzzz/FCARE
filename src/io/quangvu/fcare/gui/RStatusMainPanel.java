@@ -60,7 +60,7 @@ public class RStatusMainPanel extends JPanel {
 				updateTable();
 			}
 		});
-		btnXa.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash2.png")));
+		btnXa.setIcon(new ImageIcon(RStatusMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash.png")));
 		btnXa.setBounds(94, 34, 49, 23);
 		add(btnXa);
 		
@@ -91,8 +91,9 @@ public class RStatusMainPanel extends JPanel {
 		this.tabelModel = new DefaultTableModel(this.tableData, this.tableHeader);
 		this.table = new JTable(this.tabelModel);
 		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getColumnModel().getColumn(2).setPreferredWidth(250);
-		table.getColumnModel().getColumn(3).setPreferredWidth(520);
+		table.getColumnModel().getColumn(1).setPreferredWidth(150);
+		table.getColumnModel().getColumn(2).setPreferredWidth(320);
+		table.getColumnModel().getColumn(3).setPreferredWidth(558);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(35, 86, 1106, 419);
 		add(scrollPane);
@@ -115,8 +116,9 @@ public class RStatusMainPanel extends JPanel {
 		this.tableData = this.controller.getTableDataModel();
 		this.tabelModel.setDataVector(this.tableData, this.tableHeader);
 		this.table.setModel(this.tabelModel);
-		table.getColumnModel().getColumn(2).setPreferredWidth(250);
-		table.getColumnModel().getColumn(3).setPreferredWidth(520);
+		table.getColumnModel().getColumn(1).setPreferredWidth(150);
+		table.getColumnModel().getColumn(2).setPreferredWidth(320);
+		table.getColumnModel().getColumn(3).setPreferredWidth(558);
 		this.sum.setText("Tổng:" + this.table.getRowCount());
 	}
 }

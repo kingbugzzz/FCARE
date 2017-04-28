@@ -47,7 +47,7 @@ public class CloneCareMainPanel extends JPanel {
 				updateTable();
 			}
 		});
-		btnXa.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash2.png")));
+		btnXa.setIcon(new ImageIcon(CloneCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash.png")));
 		btnXa.setBounds(35, 34, 49, 23);
 		add(btnXa);
 		

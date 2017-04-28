@@ -28,7 +28,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
 	private JMenuItem miTag, miAbout;
 	private JMenuItem miManageClone;
 	private JMenuItem miCloneCare, miFriendCare, miGroupCare,  miPageCare;
-	private JMenuItem miSourceStatus, miSourceGroup, miSourcePage, miSourceUID;
+	private JMenuItem miSourceStatus, miSourceComment, miSourcePage, miSourceImage;
 	private JMenuItem miExportUID, miExportGroup, miExportPage, miExportPhone, miExportEmail;
 	private JMenuItem miGroupJoin;
 	private JMenuItem miFriendCareByUid;
@@ -101,20 +101,19 @@ public class DashboardFrame extends JFrame implements ActionListener {
 		this.mnSourceData.add(this.miSourceStatus);
 		this.mnSourceData.addSeparator();
 		
-		this.miSourceGroup = new JMenuItem("Group");
-		this.mnSourceData.add(this.miSourceGroup);
-		this.miSourceGroup.addActionListener(this);
+		this.miSourceComment = new JMenuItem("Comment tổng hợp");
+		this.mnSourceData.add(this.miSourceComment);
+		this.miSourceComment.addActionListener(this);
 		this.mnSourceData.addSeparator();
 		
-		this.miSourcePage = new JMenuItem("Page");
+		this.miSourcePage = new JMenuItem("Page nguồn");
 		this.miSourcePage.addActionListener(this);
 		this.mnSourceData.add(this.miSourcePage);
 		this.mnSourceData.addSeparator();
 		
-		this.miSourceUID = new JMenuItem("UID");
-		this.mnSourceData.add(this.miSourceUID);
-		this.miSourceUID.addActionListener(this);
-		this.mnSourceData.addSeparator();
+		this.miSourceImage = new JMenuItem("Ảnh nguồn");
+		this.mnSourceData.add(this.miSourceImage);
+		this.miSourceImage.addActionListener(this);
 		
 		this.mnUtil = new JMenu("Tiện ích");
 		this.menubar.add(this.mnUtil);
@@ -205,6 +204,9 @@ public class DashboardFrame extends JFrame implements ActionListener {
 		if(event.getSource().equals(this.miTag)) {
 			this.loadPanel(new TagMainPanel(this), "Quản lý Tag");
 		}
+		if(event.getSource().equals(this.miAbout)) {
+			this.loadPanel(new AboutMainPanel(this), "Thông tin");
+		}
 			
 		//Clone menu event handler
 		if(event.getSource().equals(this.miManageClone)) {
@@ -220,7 +222,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
 			this.loadPanel(new FriendCareMainPanel(this), "Quản lý kéo friend");
 		}
 		if(event.getSource().equals(this.miFriendCareByUid)) {
-//			this.loadPanel(new FriendCareMainPanel(this), "Quản lý kéo friend");
+			this.loadPanel(new FriendCareByUidMainPanel(this), "Quản lý kéo friend từ uid");
 		}
 		if(event.getSource().equals(this.miGroupCare)) {
 			this.loadPanel(new GroupCareMainPanel(this), "Quản lý kéo mem group");
@@ -236,9 +238,9 @@ public class DashboardFrame extends JFrame implements ActionListener {
 		if(event.getSource().equals(this.miSourceStatus)) {
 			this.loadPanel(new RStatusMainPanel(this), "Quản lý status nguồn");
 		}
-		if(event.getSource().equals(this.miSourceUID)) {
+		if(event.getSource().equals(this.miSourceImage)) {
 		}
-		if(event.getSource().equals(this.miSourceGroup)) {
+		if(event.getSource().equals(this.miSourceComment)) {
 		}
 		if(event.getSource().equals(this.miSourcePage)) {
 			this.loadPanel(new RPageMainPanel(this), "Quản lý page nguồn");

@@ -126,9 +126,10 @@ public class CloneMainPanel extends JPanel {
 		this.table = new JTable(this.tabelModel);
 		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getColumnModel().getColumn(0).setPreferredWidth(30);
-		table.getColumnModel().getColumn(1).setPreferredWidth(60);
+		table.getColumnModel().getColumn(1).setPreferredWidth(90);
 		table.getColumnModel().getColumn(2).setPreferredWidth(125);
-		table.getColumnModel().getColumn(3).setPreferredWidth(135);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		table.getColumnModel().getColumn(4).setPreferredWidth(60);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(35, 86, 1115, 422);
@@ -195,6 +196,11 @@ public class CloneMainPanel extends JPanel {
 		add(btnCheck);
 		
 		JButton button_1 = new JButton("");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new FriendCareByUidCreateDialog(container, "Tạo một chiến dịch kéo friend theo uid", 830, 525, getSelectedCloneIds()).display();
+			}
+		});
 		button_1.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/friend.png")));
 		button_1.setToolTipText("Add friend từ list uid");
 		button_1.setBounds(893, 34, 49, 23);
@@ -275,9 +281,10 @@ public class CloneMainPanel extends JPanel {
 		this.tabelModel.setDataVector(this.tableData, this.tableHeader);
 		this.table.setModel(this.tabelModel);
 		table.getColumnModel().getColumn(0).setPreferredWidth(30);
-		table.getColumnModel().getColumn(1).setPreferredWidth(60);
+		table.getColumnModel().getColumn(1).setPreferredWidth(90);
 		table.getColumnModel().getColumn(2).setPreferredWidth(125);
-		table.getColumnModel().getColumn(3).setPreferredWidth(135);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		table.getColumnModel().getColumn(4).setPreferredWidth(60);
 		this.sum.setText("Tổng:" + this.table.getRowCount());
 	}
 }

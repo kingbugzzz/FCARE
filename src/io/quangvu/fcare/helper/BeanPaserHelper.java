@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import io.quangvu.fcare.bean.Clone;
 import io.quangvu.fcare.bean.CloneCareCampaign;
+import io.quangvu.fcare.bean.FriendCareByUidCampaign;
 import io.quangvu.fcare.bean.FriendCareCampaign;
 import io.quangvu.fcare.bean.GroupCareCampaign;
 import io.quangvu.fcare.bean.GroupJoinCampaign;
@@ -344,6 +345,59 @@ public class BeanPaserHelper {
 		}
 	}
 
+	public static FriendCareByUidCampaign parseFriendCareByUidCampaign(ResultSet rs) {
+		try {
+			FriendCareByUidCampaign fcuc = new FriendCareByUidCampaign();
+			while (rs.next()) {
+				fcuc.setOwner(rs.getString("owner"));
+				fcuc.setId(rs.getInt("id"));
+				fcuc.setName(rs.getString("name"));
+				fcuc.setCloneIdList(rs.getString("clone_ids"));
+				fcuc.setFriendIdsSourceFile(rs.getString("friend_ids_source_file"));
+				
+				fcuc.setMinWait(rs.getInt("min_wait"));
+				fcuc.setMaxWait(rs.getInt("max_wait"));
+				fcuc.setWaitClone(rs.getInt("wait_clone"));
+				
+				fcuc.setNumThread(rs.getInt("num_thread"));
+				fcuc.setStatus(rs.getString("status"));
+				fcuc.setCreatedAt(rs.getString("created_at"));
+				fcuc.setUpdatedAt(rs.getString("updated_at"));
+			}
+			return fcuc;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public static ArrayList<FriendCareByUidCampaign> parseFriendCareByUidCampaigns(ResultSet rs) {
+		try {
+			ArrayList<FriendCareByUidCampaign> fcucList = new ArrayList<FriendCareByUidCampaign>();
+			FriendCareByUidCampaign fcuc = null;
+			while (rs.next()) {
+				fcuc = new FriendCareByUidCampaign();
+				fcuc.setOwner(rs.getString("owner"));
+				fcuc.setId(rs.getInt("id"));
+				fcuc.setName(rs.getString("name"));
+				fcuc.setCloneIdList(rs.getString("clone_ids"));
+				fcuc.setFriendIdsSourceFile(rs.getString("friend_ids_source_file"));
+				
+				fcuc.setMinWait(rs.getInt("min_wait"));
+				fcuc.setMaxWait(rs.getInt("max_wait"));
+				fcuc.setWaitClone(rs.getInt("wait_clone"));
+				
+				fcuc.setNumThread(rs.getInt("num_thread"));
+				fcuc.setStatus(rs.getString("status"));
+				fcuc.setCreatedAt(rs.getString("created_at"));
+				fcuc.setUpdatedAt(rs.getString("updated_at"));
+				fcucList.add(fcuc);
+			}
+			return fcucList;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
 	public static RStatus parseRStatus(ResultSet rs) {
 		try {
 			RStatus status = new RStatus();

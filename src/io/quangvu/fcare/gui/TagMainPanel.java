@@ -56,7 +56,7 @@ public class TagMainPanel extends JPanel {
 				updateTable();
 			}
 		});
-		btnXa.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash2.png")));
+		btnXa.setIcon(new ImageIcon(TagMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash.png")));
 		btnXa.setBounds(94, 34, 49, 23);
 		add(btnXa);
 		
@@ -87,7 +87,8 @@ public class TagMainPanel extends JPanel {
 		this.table = new JTable(tableModel);
 		this.table = new JTable(tableModel);
 		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getColumnModel().getColumn(1).setPreferredWidth(820);
+		table.getColumnModel().getColumn(0).setPreferredWidth(150);
+		table.getColumnModel().getColumn(1).setPreferredWidth(950);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(35, 86, 1106, 402);
@@ -107,6 +108,7 @@ public class TagMainPanel extends JPanel {
 		this.data = this.controller.getTagTableDataModel();
 		this.tableModel.setDataVector(this.data, this.columnNames);
 		this.table.setModel(this.tableModel);
-		table.getColumnModel().getColumn(1).setPreferredWidth(820);
+		table.getColumnModel().getColumn(0).setPreferredWidth(150);
+		table.getColumnModel().getColumn(1).setPreferredWidth(950);
 	}
 }

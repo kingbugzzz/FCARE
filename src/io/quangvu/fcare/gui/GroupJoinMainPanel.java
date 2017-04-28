@@ -46,7 +46,7 @@ public class GroupJoinMainPanel extends JPanel {
 				updateTable();
 			}
 		});
-		btnXa.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash2.png")));
+		btnXa.setIcon(new ImageIcon(GroupJoinMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash.png")));
 		btnXa.setBounds(35, 34, 49, 23);
 		add(btnXa);
 		
@@ -75,8 +75,8 @@ public class GroupJoinMainPanel extends JPanel {
 		table = new JTable(this.tabelModel);
 		
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getColumnModel().getColumn(0).setPreferredWidth(30);
-		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(0).setPreferredWidth(35);
+		table.getColumnModel().getColumn(1).setPreferredWidth(330);
 		table.getColumnModel().getColumn(2).setPreferredWidth(60);
 		table.getColumnModel().getColumn(3).setPreferredWidth(60);
 		table.getColumnModel().getColumn(4).setPreferredWidth(125);
@@ -131,8 +131,8 @@ public class GroupJoinMainPanel extends JPanel {
 		this.tableData = this.controller.getTableDataModel();
 		this.tabelModel.setDataVector(this.tableData, this.tableHeader);
 		this.table.setModel(this.tabelModel);
-		table.getColumnModel().getColumn(0).setPreferredWidth(30);
-		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(0).setPreferredWidth(35);
+		table.getColumnModel().getColumn(1).setPreferredWidth(330);
 		table.getColumnModel().getColumn(2).setPreferredWidth(60);
 		table.getColumnModel().getColumn(3).setPreferredWidth(60);
 		table.getColumnModel().getColumn(4).setPreferredWidth(125);

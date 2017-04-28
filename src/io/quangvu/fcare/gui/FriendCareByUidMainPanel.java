@@ -16,21 +16,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import io.quangvu.fcare.bean.GroupCareCampaign;
-import io.quangvu.fcare.controller.GroupCareCampaignController;
+import io.quangvu.fcare.bean.FriendCareByUidCampaign;
+import io.quangvu.fcare.controller.FriendCareByUidCampaignController;
 
-public class GroupCareMainPanel extends JPanel {
+public class FriendCareByUidMainPanel extends JPanel {
 	
-	private GroupCareCampaignController controller;
+	private FriendCareByUidCampaignController controller;
 	private JTable table;
 	private DefaultTableModel tabelModel;
 	private Vector<String> tableHeader;
 	private Vector<Vector<String>> tableData; 
 	private JLabel sum;
 	
-	public GroupCareMainPanel(DashboardFrame container) {
+	public FriendCareByUidMainPanel(DashboardFrame container) {
 		setLayout(null);
-		this.controller = new GroupCareCampaignController();
+		this.controller = new FriendCareByUidCampaignController();
 		
 		JButton btnXa = new JButton("");
 		btnXa.setToolTipText("Xóa");
@@ -46,7 +46,7 @@ public class GroupCareMainPanel extends JPanel {
 				updateTable();
 			}
 		});
-		btnXa.setIcon(new ImageIcon(GroupCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash.png")));
+		btnXa.setIcon(new ImageIcon(FriendCareByUidMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash.png")));
 		btnXa.setBounds(35, 34, 49, 23);
 		add(btnXa);
 		
@@ -56,9 +56,9 @@ public class GroupCareMainPanel extends JPanel {
 				int[] selectedRowIndexes = table.getSelectedRows();
 				if(selectedRowIndexes.length == 1) {
 					
-					GroupCareCampaign campaign = controller.get(String.valueOf(table.getValueAt(selectedRowIndexes[0], 0)));
+					FriendCareByUidCampaign campaign = controller.get(String.valueOf(table.getValueAt(selectedRowIndexes[0], 0)));
 					
-					new GroupCareUpdateDialog(container, "Cập nhật chiến dịch kéo friends [id:" + campaign.getId() + "]", 830, 585, campaign).display();
+					new FriendCareByUidUpdateDialog(container, "Cập nhật chiến dịch join group [id:" + campaign.getId() + "]", 830, 585, campaign).display();
 				}else {
 					JOptionPane.showMessageDialog(new JFrame(), "Chọn 1 thôi!");
 				}
@@ -75,12 +75,10 @@ public class GroupCareMainPanel extends JPanel {
 		table = new JTable(this.tabelModel);
 		
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getColumnModel().getColumn(0).setPreferredWidth(40);
-		table.getColumnModel().getColumn(1).setPreferredWidth(250);
+		table.getColumnModel().getColumn(0).setPreferredWidth(30);
+		table.getColumnModel().getColumn(1).setPreferredWidth(245);
 		table.getColumnModel().getColumn(2).setPreferredWidth(60);
-		table.getColumnModel().getColumn(3).setPreferredWidth(60);
-		table.getColumnModel().getColumn(4).setPreferredWidth(125);
-		table.getColumnModel().getColumn(5).setPreferredWidth(125);
+		table.getColumnModel().getColumn(3).setPreferredWidth(250);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(35, 86, 1114, 427);
@@ -93,7 +91,7 @@ public class GroupCareMainPanel extends JPanel {
 		
 		JButton btnKtBn = new JButton("");
 		btnKtBn.setToolTipText("Nghỉ");
-		btnKtBn.setIcon(new ImageIcon(GroupCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/pause.png")));
+		btnKtBn.setIcon(new ImageIcon(FriendCareByUidMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/pause.png")));
 		btnKtBn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -103,7 +101,7 @@ public class GroupCareMainPanel extends JPanel {
 		
 		JButton btnAddMem = new JButton("");
 		btnAddMem.setToolTipText("Dừng chạy");
-		btnAddMem.setIcon(new ImageIcon(GroupCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/stop.png")));
+		btnAddMem.setIcon(new ImageIcon(FriendCareByUidMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/stop.png")));
 		btnAddMem.setBounds(332, 34, 42, 23);
 		add(btnAddMem);
 		
@@ -117,7 +115,7 @@ public class GroupCareMainPanel extends JPanel {
 		
 		JButton btnPlanlist = new JButton("");
 		btnPlanlist.setToolTipText("Bắt đầu chạy");
-		btnPlanlist.setIcon(new ImageIcon(GroupCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/play.png")));
+		btnPlanlist.setIcon(new ImageIcon(FriendCareByUidMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/play.png")));
 		btnPlanlist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -131,12 +129,10 @@ public class GroupCareMainPanel extends JPanel {
 		this.tableData = this.controller.getTableDataModel();
 		this.tabelModel.setDataVector(this.tableData, this.tableHeader);
 		this.table.setModel(this.tabelModel);
-		table.getColumnModel().getColumn(0).setPreferredWidth(40);
-		table.getColumnModel().getColumn(1).setPreferredWidth(250);
+		table.getColumnModel().getColumn(0).setPreferredWidth(30);
+		table.getColumnModel().getColumn(1).setPreferredWidth(245);
 		table.getColumnModel().getColumn(2).setPreferredWidth(60);
-		table.getColumnModel().getColumn(3).setPreferredWidth(60);
-		table.getColumnModel().getColumn(4).setPreferredWidth(125);
-		table.getColumnModel().getColumn(5).setPreferredWidth(125);
+		table.getColumnModel().getColumn(3).setPreferredWidth(250);
 		this.sum.setText("Tổng:" + this.table.getRowCount());
 	}
 }
