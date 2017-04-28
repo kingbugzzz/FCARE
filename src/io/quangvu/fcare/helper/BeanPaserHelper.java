@@ -11,7 +11,10 @@ import io.quangvu.fcare.bean.FriendCareCampaign;
 import io.quangvu.fcare.bean.GroupCareCampaign;
 import io.quangvu.fcare.bean.GroupJoinCampaign;
 import io.quangvu.fcare.bean.RComment;
+import io.quangvu.fcare.bean.RImage;
+import io.quangvu.fcare.bean.RPage;
 import io.quangvu.fcare.bean.RStatus;
+import io.quangvu.fcare.bean.RUid;
 import io.quangvu.fcare.bean.Tag;
 
 public class BeanPaserHelper {
@@ -462,6 +465,111 @@ public class BeanPaserHelper {
 				comment.setName(rs.getString("name"));
 				comment.setSrc(rs.getString("src_file"));
 				list.add(comment);
+			}
+			return list;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+
+	public static RPage parseRPage(ResultSet rs) {
+		try {
+			RPage page = new RPage();
+			while (rs.next()) {
+				page.setOwner(rs.getString("owner"));
+				page.setTag(rs.getString("tag"));
+				page.setId(rs.getInt("id"));
+				page.setName(rs.getString("name"));
+				page.setSrc(rs.getString("src_file"));
+			}
+			return page;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public static ArrayList<RPage> parseAllRPage(ResultSet rs) {
+		try {
+			ArrayList<RPage> list = new ArrayList<RPage>();
+			RPage page = null;
+			while (rs.next()) {
+				page =  new RPage();
+				page.setOwner(rs.getString("owner"));
+				page.setTag(rs.getString("tag"));
+				page.setId(rs.getInt("id"));
+				page.setName(rs.getString("name"));
+				page.setSrc(rs.getString("src_file"));
+				list.add(page);
+			}
+			return list;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+
+	public static RImage parseRImage(ResultSet rs) {
+		try {
+			RImage image = new RImage();
+			while (rs.next()) {
+				image.setOwner(rs.getString("owner"));
+				image.setTag(rs.getString("tag"));
+				image.setId(rs.getInt("id"));
+				image.setName(rs.getString("name"));
+				image.setSrc(rs.getString("src_file"));
+			}
+			return image;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public static ArrayList<RImage> parseAllRImage(ResultSet rs) {
+		try {
+			ArrayList<RImage> list = new ArrayList<RImage>();
+			RImage image = null;
+			while (rs.next()) {
+				image =  new RImage();
+				image.setOwner(rs.getString("owner"));
+				image.setTag(rs.getString("tag"));
+				image.setId(rs.getInt("id"));
+				image.setName(rs.getString("name"));
+				image.setSrc(rs.getString("src_file"));
+				list.add(image);
+			}
+			return list;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+
+	public static RUid parseRUid(ResultSet rs) {
+		try {
+			RUid uid = new RUid();
+			while (rs.next()) {
+				uid.setOwner(rs.getString("owner"));
+				uid.setTag(rs.getString("tag"));
+				uid.setId(rs.getInt("id"));
+				uid.setName(rs.getString("name"));
+				uid.setSrc(rs.getString("src_file"));
+			}
+			return uid;
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public static ArrayList<RUid> parseAllRUid(ResultSet rs) {
+		try {
+			ArrayList<RUid> list = new ArrayList<RUid>();
+			RUid uid = null;
+			while (rs.next()) {
+				uid =  new RUid();
+				uid.setOwner(rs.getString("owner"));
+				uid.setTag(rs.getString("tag"));
+				uid.setId(rs.getInt("id"));
+				uid.setName(rs.getString("name"));
+				uid.setSrc(rs.getString("src_file"));
+				list.add(uid);
 			}
 			return list;
 		}catch(Exception ex) {

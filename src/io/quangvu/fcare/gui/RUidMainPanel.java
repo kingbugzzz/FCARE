@@ -14,32 +14,32 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import io.quangvu.fcare.bean.RPage;
+import io.quangvu.fcare.bean.RUid;
 import io.quangvu.fcare.bean.Tag;
 import io.quangvu.fcare.controller.CloneController;
-import io.quangvu.fcare.controller.RPageController;
+import io.quangvu.fcare.controller.RUidController;
 import io.quangvu.fcare.controller.TagController;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
-public class RPageMainPanel extends JPanel {
+public class RUidMainPanel extends JPanel {
 
-	private RPageController controller;
+	private RUidController controller;
 	private JTable table;
 	private DefaultTableModel tabelModel;
 	private Vector<String> tableHeader;
 	private Vector<Vector<String>> tableData; 
 	private JLabel sum;
 	
-	public RPageMainPanel(DashboardFrame container) {
+	public RUidMainPanel(DashboardFrame container) {
 		setLayout(null);
 		JButton btnNew = new JButton("");
 		btnNew.setToolTipText("Thêm mới");
 		btnNew.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/additem.png")));
 		btnNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new RPageCreateDialog(container, "Thêm mới nguồn page", 500, 250).display();
+				new RUidCreateDialog(container, "Thêm mới nguồn uid", 500, 250).display();
 			}
 		});
 		btnNew.setBounds(35, 34, 49, 23);
@@ -60,7 +60,7 @@ public class RPageMainPanel extends JPanel {
 				updateTable();
 			}
 		});
-		btnXa.setIcon(new ImageIcon(RPageMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash.png")));
+		btnXa.setIcon(new ImageIcon(RUidMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash.png")));
 		btnXa.setBounds(94, 34, 49, 23);
 		add(btnXa);
 		
@@ -69,12 +69,12 @@ public class RPageMainPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int[] selectedRowIndexes = table.getSelectedRows();
 				if(selectedRowIndexes.length == 1) {
-					RPage status = new RPage();
+					RUid status = new RUid();
 					status.setId(Integer.parseInt(table.getValueAt(selectedRowIndexes[0], 0).toString()));
 					status.setTag(table.getValueAt(selectedRowIndexes[0], 1).toString());
 					status.setName(table.getValueAt(selectedRowIndexes[0], 2).toString());
 					status.setSrc(table.getValueAt(selectedRowIndexes[0], 3).toString());
-					new RPageUpdateDialog(container, "Cập nhật page nguồn", 500, 250, status).display();
+					new RUidUpdateDialog(container, "Cập nhật nguồn uid", 500, 250, status).display();
 				}else {
 					JOptionPane.showMessageDialog(new JFrame(), "Chọn 1 thôi!");
 				}
@@ -85,7 +85,7 @@ public class RPageMainPanel extends JPanel {
 		btnCpNht.setBounds(153, 34, 49, 23);
 		add(btnCpNht);
 						
-		this.controller = new RPageController();
+		this.controller = new RUidController();
 		this.tableHeader = this.controller.getTableHeader();
 		this.tableData = this.controller.getTableDataModel();
 		this.tabelModel = new DefaultTableModel(this.tableData, this.tableHeader);

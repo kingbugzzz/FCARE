@@ -32,9 +32,10 @@ public class DashboardFrame extends JFrame implements ActionListener {
 	private JMenuItem miExportUID, miExportGroup, miExportPage, miExportPhone, miExportEmail;
 	private JMenuItem miGroupJoin;
 	private JMenuItem miFriendCareByUid;
+	private JMenuItem miSourceUid;
 
 	public DashboardFrame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/favicon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/fcare-icon.png")));
 		this.initMenuBar();
 	}
 
@@ -47,13 +48,11 @@ public class DashboardFrame extends JFrame implements ActionListener {
 		this.menubar.add(this.mnSystem);
 
 		this.miTag = new JMenuItem("Tag");
-		miTag.setIcon(new ImageIcon(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/item.png")));
 		this.mnSystem.add(this.miTag);
 		this.miTag.addActionListener(this);
 		this.mnSystem.addSeparator();
 		
 		this.miAbout = new JMenuItem("About");
-		this.miAbout.setIcon(new ImageIcon(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/ico_info.png")));
 		this.mnSystem.add(this.miAbout);
 		this.miAbout.addActionListener(this);
 		this.mnClone = new JMenu("Clone");
@@ -113,39 +112,44 @@ public class DashboardFrame extends JFrame implements ActionListener {
 		
 		this.miSourceImage = new JMenuItem("Ảnh nguồn");
 		this.mnSourceData.add(this.miSourceImage);
+		this.mnSourceData.addSeparator();
+		
+		miSourceUid = new JMenuItem("Uid nguồn");
+		this.miSourceUid.addActionListener(this);
+		mnSourceData.add(miSourceUid);
 		this.miSourceImage.addActionListener(this);
 		
-		this.mnUtil = new JMenu("Tiện ích");
-		this.menubar.add(this.mnUtil);
+//		this.mnUtil = new JMenu("Tiện ích");
+//		this.menubar.add(this.mnUtil);
 		
-		this.miExportUID = new JMenuItem("Xuất uid");
-		miExportUID.setIcon(new ImageIcon(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/export.png")));
-		this.mnUtil.add(this.miExportUID);
-		this.miExportUID.addActionListener(this);
-		this.mnUtil.addSeparator();
-		
-		this.miExportEmail = new JMenuItem("Xuất email");
-		miExportEmail.setIcon(new ImageIcon(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/export.png")));
-		this.mnUtil.add(this.miExportEmail);
-		this.miExportEmail.addActionListener(this);
-		this.mnUtil.addSeparator();
-		
-		this.miExportPhone = new JMenuItem("Xuất số phone");
-		miExportPhone.setIcon(new ImageIcon(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/export.png")));
-		this.mnUtil.add(this.miExportPhone);
-		this.miExportPhone.addActionListener(this);
-		this.mnUtil.addSeparator();
-		
-		this.miExportGroup = new JMenuItem("Xuất group id");
-		miExportGroup.setIcon(new ImageIcon(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/export.png")));
-		this.mnUtil.add(this.miExportGroup);
-		this.miExportGroup.addActionListener(this);
-		this.mnUtil.addSeparator();
-		
-		this.miExportPage = new JMenuItem("Xuất page id");
-		miExportPage.setIcon(new ImageIcon(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/export.png")));
-		this.mnUtil.add(this.miExportPage);
-		this.miExportPage.addActionListener(this);
+//		this.miExportUID = new JMenuItem("Xuất uid");
+//		miExportUID.setIcon(new ImageIcon(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/export.png")));
+//		this.mnUtil.add(this.miExportUID);
+//		this.miExportUID.addActionListener(this);
+//		this.mnUtil.addSeparator();
+//		
+//		this.miExportEmail = new JMenuItem("Xuất email");
+//		miExportEmail.setIcon(new ImageIcon(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/export.png")));
+//		this.mnUtil.add(this.miExportEmail);
+//		this.miExportEmail.addActionListener(this);
+//		this.mnUtil.addSeparator();
+//		
+//		this.miExportPhone = new JMenuItem("Xuất số phone");
+//		miExportPhone.setIcon(new ImageIcon(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/export.png")));
+//		this.mnUtil.add(this.miExportPhone);
+//		this.miExportPhone.addActionListener(this);
+//		this.mnUtil.addSeparator();
+//		
+//		this.miExportGroup = new JMenuItem("Xuất group id");
+//		miExportGroup.setIcon(new ImageIcon(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/export.png")));
+//		this.mnUtil.add(this.miExportGroup);
+//		this.miExportGroup.addActionListener(this);
+//		this.mnUtil.addSeparator();
+//		
+//		this.miExportPage = new JMenuItem("Xuất page id");
+//		miExportPage.setIcon(new ImageIcon(DashboardFrame.class.getResource("/io/quangvu/fcare/gui/icon/export.png")));
+//		this.mnUtil.add(this.miExportPage);
+//		this.miExportPage.addActionListener(this);
 	}
 	
 	public void loadPanel(JPanel panel, String title) {
@@ -212,7 +216,6 @@ public class DashboardFrame extends JFrame implements ActionListener {
 		if(event.getSource().equals(this.miManageClone)) {
 			this.loadPanel(new CloneMainPanel(this), "Quản lý clone");
 		}
-		
 	
 		//Campaign menu event handler
 		if(event.getSource().equals(this.miCloneCare)) {
@@ -231,7 +234,8 @@ public class DashboardFrame extends JFrame implements ActionListener {
 			this.loadPanel(new GroupJoinMainPanel(this), "Quản lý join group");
 		}
 		if(event.getSource().equals(this.miPageCare)) {
-			this.loadPanel(new PageCareMainPanel(this), "Quản lý kéo like page");
+//			this.loadPanel(new PageCareMainPanel(this), "Quản lý kéo like page");
+			JOptionPane.showMessageDialog(new JFrame(), "Đây là tính năng Page load, sẽ được cập nhật trong phiên bản 2.0");
 		}
 		
 		//Datasource menu event handler
@@ -239,6 +243,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
 			this.loadPanel(new RStatusMainPanel(this), "Quản lý status nguồn");
 		}
 		if(event.getSource().equals(this.miSourceImage)) {
+			this.loadPanel(new RImageMainPanel(this), "Quản lý ảnh nguồn");
 		}
 		if(event.getSource().equals(this.miSourceComment)) {
 			this.loadPanel(new RCommentMainPanel(this), "Quản lý comment nguồn");
@@ -246,14 +251,17 @@ public class DashboardFrame extends JFrame implements ActionListener {
 		if(event.getSource().equals(this.miSourcePage)) {
 			this.loadPanel(new RPageMainPanel(this), "Quản lý page nguồn");
 		}
+		if(event.getSource().equals(this.miSourceUid)) {
+			this.loadPanel(new RUidMainPanel(this), "Quản lý Uid nguồn");
+		}
 		
 		//Util exporter menu event handler
-		if(event.getSource().equals(this.miExportEmail) ||
-				event.getSource().equals(this.miExportGroup) ||
-				event.getSource().equals(this.miExportPage) ||
-				event.getSource().equals(this.miExportPhone) ||
-				event.getSource().equals(this.miExportUID)) {
-			this.loadPanel(new UtilExportMainPanel(this), "Tiện ích");
-		}
+//		if(event.getSource().equals(this.miExportEmail) ||
+//				event.getSource().equals(this.miExportGroup) ||
+//				event.getSource().equals(this.miExportPage) ||
+//				event.getSource().equals(this.miExportPhone) ||
+//				event.getSource().equals(this.miExportUID)) {
+//			this.loadPanel(new UtilExportMainPanel(this), "Tiện ích");
+//		}
 	}
 }
