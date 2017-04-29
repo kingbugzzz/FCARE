@@ -1,57 +1,46 @@
 package io.quangvu.fcare.main;
 
+import io.quangvu.fcare.bean.Clone;
+import io.quangvu.fcare.helper.DBHelper;
+import io.quangvu.fcare.helper.IOHelper;
+import io.quangvu.fcare.model.CloneModel;
+import io.quangvu.fcare.service.CloneCareService;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JProgressBar;
-class BarThread extends Thread {
-  private static int DELAY = 500;
-
-  JProgressBar progressBar;
-
-  public BarThread(JProgressBar bar) {
-    progressBar = bar;
-  }
-
-  public void run() {
-    int minimum = progressBar.getMinimum();
-    int maximum = progressBar.getMaximum();
-    for (int i = minimum; i < maximum; i++) {
-      try {
-        int value = progressBar.getValue();
-        progressBar.setValue(value + 1);
-
-        Thread.sleep(DELAY);
-      } catch (InterruptedException ignoredException) {
-      }
-    }
-  }
-}
 public class Debugger {
-  public static void main(String args[]) {
-    JFrame frame = new JFrame();
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
-    JProgressBar aJProgressBar = new JProgressBar(0, 50);
-    aJProgressBar.setStringPainted(true);
+	
+	public Debugger() {
+		this.testCloneService();
+	}
+	
+	public void testCloneService() {
+			DBHelper.cnt();
+			
+			CloneModel cloneModel = new CloneModel();
+			//Test Clone 6 - Ngô Hữu Tường
+//			Clone clone = cloneModel.get("100016413638900");
+			Clone clone = cloneModel.get("100016488123712");
+			CloneCareService cloneCareService = new CloneCareService(clone);
+			cloneCareService.login();
+			
+			cloneCareService.changeAvatar(IOHelper.getRandomImagePath("resource/avatar/girls"));
+			
+			cloneCareService.addFriendByUid("phong.tran.2010");
+			
+			//cloneCareService.addSuggesFriends(5);
+			
+//			cloneCareService.acceptFriends(15);
+			
+//			cloneCareService.postImageStatus(IOHelper.getRandomImagePath("resource/img/tha-thinh"), "Em buồn em nhớ, một ngày trong veo...");
+			
+//			cloneCareService.postLinkStatus("https://www.youtube.com/watch?v=JhWmRVwNhO4&t=2355s",
+//										"Trong Người Phán Xử Tập 7, Kẻ giấu mặt đã đứng sau vụ ám sát Phan Quân sẽ xuất hiện. Đó là một nhân vật khét tiếng trong giới giang hồ.");
+			
+			cloneCareService.logout();
+			
+			DBHelper.disconnect();
+	}
 
-    JButton aJButton = new JButton("Start");
-
-    ActionListener actionListener = new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        aJButton.setEnabled(false);
-        Thread stepper = new BarThread(aJProgressBar);
-        stepper.start();
-      }
-    };
-    aJButton.addActionListener(actionListener);
-    frame.add(aJProgressBar, BorderLayout.NORTH);
-    frame.add(aJButton, BorderLayout.SOUTH);
-    frame.setSize(300, 200);
-    frame.setVisible(true);
-  }
+	public static void main(String args[]) {
+		new Debugger();
+	}
 }

@@ -73,7 +73,6 @@ public class TestService extends Thread {
 	private void doSomething() {
 		dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date now =  new Date();
-		
 		try {
 			if (cursor < progressBar.getMaximum()) {
 				now.setTime(System.currentTimeMillis());

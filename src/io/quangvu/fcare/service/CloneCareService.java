@@ -22,7 +22,7 @@ public class CloneCareService {
 	public CloneCareService(Clone clone) {
 		this.cloneModel = new CloneModel();
 		this.clone = clone;
-		this.userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36 Windows";
+		this.userAgent = clone.getUserAgent();
 		this.driver = WebDriverManager.getInstance().getPhantomJSDriver(this.userAgent);
 	}
 
@@ -205,22 +205,33 @@ public class CloneCareService {
 	public void acceptFriends(int limit) {
 		System.out.println(">>>accept friends<<<");
 		int count = 0;
-		for(String uid : this.getAcceptFriendUid()) {
-			if(count == limit) {
-				System.out.println("reached to limit [" + limit + "]-> done!");
-				break;
-			}else {
-				this.acceptFriendByUid(uid);
-				count++;
-				System.out.println("wait 5 seconds for next one");
-				try {
-					Thread.sleep(5000);
-				}catch(Exception ex) {
-					ex.printStackTrace();
-					continue;
+		int rounds = limit/10;
+		System.out.println(limit + " friends will be accepted, number rounds = " + rounds+1);
+		if(rounds >=1 ) {
+			for(int i=0; i<rounds + 1; i++) {
+				for(String uid : this.getAcceptFriendUid()) {
+					if(count == limit) {
+						System.out.println("reached to limit [" + limit + "]-> done!");
+						break;
+					}else {
+						this.acceptFriendByUid(uid);
+						count++;
+						System.out.println("wait 5 seconds for next one");
+						try {
+							Thread.sleep(5000);
+						}catch(Exception ex) {
+							ex.printStackTrace();
+							continue;
+						}
+					}
+					System.out.println("count = " + count);
 				}
 			}
 		}
+	}
+	
+	public void getCookie() {
+		System.out.println();
 	}
 	
 	public void logout() {

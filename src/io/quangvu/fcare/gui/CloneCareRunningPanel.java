@@ -7,6 +7,7 @@ import javax.swing.JProgressBar;
 import io.quangvu.fcare.bean.CloneCareCampaign;
 import io.quangvu.fcare.helper.KeyHelper;
 import io.quangvu.fcare.model.CloneCareCampaignModel;
+import io.quangvu.fcare.service.ServiceFactory;
 import io.quangvu.fcare.service.TestService;
 
 import java.awt.Color;
@@ -34,7 +35,9 @@ public class CloneCareRunningPanel extends JPanel {
 	private CloneCareCampaignModel model;
 	private JEditorPane editorPane;
 	private JProgressBar progressBar;
-	private JButton btnStop;
+	private JButton btnStop, btnResume;
+	
+	private ServiceFactory serv;
 
 	public CloneCareRunningPanel(JDialog container, DashboardFrame dashboardFrame, String campaignId) {
 		setLayout(null);
@@ -57,10 +60,15 @@ public class CloneCareRunningPanel extends JPanel {
 		btnNewButton.setBounds(216, 217, 56, 23);
 		add(btnNewButton);
 
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(CloneCareRunningPanel.class.getResource("/io/quangvu/fcare/gui/icon/pause.png")));
-		button.setBounds(150, 217, 56, 23);
-		add(button);
+		JButton btnPause = new JButton("");
+		btnPause.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				serv.suspend();
+			}
+		});
+		btnPause.setIcon(new ImageIcon(CloneCareRunningPanel.class.getResource("/io/quangvu/fcare/gui/icon/pause.png")));
+		btnPause.setBounds(150, 217, 56, 23);
+		add(btnPause);
 
 		btnStop = new JButton("");
 		btnStop.addActionListener(new ActionListener() {
@@ -85,11 +93,20 @@ public class CloneCareRunningPanel extends JPanel {
 		progressBar.setStringPainted(true);
 		progressBar.setBounds(40, 47, 432, 27);
 		add(progressBar);
+		
+		btnResume = new JButton("resume");
+		btnResume.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				serv.resume();
+			}
+		});
+		btnResume.setBounds(345, 217, 89, 23);
+		add(btnResume);
 
 	}
 
 	private void start() {
-		TestService serv = new TestService(progressBar, editorPane, btnStop);
+		serv = new ServiceFactory("Demo nuoi clone",progressBar, editorPane);
 		serv.start();
 	}
 }
