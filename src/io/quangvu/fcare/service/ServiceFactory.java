@@ -32,9 +32,10 @@ public class ServiceFactory implements Runnable {
 		System.out.println("Running " + threadName);
 		int minimum = progressBar.getMinimum();
 		int maximum = progressBar.getMaximum();
+		
 		for (int i = minimum; i < maximum; i++) {
-			System.out.println("cursor = " + cursor);
 			try {
+				
 				doSomething();
 				synchronized (this) {
 					while (suspended) {
@@ -46,8 +47,6 @@ public class ServiceFactory implements Runnable {
 			}
 			try {
 				if (cursor == progressBar.getMaximum()) {
-					editorPane.getDocument().insertString(editorPane.getDocument().getLength(), "\ninterrupting...",
-							null);
 					suspend();
 					editorPane.getDocument().insertString(editorPane.getDocument().getLength(), "\ndone!", null);
 					break;
@@ -60,6 +59,10 @@ public class ServiceFactory implements Runnable {
 	}
 
 	public void start() {
+		cursor = 0;
+		progressBar.setValue(0);
+		editorPane.setText("");
+		
 		System.out.println("Starting " + threadName);
 		if (t == null) {
 			t = new Thread(this, threadName);
@@ -81,24 +84,31 @@ public class ServiceFactory implements Runnable {
 	private void doSomething() {
 		dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date now = new Date();
+		String[] actions = { "share 1 bài từ", "like page", "like", "join group", "comment trên" };
 
+		String[] uid = { "<100016395071313>", "<100016405390227>", "<100016383018168>", "<100016414809043>",
+				"<100016431217027>", "<100016395071313>", "<100016405390227>", "<100016383018168>", "<100016414809043>",
+				"<100016431217027>", };
+
+		String[] targets = { "<100016413638900>", "<100016446425687>", "<100016379538528>", "<100016493281550>",
+				"<100016450175428>", "<100016435896715>", "<100016423208068>", "<100016470153433>", "<100016425697900>",
+				"<100016431217027>", };
 		try {
 			if (cursor < progressBar.getMaximum()) {
-				now.setTime(System.currentTimeMillis());
+				
+				// a method is working...
 				String strLog = uid[NumberHelper.getRandomInt(uid.length - 1, 0)];
 				strLog += " " + actions[NumberHelper.getRandomInt(actions.length - 1, 0)];
 				strLog += " " + targets[NumberHelper.getRandomInt(targets.length - 1, 0)];
 				editorPane.getDocument().insertString(editorPane.getDocument().getLength(), strLog + "\n", null);
-				Thread.sleep(NumberHelper.getRandomInt(2000, 1000)); // a
-																		// method
-																		// is
-																		// working...
-				now.setTime(System.currentTimeMillis());
-				cursor = cursor + 1; // new
-										// value
-										// is
-										// updated
-				now.setTime(System.currentTimeMillis());
+				Thread.sleep(NumberHelper.getRandomInt(2000, 1000));
+				
+				//new value is added
+				int incree = NumberHelper.getRandomInt(3, 1);	
+				
+				//update progress bar
+				System.out.println("value was changed by " + threadName);
+				cursor = progressBar.getValue() + incree;
 				progressBar.setValue(cursor);
 			}
 		} catch (Exception ex) {
@@ -106,13 +116,11 @@ public class ServiceFactory implements Runnable {
 		}
 	}
 
-	String[] actions = { "share 1 bài từ", "like page", "like", "join group", "comment trên" };
+	public int getCursor() {
+		return cursor;
+	}
 
-	String[] uid = { "<100016395071313>", "<100016405390227>", "<100016383018168>", "<100016414809043>",
-			"<100016431217027>", "<100016395071313>", "<100016405390227>", "<100016383018168>", "<100016414809043>",
-			"<100016431217027>", };
-
-	String[] targets = { "<100016413638900>", "<100016446425687>", "<100016379538528>", "<100016493281550>",
-			"<100016450175428>", "<100016435896715>", "<100016423208068>", "<100016470153433>", "<100016425697900>",
-			"<100016431217027>", };
+	public void setCursor(int cursor) {
+		this.cursor = cursor;
+	}
 }

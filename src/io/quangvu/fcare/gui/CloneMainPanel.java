@@ -276,7 +276,7 @@ public class CloneMainPanel extends JPanel {
 			}
 		});
 		button_2.setIcon(
-				new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/avatar_512x512.png")));
+				new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/icon-camera.png")));
 		button_2.setToolTipText("Đổi avatar");
 		button_2.setBounds(271, 34, 49, 23);
 		add(button_2);

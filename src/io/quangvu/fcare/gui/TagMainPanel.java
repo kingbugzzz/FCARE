@@ -56,7 +56,7 @@ public class TagMainPanel extends JPanel {
 				updateTable();
 			}
 		});
-		btnXa.setIcon(new ImageIcon(TagMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash.png")));
+		btnXa.setIcon(new ImageIcon(TagMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/recycle-bin-recycle-16.png")));
 		btnXa.setBounds(94, 34, 49, 23);
 		add(btnXa);
 		
@@ -74,7 +74,7 @@ public class TagMainPanel extends JPanel {
 			}
 		});
 		btnCpNht.setToolTipText("Chỉnh sửa");
-		btnCpNht.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/edit_40b.png")));
+		btnCpNht.setIcon(new ImageIcon(TagMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/ic_mode_edit_48px-16.png")));
 		btnCpNht.setBounds(153, 34, 49, 23);
 		add(btnCpNht);
 				

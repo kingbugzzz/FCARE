@@ -46,7 +46,7 @@ public class GroupCareMainPanel extends JPanel {
 				updateTable();
 			}
 		});
-		btnXa.setIcon(new ImageIcon(GroupCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/trash.png")));
+		btnXa.setIcon(new ImageIcon(GroupCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/recycle-bin-recycle-16.png")));
 		btnXa.setBounds(35, 34, 49, 23);
 		add(btnXa);
 		
@@ -65,7 +65,7 @@ public class GroupCareMainPanel extends JPanel {
 			}
 		});
 		btnCpNht.setToolTipText("Chỉnh sửa");
-		btnCpNht.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/edit_40b.png")));
+		btnCpNht.setIcon(new ImageIcon(GroupCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/ic_mode_edit_48px-16.png")));
 		btnCpNht.setBounds(94, 34, 49, 23);
 		add(btnCpNht);
 				
@@ -91,22 +91,6 @@ public class GroupCareMainPanel extends JPanel {
 		sum.setBounds(35, 534, 66, 14);
 		add(sum);
 		
-		JButton btnKtBn = new JButton("");
-		btnKtBn.setToolTipText("Nghỉ");
-		btnKtBn.setIcon(new ImageIcon(GroupCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/pause.png")));
-		btnKtBn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnKtBn.setBounds(273, 34, 49, 23);
-		add(btnKtBn);
-		
-		JButton btnAddMem = new JButton("");
-		btnAddMem.setToolTipText("Dừng chạy");
-		btnAddMem.setIcon(new ImageIcon(GroupCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/stop.png")));
-		btnAddMem.setBounds(332, 34, 42, 23);
-		add(btnAddMem);
-		
 		JComboBox comboBox = new JComboBox();
 		comboBox.addItem("Tất cả chiến dịch");
 		comboBox.addItem("Đang chạy");
@@ -117,7 +101,7 @@ public class GroupCareMainPanel extends JPanel {
 		
 		JButton btnPlanlist = new JButton("");
 		btnPlanlist.setToolTipText("Bắt đầu chạy");
-		btnPlanlist.setIcon(new ImageIcon(GroupCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/play.png")));
+		btnPlanlist.setIcon(new ImageIcon(GroupCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/settings_ico.png")));
 		btnPlanlist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

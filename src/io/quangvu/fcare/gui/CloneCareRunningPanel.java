@@ -26,6 +26,9 @@ import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+
+import com.sun.jna.platform.unix.X11.Cursor;
+
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
@@ -35,9 +38,11 @@ public class CloneCareRunningPanel extends JPanel {
 	private CloneCareCampaignModel model;
 	private JEditorPane editorPane;
 	private JProgressBar progressBar;
-	private JButton btnStop, btnResume;
+	private JButton btnRun, btnStop, btnPause;
 	
-	private ServiceFactory serv;
+	private String status = "STOP";
+	
+	private ServiceFactory serv1, serv2;
 
 	public CloneCareRunningPanel(JDialog container, DashboardFrame dashboardFrame, String campaignId) {
 		setLayout(null);
@@ -49,21 +54,31 @@ public class CloneCareRunningPanel extends JPanel {
 		campaign.setBounds(40, 22, 432, 14);
 		add(campaign);
 
-		JButton btnNewButton = new JButton("");
-		btnNewButton
+		btnRun = new JButton("");
+		btnRun
 				.setIcon(new ImageIcon(CloneCareRunningPanel.class.getResource("/io/quangvu/fcare/gui/icon/play.png")));
-		btnNewButton.addActionListener(new ActionListener() {
+		btnRun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				start();
+				btnRun.setEnabled(false);
+				btnPause.setEnabled(true);
+				btnStop.setEnabled(true);
 			}
 		});
-		btnNewButton.setBounds(216, 217, 56, 23);
-		add(btnNewButton);
+		btnRun.setBounds(216, 217, 56, 23);
+		add(btnRun);
 
-		JButton btnPause = new JButton("");
+		btnPause = new JButton("");
 		btnPause.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				serv.suspend();
+				if(status.equalsIgnoreCase("RUNNING")) {
+					serv1.suspend();
+					serv2.suspend();
+					btnRun.setEnabled(true);
+					btnPause.setEnabled(false);
+					btnStop.setEnabled(true);
+					status = "PAUSE";
+				}
 			}
 		});
 		btnPause.setIcon(new ImageIcon(CloneCareRunningPanel.class.getResource("/io/quangvu/fcare/gui/icon/pause.png")));
@@ -71,11 +86,19 @@ public class CloneCareRunningPanel extends JPanel {
 		add(btnPause);
 
 		btnStop = new JButton("");
+		btnStop.setIcon(new ImageIcon(CloneCareRunningPanel.class.getResource("/io/quangvu/fcare/gui/icon/stop.png")));
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(!status.equalsIgnoreCase("STOP")) {
+					serv1.suspend();
+					serv2.suspend();
+					status = "STOP";
+					btnRun.setEnabled(true);
+					btnPause.setEnabled(true);
+					btnStop.setEnabled(false);
+				}
 			}
 		});
-		btnStop.setIcon(new ImageIcon(CloneCareRunningPanel.class.getResource("/io/quangvu/fcare/gui/icon/stop.png")));
 		btnStop.setBounds(282, 217, 49, 23);
 		add(btnStop);
 
@@ -93,21 +116,27 @@ public class CloneCareRunningPanel extends JPanel {
 		progressBar.setStringPainted(true);
 		progressBar.setBounds(40, 47, 432, 27);
 		add(progressBar);
-		
-		btnResume = new JButton("resume");
-		btnResume.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				serv.resume();
-			}
-		});
-		btnResume.setBounds(345, 217, 89, 23);
-		add(btnResume);
 
 	}
 
 	private void start() {
-		serv = new ServiceFactory("Demo nuoi clone",progressBar, editorPane);
-		serv.start();
+		
+		if(status.equalsIgnoreCase("STOP")) {
+						
+			serv1 = new ServiceFactory("Demo nuoi clone-1",progressBar, editorPane);
+			serv1.start();
+		
+			serv2 = new ServiceFactory("Demo nuoi clone-2",progressBar, editorPane);
+			serv2.start();
+			
+		}
+		
+		if(status.equalsIgnoreCase("PAUSE")) {
+			serv1.resume();
+			serv2.resume();
+		}
+		
+		status = "RUNNING";
 	}
 }
 
