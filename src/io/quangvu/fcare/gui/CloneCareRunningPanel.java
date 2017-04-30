@@ -42,7 +42,7 @@ public class CloneCareRunningPanel extends JPanel {
 	
 	private String status = "STOP";
 	
-	private ServiceFactory serv1, serv2;
+	private ServiceFactory serv1, serv2, serv3;
 
 	public CloneCareRunningPanel(JDialog container, DashboardFrame dashboardFrame, String campaignId) {
 		setLayout(null);
@@ -74,6 +74,7 @@ public class CloneCareRunningPanel extends JPanel {
 				if(status.equalsIgnoreCase("RUNNING")) {
 					serv1.suspend();
 					serv2.suspend();
+					serv3.suspend();
 					btnRun.setEnabled(true);
 					btnPause.setEnabled(false);
 					btnStop.setEnabled(true);
@@ -90,8 +91,9 @@ public class CloneCareRunningPanel extends JPanel {
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(!status.equalsIgnoreCase("STOP")) {
-					serv1.suspend();
-					serv2.suspend();
+					serv1.stop();
+					serv2.stop();
+					serv3.stop();
 					status = "STOP";
 					btnRun.setEnabled(true);
 					btnPause.setEnabled(true);
@@ -111,7 +113,8 @@ public class CloneCareRunningPanel extends JPanel {
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
-		progressBar = new JProgressBar(0,100);
+		progressBar = new JProgressBar();
+		
 		progressBar.setForeground(new Color(0, 100, 0));
 		progressBar.setStringPainted(true);
 		progressBar.setBounds(40, 47, 432, 27);
@@ -123,17 +126,20 @@ public class CloneCareRunningPanel extends JPanel {
 		
 		if(status.equalsIgnoreCase("STOP")) {
 						
-			serv1 = new ServiceFactory("Demo nuoi clone-1",progressBar, editorPane);
+			serv1 = new ServiceFactory("T1",progressBar, editorPane);
+			serv2 = new ServiceFactory("T2",progressBar, editorPane);
+			serv3 = new ServiceFactory("T3",progressBar, editorPane);
+			
 			serv1.start();
-		
-			serv2 = new ServiceFactory("Demo nuoi clone-2",progressBar, editorPane);
 			serv2.start();
+			serv3.start();
 			
 		}
 		
 		if(status.equalsIgnoreCase("PAUSE")) {
 			serv1.resume();
 			serv2.resume();
+			serv3.resume();
 		}
 		
 		status = "RUNNING";

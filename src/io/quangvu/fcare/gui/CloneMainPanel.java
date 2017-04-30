@@ -43,7 +43,7 @@ public class CloneMainPanel extends JPanel {
 				new CloneCreateDialog(container, "Thêm mới clone", 545, 630).display();
 			}
 		});
-		btnNew.setBounds(35, 34, 49, 23);
+		btnNew.setBounds(94, 34, 49, 23);
 		add(btnNew);
 
 		JButton btnXa = new JButton("");
@@ -62,7 +62,7 @@ public class CloneMainPanel extends JPanel {
 		});
 		btnXa.setIcon(new ImageIcon(
 				CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/recycle-bin-recycle-16.png")));
-		btnXa.setBounds(94, 34, 49, 23);
+		btnXa.setBounds(212, 34, 49, 23);
 		add(btnXa);
 
 		JButton btnNewButton = new JButton("");
@@ -79,7 +79,7 @@ public class CloneMainPanel extends JPanel {
 		});
 		btnNewButton.setToolTipText("Active");
 		btnNewButton.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/active.png")));
-		btnNewButton.setBounds(991, 34, 42, 23);
+		btnNewButton.setBounds(1056, 34, 42, 23);
 		add(btnNewButton);
 
 		JButton btnDeactive = new JButton("");
@@ -96,7 +96,7 @@ public class CloneMainPanel extends JPanel {
 		});
 		btnDeactive.setToolTipText("Lock");
 		btnDeactive.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/block.png")));
-		btnDeactive.setBounds(1043, 34, 42, 23);
+		btnDeactive.setBounds(1108, 34, 42, 23);
 		add(btnDeactive);
 
 		JButton btnCpNht = new JButton("");
@@ -150,7 +150,7 @@ public class CloneMainPanel extends JPanel {
 						.display();
 			}
 		});
-		btnKtBn.setBounds(543, 34, 49, 23);
+		btnKtBn.setBounds(639, 34, 49, 23);
 		add(btnKtBn);
 
 		JButton btnAddMem = new JButton("");
@@ -162,7 +162,7 @@ public class CloneMainPanel extends JPanel {
 		});
 		btnAddMem.setToolTipText("Kéo mem group");
 		btnAddMem.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/miembros1a.png")));
-		btnAddMem.setBounds(736, 34, 42, 23);
+		btnAddMem.setBounds(832, 34, 42, 23);
 		add(btnAddMem);
 
 		JComboBox comboBox = new JComboBox();
@@ -185,7 +185,7 @@ public class CloneMainPanel extends JPanel {
 						.display();
 			}
 		});
-		btnPlanlist.setBounds(472, 34, 49, 23);
+		btnPlanlist.setBounds(568, 34, 49, 23);
 		add(btnPlanlist);
 
 		JButton button = new JButton("");
@@ -197,14 +197,14 @@ public class CloneMainPanel extends JPanel {
 		});
 		button.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/globe-icon.png")));
 		button.setToolTipText("Kéo like page");
-		button.setBounds(803, 34, 42, 23);
+		button.setBounds(899, 34, 42, 23);
 		add(button);
 
-		JButton btnCheck = new JButton("");
-		btnCheck.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/death2-16.png")));
-		btnCheck.setToolTipText("Check live");
-		btnCheck.setBounds(1101, 34, 49, 23);
-		add(btnCheck);
+		JButton btnSync = new JButton("");
+		btnSync.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/refresh.png")));
+		btnSync.setToolTipText("Check live");
+		btnSync.setBounds(35, 34, 49, 23);
+		add(btnSync);
 
 		JButton button_1 = new JButton("");
 		button_1.addActionListener(new ActionListener() {
@@ -216,7 +216,7 @@ public class CloneMainPanel extends JPanel {
 		button_1.setIcon(
 				new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/xfn-friend-met-icon.png")));
 		button_1.setToolTipText("Add friend từ list uid");
-		button_1.setBounds(602, 34, 49, 23);
+		button_1.setBounds(698, 34, 49, 23);
 		add(button_1);
 
 		JButton btnNewButton_1 = new JButton("");
@@ -228,7 +228,7 @@ public class CloneMainPanel extends JPanel {
 		});
 		btnNewButton_1.setToolTipText("Join group");
 		btnNewButton_1.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/group.png")));
-		btnNewButton_1.setBounds(677, 34, 49, 23);
+		btnNewButton_1.setBounds(773, 34, 49, 23);
 		add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("");
@@ -246,7 +246,7 @@ public class CloneMainPanel extends JPanel {
 			}
 		});
 		btnNewButton_2.setIcon(new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/Tag.png")));
-		btnNewButton_2.setBounds(330, 34, 49, 23);
+		btnNewButton_2.setBounds(389, 34, 49, 23);
 		add(btnNewButton_2);
 
 		JButton button_3 = new JButton("");
@@ -258,7 +258,7 @@ public class CloneMainPanel extends JPanel {
 		button_3.setIcon(new ImageIcon(
 				CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/checkbox_unchecked 16.png")));
 		button_3.setToolTipText("Bỏ chọn");
-		button_3.setBounds(212, 34, 49, 23);
+		button_3.setBounds(271, 34, 49, 23);
 		add(button_3);
 
 		JButton button_2 = new JButton("");
@@ -278,7 +278,7 @@ public class CloneMainPanel extends JPanel {
 		button_2.setIcon(
 				new ImageIcon(CloneMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/icon-camera.png")));
 		button_2.setToolTipText("Đổi avatar");
-		button_2.setBounds(271, 34, 49, 23);
+		button_2.setBounds(330, 34, 49, 23);
 		add(button_2);
 	}
 
