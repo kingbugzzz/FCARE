@@ -39,11 +39,13 @@ public class CloneCareThread extends AbstractThread {
 		
 		editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(),
 				"\n" + this.name + " is doing job...", null);
-		
-		int sleep = NumberHelper.getRandomInt(5000, 2000);
-		System.out.println("sleep for " + sleep + " seconds...");
-		Thread.sleep(sleep);
-		System.out.println("wake  up");
+		try {
+			int sleep = NumberHelper.getRandomInt(5000, 2000);
+			System.out.println("sleep for " + sleep + " seconds...");
+			Thread.sleep(sleep);
+		}catch(Exception ex){
+			
+		}
 		
 		editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(),
 				"\n" + this.name + " finished jobs", null);

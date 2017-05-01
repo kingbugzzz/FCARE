@@ -43,13 +43,14 @@ public abstract class AbstractThread implements Runnable {
 					while (this.suspended) {
 						this.wait();
 					}
+					// main job
+					this.care();
+					// update progress bar
+					this.progressBar.setValue(this.counter.getValue());
+					//stop thread
+					this.stop();
 				}
-				// main job
-				this.care();
-				// update progress bar
-				this.progressBar.setValue(this.counter.getValue());
-				//stop thread
-				this.stop();
+			
 			} catch(InterruptedException interruped) {
 				interruped.printStackTrace();
 				continue;

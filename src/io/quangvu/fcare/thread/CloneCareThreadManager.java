@@ -44,25 +44,25 @@ public class CloneCareThreadManager {
 		int clonePerOneThread = this.campaign.getNumThread();
 		int numStack = cloneSize / clonePerOneThread;
 		
+		ArrayList<ArrayList<CloneCareThread>> stackers = this.chopIntoParts(this.cloneCareThreadList, numStack);
 		
-		for(int i=0; i<3; i++) {
-			this.cloneCareThreadList.get(i).start();
+		System.out.println("stack size = " + stackers.size());
+
+		int numTurn = 1;
+		
+		for (ArrayList<CloneCareThread> list : stackers) {
+			System.out.println("turn: " + numTurn);
+			for (CloneCareThread cct : list) {
+				System.out.println(cct.getName());
+				cct.start();
+				try{
+					Thread.sleep(100);
+				}catch(Exception ex) {
+					continue;
+				}
+			}
+			numTurn++;
 		}
-		
-//		ArrayList<ArrayList<CloneCareThread>> stackers = this.chopIntoParts(this.cloneCareThreadList, numStack);
-//		
-//		System.out.println("stack size = " + stackers.size());
-//
-//		int numTurn = 1;
-//		
-//		for (ArrayList<CloneCareThread> list : stackers) {
-//			System.out.println("turn: " + numTurn);
-//			for (CloneCareThread cct : list) {
-//				System.out.println(cct.getName());
-//				cct.start();
-//			}
-//			numTurn++;
-//		}
 	}
 
 	public void stop() {
