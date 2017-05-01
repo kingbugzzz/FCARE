@@ -104,7 +104,7 @@ public class CloneCareMainPanel extends JPanel {
 		
 		JButton btnPlanlist = new JButton("");
 		btnPlanlist.setToolTipText("Bắt đầu chạy");
-		btnPlanlist.setIcon(new ImageIcon(CloneCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/settings_ico.png")));
+		btnPlanlist.setIcon(new ImageIcon(CloneCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/play.png")));
 		btnPlanlist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int[] selectedRowIndexes = table.getSelectedRows();
@@ -119,7 +119,7 @@ public class CloneCareMainPanel extends JPanel {
 				}
 			}
 		});
-		btnPlanlist.setBounds(214, 34, 49, 23);
+		btnPlanlist.setBounds(214, 34, 85, 23);
 		add(btnPlanlist);
 		updateTable();
 	}

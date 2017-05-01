@@ -8,11 +8,14 @@ import javax.swing.JEditorPane;
 import javax.swing.JProgressBar;
 import javax.swing.text.BadLocationException;
 
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Text;
+
+import io.quangvu.fcare.counter.CloneCareCampaignCounter;
 import io.quangvu.fcare.helper.NumberHelper;
 
-public class ServiceFactory implements Runnable {
+public class CloneCareServiceFactory implements Runnable {
 
-	public Thread t;
+	private Thread t;
 	private String threadName;
 	boolean suspended = false;
 
@@ -20,14 +23,16 @@ public class ServiceFactory implements Runnable {
 	JEditorPane editorPane;
 	private DateFormat dateFormat;
 
+	private CloneCareCampaignCounter counter;
 	private int limitJob = 110;
 
-	public ServiceFactory(String name, JProgressBar bar, JEditorPane editor) {
+	public CloneCareServiceFactory(String name, JProgressBar bar, JEditorPane editor, CloneCareCampaignCounter counter) {
 		threadName = name;
 		progressBar = bar;
 		progressBar.setMinimum(0);
 		progressBar.setMaximum(limitJob);
 		editorPane = editor;
+		this.counter = counter;
 		System.out.println("Creating " + threadName);
 	}
 
@@ -53,10 +58,11 @@ public class ServiceFactory implements Runnable {
 				e.printStackTrace();
 				continue;
 			} 
-		} while (Counter.JOBS <= limitJob);
+		} while (counter.getValue() <= limitJob);
 
 		System.out.println("Thread " + threadName + " exiting.");
 		try {
+			stop();
 			editorPane.getDocument().insertString(editorPane.getDocument().getLength(),
 					"\n" + threadName + " finished.", null);
 		} catch (Exception ex) {
@@ -65,18 +71,19 @@ public class ServiceFactory implements Runnable {
 	}
 
 	private void care() throws BadLocationException, InterruptedException {
-		System.out.println(threadName + " > raised JOBS: " + Counter.JOBS);
+		System.out.println(threadName + " > raised JOBS: " + counter.getValue());
 		editorPane.getDocument().insertString(editorPane.getDocument().getLength(),
-				threadName + " > raised JOBS: " + Counter.JOBS + "\n", null);
+				threadName + " > raised JOBS: " + counter.getValue() + "\n", null);
 		
-		Counter.JOBS++;
+		counter.count();
 		Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
 		
 		// update progress bar
-		progressBar.setValue(Counter.JOBS);
+		progressBar.setValue(counter.getValue());
 	}
 	
 	public void start() {
+		counter.setValue(0);
 		progressBar.setValue(0);
 		editorPane.setText("");
 		System.out.println("Starting " + threadName);
@@ -140,8 +147,4 @@ public class ServiceFactory implements Runnable {
 		}
 	}
 
-}
-
-class Counter {
-	public static int JOBS = 0;
 }

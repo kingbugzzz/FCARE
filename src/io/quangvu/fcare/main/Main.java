@@ -11,7 +11,7 @@ import io.quangvu.fcare.helper.IOHelper;
 import io.quangvu.fcare.helper.KeyHelper;
 import io.quangvu.fcare.helper.NumberHelper;
 import io.quangvu.fcare.model.CloneModel;
-import io.quangvu.fcare.service.CloneCareService;
+import io.quangvu.fcare.thread.CloneCareThread;
 
 public class Main {
 	

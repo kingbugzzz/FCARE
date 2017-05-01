@@ -1,34 +1,61 @@
-package io.quangvu.fcare.service;
+package io.quangvu.fcare.thread;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JEditorPane;
+import javax.swing.JProgressBar;
+import javax.swing.text.BadLocationException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 import io.quangvu.fcare.bean.Clone;
+import io.quangvu.fcare.counter.CloneCareCampaignCounter;
+import io.quangvu.fcare.helper.NumberHelper;
 import io.quangvu.fcare.model.CloneModel;
 import io.quangvu.fcare.selenium.WebDriverManager;
 
-public class CloneCareService {
+public class CloneCareThread extends AbstractThread {
 
 	private Clone clone;
 	private CloneModel cloneModel;
 	private PhantomJSDriver driver;
-	private String userAgent;
 	private boolean isLoggedIn = false;
 
-	public CloneCareService(Clone clone) {
+	public CloneCareThread(String name, JProgressBar bar, JEditorPane editor, CloneCareCampaignCounter counter,
+			int limitJobs, String cloneId) {
+		super(name, bar, editor, counter, limitJobs);
 		this.cloneModel = new CloneModel();
-		this.clone = clone;
-		this.userAgent = clone.getUserAgent();
-		this.driver = WebDriverManager.getInstance().getPhantomJSDriver(this.userAgent);
+		this.clone = cloneModel.get(cloneId);
+		this.name = this.name + " > " + this.clone.getName();
+	}
+
+	public void care() throws InterruptedException, BadLocationException {
+		
+		System.out.println( this.name + " is doing job...");
+		
+		editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(),
+				"\n" + this.name + " is doing job...", null);
+		
+		int sleep = NumberHelper.getRandomInt(5000, 2000);
+		System.out.println("sleep for " + sleep + " seconds...");
+		Thread.sleep(sleep);
+		System.out.println("wake  up");
+		
+		editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(),
+				"\n" + this.name + " finished jobs", null);
+		
+		//update counter
+		this.counter.count();
 	}
 
 	public boolean login() {
 		System.out.println(clone.toString());
 		System.out.println(">>>login<<<");
+		this.driver = WebDriverManager.getInstance().getPhantomJSDriver(this.clone.getUserAgent());
 		this.driver.get("https://mbasic.facebook.com/");
 		System.out.println(this.driver.getTitle() + "-" + this.driver.getCurrentUrl());
 		this.driver.findElement(By.name("email")).clear();
@@ -127,99 +154,99 @@ public class CloneCareService {
 			}
 		}
 	}
-	
+
 	public void addSuggesFriends(int limit) {
 		System.out.println(">>>add suggest friends<<<");
 		int count = 0;
-		for(String uid : this.getSuggestionFriendsUid()) {
-			if(count == limit) {
+		for (String uid : this.getSuggestionFriendsUid()) {
+			if (count == limit) {
 				System.out.println("reached to limit [" + limit + "]-> done!");
 				break;
-			}else {
+			} else {
 				this.addFriendByUid(uid);
 				count++;
 				System.out.println("wait 5 seconds for next one");
 				try {
 					Thread.sleep(5000);
-				}catch(Exception ex) {
+				} catch (Exception ex) {
 					ex.printStackTrace();
 					continue;
 				}
 			}
 		}
 	}
-	
+
 	private ArrayList<String> getSuggestionFriendsUid() {
 		this.driver.get("https://mbasic.facebook.com/friends/center/suggestions/?fb_ref=psa&_rdr");
 		ArrayList<String> suggestionListId = new ArrayList<String>();
 		List<WebElement> addLinks = driver
 				.findElementsByXPath("//*[@id='friends_center_main']/div[1]/div/table/tbody/tr/td[2]/a");
-		for(WebElement link : addLinks) {
+		for (WebElement link : addLinks) {
 			String uid = ((link.getAttribute("href").split("uid=")[1]).split("&"))[0];
 			suggestionListId.add(uid);
 		}
 		return suggestionListId;
 	}
-		
+
 	public void addFriendsByUid(ArrayList<String> listId) {
 		System.out.println("Preparing to add " + listId.size() + " friends");
-		for(String uid : listId) {
+		for (String uid : listId) {
 			this.addFriendByUid(uid);
 			try {
 				System.out.println("wait 5 seconds for next one");
 				Thread.sleep(5000);
-			}catch(Exception ex) {
+			} catch (Exception ex) {
 				ex.printStackTrace();
 				continue;
 			}
 		}
 		System.out.println("finished");
 	}
-	
+
 	public void addFriendByUid(String uid) {
 		System.out.println("adding friend[" + uid + "]");
 		driver.get("https://mbasic.facebook.com/" + uid);
 		driver.findElementByXPath("//*[@id='root']/div[1]/div[1]/div[3]/table/tbody/tr/td[1]/a").click();
 		System.out.println("added");
 	}
-	
+
 	public void acceptFriendByUid(String uid) {
 		System.out.println("accept friend[" + uid + "]");
 		driver.get("https://mbasic.facebook.com/" + uid);
 		driver.findElementByXPath("//*[@id='root']/div[1]/div[1]/div[3]/table/tbody/tr/td[1]/a").click();
 		System.out.println("accept");
 	}
-	
+
 	private ArrayList<String> getAcceptFriendUid() {
 		this.driver.get("https://mbasic.facebook.com/friends/center/requests/#friends_center_main");
 		ArrayList<String> listUid = new ArrayList<String>();
 		List<WebElement> addLinks = driver
 				.findElementsByXPath("//*[@id='friends_center_main']/div[1]/div/table/tbody/tr/td[2]/div[2]/a[1]");
-		for(WebElement link : addLinks) {
+		for (WebElement link : addLinks) {
 			String uid = ((link.getAttribute("href").split("confirm=")[1]).split("&"))[0];
 			listUid.add(uid);
 		}
 		return listUid;
 	}
-	
+
 	public void acceptFriends(int limit) {
 		System.out.println(">>>accept friends<<<");
 		int count = 0;
-		int rounds = limit/10;
-		System.out.println(limit + " friends will be accepted, number rounds = " + rounds+1);
-		if(rounds >=1 ) {
-			for(int i=0; i<rounds + 1; i++) {
-				for(String uid : this.getAcceptFriendUid()) {
-					if(count == limit) {
+		int rounds = limit / 10;
+		System.out.println(limit + " friends will be accepted, number rounds = " + rounds + 1);
+		if (rounds >= 1) {
+			for (int i = 0; i < rounds + 1; i++) {
+				for (String uid : this.getAcceptFriendUid()) {
+					if (count == limit) {
 						System.out.println("reached to limit [" + limit + "]-> done!");
 						break;
-					}else {
+					} else {
 						this.acceptFriendByUid(uid);
 						count++;
 						System.out.println("wait 5 seconds for next one");
 						try {
 							Thread.sleep(5000);
-						}catch(Exception ex) {
+						} catch (Exception ex) {
 							ex.printStackTrace();
 							continue;
 						}
@@ -229,11 +256,11 @@ public class CloneCareService {
 			}
 		}
 	}
-	
+
 	public void getCookie() {
 		System.out.println();
 	}
-	
+
 	public void logout() {
 		this.driver.quit();
 	}
