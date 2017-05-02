@@ -36,7 +36,7 @@ public class CloneCareCampaignModel {
 		String query = "INSERT INTO clone_care_campaigns(owner, name, clone_ids, status_type, min_like, max_like, wait_like, wait_clone_like,";
 		query += "min_comment, max_comment, wait_comment, wait_clone_comment,";
 		query += "min_share, max_share, wait_share, wait_clone_share,";
-		query += "num_thread, status, created_at) VALUES(";
+		query += "status, created_at) VALUES(";
 		
 		query += "'" + SessionHelper.getSessionUser() + "',";
 		query += "'" + cloneCC.getName() + "',";
@@ -58,7 +58,6 @@ public class CloneCareCampaignModel {
 		query +=  cloneCC.getWaitShare() + ",";
 		query +=  cloneCC.getWaitCloneShare() + ",";
 		
-		query +=  cloneCC.getNumThread() + ",";
 		query +=  "'" + cloneCC.getStatus() + "',";
 		query +=  "'" + dateFormater.format(now)  + "'";
 		
@@ -92,7 +91,6 @@ public class CloneCareCampaignModel {
 		query +=  "wait_share=" + cloneCC.getWaitShare() + ",";
 		query +=  "wait_clone_share=" + cloneCC.getWaitCloneShare() + ",";
 		
-		query +=  "num_thread=" + cloneCC.getNumThread() + ",";
 		query +=  "status='" + cloneCC.getStatus() + "'";
 		//query +=  "updated_at='" + dateFormater.format(now)  + "'";
 		
@@ -171,8 +169,6 @@ public class CloneCareCampaignModel {
 		header.add("wait_share");
 		header.add("wait_clone_share");
 		
-		header.add("số luồng");
-
 		return header;
 	}
 
@@ -204,8 +200,6 @@ public class CloneCareCampaignModel {
 			row.add(String.valueOf(cloneCC.getMaxShare()));
 			row.add(String.valueOf(cloneCC.getWaitShare()));
 			row.add(String.valueOf(cloneCC.getWaitCloneShare()));
-			
-			row.add(String.valueOf(cloneCC.getNumThread()));
 			
 			data.add(row);
 		}

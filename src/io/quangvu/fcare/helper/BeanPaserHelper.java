@@ -132,7 +132,6 @@ public class BeanPaserHelper {
 				clonecc.setMaxShare(rs.getInt("max_share"));
 				clonecc.setWaitShare(rs.getInt("wait_share"));
 				clonecc.setWaitCloneShare(rs.getInt("wait_clone_share"));
-				clonecc.setNumThread(rs.getInt("num_thread"));
 				clonecc.setStatus(rs.getString("status"));
 				clonecc.setCreatedAt(rs.getString("created_at"));
 				clonecc.setUpdatedAt(rs.getString("updated_at"));
@@ -166,7 +165,6 @@ public class BeanPaserHelper {
 				clonecc.setMaxShare(rs.getInt("max_share"));
 				clonecc.setWaitShare(rs.getInt("wait_share"));
 				clonecc.setWaitCloneShare(rs.getInt("wait_clone_share"));
-				clonecc.setNumThread(rs.getInt("num_thread"));
 				clonecc.setStatus(rs.getString("status"));
 				clonecc.setCreatedAt(rs.getString("created_at"));
 				clonecc.setUpdatedAt(rs.getString("updated_at"));

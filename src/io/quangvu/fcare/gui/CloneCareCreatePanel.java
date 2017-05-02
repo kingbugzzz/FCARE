@@ -41,7 +41,7 @@ public class CloneCareCreatePanel extends JPanel {
 	private JSpinner minLike, maxLike, waitLike, waitCloneLike;
 	private JSpinner minComment, maxComment, waitComment, waitCloneComment;
 	private JSpinner minShare, maxShare, waitShare, waitCloneShare;
-	private JComboBox numThread, statusType;
+	private JComboBox statusType;
 	
 	private CloneCareCampaignController controller;
 	
@@ -199,33 +199,6 @@ public class CloneCareCreatePanel extends JPanel {
 		waitCloneShare.setBounds(673, 365, 42, 20);
 		add(waitCloneShare);
 
-		numThread = new JComboBox();
-		numThread.addItem("1");
-		numThread.addItem("2");
-		numThread.addItem("3");
-		numThread.addItem("4");
-		numThread.addItem("5");
-		numThread.addItem("6");
-		numThread.addItem("7");
-		numThread.addItem("8");
-		numThread.addItem("9");
-		numThread.addItem("10");
-		numThread.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO Auto-generated method stub
-				lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 90) + " MB");
-				updateTimeExec();
-			}
-		});
-		
-		numThread.setBounds(106, 247, 138, 20);
-		add(numThread);
-
-		JLabel lblKiuChy = new JLabel("Số luồng");
-		lblKiuChy.setBounds(36, 250, 60, 14);
-		add(lblKiuChy);
-
 		JLabel lblPlan = new JLabel("Camp");
 		lblPlan.setBounds(36, 201, 60, 14);
 		add(lblPlan);
@@ -235,8 +208,8 @@ public class CloneCareCreatePanel extends JPanel {
 		add(name);
 		name.setColumns(10);
 
-		JLabel lblKiuStatus = new JLabel("Kiểu status");
-		lblKiuStatus.setBounds(302, 250, 73, 14);
+		JLabel lblKiuStatus = new JLabel("Status");
+		lblKiuStatus.setBounds(36, 247, 50, 14);
 		add(lblKiuStatus);
 
 		statusType = new JComboBox();
@@ -244,7 +217,7 @@ public class CloneCareCreatePanel extends JPanel {
 		statusType.addItem("text");
 		statusType.addItem("random");
 		statusType.addItem("no status");
-		statusType.setBounds(416, 244, 129, 20);
+		statusType.setBounds(106, 244, 138, 20);
 		add(statusType);
 
 		JButton btnNewButton = new JButton("Bắt đầu ngay");
@@ -437,7 +410,6 @@ public class CloneCareCreatePanel extends JPanel {
 		updateMinLikeStatus();updateMaxLikeStatus();
 		updateMinCommentStatus();updateMaxCommentStatus();
 		updateMinShareStatus();updateMaxShareStatus();
-		lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 150) + " MB");
 		updateTimeExec();
 	}
 	
@@ -492,10 +464,8 @@ public class CloneCareCreatePanel extends JPanel {
 		
 		int csize = this.cloneList.getSelectedIndices().length;
 		
-		int numThread = Integer.parseInt(this.numThread.getSelectedItem().toString());
-		
 		int timeExecution = (csize * (mediLike + mediLikeWait + mediLikeCloneWait + mediShare + mediShareWait + mediShareCloneWait + mediComment + mediCommentWait +  mediCommentCloneWait + 20))/60;
-		this.lbTimeExec.setText(timeExecution/numThread + " mins");
+		this.lbTimeExec.setText(timeExecution + " mins");
 	}
 	
 	private void createCareCampaignHandler() {
@@ -520,7 +490,7 @@ public class CloneCareCreatePanel extends JPanel {
 		campaign.setWaitShare(Integer.parseInt(String.valueOf(waitShare.getValue())));
 		campaign.setWaitCloneShare(Integer.parseInt(String.valueOf(waitCloneShare.getValue())));
 		
-		campaign.setNumThread(Integer.parseInt(numThread.getSelectedItem().toString()));
+//		campaign.setNumThread(Integer.parseInt(numThread.getSelectedItem().toString()));
 		campaign.setStatus("off");
 		
 //		System.out.println(campaign.toString());
