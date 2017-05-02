@@ -3,32 +3,32 @@ package io.quangvu.fcare.gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
+import javax.swing.JTextArea;
+import javax.swing.SwingWorker;
 
 import io.quangvu.fcare.bean.CloneCareCampaign;
-import io.quangvu.fcare.helper.ProgressHelper;
+import io.quangvu.fcare.helper.NumberHelper;
 import io.quangvu.fcare.model.CloneCareCampaignModel;
-import io.quangvu.fcare.service.CenterService;
 
 public class CloneCareRunningPanel extends JPanel {
 
 	private JLabel campaign;
 	private CloneCareCampaignModel model;
-	private JEditorPane editorPane;
 	private JProgressBar progressBar;
-	private JButton btnRun, btnStop, btnPause;
+	private JTextArea textArea;
 
 	private String runningStatus = "STOP";
 	CloneCareCampaign cloneCareCampaign;
+	private SimulatedActivity activity;
 
 	public CloneCareRunningPanel(JDialog container, DashboardFrame dashboardFrame, String campaignId) {
 		setLayout(null);
@@ -40,83 +40,116 @@ public class CloneCareRunningPanel extends JPanel {
 		campaign.setBounds(40, 22, 432, 14);
 		add(campaign);
 
-		btnRun = new JButton("");
-		btnRun.setIcon(new ImageIcon(CloneCareRunningPanel.class.getResource("/io/quangvu/fcare/gui/icon/play.png")));
-		btnRun.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				start();
-				btnPause.setEnabled(true);
-				btnStop.setEnabled(true);
-			}
-		});
-		btnRun.setBounds(216, 217, 56, 23);
-		add(btnRun);
-
-		btnPause = new JButton("");
-		btnPause.setIcon(
-				new ImageIcon(CloneCareRunningPanel.class.getResource("/io/quangvu/fcare/gui/icon/pause.png")));
-		btnPause.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (runningStatus.equalsIgnoreCase("RUNNING")) {
-
-					btnRun.setEnabled(true);
-					btnPause.setEnabled(false);
-					btnStop.setEnabled(true);
-					runningStatus = "PAUSE";
-				}
-			}
-		});
-		btnPause.setBounds(150, 217, 56, 23);
-		add(btnPause);
-
-		btnStop = new JButton("");
-		btnStop.setIcon(new ImageIcon(CloneCareRunningPanel.class.getResource("/io/quangvu/fcare/gui/icon/stop.png")));
-		btnStop.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (!runningStatus.equalsIgnoreCase("STOP")) {
-					runningStatus = "STOP";
-
-					btnRun.setEnabled(true);
-					btnPause.setEnabled(true);
-					btnStop.setEnabled(false);
-				}
-			}
-		});
-		btnStop.setBounds(282, 217, 49, 23);
-		add(btnStop);
-
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(40, 85, 432, 114);
 		add(scrollPane);
-
-		editorPane = new JEditorPane();
-		scrollPane.setViewportView(editorPane);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		
+		textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
 
-		progressBar = new JProgressBar(0, 100);
+		progressBar = new JProgressBar();
 		progressBar.setStringPainted(true);
 
 		progressBar.setForeground(new Color(0, 100, 0));
 		progressBar.setStringPainted(true);
 		progressBar.setBounds(40, 47, 432, 27);
 		add(progressBar);
+		
+		JButton btnStop = new JButton("Stop");
+		btnStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				activity.cancel(true);
+			}
+		});
+		btnStop.setBounds(197, 215, 89, 23);
+		add(btnStop);
 
 		this.start();
 	}
 
 	private void start() {
-
+		
 		System.out.println("Campaign: " + this.cloneCareCampaign.getName());
-		System.out.println("numThread: " + this.cloneCareCampaign.getNumThread());
-		System.out.println("Total clone: " + this.cloneCareCampaign.getCloneIdList().split(",").length);
-
-		int min = this.progressBar.getMaximum();
-		int max = this.progressBar.getMaximum();
-		ProgressHelper pgHelper = new ProgressHelper(progressBar);
-		pgHelper.setValue(30);
-		pgHelper.run();
+		int numClones = this.cloneCareCampaign.getCloneIdList().split(",").length;
+		System.out.println("Total clone: " + numClones);
+		
+		progressBar.setMaximum(0);
+		progressBar.setMaximum(numClones);
+		
+		activity = new SimulatedActivity(numClones);
+		activity.execute();
+				
 		runningStatus = "RUNNING";
-		this.btnRun.setEnabled(false);
+	}
+	
+	class SimulatedActivity extends SwingWorker<Void, Integer> {
+		
+		public SimulatedActivity(int t) {
+			current = 0;
+			target = t;
+		}
+
+		protected Void doInBackground() throws Exception {
+
+			while (current < target) {
+
+				MyTask mytask = new MyTask("Task" + current);
+				mytask.work();
+				current++;
+				publish(current);
+			}
+
+			return null;
+		}
+
+		protected void process(List<Integer> chunks) {
+			for (Integer chunk : chunks) {
+				textArea.append(chunk + "\n");
+				progressBar.setValue(chunk);
+			}
+		}
+
+		protected void done() {
+		}
+
+		private int current;
+		private int target;
+	}
+}
+
+class MyTask {
+
+	private String name;
+
+	public MyTask(String name) {
+		this.name = name;
+		System.out.println("Hi, my name is " + this.name);
+	}
+
+	public void work() {
+		try {
+			System.out.println(this.name + " logging...");
+			Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
+
+			System.out.println(this.name + " posting status...");
+			Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
+
+			System.out.println(this.name + " like...");
+			Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
+
+			System.out.println(this.name + " share...");
+			Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
+
+			System.out.println(this.name + " comment...");
+			Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
+
+			System.out.println(this.name + " finished.");
+			Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 }

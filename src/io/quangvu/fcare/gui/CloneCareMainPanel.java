@@ -1,24 +1,30 @@
 package io.quangvu.fcare.gui;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 
-import io.quangvu.fcare.bean.Clone;
 import io.quangvu.fcare.bean.CloneCareCampaign;
 import io.quangvu.fcare.controller.CloneCareCampaignController;
+import io.quangvu.fcare.helper.NumberHelper;
 
 public class CloneCareMainPanel extends JPanel {
 	
@@ -28,6 +34,7 @@ public class CloneCareMainPanel extends JPanel {
 	private Vector<String> tableHeader;
 	private Vector<Vector<String>> tableData; 
 	private JLabel sum;
+	
 	private CloneCareRunningDialog cloneCRD;
 	
 	public CloneCareMainPanel(DashboardFrame container) {
@@ -102,10 +109,10 @@ public class CloneCareMainPanel extends JPanel {
 		comboBox.setBounds(993, 37, 151, 20);
 		add(comboBox);
 		
-		JButton btnPlanlist = new JButton("");
-		btnPlanlist.setToolTipText("Bắt đầu chạy");
-		btnPlanlist.setIcon(new ImageIcon(CloneCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/play.png")));
-		btnPlanlist.addActionListener(new ActionListener() {
+		JButton btnStart = new JButton("");
+		btnStart.setToolTipText("Bắt đầu chạy");
+		btnStart.setIcon(new ImageIcon(CloneCareMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/play.png")));
+		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int[] selectedRowIndexes = table.getSelectedRows();
 				if (selectedRowIndexes.length == 1) {
@@ -113,14 +120,14 @@ public class CloneCareMainPanel extends JPanel {
 					cloneCRD = new CloneCareRunningDialog(container, "Chạy chiến dịch nuôi <" + campId + ">", 510, 290, campId);
 					cloneCRD.setModal(false);
 					cloneCRD.display();
-
+					
 				} else {
 					JOptionPane.showMessageDialog(new JFrame(), "Chọn 1!");
 				}
 			}
 		});
-		btnPlanlist.setBounds(214, 34, 85, 23);
-		add(btnPlanlist);
+		btnStart.setBounds(214, 34, 85, 23);
+		add(btnStart);
 		updateTable();
 	}
 	
