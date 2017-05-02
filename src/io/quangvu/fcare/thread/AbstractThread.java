@@ -15,12 +15,14 @@ public abstract class AbstractThread implements Runnable {
 	protected Thread thread;
 	protected String name;
 	protected boolean suspended = false;
+	protected boolean isStop = false; 
 
 	protected JProgressBar progressBar;
 	protected JEditorPane editorPane;
 	
 	protected CloneCareCampaignCounter counter;
 	protected int limitJobs = 0;
+	protected ThreadMonitor monitor;
 	
 	public AbstractThread(String name, JProgressBar bar, JEditorPane editor, CloneCareCampaignCounter counter, int limitJobs) {
 		this.name = name;
@@ -30,6 +32,7 @@ public abstract class AbstractThread implements Runnable {
 		this.progressBar.setMaximum(this.limitJobs);
 		this.editorPane = editor;
 		this.counter = counter;
+		this.monitor = monitor;
 //		System.out.println("Creating " + name);
 	}
 	
@@ -45,12 +48,7 @@ public abstract class AbstractThread implements Runnable {
 					}
 					// main job
 					this.care();
-					// update progress bar
-					this.progressBar.setValue(this.counter.getValue());
-					//stop thread
-					this.stop();
 				}
-			
 			} catch(InterruptedException interruped) {
 				interruped.printStackTrace();
 				continue;
@@ -65,16 +63,15 @@ public abstract class AbstractThread implements Runnable {
 		System.out.println("Non implement method from AbstractThread");
 	}
 	
-	public void start() {
-		this.counter.setValue(0);
-		this.progressBar.setValue(0);
-		this.editorPane.setText("");
-		
+	public void start() {		
 		if (this.thread == null) {
 			this.thread = new Thread(this, name);
 			this.thread.start();
 		}
 		System.out.println(this.name + " started");
+//		this.counter.setValue(this.counter.getValue());
+//		this.progressBar.setValue(this.progressBar.getValue());
+////		this.editorPane.setText("");
 	}
 
 	public void stop() {
@@ -88,6 +85,8 @@ public abstract class AbstractThread implements Runnable {
 //		}
 
 		System.out.println(this.name + " stopped.");
+		
+		this.isStop = true;
 	}
 
 	public void suspend() {
@@ -121,5 +120,9 @@ public abstract class AbstractThread implements Runnable {
 	
 	public String getName() {
 		return this.name;
+	}
+	
+	public boolean isStop() {
+		return this.isStop;
 	}
 }

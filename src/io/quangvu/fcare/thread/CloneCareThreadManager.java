@@ -15,54 +15,42 @@ public class CloneCareThreadManager {
 	private CloneCareCampaign campaign;
 	private CloneCareCampaignController controller;
 	private int limitJobs = 0;
-	int stackNumber = 0;
-
-	public CloneCareThreadManager(JProgressBar bar, JEditorPane editor, CloneCareCampaignCounter counter,
-			String campId) {
+	private int stackNumber = 0;
+	private CloneCareCampaignCounter counter;
+	
+	public CloneCareThreadManager(JProgressBar bar, JEditorPane editor, String campId) {
 		this.controller = new CloneCareCampaignController();
 		this.campaign = this.controller.get(campId);
+		
 		System.out.println(campaign.toString());
 
 		String[] cloneIds = campaign.getCloneIdList().split(",");
+
 		this.limitJobs = cloneIds.length;
 
 		System.out.println("limitjobs: " + this.limitJobs);
+		
+		this.counter = new CloneCareCampaignCounter();
 
 		if (this.limitJobs > 0) {
 			this.cloneCareThreadList = new ArrayList<CloneCareThread>();
 			CloneCareThread cct = null;
 			for (String cloneId : cloneIds) {
-				cct = new CloneCareThread(this.campaign.getName(), bar, editor, counter, this.limitJobs, cloneId);
+				cct = new CloneCareThread(this.campaign.getName(), bar, editor, this.counter, this.limitJobs, cloneId);
 				this.cloneCareThreadList.add(cct);
 			}
 		}
 	}
 
 	public void start() {
-
-		int cloneSize = this.cloneCareThreadList.size();
-		int clonePerOneThread = this.campaign.getNumThread();
-		int numStack = cloneSize / clonePerOneThread;
 		
-		ArrayList<ArrayList<CloneCareThread>> stackers = this.chopIntoParts(this.cloneCareThreadList, numStack);
+		int numClone1Time = 5;
 		
-		System.out.println("stack size = " + stackers.size());
-
-		int numTurn = 1;
+		int turn = this.cloneCareThreadList.size() /numClone1Time ;
 		
-		for (ArrayList<CloneCareThread> list : stackers) {
-			System.out.println("turn: " + numTurn);
-			for (CloneCareThread cct : list) {
-				System.out.println(cct.getName());
-				cct.start();
-				try{
-					Thread.sleep(100);
-				}catch(Exception ex) {
-					continue;
-				}
-			}
-			numTurn++;
-		}
+		ArrayList<ArrayList<CloneCareThread>> stackers = this.chopIntoParts(this.cloneCareThreadList, turn);
+			
+		
 	}
 
 	public void stop() {

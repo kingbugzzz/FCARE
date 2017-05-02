@@ -13,7 +13,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Text;
 import io.quangvu.fcare.counter.CloneCareCampaignCounter;
 import io.quangvu.fcare.helper.NumberHelper;
 
-public class CloneCareServiceFactory implements Runnable {
+public class ServiceFactory implements Runnable {
 
 	private Thread t;
 	private String threadName;
@@ -24,9 +24,9 @@ public class CloneCareServiceFactory implements Runnable {
 	private DateFormat dateFormat;
 
 	private CloneCareCampaignCounter counter;
-	private int limitJob = 110;
+	private int limitJob = 100;
 
-	public CloneCareServiceFactory(String name, JProgressBar bar, JEditorPane editor, CloneCareCampaignCounter counter) {
+	public ServiceFactory(String name, JProgressBar bar, JEditorPane editor, CloneCareCampaignCounter counter) {
 		threadName = name;
 		progressBar = bar;
 		progressBar.setMinimum(0);
@@ -76,10 +76,14 @@ public class CloneCareServiceFactory implements Runnable {
 				threadName + " > raised JOBS: " + counter.getValue() + "\n", null);
 		
 		counter.count();
-		Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
+		System.out.println(this.threadName + " sleep for 10 s...");
+		Thread.sleep(10000);
+		System.out.println(this.threadName + " wake up");
 		
 		// update progress bar
 		progressBar.setValue(counter.getValue());
+		
+		this.stop();
 	}
 	
 	public void start() {

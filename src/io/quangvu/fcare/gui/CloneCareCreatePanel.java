@@ -214,7 +214,7 @@ public class CloneCareCreatePanel extends JPanel {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
-				lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 150) + " MB");
+				lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 90) + " MB");
 				updateTimeExec();
 			}
 		});
@@ -494,7 +494,7 @@ public class CloneCareCreatePanel extends JPanel {
 		
 		int numThread = Integer.parseInt(this.numThread.getSelectedItem().toString());
 		
-		int timeExecution = (csize * (mediLike + mediLikeWait + 5 + mediLikeCloneWait + 5 + mediShare + mediShareWait + 5 + mediShareCloneWait + 5 + mediComment + mediCommentWait + 5 + mediCommentCloneWait + 5 + 45 + 45))/60;
+		int timeExecution = (csize * (mediLike + mediLikeWait + mediLikeCloneWait + mediShare + mediShareWait + mediShareCloneWait + mediComment + mediCommentWait +  mediCommentCloneWait + 20))/60;
 		this.lbTimeExec.setText(timeExecution/numThread + " mins");
 	}
 	

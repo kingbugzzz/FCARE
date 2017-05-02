@@ -3,6 +3,7 @@ package io.quangvu.fcare.gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +17,8 @@ import javax.swing.JScrollPane;
 import io.quangvu.fcare.bean.CloneCareCampaign;
 import io.quangvu.fcare.counter.CloneCareCampaignCounter;
 import io.quangvu.fcare.model.CloneCareCampaignModel;
+import io.quangvu.fcare.service.ServiceFactory;
+import io.quangvu.fcare.thread.CloneCareThread;
 import io.quangvu.fcare.thread.CloneCareThreadManager;
 
 public class CloneCareRunningPanel extends JPanel {
@@ -26,7 +29,6 @@ public class CloneCareRunningPanel extends JPanel {
 	private JProgressBar progressBar;
 	private JButton btnRun, btnStop, btnPause;
 
-	private CloneCareCampaignCounter counter;
 	private CloneCareThreadManager cloneCareThreadManager;
 	private String runningStatus = "STOP";
 	CloneCareCampaign cloneCareCampaign;
@@ -76,8 +78,7 @@ public class CloneCareRunningPanel extends JPanel {
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!runningStatus.equalsIgnoreCase("STOP")) {
-					cloneCareThreadManager.stop();
-					counter = null;
+//					cloneCareThreadManager.stop();
 					runningStatus = "STOP";
 					btnRun.setEnabled(true);
 					btnPause.setEnabled(true);
@@ -104,14 +105,13 @@ public class CloneCareRunningPanel extends JPanel {
 		progressBar.setBounds(40, 47, 432, 27);
 		add(progressBar);
 
-		this.start();
+		//this.start();
 	}
 
 	private void start() {
-		counter = new CloneCareCampaignCounter();
-		System.out.println(String.valueOf(cloneCareCampaign.getId()));
-		cloneCareThreadManager = new CloneCareThreadManager(progressBar, editorPane, counter, String.valueOf(cloneCareCampaign.getId()));
-		cloneCareThreadManager.start();
+		CloneCareThreadManager cctm = new CloneCareThreadManager(progressBar, editorPane,  String.valueOf(this.cloneCareCampaign.getId()));
+		cctm.start();
+		
 		runningStatus = "RUNNING";
 	}
 }

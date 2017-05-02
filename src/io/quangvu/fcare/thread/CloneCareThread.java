@@ -35,23 +35,72 @@ public class CloneCareThread extends AbstractThread {
 
 	public void care() throws InterruptedException, BadLocationException {
 		
-		System.out.println( this.name + " is doing job...");
-		
-		editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(),
-				"\n" + this.name + " is doing job...", null);
+		System.out.println(this.name + " logging in...");
 		try {
-			int sleep = NumberHelper.getRandomInt(5000, 2000);
-			System.out.println("sleep for " + sleep + " seconds...");
-			Thread.sleep(sleep);
-		}catch(Exception ex){
-			
+			this.editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(), "\n" + this.name + " logging in...",
+					null);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		Thread.sleep(10000);
+		System.out.println(this.name + " logged in");
+		try {
+			this.editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(), "\n" + this.name + " logged in",
+					null);
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		
-		editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(),
-				"\n" + this.name + " finished jobs", null);
+		System.out.println(this.name + " posting status...");
+		try {
+			this.editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(), "\n" + this.name + " posting status...",
+					null);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		Thread.sleep(10000);
 		
-		//update counter
-		this.counter.count();
+		try {
+			this.editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(), "\n" + this.name + " doing like...",
+					null);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		System.out.println(this.name + " doing like...");
+		Thread.sleep(10000);
+		
+		try {
+			this.editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(), "\n" + this.name + " doing comment...",
+					null);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		System.out.println(this.name + " doing comment...");
+		Thread.sleep(20000);
+
+		try {
+			this.editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(), "\n" + this.name + " doing share...",
+					null);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		System.out.println(this.name + " doing share...");
+		Thread.sleep(10000);
+			
+		try {
+			this.editorPane.getDocument().insertString(this.editorPane.getDocument().getLength(), "\n" + this.name + " finished carring job",
+					null);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		System.out.println(this.name  + " finished carring job");
+		
+		counter.count();
+		
+		// update progress bar
+		progressBar.setValue(counter.getValue());
+		
+		this.stop();
 	}
 
 	public boolean login() {
