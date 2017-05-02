@@ -13,9 +13,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Text;
 import io.quangvu.fcare.counter.CloneCareCampaignCounter;
 import io.quangvu.fcare.helper.NumberHelper;
 
-public class ServiceFactory implements Runnable {
+public class ServiceFactory extends Thread implements Runnable {
 
-	private Thread t;
 	private String threadName;
 	boolean suspended = false;
 
@@ -91,64 +90,6 @@ public class ServiceFactory implements Runnable {
 		progressBar.setValue(0);
 		editorPane.setText("");
 		System.out.println("Starting " + threadName);
-
-		if (t == null) {
-			t = new Thread(this, threadName);
-			t.start();
-		}
-	}
-
-	public void stop() {
-		System.out.println(threadName + " is stopping...");
-		try {
-			editorPane.getDocument().insertString(editorPane.getDocument().getLength(),
-					"\n" + threadName + " is stopping", null);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		suspended = true;
-		t = null;
-		try {
-			editorPane.getDocument().insertString(editorPane.getDocument().getLength(), "\n" + threadName + " stopped.",
-					null);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		System.out.println(threadName + " stopped.");
-	}
-
-	public void suspend() {
-		try {
-			editorPane.getDocument().insertString(editorPane.getDocument().getLength(),
-					"\n" + threadName + " is suppending...", null);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		suspended = true;
-		try {
-			editorPane.getDocument().insertString(editorPane.getDocument().getLength(),
-					"\n" + threadName + " suppended", null);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	public synchronized void resume() {
-		try {
-			editorPane.getDocument().insertString(editorPane.getDocument().getLength(),
-					"\n" + threadName + " is resuming...", null);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		suspended = false;
-		notify();
-		try {
-			editorPane.getDocument().insertString(editorPane.getDocument().getLength(), "\n" + threadName + " resumed.",
-					null);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 	}
 
 }

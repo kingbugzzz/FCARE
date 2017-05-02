@@ -18,8 +18,6 @@ import io.quangvu.fcare.bean.CloneCareCampaign;
 import io.quangvu.fcare.counter.CloneCareCampaignCounter;
 import io.quangvu.fcare.model.CloneCareCampaignModel;
 import io.quangvu.fcare.service.ServiceFactory;
-import io.quangvu.fcare.thread.CloneCareThread;
-import io.quangvu.fcare.thread.CloneCareThreadManager;
 
 public class CloneCareRunningPanel extends JPanel {
 
@@ -29,7 +27,6 @@ public class CloneCareRunningPanel extends JPanel {
 	private JProgressBar progressBar;
 	private JButton btnRun, btnStop, btnPause;
 
-	private CloneCareThreadManager cloneCareThreadManager;
 	private String runningStatus = "STOP";
 	CloneCareCampaign cloneCareCampaign;
 
@@ -62,7 +59,7 @@ public class CloneCareRunningPanel extends JPanel {
 		btnPause.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (runningStatus.equalsIgnoreCase("RUNNING")) {
-					cloneCareThreadManager.pause();
+					
 					btnRun.setEnabled(true);
 					btnPause.setEnabled(false);
 					btnStop.setEnabled(true);
@@ -78,7 +75,6 @@ public class CloneCareRunningPanel extends JPanel {
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!runningStatus.equalsIgnoreCase("STOP")) {
-//					cloneCareThreadManager.stop();
 					runningStatus = "STOP";
 					btnRun.setEnabled(true);
 					btnPause.setEnabled(true);
@@ -98,19 +94,16 @@ public class CloneCareRunningPanel extends JPanel {
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-		progressBar = new JProgressBar();
+		progressBar = new JProgressBar(0,100);
 
 		progressBar.setForeground(new Color(0, 100, 0));
 		progressBar.setStringPainted(true);
 		progressBar.setBounds(40, 47, 432, 27);
 		add(progressBar);
 
-		//this.start();
 	}
 
 	private void start() {
-		CloneCareThreadManager cctm = new CloneCareThreadManager(progressBar, editorPane,  String.valueOf(this.cloneCareCampaign.getId()));
-		cctm.start();
 		
 		runningStatus = "RUNNING";
 	}
