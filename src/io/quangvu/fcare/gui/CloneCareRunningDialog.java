@@ -1,17 +1,23 @@
 package io.quangvu.fcare.gui;
 
-import java.util.ArrayList;
-
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
-import io.quangvu.fcare.bean.Clone;
-import io.quangvu.fcare.bean.Tag;
-
-public class CloneCareRunningDialog extends AbstractDialog {
+public class CloneCareRunningDialog extends JDialog {
 	
 	public CloneCareRunningDialog(DashboardFrame container, String title, int width, int height, String campaignId) {
-		super(title, width, height);
 		
 		this.getContentPane().add(new CloneCareRunningPanel(this, container, campaignId));
+		
+		this.setTitle(title);
+		this.setSize(width, height);
+		this.setResizable(false);	
+		
+	}
+
+	public void display() {
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
 	}
 }

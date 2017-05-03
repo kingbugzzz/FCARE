@@ -3,12 +3,15 @@ package io.quangvu.fcare.gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -31,8 +34,23 @@ public class CloneCareRunningPanel extends JPanel {
 	private SimulatedActivity activity;
 
 	public CloneCareRunningPanel(JDialog container, DashboardFrame dashboardFrame, String campaignId) {
+		
 		setLayout(null);
-
+		
+		container.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent we) {
+				String ObjButtons[] = { "Yes", "No" };
+				int PromptResult = JOptionPane.showOptionDialog(null, "Đóng?",
+						"FCARE 1.0", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
+						ObjButtons, ObjButtons[1]);
+				if (PromptResult == JOptionPane.YES_OPTION) {
+					activity.cancel(true);
+					container.dispose();
+				}
+			}
+		});
+		
 		model = new CloneCareCampaignModel();
 
 		cloneCareCampaign = this.model.get(campaignId);
@@ -60,7 +78,13 @@ public class CloneCareRunningPanel extends JPanel {
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				activity.cancel(true);
+				String ObjButtons[] = { "Yes", "No" };
+				int PromptResult = JOptionPane.showOptionDialog(null, "Stop?",
+						"FCARE 1.0", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
+						ObjButtons, ObjButtons[1]);
+				if (PromptResult == JOptionPane.YES_OPTION) {
+					activity.cancel(true);
+				}
 			}
 		});
 		btnStop.setBounds(197, 215, 89, 23);
@@ -83,20 +107,37 @@ public class CloneCareRunningPanel extends JPanel {
 				
 		runningStatus = "RUNNING";
 	}
-	
+		
 	class SimulatedActivity extends SwingWorker<Void, Integer> {
 		
 		public SimulatedActivity(int t) {
 			current = 0;
 			target = t;
 		}
+		
+		public void work() throws InterruptedException {
+			System.out.println(" logging...");
+			Thread.sleep(500);
+
+			System.out.println(" posting status...");
+			Thread.sleep(500);
+
+			System.out.println(" like...");
+			Thread.sleep(500);
+
+			System.out.println(" share...");
+			Thread.sleep(500);
+
+			System.out.println(" comment...");
+			Thread.sleep(500);
+
+			System.out.println(" finished.");
+		}
 
 		protected Void doInBackground() throws Exception {
 
 			while (current < target) {
-
-				MyTask mytask = new MyTask("Task" + current);
-				mytask.work();
+				work();
 				current++;
 				publish(current);
 			}
@@ -112,44 +153,10 @@ public class CloneCareRunningPanel extends JPanel {
 		}
 
 		protected void done() {
+//			JOptionPane.showMessageDialog(null, "Done!");
 		}
 
 		private int current;
 		private int target;
-	}
-}
-
-class MyTask {
-
-	private String name;
-
-	public MyTask(String name) {
-		this.name = name;
-		System.out.println("Hi, my name is " + this.name);
-	}
-
-	public void work() {
-		try {
-			System.out.println(this.name + " logging...");
-			Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
-
-			System.out.println(this.name + " posting status...");
-			Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
-
-			System.out.println(this.name + " like...");
-			Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
-
-			System.out.println(this.name + " share...");
-			Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
-
-			System.out.println(this.name + " comment...");
-			Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
-
-			System.out.println(this.name + " finished.");
-			Thread.sleep(NumberHelper.getRandomInt(3000, 1000));
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 	}
 }
