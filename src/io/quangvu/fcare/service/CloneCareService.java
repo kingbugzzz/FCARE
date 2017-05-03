@@ -24,26 +24,24 @@ public class CloneCareService {
 	}
 
 	public boolean login() {
-//		System.out.println(clone.toString());
-//		System.out.println(">>>login<<<");
-//		this.driver = WebDriverManager.getInstance().getPhantomJSDriver(this.clone.getUserAgent());
-//		this.driver.get("https://mbasic.facebook.com/");
-//		System.out.println(this.driver.getTitle() + "-" + this.driver.getCurrentUrl());
-//		this.driver.findElement(By.name("email")).clear();
-//		this.driver.findElement(By.name("email")).sendKeys(this.clone.getId());
-//		this.driver.findElement(By.name("pass")).clear();
-//		this.driver.findElement(By.name("pass")).sendKeys(this.clone.getPassword());
-//		this.driver.findElement(By.name("login")).click();
-//		if (this.driver.getCurrentUrl().contains("checkpoint")) {
-//			System.out.println(this.clone.getName() + "[id:" + this.clone.getId() + "] got checkpoint!");
-//			return false;
-//		} else {
-//			System.out.println(this.clone.getName() + " login successful!");
-//			this.isLoggedIn = true;
-//			return true;
-//		}
-		System.out.println(this.clone.getName() + " s logging in...");
-		return true;
+		System.out.println(clone.toString());
+		System.out.println(">>>login<<<");
+		this.driver = WebDriverManager.getInstance().getPhantomJSDriver(this.clone.getUserAgent());
+		this.driver.get("https://mbasic.facebook.com/");
+		System.out.println(this.driver.getTitle() + "-" + this.driver.getCurrentUrl());
+		this.driver.findElement(By.name("email")).clear();
+		this.driver.findElement(By.name("email")).sendKeys(this.clone.getId());
+		this.driver.findElement(By.name("pass")).clear();
+		this.driver.findElement(By.name("pass")).sendKeys(this.clone.getPassword());
+		this.driver.findElement(By.name("login")).click();
+		if (this.driver.getCurrentUrl().contains("checkpoint")) {
+			System.out.println(this.clone.getName() + "[id:" + this.clone.getId() + "] got checkpoint!");
+			return false;
+		} else {
+			System.out.println(this.clone.getName() + " login successful!");
+			this.isLoggedIn = true;
+			return true;
+		}
 	}
 
 	public void changeAvatar(String avataPath) {
