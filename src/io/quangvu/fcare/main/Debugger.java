@@ -18,10 +18,10 @@ public class Debugger {
 
 	public static void main(String[] args) {
 		
-		String id = "0988031665@likechich3.com";  // "0988102926@likechich3.com"   "0988129071@likechich3.com"
+		String id = "0988006596@likechich3.com";  
 		String pass = "ndtnht123";
 		
-		String userAgent = "Mozilla/5.0 (Linux; U; Android-4.0.3; en-us; Galaxy Nexus Build/IML74K) AppleWebKit/535.7 (KHTML, like Gecko) CrMo/16.0.912.75 Mobile Safari/535.7";
+		String userAgent = "Mozilla/5.0 (Linux; Android 4.4.2; XT1028 Build/KXB20.9-1.10-1.20) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.92 Mobile Safari/537.36";
 		
 		PhantomJSDriver driver = WebDriverManager.getInstance().getPhantomJSDriver(userAgent);
 		System.out.println(">>>login<<<");

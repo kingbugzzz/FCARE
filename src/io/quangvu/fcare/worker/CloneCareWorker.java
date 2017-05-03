@@ -56,7 +56,7 @@ public class CloneCareWorker extends SwingWorker<Void, String> {
 		
 		String info = service.getName() + "\n";
 		
-		service.login();
+		//service.login();
 		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] logged in\n";
 		Thread.sleep(500);
 		
