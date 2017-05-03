@@ -117,7 +117,7 @@ public class CloneCareMainPanel extends JPanel {
 				int[] selectedRowIndexes = table.getSelectedRows();
 				if (selectedRowIndexes.length == 1) {
 					String campId = String.valueOf(table.getValueAt(selectedRowIndexes[0], 0));
-					cloneCRD = new CloneCareRunningDialog(container, "Chạy chiến dịch nuôi <" + campId + ">", 510, 290, campId);
+					cloneCRD = new CloneCareRunningDialog(container, "Campaign Id: " + campId + "", campId);
 					cloneCRD.setModal(false);
 					cloneCRD.display();
 					

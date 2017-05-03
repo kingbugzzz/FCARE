@@ -16,7 +16,7 @@ import org.apache.http.util.EntityUtils;
 import io.quangvu.fcare.config.AppConfig;
 import io.quangvu.fcare.helper.IOHelper;
 
-public class LoginService {
+public class SystemLoginService {
 
 	public static boolean login(String username, String password) {
 		try {

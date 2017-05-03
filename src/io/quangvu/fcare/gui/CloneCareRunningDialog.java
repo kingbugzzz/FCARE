@@ -5,12 +5,12 @@ import javax.swing.JFrame;
 
 public class CloneCareRunningDialog extends JDialog {
 	
-	public CloneCareRunningDialog(DashboardFrame container, String title, int width, int height, String campaignId) {
+	public CloneCareRunningDialog(DashboardFrame container, String title, String campaignId) {
 		
 		this.getContentPane().add(new CloneCareRunningPanel(this, container, campaignId));
 		
 		this.setTitle(title);
-		this.setSize(width, height);
+		this.setSize(610, 450);
 		this.setResizable(false);	
 		
 	}

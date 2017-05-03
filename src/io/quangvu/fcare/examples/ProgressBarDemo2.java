@@ -1,4 +1,4 @@
-package io.quangvu.fcare.demo;
+package io.quangvu.fcare.examples;
 
 import java.awt.BorderLayout;
 import java.awt.Insets;

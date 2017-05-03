@@ -1,4 +1,4 @@
-package io.quangvu.fcare.demo;
+package io.quangvu.fcare.examples;
 
 /*
 This program is a part of the companion code for Core Java 8th ed.

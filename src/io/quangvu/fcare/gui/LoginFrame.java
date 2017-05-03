@@ -19,7 +19,7 @@ import io.quangvu.fcare.controller.TagController;
 import io.quangvu.fcare.helper.DBHelper;
 import io.quangvu.fcare.helper.SystemStaticHelper;
 import io.quangvu.fcare.model.TagModel;
-import io.quangvu.fcare.service.LoginService;
+import io.quangvu.fcare.service.SystemLoginService;
 
 public class LoginFrame extends JFrame {
 
@@ -89,7 +89,7 @@ public class LoginFrame extends JFrame {
 	private boolean doLogin() {
 		String username = this.tfUsername.getText().trim();
 		String password = String.valueOf(this.tfPassword.getPassword());
-		return LoginService.login(username, password);
+		return SystemLoginService.login(username, password);
 	}
 	
 	private void success() {
