@@ -24,6 +24,9 @@ public class CloneCareWorker extends SwingWorker<Void, String> {
 	ArrayList<CloneCareService> careServiceList;
 	private SimpleDateFormat dateFormat;
 	
+	private int minLike, maxLike, minComment, maxComment, minShare, maxShare;
+	private int waitLike, waitComment, waitShare, waitClone;
+	
 	public CloneCareWorker(CloneCareCampaign campaign, JTextArea textarea, JProgressBar progressBar) {
 		this.dateFormat = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 		this.campaign = campaign;
@@ -51,41 +54,50 @@ public class CloneCareWorker extends SwingWorker<Void, String> {
 	}
 	
 	public String care(int current) throws InterruptedException {
-		
+				
 		CloneCareService service = this.careServiceList.get(current);
 		
 		String info = service.getName() + "\n";
+
+		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] turn: " + current + "\n";
 		
-		//service.login();
+//		service.login();
 		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] logged in\n";
 		Thread.sleep(500);
 		
+		for(int i=1; i<=5; i++) {
+			System.out.println(i);
+			info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "]add friends---count" + i + "\n";
+			System.out.println("sleep 3 second");
+			Thread.sleep(3000);
+		}
+		
 //		service.changeAvatar("");
-//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] changed avatar\n";
-//		Thread.sleep(500);
+		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] changed avatar\n";
+		Thread.sleep(500);
 //		
 //		service.postTextLink("");
-//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] post text status\n";
-//		Thread.sleep(500);
+		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] post text status\n";
+		Thread.sleep(500);
 //		
 //		service.postImageStatus("", "");
-//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] post image status\n";
-//		Thread.sleep(500);
+		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] post image status\n";
+		Thread.sleep(500);
 //		
 //		service.like();
-//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] like\n";
-//		Thread.sleep(500);
+		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] like\n";
+		Thread.sleep(500);
 //		
 //		service.comment();
-//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] comment\n";
-//		Thread.sleep(500);
+		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] comment\n";
+		Thread.sleep(500);
 //		
 //		service.share();
-//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] shared\n";
-//		Thread.sleep(500);
+		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] shared\n";
+		Thread.sleep(500);
 //		
 //		service.logout();
-//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] logged out\n\n";
+		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] logged out\n\n";
 		
 		return current + "#" + info;
 	}
@@ -103,7 +115,7 @@ public class CloneCareWorker extends SwingWorker<Void, String> {
 	protected void process(List<String> chunks) {
 		for (String chunk : chunks) {
 			progressBar.setValue(Integer.parseInt(chunk.split("#")[0]));
-			textArea.append(chunk.split("#")[1]);
+			textArea.append(chunk.split("#")[1] + "\n");
 		}
 	}
 

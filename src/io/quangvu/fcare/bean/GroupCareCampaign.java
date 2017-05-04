@@ -1,20 +1,18 @@
 package io.quangvu.fcare.bean;
 
 public class GroupCareCampaign {
-	
+
 	private String owner;
 	private int id;
 	private String name, cloneIdList, groupIds;
-	private int minMem, maxMem, waitMem, waitClone;
-	private int numThread;
+	private int minMem, maxMem, minWait, maxWait;
 	private String createdAt, updatedAt, status;
-	
-	public GroupCareCampaign(){}
-	
-	
+
+	public GroupCareCampaign() {
+	}
 
 	public GroupCareCampaign(String owner, int id, String name, String cloneIdList, String groupIds, int minMem,
-			int maxMem, int waitMem, int waitClone, int numThread, String createdAt, String updatedAt, String status) {
+			int maxMem, int minWait, int maxWait, String createdAt, String updatedAt, String status) {
 		super();
 		this.owner = owner;
 		this.id = id;
@@ -23,9 +21,8 @@ public class GroupCareCampaign {
 		this.groupIds = groupIds;
 		this.minMem = minMem;
 		this.maxMem = maxMem;
-		this.waitMem = waitMem;
-		this.waitClone = waitClone;
-		this.numThread = numThread;
+		this.minWait = minWait;
+		this.maxWait = maxWait;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.status = status;
@@ -58,17 +55,17 @@ public class GroupCareCampaign {
 	public String getCloneIdList() {
 		return cloneIdList;
 	}
-	
+
+	public void setCloneIdList(String cloneIdList) {
+		this.cloneIdList = cloneIdList;
+	}
+
 	public String getGroupIds() {
 		return groupIds;
 	}
 
 	public void setGroupIds(String groupIds) {
 		this.groupIds = groupIds;
-	}
-
-	public void setCloneIdList(String cloneIdList) {
-		this.cloneIdList = cloneIdList;
 	}
 
 	public int getMinMem() {
@@ -87,28 +84,20 @@ public class GroupCareCampaign {
 		this.maxMem = maxMem;
 	}
 
-	public int getWaitMem() {
-		return waitMem;
+	public int getMinWait() {
+		return minWait;
 	}
 
-	public void setWaitMem(int waitMem) {
-		this.waitMem = waitMem;
+	public void setMinWait(int minWait) {
+		this.minWait = minWait;
 	}
 
-	public int getWaitClone() {
-		return waitClone;
+	public int getMaxWait() {
+		return maxWait;
 	}
 
-	public void setWaitClone(int waitClone) {
-		this.waitClone = waitClone;
-	}
-
-	public int getNumThread() {
-		return numThread;
-	}
-
-	public void setNumThread(int numThread) {
-		this.numThread = numThread;
+	public void setMaxWait(int maxWait) {
+		this.maxWait = maxWait;
 	}
 
 	public String getCreatedAt() {
@@ -138,8 +127,8 @@ public class GroupCareCampaign {
 	@Override
 	public String toString() {
 		return "GroupCareCampaign [owner=" + owner + ", id=" + id + ", name=" + name + ", cloneIdList=" + cloneIdList
-				+ ", groupIds=" + groupIds + ", minMem=" + minMem + ", maxMem=" + maxMem + ", waitMem=" + waitMem
-				+ ", waitClone=" + waitClone + ", numThread=" + numThread + ", createdAt=" + createdAt + ", updatedAt="
-				+ updatedAt + ", status=" + status + "]";
+				+ ", groupIds=" + groupIds + ", minMem=" + minMem + ", maxMem=" + maxMem + ", minWait=" + minWait
+				+ ", maxWait=" + maxWait + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", status="
+				+ status + "]";
 	}
 }

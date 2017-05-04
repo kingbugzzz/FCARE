@@ -122,16 +122,16 @@ public class BeanPaserHelper {
 				clonecc.setStatusType(rs.getString("status_type"));
 				clonecc.setMinLike(rs.getInt("min_like"));
 				clonecc.setMaxLike(rs.getInt("max_like"));
-				clonecc.setWaitLike(rs.getInt("wait_like"));
-				clonecc.setWaitCloneLike(rs.getInt("wait_clone_like"));
+				clonecc.setMinLikeWait(rs.getInt("min_like_wait"));
+				clonecc.setMaxLikeWait(rs.getInt("max_like_wait"));
 				clonecc.setMinComment(rs.getInt("min_comment"));
 				clonecc.setMaxComment(rs.getInt("max_comment"));
-				clonecc.setWaitComment(rs.getInt("wait_comment"));
-				clonecc.setWaitCloneComment(rs.getInt("wait_clone_comment"));
+				clonecc.setMinCommentWait(rs.getInt("min_comment_wait"));
+				clonecc.setMaxCommentWait(rs.getInt("max_comment_wait"));
 				clonecc.setMinShare(rs.getInt("min_share"));
 				clonecc.setMaxShare(rs.getInt("max_share"));
-				clonecc.setWaitShare(rs.getInt("wait_share"));
-				clonecc.setWaitCloneShare(rs.getInt("wait_clone_share"));
+				clonecc.setMinShareWait(rs.getInt("min_share_wait"));
+				clonecc.setMaxShareWait(rs.getInt("max_share_wait"));
 				clonecc.setStatus(rs.getString("status"));
 				clonecc.setCreatedAt(rs.getString("created_at"));
 				clonecc.setUpdatedAt(rs.getString("updated_at"));
@@ -155,16 +155,16 @@ public class BeanPaserHelper {
 				clonecc.setStatusType(rs.getString("status_type"));
 				clonecc.setMinLike(rs.getInt("min_like"));
 				clonecc.setMaxLike(rs.getInt("max_like"));
-				clonecc.setWaitLike(rs.getInt("wait_like"));
-				clonecc.setWaitCloneLike(rs.getInt("wait_clone_like"));
+				clonecc.setMinLikeWait(rs.getInt("min_like_wait"));
+				clonecc.setMaxLikeWait(rs.getInt("max_like_wait"));
 				clonecc.setMinComment(rs.getInt("min_comment"));
 				clonecc.setMaxComment(rs.getInt("max_comment"));
-				clonecc.setWaitComment(rs.getInt("wait_comment"));
-				clonecc.setWaitCloneComment(rs.getInt("wait_clone_comment"));
+				clonecc.setMinCommentWait(rs.getInt("min_comment_wait"));
+				clonecc.setMaxCommentWait(rs.getInt("max_comment_wait"));
 				clonecc.setMinShare(rs.getInt("min_share"));
 				clonecc.setMaxShare(rs.getInt("max_share"));
-				clonecc.setWaitShare(rs.getInt("wait_share"));
-				clonecc.setWaitCloneShare(rs.getInt("wait_clone_share"));
+				clonecc.setMinShareWait(rs.getInt("min_share_wait"));
+				clonecc.setMaxShareWait(rs.getInt("max_share_wait"));
 				clonecc.setStatus(rs.getString("status"));
 				clonecc.setCreatedAt(rs.getString("created_at"));
 				clonecc.setUpdatedAt(rs.getString("updated_at"));
@@ -187,15 +187,14 @@ public class BeanPaserHelper {
 				
 				fcc.setMinReq(rs.getInt("min_req"));
 				fcc.setMaxReq(rs.getInt("max_req"));
-				fcc.setWaitReq(rs.getInt("wait_req"));
-				fcc.setWaitCloneReq(rs.getInt("wait_clone_req"));
+				fcc.setMinReqWait(rs.getInt("min_req_wait"));
+				fcc.setMaxReqWait(rs.getInt("max_req_wait"));
 				
 				fcc.setMinAcp(rs.getInt("min_acp"));
 				fcc.setMaxAcp(rs.getInt("max_acp"));
-				fcc.setWaitAcp(rs.getInt("wait_acp"));
-				fcc.setWaitCloneAcp(rs.getInt("wait_clone_acp"));
+				fcc.setMinAcpWait(rs.getInt("min_acp_wait"));
+				fcc.setMaxAcpWait(rs.getInt("max_acp_wait"));
 				
-				fcc.setNumThread(rs.getInt("num_thread"));
 				fcc.setStatus(rs.getString("status"));
 				fcc.setCreatedAt(rs.getString("created_at"));
 				fcc.setUpdatedAt(rs.getString("updated_at"));
@@ -219,15 +218,14 @@ public class BeanPaserHelper {
 				
 				fcc.setMinReq(rs.getInt("min_req"));
 				fcc.setMaxReq(rs.getInt("max_req"));
-				fcc.setWaitReq(rs.getInt("wait_req"));
-				fcc.setWaitCloneReq(rs.getInt("wait_clone_req"));
+				fcc.setMinReqWait(rs.getInt("min_req_wait"));
+				fcc.setMaxReqWait(rs.getInt("max_req_wait"));
 				
 				fcc.setMinAcp(rs.getInt("min_acp"));
 				fcc.setMaxAcp(rs.getInt("max_acp"));
-				fcc.setWaitAcp(rs.getInt("wait_acp"));
-				fcc.setWaitCloneAcp(rs.getInt("wait_clone_acp"));
+				fcc.setMinAcpWait(rs.getInt("min_acp_wait"));
+				fcc.setMaxAcpWait(rs.getInt("max_acp_wait"));
 				
-				fcc.setNumThread(rs.getInt("num_thread"));
 				fcc.setStatus(rs.getString("status"));
 				fcc.setCreatedAt(rs.getString("created_at"));
 				fcc.setUpdatedAt(rs.getString("updated_at"));
@@ -251,10 +249,9 @@ public class BeanPaserHelper {
 				
 				gcc.setMinMem(rs.getInt("min_mem"));
 				gcc.setMaxMem(rs.getInt("max_mem"));
-				gcc.setWaitMem(rs.getInt("wait_mem"));
-				gcc.setWaitClone(rs.getInt("wait_clone"));
+				gcc.setMinWait(rs.getInt("min_wait"));
+				gcc.setMaxWait(rs.getInt("max_wait"));
 				
-				gcc.setNumThread(rs.getInt("num_thread"));
 				gcc.setStatus(rs.getString("status"));
 				gcc.setCreatedAt(rs.getString("created_at"));
 				gcc.setUpdatedAt(rs.getString("updated_at"));
@@ -279,10 +276,9 @@ public class BeanPaserHelper {
 				
 				gcc.setMinMem(rs.getInt("min_mem"));
 				gcc.setMaxMem(rs.getInt("max_mem"));
-				gcc.setWaitMem(rs.getInt("wait_mem"));
-				gcc.setWaitClone(rs.getInt("wait_clone"));
+				gcc.setMinWait(rs.getInt("min_wait"));
+				gcc.setMaxWait(rs.getInt("max_wait"));
 				
-				gcc.setNumThread(rs.getInt("num_thread"));
 				gcc.setStatus(rs.getString("status"));
 				gcc.setCreatedAt(rs.getString("created_at"));
 				gcc.setUpdatedAt(rs.getString("updated_at"));
@@ -306,9 +302,7 @@ public class BeanPaserHelper {
 				
 				gcc.setMinWait(rs.getInt("min_wait"));
 				gcc.setMaxWait(rs.getInt("max_wait"));
-				gcc.setWaitClone(rs.getInt("wait_clone"));
 				
-				gcc.setNumThread(rs.getInt("num_thread"));
 				gcc.setStatus(rs.getString("status"));
 				gcc.setCreatedAt(rs.getString("created_at"));
 				gcc.setUpdatedAt(rs.getString("updated_at"));
@@ -333,9 +327,7 @@ public class BeanPaserHelper {
 				
 				gcc.setMinWait(rs.getInt("min_wait"));
 				gcc.setMaxWait(rs.getInt("max_wait"));
-				gcc.setWaitClone(rs.getInt("wait_clone"));
 				
-				gcc.setNumThread(rs.getInt("num_thread"));
 				gcc.setStatus(rs.getString("status"));
 				gcc.setCreatedAt(rs.getString("created_at"));
 				gcc.setUpdatedAt(rs.getString("updated_at"));
@@ -359,9 +351,7 @@ public class BeanPaserHelper {
 				
 				fcuc.setMinWait(rs.getInt("min_wait"));
 				fcuc.setMaxWait(rs.getInt("max_wait"));
-				fcuc.setWaitClone(rs.getInt("wait_clone"));
 				
-				fcuc.setNumThread(rs.getInt("num_thread"));
 				fcuc.setStatus(rs.getString("status"));
 				fcuc.setCreatedAt(rs.getString("created_at"));
 				fcuc.setUpdatedAt(rs.getString("updated_at"));
@@ -386,9 +376,7 @@ public class BeanPaserHelper {
 				
 				fcuc.setMinWait(rs.getInt("min_wait"));
 				fcuc.setMaxWait(rs.getInt("max_wait"));
-				fcuc.setWaitClone(rs.getInt("wait_clone"));
 				
-				fcuc.setNumThread(rs.getInt("num_thread"));
 				fcuc.setStatus(rs.getString("status"));
 				fcuc.setCreatedAt(rs.getString("created_at"));
 				fcuc.setUpdatedAt(rs.getString("updated_at"));

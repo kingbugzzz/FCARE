@@ -35,8 +35,7 @@ public class GroupJoinUpdatePanel extends JPanel {
 	private JList<String> cloneList;
 	private JLabel title, cloneCount, lbRam,
 			lbTimeExec;
-	private JSpinner minWait, maxWait, waitClone;
-	private JComboBox numThread;
+	private JSpinner minWait, maxWait;
 	private Vector<String> cloneIds;
 	
 	private CloneModel cloneModel;
@@ -58,11 +57,11 @@ public class GroupJoinUpdatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		minWait.setBounds(247, 409, 40, 20);
+		minWait.setBounds(247, 374, 93, 20);
 		add(minWait);
 
 		JLabel lblMax = new JLabel("đến");
-		lblMax.setBounds(324, 412, 29, 14);
+		lblMax.setBounds(388, 377, 29, 14);
 		add(lblMax);
 
 		maxWait = new JSpinner();
@@ -73,39 +72,12 @@ public class GroupJoinUpdatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		maxWait.setBounds(377, 409, 40, 20);
+		maxWait.setBounds(476, 374, 87, 20);
 		add(maxWait);
 
 		JLabel lblSWait = new JLabel("Nghỉ giữa lượt join");
-		lblSWait.setBounds(106, 412, 121, 14);
+		lblSWait.setBounds(106, 377, 121, 14);
 		add(lblSWait);
-
-		numThread = new JComboBox();
-		numThread.addItem("1");
-		numThread.addItem("2");
-		numThread.addItem("3");
-		numThread.addItem("4");
-		numThread.addItem("5");
-		numThread.addItem("6");
-		numThread.addItem("7");
-		numThread.addItem("8");
-		numThread.addItem("9");
-		numThread.addItem("10");
-		numThread.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO Auto-generated method stub
-				lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 150) + " MB");
-				updateTimeExec();
-			}
-		});
-		
-		numThread.setBounds(106, 362, 138, 20);
-		add(numThread);
-
-		JLabel lblKiuChy = new JLabel("Số luồng");
-		lblKiuChy.setBounds(36, 365, 60, 14);
-		add(lblKiuChy);
 
 		JLabel lblPlan = new JLabel("Camp");
 		lblPlan.setBounds(36, 255, 60, 14);
@@ -124,7 +96,7 @@ public class GroupJoinUpdatePanel extends JPanel {
 				dashboardFrame.loadPanel(new GroupJoinMainPanel(dashboardFrame), "Quản lý chiến dịch nuôi");
 			}
 		});
-		btnLuChySau.setBounds(315, 459, 124, 23);
+		btnLuChySau.setBounds(343, 428, 124, 23);
 		add(btnLuChySau);
 		
 		this.cloneList = new JList<String>(this.cloneIds);
@@ -170,35 +142,15 @@ public class GroupJoinUpdatePanel extends JPanel {
 		lblTiNguynRamd.setBounds(465, 191, 158, 14);
 		add(lblTiNguynRamd);
 
-		lbRam = new JLabel("0 MB");
+		lbRam = new JLabel("95 MB");
 		lbRam.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbRam.setForeground(new Color(0, 100, 0));
 		lbRam.setBounds(685, 191, 80, 14);
 		add(lbRam);
-
-		JLabel label_1 = new JLabel("nghỉ giữa clone");
-		label_1.setBounds(465, 412, 96, 14);
-		add(label_1);
-
-		waitClone = new JSpinner();
-		waitClone.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateTimeExec();
-			}
-		});
-		waitClone.setBounds(571, 409, 42, 20);
-		
-		add(waitClone);
-
-		JLabel label_8 = new JLabel("(+10)");
-		label_8.setBounds(633, 412, 40, 14);
-		add(label_8);
 		
 		
 		updateMinWaitStatus();updateMaxWaitStatus();
 		updateMinAcpStatus();updateMaxAcpStatus();
-		lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 150) + " MB");
 		
 		title = new JLabel("Camp Id: " + campaign.getId());
 		title.setBounds(106, 43, 311, 14);
@@ -260,11 +212,9 @@ public class GroupJoinUpdatePanel extends JPanel {
 	private void initUpdateFormValues(GroupJoinCampaign campaign) {
 		this.name.setText(campaign.getName());
 		this.groupIds.setText(campaign.getGroupIds());
-		this.numThread.setSelectedItem(String.valueOf(campaign.getNumThread()));
 		
 		this.minWait.setValue(campaign.getMinWait());
 		this.maxWait.setValue(campaign.getMaxWait());
-		this.waitClone.setValue(campaign.getWaitClone());
 
 	}
 	
@@ -289,14 +239,10 @@ public class GroupJoinUpdatePanel extends JPanel {
 	private void updateTimeExec() {
 		int mediWait = Integer.parseInt(maxWait.getValue().toString());
 		
-		int mediWaitCloneWait = Integer.parseInt(waitClone.getValue().toString());
-		
 		int csize = this.cloneList.getSelectedIndices().length;
 		
-		int numThread = Integer.parseInt(this.numThread.getSelectedItem().toString());
-		
-		int timeExecution = (csize * (mediWait + 5 + mediWaitCloneWait + 5 + 45 + 45))/60;
-		this.lbTimeExec.setText(timeExecution/numThread + " mins");
+		int timeExecution = (csize * (mediWait + 45 + 45))/60;
+		this.lbTimeExec.setText(timeExecution + " mins");
 	}
 	
 	private void updateJoinCampaignHandler() {
@@ -309,10 +255,7 @@ public class GroupJoinUpdatePanel extends JPanel {
 		
 		campaign.setMinWait(Integer.parseInt(String.valueOf(minWait.getValue())));
 		campaign.setMaxWait(Integer.parseInt(String.valueOf(maxWait.getValue())));
-		campaign.setWaitClone(Integer.parseInt(String.valueOf(waitClone.getValue())));
 		
-		
-		campaign.setNumThread(Integer.parseInt(numThread.getSelectedItem().toString()));
 		campaign.setStatus("off");
 		
 //		System.out.println(campaign.toString());

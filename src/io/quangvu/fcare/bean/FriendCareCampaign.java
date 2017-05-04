@@ -1,20 +1,20 @@
 package io.quangvu.fcare.bean;
 
 public class FriendCareCampaign {
-	
+
 	private String owner;
 	private int id;
 	private String name, cloneIdList;
-	private int minReq, maxReq, waitReq, waitCloneReq;
-	private int minAcp, maxAcp, waitAcp, waitCloneAcp;
-	private int numThread;
+	private int minReq, maxReq, minReqWait, maxReqWait;
+	private int minAcp, maxAcp, minAcpWait, maxAcpWait;
 	private String createdAt, updatedAt, status;
-	
-	public FriendCareCampaign(){}
-	
+
+	public FriendCareCampaign() {
+	}
+
 	public FriendCareCampaign(String owner, int id, String name, String cloneIdList, int minReq, int maxReq,
-			int waitReq, int waitCloneReq, int minAcp, int maxAcp, int waitAcp, int waitCloneAcp, int numThread,
-			String createdAt, String updatedAt, String status) {
+			int minReqWait, int maxReqWait, int minAcp, int maxAcp, int minAcpWait, int maxAcpWait, String createdAt,
+			String updatedAt, String status) {
 		super();
 		this.owner = owner;
 		this.id = id;
@@ -22,13 +22,12 @@ public class FriendCareCampaign {
 		this.cloneIdList = cloneIdList;
 		this.minReq = minReq;
 		this.maxReq = maxReq;
-		this.waitReq = waitReq;
-		this.waitCloneReq = waitCloneReq;
+		this.minReqWait = minReqWait;
+		this.maxReqWait = maxReqWait;
 		this.minAcp = minAcp;
 		this.maxAcp = maxAcp;
-		this.waitAcp = waitAcp;
-		this.waitCloneAcp = waitCloneAcp;
-		this.numThread = numThread;
+		this.minAcpWait = minAcpWait;
+		this.maxAcpWait = maxAcpWait;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.status = status;
@@ -82,20 +81,20 @@ public class FriendCareCampaign {
 		this.maxReq = maxReq;
 	}
 
-	public int getWaitReq() {
-		return waitReq;
+	public int getMinReqWait() {
+		return minReqWait;
 	}
 
-	public void setWaitReq(int waitReq) {
-		this.waitReq = waitReq;
+	public void setMinReqWait(int minReqWait) {
+		this.minReqWait = minReqWait;
 	}
 
-	public int getWaitCloneReq() {
-		return waitCloneReq;
+	public int getMaxReqWait() {
+		return maxReqWait;
 	}
 
-	public void setWaitCloneReq(int waitCloneReq) {
-		this.waitCloneReq = waitCloneReq;
+	public void setMaxReqWait(int maxReqWait) {
+		this.maxReqWait = maxReqWait;
 	}
 
 	public int getMinAcp() {
@@ -114,28 +113,20 @@ public class FriendCareCampaign {
 		this.maxAcp = maxAcp;
 	}
 
-	public int getWaitAcp() {
-		return waitAcp;
+	public int getMinAcpWait() {
+		return minAcpWait;
 	}
 
-	public void setWaitAcp(int waitAcp) {
-		this.waitAcp = waitAcp;
+	public void setMinAcpWait(int minAcpWait) {
+		this.minAcpWait = minAcpWait;
 	}
 
-	public int getWaitCloneAcp() {
-		return waitCloneAcp;
+	public int getMaxAcpWait() {
+		return maxAcpWait;
 	}
 
-	public void setWaitCloneAcp(int waitCloneAcp) {
-		this.waitCloneAcp = waitCloneAcp;
-	}
-
-	public int getNumThread() {
-		return numThread;
-	}
-
-	public void setNumThread(int numThread) {
-		this.numThread = numThread;
+	public void setMaxAcpWait(int maxAcpWait) {
+		this.maxAcpWait = maxAcpWait;
 	}
 
 	public String getCreatedAt() {
@@ -165,9 +156,9 @@ public class FriendCareCampaign {
 	@Override
 	public String toString() {
 		return "FriendCareCampaign [owner=" + owner + ", id=" + id + ", name=" + name + ", cloneIdList=" + cloneIdList
-				+ ", minReq=" + minReq + ", maxReq=" + maxReq + ", waitReq=" + waitReq + ", waitCloneReq="
-				+ waitCloneReq + ", minAcp=" + minAcp + ", maxAcp=" + maxAcp + ", waitAcp=" + waitAcp
-				+ ", waitCloneAcp=" + waitCloneAcp + ", numThread=" + numThread + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", status=" + status + "]";
+				+ ", minReq=" + minReq + ", maxReq=" + maxReq + ", minReqWait=" + minReqWait + ", maxReqWait="
+				+ maxReqWait + ", minAcp=" + minAcp + ", maxAcp=" + maxAcp + ", minAcpWait=" + minAcpWait
+				+ ", maxAcpWait=" + maxAcpWait + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", status="
+				+ status + "]";
 	}
 }

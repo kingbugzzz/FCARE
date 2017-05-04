@@ -33,8 +33,8 @@ public class GroupJoinCampaignModel {
 		Date now =  new Date();
 		DateFormat dateFormater = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		
-		String query = "INSERT INTO group_join_campaigns(owner, name, clone_ids, group_ids, min_wait, max_wait,  wait_clone,";
-		query += "num_thread, status, created_at) VALUES(";
+		String query = "INSERT INTO group_join_campaigns(owner, name, clone_ids, group_ids, min_wait, max_wait,";
+		query += "status, created_at) VALUES(";
 		
 		query += "'" + SessionHelper.getSessionUser() + "',";
 		query += "'" + gcc.getName() + "',";
@@ -42,9 +42,7 @@ public class GroupJoinCampaignModel {
 		query += "'" + gcc.getGroupIds() + "',";
 		query +=  gcc.getMinWait() + ",";
 		query +=  gcc.getMaxWait() + ",";
-		query +=  gcc.getWaitClone() + ",";
 		
-		query +=  gcc.getNumThread() + ",";
 		query +=  "'" + gcc.getStatus() + "',";
 		query +=  "'" + dateFormater.format(now)  + "'";
 		
@@ -65,9 +63,7 @@ public class GroupJoinCampaignModel {
 		
 		query +=  "min_wait=" + gcc.getMinWait() + ",";
 		query +=  "max_wait=" + gcc.getMaxWait() + ",";
-		query +=  "wait_clone=" + gcc.getWaitClone() + ",";
 		
-		query +=  "num_thread=" + gcc.getNumThread() + ",";
 		query +=  "status='" + gcc.getStatus() + "'";
 		//query +=  "updated_at='" + dateFormater.format(now)  + "'";
 		
@@ -78,7 +74,6 @@ public class GroupJoinCampaignModel {
 		return DBHelper.execute(query);
 	}
 	
-		
 	public boolean delete(int id) {
 		String query = "DELETE FROM group_join_campaigns WHERE id=" + id + " AND owner='" + SessionHelper.getSessionUser() + "'";
 		return DBHelper.execute(query);
@@ -120,10 +115,7 @@ public class GroupJoinCampaignModel {
 		
 		header.add("min_wait");
 		header.add("max_wait");
-		header.add("wait_clone");
 	
-		header.add("số luồng");
-
 		return header;
 	}
 
@@ -143,10 +135,7 @@ public class GroupJoinCampaignModel {
 
 			row.add(String.valueOf(gcc.getMinWait()));
 			row.add(String.valueOf(gcc.getMaxWait()));
-			row.add(String.valueOf(gcc.getWaitClone()));
 					
-			row.add(String.valueOf(gcc.getNumThread()));
-			
 			data.add(row);
 		}
 		return data;

@@ -42,9 +42,9 @@ public class CloneCareUpdatePanel extends JPanel {
 	private JList<String> cloneList;
 	private JLabel title, cloneCount, lbMinLike, lbMaxLike, lbMinComment, lbMaxComment, lbMinShare, lbMaxShare, lbRam,
 			lbTimeExec;
-	private JSpinner minLike, maxLike, waitLike, waitCloneLike;
-	private JSpinner minComment, maxComment, waitComment, waitCloneComment;
-	private JSpinner minShare, maxShare, waitShare, waitCloneShare;
+	private JSpinner minLike, maxLike, minLikeWait, maxLikeWait;
+	private JSpinner minComment, maxComment, minCommentWait, maxCommentWait;
+	private JSpinner minShare, maxShare, minShareWait, maxShareWait;
 	private JComboBox statusType;
 	private Vector<String> cloneIds;
 	
@@ -66,11 +66,11 @@ public class CloneCareUpdatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		minLike.setBounds(106, 326, 40, 20);
+		minLike.setBounds(106, 326, 52, 20);
 		add(minLike);
 
 		JLabel lblMax = new JLabel("đến");
-		lblMax.setBounds(165, 332, 29, 14);
+		lblMax.setBounds(192, 329, 29, 14);
 		add(lblMax);
 
 		maxLike = new JSpinner();
@@ -81,16 +81,12 @@ public class CloneCareUpdatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		maxLike.setBounds(204, 326, 40, 20);
+		maxLike.setBounds(242, 326, 49, 20);
 		add(maxLike);
 
 		JLabel lblSLike = new JLabel("Số like");
 		lblSLike.setBounds(36, 329, 60, 14);
 		add(lblSLike);
-
-		JLabel lblNghGiaLike = new JLabel("nghỉ giữa lượt");
-		lblNghGiaLike.setBounds(302, 329, 104, 14);
-		add(lblNghGiaLike);
 
 		JLabel lblSCmtT = new JLabel("Số cmt");
 		lblSCmtT.setBounds(36, 360, 60, 14);
@@ -105,11 +101,11 @@ public class CloneCareUpdatePanel extends JPanel {
 			}
 		});
 		
-		minComment.setBounds(106, 357, 40, 20);
+		minComment.setBounds(106, 357, 52, 20);
 		add(minComment);
 
 		JLabel label_2 = new JLabel("đến");
-		label_2.setBounds(165, 363, 29, 14);
+		label_2.setBounds(192, 360, 29, 14);
 		add(label_2);
 
 		maxComment = new JSpinner();
@@ -120,36 +116,8 @@ public class CloneCareUpdatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		maxComment.setBounds(204, 357, 40, 20);
+		maxComment.setBounds(242, 357, 49, 20);
 		add(maxComment);
-
-		JLabel lblNghGiaCmt = new JLabel("nghỉ giữa lượt");
-		lblNghGiaCmt.setBounds(302, 360, 98, 14);
-		add(lblNghGiaCmt);
-
-		waitComment = new JSpinner();
-		waitComment.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateTimeExec();
-			}
-		});
-		waitComment.setBounds(416, 354, 40, 20);
-		add(waitComment);
-
-		JLabel lblNghGiaClone_1 = new JLabel("nghỉ giữa clone");
-		lblNghGiaClone_1.setBounds(567, 360, 96, 14);
-		add(lblNghGiaClone_1);
-
-		waitCloneComment = new JSpinner();
-		waitCloneComment.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateTimeExec();
-			}
-		});
-		waitCloneComment.setBounds(673, 354, 42, 20);
-		add(waitCloneComment);
 
 		JLabel lblSShareT = new JLabel("Số share");
 		lblSShareT.setBounds(36, 394, 66, 14);
@@ -163,11 +131,11 @@ public class CloneCareUpdatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		minShare.setBounds(106, 391, 40, 20);
+		minShare.setBounds(106, 391, 52, 20);
 		add(minShare);
 
 		JLabel label_3 = new JLabel("đến");
-		label_3.setBounds(165, 397, 29, 14);
+		label_3.setBounds(192, 394, 29, 14);
 		add(label_3);
 
 		maxShare = new JSpinner();
@@ -178,36 +146,8 @@ public class CloneCareUpdatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		maxShare.setBounds(204, 391, 40, 20);
+		maxShare.setBounds(242, 391, 49, 20);
 		add(maxShare);
-
-		JLabel lblNghGiaShare = new JLabel("nghỉ giữa lượt");
-		lblNghGiaShare.setBounds(302, 394, 98, 14);
-		add(lblNghGiaShare);
-
-		waitShare = new JSpinner();
-		waitShare.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateTimeExec();
-			}
-		});
-		waitShare.setBounds(416, 388, 40, 20);
-		add(waitShare);
-
-		JLabel lblNghGiaClone_2 = new JLabel("nghỉ giữa clone");
-		lblNghGiaClone_2.setBounds(567, 394, 96, 14);
-		add(lblNghGiaClone_2);
-
-		waitCloneShare = new JSpinner();
-		waitCloneShare.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateTimeExec();
-			}
-		});
-		waitCloneShare.setBounds(673, 388, 42, 20);
-		add(waitCloneShare);
 
 		JLabel lblKiuChy = new JLabel("Status");
 		lblKiuChy.setBounds(36, 289, 60, 14);
@@ -227,7 +167,7 @@ public class CloneCareUpdatePanel extends JPanel {
 		statusType.addItem("text");
 		statusType.addItem("random");
 		statusType.addItem("no status");
-		statusType.setBounds(106, 286, 138, 20);
+		statusType.setBounds(106, 286, 185, 20);
 		add(statusType);
 
 		JButton btnLuChySau = new JButton("Cập nhật");
@@ -302,60 +242,11 @@ public class CloneCareUpdatePanel extends JPanel {
 		lblTiNguynRamd.setBounds(465, 191, 158, 14);
 		add(lblTiNguynRamd);
 
-		lbRam = new JLabel("0 MB");
+		lbRam = new JLabel("95 MB");
 		lbRam.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbRam.setForeground(new Color(0, 100, 0));
 		lbRam.setBounds(685, 191, 80, 14);
 		add(lbRam);
-
-		waitLike = new JSpinner();
-		waitLike.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateTimeExec();
-			}
-		});
-		waitLike.setBounds(416, 323, 40, 20);
-		add(waitLike);
-
-		JLabel label_1 = new JLabel("nghỉ giữa clone");
-		label_1.setBounds(567, 329, 96, 14);
-		add(label_1);
-
-		waitCloneLike = new JSpinner();
-		waitCloneLike.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateTimeExec();
-			}
-		});
-		waitCloneLike.setBounds(673, 326, 42, 20);
-		
-		add(waitCloneLike);
-
-		JLabel lblGiy = new JLabel("(+10)");
-		lblGiy.setBounds(466, 326, 60, 14);
-		add(lblGiy);
-
-		JLabel label_5 = new JLabel("(+10)");
-		label_5.setBounds(466, 357, 40, 14);
-		add(label_5);
-
-		JLabel label_6 = new JLabel("(+10)");
-		label_6.setBounds(466, 391, 40, 14);
-		add(label_6);
-
-		JLabel label_8 = new JLabel("(+10)");
-		label_8.setBounds(725, 329, 40, 14);
-		add(label_8);
-
-		JLabel label_9 = new JLabel("(+10)");
-		label_9.setBounds(725, 360, 40, 14);
-		add(label_9);
-
-		JLabel label_10 = new JLabel("(+10)");
-		label_10.setBounds(725, 394, 40, 14);
-		add(label_10);
 
 		JLabel label_4 = new JLabel("-");
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
@@ -413,6 +304,90 @@ public class CloneCareUpdatePanel extends JPanel {
 		title = new JLabel("Camp Id: " + campaign.getId());
 		title.setBounds(106, 43, 311, 14);
 		add(title);
+		
+		JLabel label = new JLabel("nghỉ giữa mỗi lượt like");
+		label.setBounds(376, 324, 151, 14);
+		add(label);
+		
+		minLikeWait = new JSpinner();
+		minLikeWait.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				updateTimeExec();
+			}
+		});
+		minLikeWait.setBounds(551, 318, 63, 20);
+		add(minLikeWait);
+		
+		JLabel label_1 = new JLabel("đến");
+		label_1.setBounds(659, 321, 40, 14);
+		add(label_1);
+		
+		maxLikeWait = new JSpinner();
+		maxLikeWait.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				updateTimeExec();
+			}
+		});
+		maxLikeWait.setBounds(709, 321, 56, 20);
+		add(maxLikeWait);
+		
+		maxCommentWait = new JSpinner();
+		maxCommentWait.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				updateTimeExec();
+			}
+		});
+		maxCommentWait.setBounds(709, 357, 56, 20);
+		add(maxCommentWait);
+		
+		JLabel label_5 = new JLabel("đến");
+		label_5.setBounds(659, 363, 40, 14);
+		add(label_5);
+		
+		minCommentWait = new JSpinner();
+		minCommentWait.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				updateTimeExec();
+			}
+		});
+		minCommentWait.setBounds(551, 357, 63, 20);
+		add(minCommentWait);
+		
+		JLabel label_6 = new JLabel("nghỉ giữa mỗi lượt comment");
+		label_6.setBounds(376, 363, 165, 14);
+		add(label_6);
+		
+		JLabel label_8 = new JLabel("nghỉ giữa mỗi lượt share");
+		label_8.setBounds(376, 397, 151, 14);
+		add(label_8);
+		
+		minShareWait = new JSpinner();
+		minShareWait.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				updateTimeExec();
+			}
+		});
+		minShareWait.setBounds(551, 391, 63, 20);
+		add(minShareWait);
+		
+		JLabel label_9 = new JLabel("đến");
+		label_9.setBounds(659, 397, 40, 14);
+		add(label_9);
+		
+		maxShareWait = new JSpinner();
+		maxShareWait.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				updateTimeExec();
+			}
+		});
+		maxShareWait.setBounds(709, 391, 56, 20);
+		add(maxShareWait);
 		this.initUpdateFormValues(campaign);
 		updateTimeExec();
 	}
@@ -423,18 +398,18 @@ public class CloneCareUpdatePanel extends JPanel {
 		
 		this.minLike.setValue(campaign.getMinLike());
 		this.maxLike.setValue(campaign.getMaxLike());
-		this.waitLike.setValue(campaign.getWaitLike());
-		this.waitCloneLike.setValue(campaign.getWaitCloneLike());
+		this.minLikeWait.setValue(campaign.getMinLikeWait());
+		this.maxLikeWait.setValue(campaign.getMaxLikeWait());
 		
 		this.minComment.setValue(campaign.getMinComment());
 		this.maxComment.setValue(campaign.getMaxComment());
-		this.waitComment.setValue(campaign.getWaitComment());
-		this.waitCloneComment.setValue(campaign.getWaitCloneComment());
+		this.minCommentWait.setValue(campaign.getMinCommentWait());
+		this.maxCommentWait.setValue(campaign.getMaxCommentWait());
 		
 		this.minShare.setValue(campaign.getMinShare());
 		this.maxShare.setValue(campaign.getMaxShare());
-		this.waitShare.setValue(campaign.getWaitShare());
-		this.waitCloneShare.setValue(campaign.getWaitCloneShare());
+		this.minShareWait.setValue(campaign.getMinShareWait());
+		this.maxShareWait.setValue(campaign.getMaxShareWait());
 	}
 	
 	private void updateMinLikeStatus() {
@@ -478,17 +453,14 @@ public class CloneCareUpdatePanel extends JPanel {
 		int mediComment = Integer.parseInt(maxComment.getValue().toString());
 		int mediShare = Integer.parseInt(maxShare.getValue().toString());
 		
-		int mediLikeWait = Integer.parseInt(waitLike.getValue().toString());
-		int mediCommentWait = Integer.parseInt(waitComment.getValue().toString());
-		int mediShareWait = Integer.parseInt(waitShare.getValue().toString());
-		
-		int mediLikeCloneWait = Integer.parseInt(waitCloneLike.getValue().toString());
-		int mediCommentCloneWait = Integer.parseInt(waitCloneComment.getValue().toString());
-		int mediShareCloneWait = Integer.parseInt(waitCloneShare.getValue().toString());
+		int mediLikeWait = NumberHelper.getRandomInt(Integer.parseInt(maxLikeWait.getValue().toString()), Integer.parseInt(minLikeWait.getValue().toString()));
+		int mediCommentWait = NumberHelper.getRandomInt(Integer.parseInt(maxCommentWait.getValue().toString()), Integer.parseInt(minCommentWait.getValue().toString()));
+		int mediShareWait = NumberHelper.getRandomInt(Integer.parseInt(maxShareWait.getValue().toString()), Integer.parseInt(minShareWait.getValue().toString()));
 		
 		int csize = this.cloneList.getSelectedIndices().length;
 		
-		int timeExecution = (csize * (mediLike + mediLikeWait + mediLikeCloneWait + mediShare + mediShareWait + mediShareCloneWait + mediComment + mediCommentWait +  mediCommentCloneWait + 20))/60;
+		int timeExecution = (csize * (mediLike + mediLikeWait +  mediShare + mediShareWait  + mediComment + mediCommentWait + 50))/60;
+		
 		this.lbTimeExec.setText(timeExecution + " mins");
 	}
 	
@@ -506,18 +478,18 @@ public class CloneCareUpdatePanel extends JPanel {
 		
 		campaign.setMinLike(Integer.parseInt(String.valueOf(minLike.getValue())));
 		campaign.setMaxLike(Integer.parseInt(String.valueOf(maxLike.getValue())));
-		campaign.setWaitLike(Integer.parseInt(String.valueOf(waitLike.getValue())));
-		campaign.setWaitCloneLike(Integer.parseInt(String.valueOf(waitCloneLike.getValue())));
+		campaign.setMinLikeWait(Integer.parseInt(String.valueOf(minLikeWait.getValue())));
+		campaign.setMaxLikeWait(Integer.parseInt(String.valueOf(maxLikeWait.getValue())));
 		
 		campaign.setMinComment(Integer.parseInt(String.valueOf(minComment.getValue())));
 		campaign.setMaxComment(Integer.parseInt(String.valueOf(maxComment.getValue())));
-		campaign.setWaitComment(Integer.parseInt(String.valueOf(waitComment.getValue())));
-		campaign.setWaitCloneComment(Integer.parseInt(String.valueOf(waitCloneComment.getValue())));
+		campaign.setMinCommentWait(Integer.parseInt(String.valueOf(minCommentWait.getValue())));
+		campaign.setMaxCommentWait(Integer.parseInt(String.valueOf(maxCommentWait.getValue())));
 		
 		campaign.setMinShare(Integer.parseInt(String.valueOf(minShare.getValue())));
 		campaign.setMaxShare(Integer.parseInt(String.valueOf(maxShare.getValue())));
-		campaign.setWaitShare(Integer.parseInt(String.valueOf(waitShare.getValue())));
-		campaign.setWaitCloneShare(Integer.parseInt(String.valueOf(waitCloneShare.getValue())));
+		campaign.setMinShareWait(Integer.parseInt(String.valueOf(minShareWait.getValue())));
+		campaign.setMaxShareWait(Integer.parseInt(String.valueOf(maxShareWait.getValue())));
 		
 //		campaign.setNumThread(Integer.parseInt(numThread.getSelectedItem().toString()));
 		campaign.setStatus("off");

@@ -39,10 +39,11 @@ public class Debugger {
 		this.login();
 		this.friendIds = this.getFriendIds();
 
-		this.postTextLink("Ngày xưa có phải anh quá vội vàng... https://www.youtube.com/watch?v=n3vAvg7eI0E");
+//		this.acceptFriends(20);
+		this.addSuggesFriends(10);
 		
+//		this.postTextLink("Ngày xưa có phải anh quá vội vàng... https://www.youtube.com/watch?v=n3vAvg7eI0E");
 //		this.postImageStatus(this.sourcePath + "image/tha-thinh/chum-tho-tinh-mua-thu.jpg", "mùa thu của em");
-		
 //		this.changeAvatar(this.sourcePath + "avatar/tha-thinh/8.jpg");
 //		this.likePage("thangbanben");
 //		this.commentPage("thangbanben");
@@ -71,6 +72,118 @@ public class Debugger {
 		}
 	}
 
+	
+	public void acceptFriends(int limit) {
+		System.out.println(">>>accept friends<<<");
+		int count = 0;
+		int rounds = limit / 10;
+		int sleep = 0;
+		System.out.println(limit + " friends will be accepted, number rounds = " + (rounds+1));
+		if (rounds >= 1) {
+			for (int i = 0; i < rounds + 1; i++) {
+				for (String uid : this.getAcceptFriendUid()) {
+					if (count == limit) {
+						System.out.println("reached to limit [" + limit + "]-> done!");
+						break;
+					} else {
+						
+						this.acceptFriendByUid(uid);
+						count++;
+						sleep = NumberHelper.getRandomInt(5000, 3000);
+						System.out.println("wait " + (sleep/1000) + "."  + (sleep % 1000) + " seconds for next one");
+						try {
+							Thread.sleep(sleep/1000);
+						} catch (Exception ex) {
+							ex.printStackTrace();
+							continue;
+						}
+					}
+					System.out.println("count = " + count);
+				}
+			}
+		}
+	}
+	
+	public void acceptFriendByUid(String uid) {
+		System.out.println("accept friend[" + uid + "]");
+		driver.get("https://mbasic.facebook.com/" + uid);
+		driver.findElementByXPath("//*[@id='root']/div[1]/div[1]/div[3]/table/tbody/tr/td[1]/a").click();
+		System.out.println("accept");
+	}
+
+	private ArrayList<String> getAcceptFriendUid() {
+		this.driver.get("https://mbasic.facebook.com/friends/center/requests/#friends_center_main");
+		ArrayList<String> listUid = new ArrayList<String>();
+		List<WebElement> addLinks = driver
+				.findElementsByXPath("//*[@id='friends_center_main']/div[1]/div/table/tbody/tr/td[2]/div[2]/a[1]");
+		for (WebElement link : addLinks) {
+			String uid = ((link.getAttribute("href").split("confirm=")[1]).split("&"))[0];
+			listUid.add(uid);
+		}
+		return listUid;
+	}
+	
+	
+	public void addSuggesFriends(int limit) {
+		System.out.println(">>>add suggest friends<<<");
+		int rounds = limit / 10;
+		int count = 0;
+		int sleep = 0;
+		System.out.println(limit + " friends will be accepted, number rounds = " + (rounds+1));
+		for (String uid : this.getSuggestionFriendsUid()) {
+			if (count == limit) {
+				System.out.println("reached to limit [" + limit + "]-> done!");
+				break;
+			} else {
+				this.addFriendByUid(uid);
+				count++;
+				sleep = NumberHelper.getRandomInt(5000, 3000);
+				System.out.println("wait " + (sleep/1000) + "."  + (sleep % 1000) + " seconds for next one");
+				try {
+					Thread.sleep(sleep/1000);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					continue;
+				}
+			}
+		}
+	}
+	
+	private ArrayList<String> getSuggestionFriendsUid() {
+		this.driver.get("https://mbasic.facebook.com/friends/center/suggestions/?fb_ref=psa&_rdr");
+		ArrayList<String> suggestionListId = new ArrayList<String>();
+		List<WebElement> addLinks = driver
+				.findElementsByXPath("//*[@id='friends_center_main']/div[1]/div/table/tbody/tr/td[2]/a");
+		for (WebElement link : addLinks) {
+			String uid = ((link.getAttribute("href").split("uid=")[1]).split("&"))[0];
+			suggestionListId.add(uid);
+		}
+		return suggestionListId;
+	}
+	
+	public void addFriendsByUid(ArrayList<String> listId) {
+		System.out.println("Preparing to add " + listId.size() + " friends");
+		for (String uid : listId) {
+			this.addFriendByUid(uid);
+			try {
+				System.out.println("wait 5 seconds for next one");
+				Thread.sleep(5000);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				continue;
+			}
+		}
+		System.out.println("finished");
+	}
+	
+	public void addFriendByUid(String uid) {
+		System.out.println("adding friend[" + uid + "]");
+		driver.get("https://mbasic.facebook.com/" + uid);
+		driver.findElementByXPath("//*[@id='root']/div[1]/div[1]/div[3]/table/tbody/tr/td[1]/a").click();
+		System.out.println("added");
+	}
+
+	
 	public void changeAvatar(String avataPath) {
 		System.out.println(">>>change avatar<<<");
 		System.out.println(avataPath);

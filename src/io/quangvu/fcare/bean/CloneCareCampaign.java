@@ -5,17 +5,17 @@ public class CloneCareCampaign {
 	private String owner;
 	private int id;
 	private String name, cloneIdList, statusType;
-	private int minLike, maxLike, waitLike, waitCloneLike;
-	private int minComment, maxComment, waitComment, waitCloneComment;
-	private int minShare, maxShare, waitShare, waitCloneShare;
+	private int minLike, maxLike, minLikeWait, maxLikeWait;
+	private int minComment, maxComment, minCommentWait, maxCommentWait;
+	private int minShare, maxShare, minShareWait, maxShareWait;
 	private int numThread;
 	private String createdAt, updatedAt, status;
 	
 	public CloneCareCampaign() {}
 
 	public CloneCareCampaign(String cloneIdList, int id, String owner, String name, int minLike, int maxLike,
-			int waitLike, int waitCloneLike, int minComment, int maxComment, int waitComment, int waitCloneComment,
-			int minShare, int maxShare, int waitShare, int waitCloneShare, int numThread, String createdAt,
+			int minLikeWait, int maxLikeWait, int minComment, int maxComment, int minCommentWait, int maxCommentWait,
+			int minShare, int maxShare, int minShareWait, int maxShareWait, int numThread, String createdAt,
 			String updatedAt, String status) {
 		super();
 		this.cloneIdList = cloneIdList;
@@ -24,16 +24,16 @@ public class CloneCareCampaign {
 		this.name = name;
 		this.minLike = minLike;
 		this.maxLike = maxLike;
-		this.waitLike = waitLike;
-		this.waitCloneLike = waitCloneLike;
+		this.minLikeWait = minLikeWait;
+		this.maxLikeWait = maxLikeWait;
 		this.minComment = minComment;
 		this.maxComment = maxComment;
-		this.waitComment = waitComment;
-		this.waitCloneComment = waitCloneComment;
+		this.minCommentWait = minCommentWait;
+		this.maxCommentWait = maxCommentWait;
 		this.minShare = minShare;
 		this.maxShare = maxShare;
-		this.waitShare = waitShare;
-		this.waitCloneShare = waitCloneShare;
+		this.minShareWait = minShareWait;
+		this.maxShareWait = maxShareWait;
 		this.numThread = numThread;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
@@ -96,20 +96,20 @@ public class CloneCareCampaign {
 		this.maxLike = maxLike;
 	}
 
-	public int getWaitLike() {
-		return waitLike;
+	public int getMinLikeWait() {
+		return minLikeWait;
 	}
 
-	public void setWaitLike(int waitLike) {
-		this.waitLike = waitLike;
+	public void setMinLikeWait(int minLikeWait) {
+		this.minLikeWait = minLikeWait;
 	}
 
-	public int getWaitCloneLike() {
-		return waitCloneLike;
+	public int getMaxLikeWait() {
+		return maxLikeWait;
 	}
 
-	public void setWaitCloneLike(int waitCloneLike) {
-		this.waitCloneLike = waitCloneLike;
+	public void setMaxLikeWait(int maxLikeWait) {
+		this.maxLikeWait = maxLikeWait;
 	}
 
 	public int getMinComment() {
@@ -128,20 +128,20 @@ public class CloneCareCampaign {
 		this.maxComment = maxComment;
 	}
 
-	public int getWaitComment() {
-		return waitComment;
+	public int getMinCommentWait() {
+		return minCommentWait;
 	}
 
-	public void setWaitComment(int waitComment) {
-		this.waitComment = waitComment;
+	public void setMinCommentWait(int minCommentWait) {
+		this.minCommentWait = minCommentWait;
 	}
 
-	public int getWaitCloneComment() {
-		return waitCloneComment;
+	public int getMaxCommentWait() {
+		return maxCommentWait;
 	}
 
-	public void setWaitCloneComment(int waitCloneComment) {
-		this.waitCloneComment = waitCloneComment;
+	public void setMaxCommentWait(int maxCommentWait) {
+		this.maxCommentWait = maxCommentWait;
 	}
 
 	public int getMinShare() {
@@ -160,20 +160,20 @@ public class CloneCareCampaign {
 		this.maxShare = maxShare;
 	}
 
-	public int getWaitShare() {
-		return waitShare;
+	public int getMinShareWait() {
+		return minShareWait;
 	}
 
-	public void setWaitShare(int waitShare) {
-		this.waitShare = waitShare;
+	public void setMinShareWait(int minShareWait) {
+		this.minShareWait = minShareWait;
 	}
 
-	public int getWaitCloneShare() {
-		return waitCloneShare;
+	public int getMaxShareWait() {
+		return maxShareWait;
 	}
 
-	public void setWaitCloneShare(int waitCloneShare) {
-		this.waitCloneShare = waitCloneShare;
+	public void setMaxShareWait(int maxShareWait) {
+		this.maxShareWait = maxShareWait;
 	}
 
 	public int getNumThread() {
@@ -211,11 +211,11 @@ public class CloneCareCampaign {
 	@Override
 	public String toString() {
 		return "CloneCareCampaign [owner=" + owner + ", id=" + id + ", name=" + name + ", cloneIdList=" + cloneIdList
-				+ ", statusType=" + statusType + ", minLike=" + minLike + ", maxLike=" + maxLike + ", waitLike="
-				+ waitLike + ", waitCloneLike=" + waitCloneLike + ", minComment=" + minComment + ", maxComment="
-				+ maxComment + ", waitComment=" + waitComment + ", waitCloneComment=" + waitCloneComment + ", minShare="
-				+ minShare + ", maxShare=" + maxShare + ", waitShare=" + waitShare + ", waitCloneShare="
-				+ waitCloneShare + ", numThread=" + numThread + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", statusType=" + statusType + ", minLike=" + minLike + ", maxLike=" + maxLike + ", minLikeWait="
+				+ minLikeWait + ", maxLikeWait=" + maxLikeWait + ", minComment=" + minComment + ", maxComment="
+				+ maxComment + ", minCommentWait=" + minCommentWait + ", maxCommentWait=" + maxCommentWait + ", minShare="
+				+ minShare + ", maxShare=" + maxShare + ", minShareWait=" + minShareWait + ", maxShareWait="
+				+ maxShareWait + ", numThread=" + numThread + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
 				+ ", status=" + status + "]";
 	}
 

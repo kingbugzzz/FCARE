@@ -33,8 +33,7 @@ public class GroupCareUpdatePanel extends JPanel {
 	private JList<String> cloneList;
 	private JLabel title, cloneCount, lbMinMem, lbMaxMem, lbRam,
 			lbTimeExec;
-	private JSpinner minMem, maxMem, waitMem, waitClone;
-	private JComboBox numThread;
+	private JSpinner minMem, maxMem, minWait, maxWait;
 	private Vector<String> cloneIds;
 	
 	private CloneModel cloneModel;
@@ -55,11 +54,11 @@ public class GroupCareUpdatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		minMem.setBounds(106, 409, 40, 20);
+		minMem.setBounds(106, 367, 71, 20);
 		add(minMem);
 
 		JLabel lblMax = new JLabel("đến");
-		lblMax.setBounds(165, 415, 29, 14);
+		lblMax.setBounds(202, 370, 29, 14);
 		add(lblMax);
 
 		maxMem = new JSpinner();
@@ -70,43 +69,16 @@ public class GroupCareUpdatePanel extends JPanel {
 				updateTimeExec();
 			}
 		});
-		maxMem.setBounds(204, 409, 40, 20);
+		maxMem.setBounds(241, 367, 60, 20);
 		add(maxMem);
 
-		JLabel lblSMem = new JLabel("Gửi");
-		lblSMem.setBounds(36, 412, 60, 14);
+		JLabel lblSMem = new JLabel("Mem");
+		lblSMem.setBounds(36, 370, 60, 14);
 		add(lblSMem);
 
-		JLabel lblNghGiaMem = new JLabel("nghỉ giữa lượt");
-		lblNghGiaMem.setBounds(302, 412, 104, 14);
+		JLabel lblNghGiaMem = new JLabel("nghỉ giữa lượt add mem");
+		lblNghGiaMem.setBounds(350, 370, 149, 14);
 		add(lblNghGiaMem);
-
-		numThread = new JComboBox();
-		numThread.addItem("1");
-		numThread.addItem("2");
-		numThread.addItem("3");
-		numThread.addItem("4");
-		numThread.addItem("5");
-		numThread.addItem("6");
-		numThread.addItem("7");
-		numThread.addItem("8");
-		numThread.addItem("9");
-		numThread.addItem("10");
-		numThread.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO Auto-generated method stub
-				lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 150) + " MB");
-				updateTimeExec();
-			}
-		});
-		
-		numThread.setBounds(106, 362, 138, 20);
-		add(numThread);
-
-		JLabel lblKiuChy = new JLabel("Số luồng");
-		lblKiuChy.setBounds(36, 365, 60, 14);
-		add(lblKiuChy);
 
 		JLabel lblPlan = new JLabel("Camp");
 		lblPlan.setBounds(36, 255, 60, 14);
@@ -125,7 +97,7 @@ public class GroupCareUpdatePanel extends JPanel {
 				dashboardFrame.loadPanel(new GroupCareMainPanel(dashboardFrame), "Quản lý chiến dịch nuôi");
 			}
 		});
-		btnLuChySau.setBounds(315, 459, 124, 23);
+		btnLuChySau.setBounds(314, 428, 124, 23);
 		add(btnLuChySau);
 		
 		this.cloneList = new JList<String>(this.cloneIds);
@@ -183,38 +155,26 @@ public class GroupCareUpdatePanel extends JPanel {
 		lbRam.setBounds(685, 191, 80, 14);
 		add(lbRam);
 
-		waitMem = new JSpinner();
-		waitMem.addChangeListener(new ChangeListener() {
+		minWait = new JSpinner();
+		minWait.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				updateTimeExec();
 			}
 		});
-		waitMem.setBounds(416, 406, 40, 20);
-		add(waitMem);
+		minWait.setBounds(509, 367, 80, 20);
+		add(minWait);
 
-		JLabel label_1 = new JLabel("nghỉ giữa clone");
-		label_1.setBounds(567, 412, 96, 14);
-		add(label_1);
-
-		waitClone = new JSpinner();
-		waitClone.addChangeListener(new ChangeListener() {
+		maxWait = new JSpinner();
+		maxWait.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				updateTimeExec();
 			}
 		});
-		waitClone.setBounds(673, 409, 42, 20);
+		maxWait.setBounds(685, 367, 80, 20);
 		
-		add(waitClone);
-
-		JLabel lblGiy = new JLabel("(+10)");
-		lblGiy.setBounds(466, 409, 60, 14);
-		add(lblGiy);
-
-		JLabel label_8 = new JLabel("(+10)");
-		label_8.setBounds(725, 412, 40, 14);
-		add(label_8);
+		add(maxWait);
 
 		JLabel label_4 = new JLabel("-");
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
@@ -231,7 +191,6 @@ public class GroupCareUpdatePanel extends JPanel {
 		
 		updateMinMemStatus();updateMaxMemStatus();
 		updateMinAcpStatus();updateMaxAcpStatus();
-		lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 150) + " MB");
 		
 		title = new JLabel("Camp Id: " + campaign.getId());
 		title.setBounds(106, 43, 311, 14);
@@ -252,6 +211,10 @@ public class GroupCareUpdatePanel extends JPanel {
 		lblNewLabel_1.setForeground(Color.GRAY);
 		lblNewLabel_1.setBounds(106, 321, 517, 14);
 		add(lblNewLabel_1);
+		
+		JLabel label = new JLabel("đến");
+		label.setBounds(628, 370, 29, 14);
+		add(label);
 		this.initUpdateFormValues(campaign);
 		updateTimeExec();
 	}
@@ -259,12 +222,11 @@ public class GroupCareUpdatePanel extends JPanel {
 	private void initUpdateFormValues(GroupCareCampaign campaign) {
 		this.name.setText(campaign.getName());
 		this.groupIds.setText(campaign.getGroupIds());
-		this.numThread.setSelectedItem(String.valueOf(campaign.getNumThread()));
 		
 		this.minMem.setValue(campaign.getMinMem());
 		this.maxMem.setValue(campaign.getMaxMem());
-		this.waitMem.setValue(campaign.getWaitMem());
-		this.waitClone.setValue(campaign.getWaitClone());
+		this.minWait.setValue(campaign.getMinWait());
+		this.maxWait.setValue(campaign.getMaxWait());
 
 	}
 	
@@ -291,16 +253,14 @@ public class GroupCareUpdatePanel extends JPanel {
 	private void updateTimeExec() {
 		int mediMem = Integer.parseInt(maxMem.getValue().toString());
 		
-		int mediMemWait = Integer.parseInt(waitMem.getValue().toString());
+		int mediMemWait = Integer.parseInt(minWait.getValue().toString());
 		
-		int mediMemCloneWait = Integer.parseInt(waitClone.getValue().toString());
+		int mediMemCloneWait = Integer.parseInt(maxWait.getValue().toString());
 		
 		int csize = this.cloneList.getSelectedIndices().length;
 		
-		int numThread = Integer.parseInt(this.numThread.getSelectedItem().toString());
-		
 		int timeExecution = (csize * (mediMem + mediMemWait + 5 + mediMemCloneWait + 5 + 45 + 45))/60;
-		this.lbTimeExec.setText(timeExecution/numThread + " mins");
+		this.lbTimeExec.setText(timeExecution + " mins");
 	}
 	
 	private void updateCareCampaignHandler() {
@@ -313,11 +273,9 @@ public class GroupCareUpdatePanel extends JPanel {
 		
 		campaign.setMinMem(Integer.parseInt(String.valueOf(minMem.getValue())));
 		campaign.setMaxMem(Integer.parseInt(String.valueOf(maxMem.getValue())));
-		campaign.setWaitMem(Integer.parseInt(String.valueOf(waitMem.getValue())));
-		campaign.setWaitClone(Integer.parseInt(String.valueOf(waitClone.getValue())));
+		campaign.setMinWait(Integer.parseInt(String.valueOf(minWait.getValue())));
+		campaign.setMaxWait(Integer.parseInt(String.valueOf(maxWait.getValue())));
 		
-		
-		campaign.setNumThread(Integer.parseInt(numThread.getSelectedItem().toString()));
 		campaign.setStatus("off");
 		
 //		System.out.println(campaign.toString());

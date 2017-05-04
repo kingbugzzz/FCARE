@@ -33,9 +33,9 @@ public class CloneCareCampaignModel {
 		Date now =  new Date();
 		DateFormat dateFormater = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		
-		String query = "INSERT INTO clone_care_campaigns(owner, name, clone_ids, status_type, min_like, max_like, wait_like, wait_clone_like,";
-		query += "min_comment, max_comment, wait_comment, wait_clone_comment,";
-		query += "min_share, max_share, wait_share, wait_clone_share,";
+		String query = "INSERT INTO clone_care_campaigns(owner, name, clone_ids, status_type, min_like, max_like, min_like_wait, max_like_wait,";
+		query += "min_comment, max_comment, min_comment_wait, max_comment_wait,";
+		query += "min_share, max_share, min_share_wait, max_share_wait,";
 		query += "status, created_at) VALUES(";
 		
 		query += "'" + SessionHelper.getSessionUser() + "',";
@@ -45,18 +45,18 @@ public class CloneCareCampaignModel {
 		
 		query +=  cloneCC.getMinLike() + ",";
 		query +=  cloneCC.getMaxLike() + ",";
-		query +=  cloneCC.getWaitLike() + ",";
-		query +=  cloneCC.getWaitCloneLike() + ",";
+		query +=  cloneCC.getMinLikeWait() + ",";
+		query +=  cloneCC.getMaxLikeWait() + ",";
 		
 		query +=  cloneCC.getMinComment() + ",";
 		query +=  cloneCC.getMaxComment() + ",";
-		query +=  cloneCC.getWaitComment() + ",";
-		query +=  cloneCC.getWaitCloneComment() + ",";
+		query +=  cloneCC.getMinCommentWait() + ",";
+		query +=  cloneCC.getMaxCommentWait() + ",";
 		
 		query +=  cloneCC.getMinShare() + ",";
 		query +=  cloneCC.getMaxShare() + ",";
-		query +=  cloneCC.getWaitShare() + ",";
-		query +=  cloneCC.getWaitCloneShare() + ",";
+		query +=  cloneCC.getMinShareWait() + ",";
+		query +=  cloneCC.getMaxShareWait() + ",";
 		
 		query +=  "'" + cloneCC.getStatus() + "',";
 		query +=  "'" + dateFormater.format(now)  + "'";
@@ -78,18 +78,18 @@ public class CloneCareCampaignModel {
 		
 		query +=  "min_like=" + cloneCC.getMinLike() + ",";
 		query +=  "max_like=" + cloneCC.getMaxLike() + ",";
-		query +=  "wait_like=" + cloneCC.getWaitLike() + ",";
-		query +=  "wait_clone_like=" + cloneCC.getWaitCloneLike() + ",";
+		query +=  "min_like_wait=" + cloneCC.getMinLikeWait() + ",";
+		query +=  "max_like_wait=" + cloneCC.getMaxLikeWait() + ",";
 		
 		query +=  "min_comment=" + cloneCC.getMinComment() + ",";
 		query +=  "max_comment=" + cloneCC.getMaxComment() + ",";
-		query +=  "wait_comment=" + cloneCC.getWaitComment() + ",";
-		query +=  "wait_clone_comment=" + cloneCC.getWaitCloneComment() + ",";
+		query +=  "min_comment_wait=" + cloneCC.getMinCommentWait() + ",";
+		query +=  "max_comment_wait=" + cloneCC.getMaxCommentWait() + ",";
 		
 		query +=  "min_share=" + cloneCC.getMinShare() + ",";
 		query +=  "max_share=" + cloneCC.getMaxShare() + ",";
-		query +=  "wait_share=" + cloneCC.getWaitShare() + ",";
-		query +=  "wait_clone_share=" + cloneCC.getWaitCloneShare() + ",";
+		query +=  "min_share_wait=" + cloneCC.getMinShareWait() + ",";
+		query +=  "max_share_wait=" + cloneCC.getMaxShareWait() + ",";
 		
 		query +=  "status='" + cloneCC.getStatus() + "'";
 		//query +=  "updated_at='" + dateFormater.format(now)  + "'";
@@ -156,18 +156,18 @@ public class CloneCareCampaignModel {
 		
 		header.add("min_like");
 		header.add("max_like");
-		header.add("wait_like");
-		header.add("wait_clone_like");
+		header.add("min_like_wait");
+		header.add("max_like_wait");
 		
 		header.add("min_comment");
 		header.add("max_comment");
-		header.add("wait_comment");
-		header.add("wait_clone_comment");
+		header.add("min_comment_wait");
+		header.add("max_comment_wait");
 		
 		header.add("min_share");
 		header.add("max_share");
-		header.add("wait_share");
-		header.add("wait_clone_share");
+		header.add("min_share_wait");
+		header.add("max_share_wait");
 		
 		return header;
 	}
@@ -188,18 +188,18 @@ public class CloneCareCampaignModel {
 
 			row.add(String.valueOf(cloneCC.getMinLike()));
 			row.add(String.valueOf(cloneCC.getMaxLike()));
-			row.add(String.valueOf(cloneCC.getWaitLike()));
-			row.add(String.valueOf(cloneCC.getWaitCloneLike()));
+			row.add(String.valueOf(cloneCC.getMinLikeWait()));
+			row.add(String.valueOf(cloneCC.getMaxLikeWait()));
 			
 			row.add(String.valueOf(cloneCC.getMinComment()));
 			row.add(String.valueOf(cloneCC.getMaxComment()));
-			row.add(String.valueOf(cloneCC.getWaitComment()));
-			row.add(String.valueOf(cloneCC.getWaitCloneComment()));
+			row.add(String.valueOf(cloneCC.getMinCommentWait()));
+			row.add(String.valueOf(cloneCC.getMaxCommentWait()));
 			
 			row.add(String.valueOf(cloneCC.getMinShare()));
 			row.add(String.valueOf(cloneCC.getMaxShare()));
-			row.add(String.valueOf(cloneCC.getWaitShare()));
-			row.add(String.valueOf(cloneCC.getWaitCloneShare()));
+			row.add(String.valueOf(cloneCC.getMinShareWait()));
+			row.add(String.valueOf(cloneCC.getMaxShareWait()));
 			
 			data.add(row);
 		}

@@ -33,9 +33,9 @@ public class FriendCareCampaignModel {
 		Date now =  new Date();
 		DateFormat dateFormater = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		
-		String query = "INSERT INTO friend_care_campaigns(owner, name, clone_ids, min_req, max_req, wait_req, wait_clone_req,";
-		query += "min_acp, max_acp, wait_acp, wait_clone_acp,";
-		query += "num_thread, status, created_at) VALUES(";
+		String query = "INSERT INTO friend_care_campaigns(owner, name, clone_ids, min_req, max_req, min_req_wait, max_req_wait,";
+		query += "min_acp, max_acp, min_acp_wait, max_acp_wait,";
+		query += "status, created_at) VALUES(";
 		
 		query += "'" + SessionHelper.getSessionUser() + "',";
 		query += "'" + fcc.getName() + "',";
@@ -43,16 +43,15 @@ public class FriendCareCampaignModel {
 		
 		query +=  fcc.getMinReq() + ",";
 		query +=  fcc.getMaxReq() + ",";
-		query +=  fcc.getWaitReq() + ",";
-		query +=  fcc.getWaitCloneReq() + ",";
+		query +=  fcc.getMinReqWait() + ",";
+		query +=  fcc.getMaxReqWait() + ",";
 		
 		query +=  fcc.getMinAcp() + ",";
 		query +=  fcc.getMaxAcp() + ",";
-		query +=  fcc.getWaitAcp() + ",";
-		query +=  fcc.getWaitCloneAcp() + ",";
+		query +=  fcc.getMinAcpWait() + ",";
+		query +=  fcc.getMaxAcpWait() + ",";
 
 		
-		query +=  fcc.getNumThread() + ",";
 		query +=  "'" + fcc.getStatus() + "',";
 		query +=  "'" + dateFormater.format(now)  + "'";
 		
@@ -72,15 +71,14 @@ public class FriendCareCampaignModel {
 		
 		query +=  "min_req=" + fcc.getMinReq() + ",";
 		query +=  "max_req=" + fcc.getMaxReq() + ",";
-		query +=  "wait_req=" + fcc.getWaitReq() + ",";
-		query +=  "wait_clone_req=" + fcc.getWaitCloneReq() + ",";
+		query +=  "min_req_wait=" + fcc.getMinReqWait() + ",";
+		query +=  "max_req_wait=" + fcc.getMaxReqWait() + ",";
 		
 		query +=  "min_acp=" + fcc.getMinAcp() + ",";
 		query +=  "max_acp=" + fcc.getMaxAcp() + ",";
-		query +=  "wait_acp=" + fcc.getWaitAcp() + ",";
-		query +=  "wait_clone_acp=" + fcc.getWaitCloneAcp() + ",";
+		query +=  "min_acp_wait=" + fcc.getMinAcpWait() + ",";
+		query +=  "max_acp_wait=" + fcc.getMaxAcpWait() + ",";
 		
-		query +=  "num_thread=" + fcc.getNumThread() + ",";
 		query +=  "status='" + fcc.getStatus() + "'";
 		//query +=  "updated_at='" + dateFormater.format(now)  + "'";
 		
@@ -132,16 +130,14 @@ public class FriendCareCampaignModel {
 		
 		header.add("min_req");
 		header.add("max_req");
-		header.add("wait_req");
-		header.add("wait_clone_req");
+		header.add("min_req_wait");
+		header.add("max_req_wait");
 		
 		header.add("min_acp");
 		header.add("max_acp");
-		header.add("wait_acp");
-		header.add("wait_clone_acp");
+		header.add("min_acp_wait");
+		header.add("max_acp_wait");
 		
-		header.add("số luồng");
-
 		return header;
 	}
 
@@ -160,15 +156,13 @@ public class FriendCareCampaignModel {
 
 			row.add(String.valueOf(fcc.getMinReq()));
 			row.add(String.valueOf(fcc.getMaxReq()));
-			row.add(String.valueOf(fcc.getWaitReq()));
-			row.add(String.valueOf(fcc.getWaitCloneReq()));
+			row.add(String.valueOf(fcc.getMinReqWait()));
+			row.add(String.valueOf(fcc.getMaxReqWait()));
 			
 			row.add(String.valueOf(fcc.getMinAcp()));
 			row.add(String.valueOf(fcc.getMaxAcp()));
-			row.add(String.valueOf(fcc.getWaitAcp()));
-			row.add(String.valueOf(fcc.getWaitCloneAcp()));
-			
-			row.add(String.valueOf(fcc.getNumThread()));
+			row.add(String.valueOf(fcc.getMinAcpWait()));
+			row.add(String.valueOf(fcc.getMaxAcpWait()));
 			
 			data.add(row);
 		}

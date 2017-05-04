@@ -33,8 +33,8 @@ public class GroupCareCampaignModel {
 		Date now =  new Date();
 		DateFormat dateFormater = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		
-		String query = "INSERT INTO group_care_campaigns(owner, name, clone_ids, group_ids, min_mem, max_mem, wait_mem, wait_clone,";
-		query += "num_thread, status, created_at) VALUES(";
+		String query = "INSERT INTO group_care_campaigns(owner, name, clone_ids, group_ids, min_mem, max_mem, min_wait, max_wait,";
+		query += "status, created_at) VALUES(";
 		
 		query += "'" + SessionHelper.getSessionUser() + "',";
 		query += "'" + gcc.getName() + "',";
@@ -42,10 +42,9 @@ public class GroupCareCampaignModel {
 		query += "'" + gcc.getGroupIds() + "',";
 		query +=  gcc.getMinMem() + ",";
 		query +=  gcc.getMaxMem() + ",";
-		query +=  gcc.getWaitMem() + ",";
-		query +=  gcc.getWaitClone() + ",";
+		query +=  gcc.getMinWait() + ",";
+		query +=  gcc.getMaxWait() + ",";
 		
-		query +=  gcc.getNumThread() + ",";
 		query +=  "'" + gcc.getStatus() + "',";
 		query +=  "'" + dateFormater.format(now)  + "'";
 		
@@ -66,10 +65,9 @@ public class GroupCareCampaignModel {
 		
 		query +=  "min_mem=" + gcc.getMinMem() + ",";
 		query +=  "max_mem=" + gcc.getMaxMem() + ",";
-		query +=  "wait_mem=" + gcc.getWaitMem() + ",";
-		query +=  "wait_clone=" + gcc.getWaitClone() + ",";
+		query +=  "min_wait=" + gcc.getMinWait() + ",";
+		query +=  "max_wait=" + gcc.getMaxWait() + ",";
 		
-		query +=  "num_thread=" + gcc.getNumThread() + ",";
 		query +=  "status='" + gcc.getStatus() + "'";
 		//query +=  "updated_at='" + dateFormater.format(now)  + "'";
 		
@@ -122,11 +120,9 @@ public class GroupCareCampaignModel {
 		
 		header.add("min_mem");
 		header.add("max_mem");
-		header.add("wait_mem");
-		header.add("wait_clone");
+		header.add("min_wait");
+		header.add("max_wait");
 	
-		header.add("số luồng");
-
 		return header;
 	}
 
@@ -146,11 +142,9 @@ public class GroupCareCampaignModel {
 
 			row.add(String.valueOf(gcc.getMinMem()));
 			row.add(String.valueOf(gcc.getMaxMem()));
-			row.add(String.valueOf(gcc.getWaitMem()));
-			row.add(String.valueOf(gcc.getWaitClone()));
+			row.add(String.valueOf(gcc.getMinWait()));
+			row.add(String.valueOf(gcc.getMaxWait()));
 					
-			row.add(String.valueOf(gcc.getNumThread()));
-			
 			data.add(row);
 		}
 		return data;

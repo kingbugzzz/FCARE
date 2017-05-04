@@ -28,6 +28,7 @@ import javax.swing.filechooser.FileSystemView;
 import io.quangvu.fcare.bean.FriendCareByUidCampaign;
 import io.quangvu.fcare.controller.FriendCareByUidCampaignController;
 import io.quangvu.fcare.helper.IOHelper;
+import io.quangvu.fcare.helper.NumberHelper;
 
 import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
@@ -39,8 +40,7 @@ public class FriendCareByUidCreatePanel extends JPanel {
 	private JTextField name;
 	private JList<String> cloneList;
 	private JLabel cloneCount, lbRam, lbTimeExec, friendUidFilePath;
-	private JSpinner minWait, maxWait, waitClone;
-	private JComboBox numThread;
+	private JSpinner minWait, maxWait;
 
 	private FriendCareByUidCampaignController controller;
 	private JLabel friendCount;
@@ -52,58 +52,29 @@ public class FriendCareByUidCreatePanel extends JPanel {
 		minWait.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				updateMinReqStatus();
 				updateTimeExec();
 			}
 		});
-		minWait.setBounds(240, 326, 40, 20);
+		minWait.setBounds(240, 290, 72, 20);
 		add(minWait);
 
 		JLabel lblMax = new JLabel("đến");
-		lblMax.setBounds(326, 329, 29, 14);
+		lblMax.setBounds(360, 293, 29, 14);
 		add(lblMax);
 
 		maxWait = new JSpinner();
 		maxWait.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				updateMaxReqStatus();
 				updateTimeExec();
 			}
 		});
-		maxWait.setBounds(377, 326, 40, 20);
+		maxWait.setBounds(441, 290, 72, 20);
 		add(maxWait);
 
 		JLabel lblSReq = new JLabel("Nghỉ giữa lượt add");
-		lblSReq.setBounds(106, 329, 124, 14);
+		lblSReq.setBounds(106, 293, 124, 14);
 		add(lblSReq);
-
-		numThread = new JComboBox();
-		numThread.addItem("1");
-		numThread.addItem("2");
-		numThread.addItem("3");
-		numThread.addItem("4");
-		numThread.addItem("5");
-		numThread.addItem("6");
-		numThread.addItem("7");
-		numThread.addItem("8");
-		numThread.addItem("9");
-		numThread.addItem("10");
-		numThread.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO Auto-generated method stub
-				lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 150) + " MB");
-				updateTimeExec();
-			}
-		});
-
-		numThread.setBounds(106, 285, 124, 20);
-		add(numThread);
-
-		JLabel lblKiuChy = new JLabel("Số luồng");
-		lblKiuChy.setBounds(36, 288, 60, 14);
-		add(lblKiuChy);
 
 		JLabel lblPlan = new JLabel("Camp");
 		lblPlan.setBounds(36, 181, 60, 14);
@@ -120,7 +91,7 @@ public class FriendCareByUidCreatePanel extends JPanel {
 
 			}
 		});
-		btnNewButton.setBounds(357, 392, 131, 23);
+		btnNewButton.setBounds(362, 356, 131, 23);
 		add(btnNewButton);
 
 		JButton btnLuChySau = new JButton("Lưu chạy sau");
@@ -131,11 +102,11 @@ public class FriendCareByUidCreatePanel extends JPanel {
 				dashboardFrame.loadPanel(new FriendCareByUidMainPanel(dashboardFrame), "Quản lý chiến dịch add friend theo uid");
 			}
 		});
-		btnLuChySau.setBounds(204, 392, 124, 23);
+		btnLuChySau.setBounds(209, 356, 124, 23);
 		add(btnLuChySau);
 
 		JButton btnNhpLi = new JButton("Nhập lại");
-		btnNhpLi.setBounds(520, 392, 98, 23);
+		btnNhpLi.setBounds(525, 356, 98, 23);
 		add(btnNhpLi);
 
 		this.cloneList = new JList<String>(cloneIds);
@@ -144,12 +115,6 @@ public class FriendCareByUidCreatePanel extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				cloneCount.setText(String.valueOf(cloneList.getSelectedIndices().length));
-				updateMinReqStatus();
-				updateMaxReqStatus();
-				updateMinAcpStatus();
-				updateMaxAcpStatus();
-				updateMinShareStatus();
-				updateMaxShareStatus();
 				updateTimeExec();
 			}
 		});
@@ -185,39 +150,13 @@ public class FriendCareByUidCreatePanel extends JPanel {
 		lblTiNguynRamd.setBounds(465, 120, 158, 14);
 		add(lblTiNguynRamd);
 
-		lbRam = new JLabel("0 MB");
+		lbRam = new JLabel("95 MB");
 		lbRam.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbRam.setForeground(new Color(0, 100, 0));
 		lbRam.setBounds(685, 120, 80, 14);
 		add(lbRam);
 
-		JLabel label_1 = new JLabel("nghỉ giữa clone");
-		label_1.setBounds(465, 329, 96, 14);
-		add(label_1);
-
-		waitClone = new JSpinner();
-		waitClone.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateTimeExec();
-			}
-		});
-		waitClone.setBounds(571, 326, 42, 20);
-
-		add(waitClone);
-
-		JLabel label_8 = new JLabel("(+10)");
-		label_8.setBounds(633, 329, 40, 14);
-		add(label_8);
-
-		updateMinReqStatus();
-		updateMaxReqStatus();
-		updateMinAcpStatus();
-		updateMaxAcpStatus();
-		updateMinShareStatus();
-		updateMaxShareStatus();
-		lbRam.setText((Integer.parseInt(numThread.getSelectedItem().toString()) * 150) + " MB");
-
+		
 		friendCount = new JLabel();
 		
 		friendCount.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -234,8 +173,7 @@ public class FriendCareByUidCreatePanel extends JPanel {
 					String srcPath = jfc.getSelectedFile().getAbsolutePath().replace("\\", "/");
 					if (returnValue == JFileChooser.APPROVE_OPTION) {
 						friendUidFilePath.setText(srcPath);
-						int numUid = IOHelper.readLines(srcPath).size();
-						friendCount.setText(String.valueOf(numUid));
+						friendCount.setText(String.valueOf(IOHelper.readLines(srcPath).size()));
 					}
 				}
 			}
@@ -248,43 +186,17 @@ public class FriendCareByUidCreatePanel extends JPanel {
 		updateTimeExec();
 	}
 
-	private void updateMinReqStatus() {
-		int num = Integer.parseInt(minWait.getValue().toString().trim());
-		int csize = cloneList.getSelectedIndices().length;
-	}
-
-	private void updateMaxReqStatus() {
-		int num = Integer.parseInt(maxWait.getValue().toString().trim());
-		int csize = cloneList.getSelectedIndices().length;
-	}
-
-	private void updateMinAcpStatus() {
-		int csize = cloneList.getSelectedIndices().length;
-	}
-
-	private void updateMaxAcpStatus() {
-		int csize = cloneList.getSelectedIndices().length;
-	}
-
-	private void updateMinShareStatus() {
-		int csize = cloneList.getSelectedIndices().length;
-	}
-
-	private void updateMaxShareStatus() {
-		int csize = cloneList.getSelectedIndices().length;
-	}
-
 	private void updateTimeExec() {
-		int mediReq = Integer.parseInt(maxWait.getValue().toString());
-
-		int mediReqCloneWait = Integer.parseInt(waitClone.getValue().toString());
-
+		int mediWait = NumberHelper.getRandomInt(Integer.parseInt(maxWait.getValue().toString()),Integer.parseInt(minWait.getValue().toString()));
+		
 		int csize = this.cloneList.getSelectedIndices().length;
-
-		int numThread = Integer.parseInt(this.numThread.getSelectedItem().toString());
-
-		int timeExecution = (csize * (mediReq + 5 + mediReqCloneWait + 5 + 45 + 45)) / 60;
-		this.lbTimeExec.setText(timeExecution / numThread + " mins");
+		int timeExecution = csize * mediWait;
+		
+		if(!this.friendCount.getText().equals("")) {
+			timeExecution = csize *  Integer.parseInt(this.friendCount.getText().trim()) * mediWait / 60;
+		}
+		
+		this.lbTimeExec.setText(timeExecution + " mins");
 	}
 
 	private void createAddCampaignHandler() {
@@ -296,9 +208,7 @@ public class FriendCareByUidCreatePanel extends JPanel {
 
 		campaign.setMinWait(Integer.parseInt(String.valueOf(minWait.getValue())));
 		campaign.setMaxWait(Integer.parseInt(String.valueOf(maxWait.getValue())));
-		campaign.setWaitClone(Integer.parseInt(String.valueOf(waitClone.getValue())));
 
-		campaign.setNumThread(Integer.parseInt(numThread.getSelectedItem().toString()));
 		campaign.setStatus("off");
 
 		// System.out.println(campaign.toString());

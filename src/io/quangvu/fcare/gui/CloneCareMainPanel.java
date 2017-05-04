@@ -126,7 +126,7 @@ public class CloneCareMainPanel extends JPanel {
 				}
 			}
 		});
-		btnStart.setBounds(214, 34, 85, 23);
+		btnStart.setBounds(214, 34, 55, 23);
 		add(btnStart);
 		updateTable();
 	}

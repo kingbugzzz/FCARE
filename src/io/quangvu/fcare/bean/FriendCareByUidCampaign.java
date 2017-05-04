@@ -1,18 +1,18 @@
 package io.quangvu.fcare.bean;
 
 public class FriendCareByUidCampaign {
-	
+
 	private String owner;
 	private int id;
 	private String name, cloneIdList, friendIdsSourceFile;
-	private int minWait, maxWait, waitClone;
-	private int numThread;
+	private int minWait, maxWait;
 	private String createdAt, updatedAt, status;
-	
-	public FriendCareByUidCampaign(){}
 
-	public FriendCareByUidCampaign(String owner, int id, String name, String cloneIdList, String friendIdsSourceFile, int minWait,
-			int maxWait, int waitClone, int numThread, String createdAt, String updatedAt, String status) {
+	public FriendCareByUidCampaign() {
+	}
+
+	public FriendCareByUidCampaign(String owner, int id, String name, String cloneIdList, String friendIdsSourceFile,
+			int minWait, int maxWait, String createdAt, String updatedAt, String status) {
 		super();
 		this.owner = owner;
 		this.id = id;
@@ -21,8 +21,6 @@ public class FriendCareByUidCampaign {
 		this.friendIdsSourceFile = friendIdsSourceFile;
 		this.minWait = minWait;
 		this.maxWait = maxWait;
-		this.waitClone = waitClone;
-		this.numThread = numThread;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.status = status;
@@ -84,22 +82,6 @@ public class FriendCareByUidCampaign {
 		this.maxWait = maxWait;
 	}
 
-	public int getWaitClone() {
-		return waitClone;
-	}
-
-	public void setWaitClone(int waitClone) {
-		this.waitClone = waitClone;
-	}
-
-	public int getNumThread() {
-		return numThread;
-	}
-
-	public void setNumThread(int numThread) {
-		this.numThread = numThread;
-	}
-
 	public String getCreatedAt() {
 		return createdAt;
 	}
@@ -128,7 +110,6 @@ public class FriendCareByUidCampaign {
 	public String toString() {
 		return "FriendCareByUidCampaign [owner=" + owner + ", id=" + id + ", name=" + name + ", cloneIdList="
 				+ cloneIdList + ", friendIdsSourceFile=" + friendIdsSourceFile + ", minWait=" + minWait + ", maxWait="
-				+ maxWait + ", waitClone=" + waitClone + ", numThread=" + numThread + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", status=" + status + "]";
+				+ maxWait + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", status=" + status + "]";
 	}
 }

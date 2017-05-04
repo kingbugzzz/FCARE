@@ -97,15 +97,15 @@ public class FriendCareByUidMainPanel extends JPanel {
 		comboBox.setBounds(998, 44, 151, 20);
 		add(comboBox);
 		
-		JButton btnPlanlist = new JButton("");
-		btnPlanlist.setToolTipText("Bắt đầu chạy");
-		btnPlanlist.setIcon(new ImageIcon(FriendCareByUidMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/settings_ico.png")));
-		btnPlanlist.addActionListener(new ActionListener() {
+		JButton btnStart = new JButton("");
+		btnStart.setToolTipText("Bắt đầu chạy");
+		btnStart.setIcon(new ImageIcon(FriendCareByUidMainPanel.class.getResource("/io/quangvu/fcare/gui/icon/play.png")));
+		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnPlanlist.setBounds(214, 34, 49, 23);
-		add(btnPlanlist);
+		btnStart.setBounds(214, 34, 49, 23);
+		add(btnStart);
 		updateTable();
 	}
 	

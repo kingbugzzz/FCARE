@@ -32,8 +32,8 @@ public class FriendCareByUidCampaignModel {
 		Date now =  new Date();
 		DateFormat dateFormater = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		
-		String query = "INSERT INTO friend_care_by_uid_campaigns(owner, name, clone_ids, friend_ids_source_file, min_wait, max_wait,  wait_clone,";
-		query += "num_thread, status, created_at) VALUES(";
+		String query = "INSERT INTO friend_care_by_uid_campaigns(owner, name, clone_ids, friend_ids_source_file, min_wait, max_wait, ";
+		query += "status, created_at) VALUES(";
 		
 		query += "'" + SessionHelper.getSessionUser() + "',";
 		query += "'" + gcc.getName() + "',";
@@ -41,9 +41,7 @@ public class FriendCareByUidCampaignModel {
 		query += "'" + gcc.getFriendIdsSourceFile() + "',";
 		query +=  gcc.getMinWait() + ",";
 		query +=  gcc.getMaxWait() + ",";
-		query +=  gcc.getWaitClone() + ",";
 		
-		query +=  gcc.getNumThread() + ",";
 		query +=  "'" + gcc.getStatus() + "',";
 		query +=  "'" + dateFormater.format(now)  + "'";
 		
@@ -64,9 +62,7 @@ public class FriendCareByUidCampaignModel {
 		
 		query +=  "min_wait=" + gcc.getMinWait() + ",";
 		query +=  "max_wait=" + gcc.getMaxWait() + ",";
-		query +=  "wait_clone=" + gcc.getWaitClone() + ",";
 		
-		query +=  "num_thread=" + gcc.getNumThread() + ",";
 		query +=  "status='" + gcc.getStatus() + "'";
 		//query +=  "updated_at='" + dateFormater.format(now)  + "'";
 		
@@ -118,10 +114,7 @@ public class FriendCareByUidCampaignModel {
 		
 		header.add("min_wait");
 		header.add("max_wait");
-		header.add("wait_clone");
 	
-		header.add("số luồng");
-
 		return header;
 	}
 
@@ -141,10 +134,7 @@ public class FriendCareByUidCampaignModel {
 
 			row.add(String.valueOf(gcc.getMinWait()));
 			row.add(String.valueOf(gcc.getMaxWait()));
-			row.add(String.valueOf(gcc.getWaitClone()));
 					
-			row.add(String.valueOf(gcc.getNumThread()));
-			
 			data.add(row);
 		}
 		return data;
