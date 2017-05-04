@@ -108,7 +108,7 @@ public class FriendCareMainPanel extends JPanel {
 		});
 		btnStart.setBounds(214, 34, 49, 23);
 		add(btnStart);
-		updateTable();
+		//updateTable();
 	}
 	
 	private void updateTable() {

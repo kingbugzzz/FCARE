@@ -85,7 +85,6 @@ public class TagMainPanel extends JPanel {
 		this.loadTableData();
 		this.tableModel = new DefaultTableModel(this.data, this.columnNames);
 		this.table = new JTable(tableModel);
-		this.table = new JTable(tableModel);
 		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getColumnModel().getColumn(0).setPreferredWidth(150);
 		table.getColumnModel().getColumn(1).setPreferredWidth(950);
