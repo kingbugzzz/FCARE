@@ -3,15 +3,11 @@ package io.quangvu.fcare.gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -28,12 +24,6 @@ import javax.swing.filechooser.FileSystemView;
 import io.quangvu.fcare.bean.FriendCareByUidCampaign;
 import io.quangvu.fcare.controller.FriendCareByUidCampaignController;
 import io.quangvu.fcare.helper.IOHelper;
-import io.quangvu.fcare.helper.NumberHelper;
-
-import javax.swing.JEditorPane;
-import javax.swing.JFileChooser;
-
-import java.awt.Font;
 
 public class FriendCareByUidCreatePanel extends JPanel {
 
@@ -187,7 +177,7 @@ public class FriendCareByUidCreatePanel extends JPanel {
 	}
 
 	private void updateTimeExec() {
-		int mediWait = NumberHelper.getRandomInt(Integer.parseInt(maxWait.getValue().toString()),Integer.parseInt(minWait.getValue().toString()));
+		int mediWait = Integer.parseInt(maxWait.getValue().toString());
 		
 		int csize = this.cloneList.getSelectedIndices().length;
 		int timeExecution = csize * mediWait;

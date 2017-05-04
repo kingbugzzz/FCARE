@@ -293,6 +293,7 @@ public class Debugger {
 	}
 
 	public static void main(String[] args) {
-		new Debugger();
+//		new Debugger();
+		System.out.println(NumberHelper.getRandomInt(1, 10));
 	}
 }

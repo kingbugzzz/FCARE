@@ -386,6 +386,7 @@ public class CloneCareCreatePanel extends JPanel {
 		updateMinLikeStatus();updateMaxLikeStatus();
 		updateMinCommentStatus();updateMaxCommentStatus();
 		updateMinShareStatus();updateMaxShareStatus();
+		
 		updateTimeExec();
 	}
 	
@@ -430,9 +431,9 @@ public class CloneCareCreatePanel extends JPanel {
 		int mediComment = Integer.parseInt(maxComment.getValue().toString());
 		int mediShare = Integer.parseInt(maxShare.getValue().toString());
 		
-		int mediLikeWait = NumberHelper.getRandomInt(Integer.parseInt(maxLikeWait.getValue().toString()), Integer.parseInt(minLikeWait.getValue().toString()));
-		int mediCommentWait = NumberHelper.getRandomInt(Integer.parseInt(maxCommentWait.getValue().toString()), Integer.parseInt(minCommentWait.getValue().toString()));
-		int mediShareWait = NumberHelper.getRandomInt(Integer.parseInt(maxShareWait.getValue().toString()), Integer.parseInt(minShareWait.getValue().toString()));
+		int mediLikeWait = Integer.parseInt(maxLikeWait.getValue().toString());
+		int mediCommentWait = Integer.parseInt(maxCommentWait.getValue().toString());
+		int mediShareWait = Integer.parseInt(maxShareWait.getValue().toString());
 		
 		int csize = this.cloneList.getSelectedIndices().length;
 		

@@ -297,9 +297,7 @@ public class CloneCareUpdatePanel extends JPanel {
 		add(lbMaxShare);
 		
 		
-		updateMinLikeStatus();updateMaxLikeStatus();
-		updateMinCommentStatus();updateMaxCommentStatus();
-		updateMinShareStatus();updateMaxShareStatus();
+		
 		
 		title = new JLabel("Camp Id: " + campaign.getId());
 		title.setBounds(106, 43, 311, 14);
@@ -389,6 +387,9 @@ public class CloneCareUpdatePanel extends JPanel {
 		maxShareWait.setBounds(709, 391, 56, 20);
 		add(maxShareWait);
 		this.initUpdateFormValues(campaign);
+		updateMinLikeStatus();updateMaxLikeStatus();
+		updateMinCommentStatus();updateMaxCommentStatus();
+		updateMinShareStatus();updateMaxShareStatus();
 		updateTimeExec();
 	}
 	
@@ -453,9 +454,9 @@ public class CloneCareUpdatePanel extends JPanel {
 		int mediComment = Integer.parseInt(maxComment.getValue().toString());
 		int mediShare = Integer.parseInt(maxShare.getValue().toString());
 		
-		int mediLikeWait = NumberHelper.getRandomInt(Integer.parseInt(maxLikeWait.getValue().toString()), Integer.parseInt(minLikeWait.getValue().toString()));
-		int mediCommentWait = NumberHelper.getRandomInt(Integer.parseInt(maxCommentWait.getValue().toString()), Integer.parseInt(minCommentWait.getValue().toString()));
-		int mediShareWait = NumberHelper.getRandomInt(Integer.parseInt(maxShareWait.getValue().toString()), Integer.parseInt(minShareWait.getValue().toString()));
+		int mediLikeWait = Integer.parseInt(maxLikeWait.getValue().toString());
+		int mediCommentWait = Integer.parseInt(maxCommentWait.getValue().toString());
+		int mediShareWait = Integer.parseInt(maxShareWait.getValue().toString());
 		
 		int csize = this.cloneList.getSelectedIndices().length;
 		
@@ -463,11 +464,7 @@ public class CloneCareUpdatePanel extends JPanel {
 		
 		this.lbTimeExec.setText(timeExecution + " mins");
 	}
-	
-	private void initUpdateValues() {
 		
-	}
-	
 	private void updateCareCampaignHandler() {
 		this.controller = new CloneCareCampaignController();
 		CloneCareCampaign campaign = new CloneCareCampaign();

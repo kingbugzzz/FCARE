@@ -53,7 +53,6 @@ public class GroupJoinUpdatePanel extends JPanel {
 		minWait.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				updateMinWaitStatus();
 				updateTimeExec();
 			}
 		});
@@ -68,7 +67,6 @@ public class GroupJoinUpdatePanel extends JPanel {
 		maxWait.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				updateMaxWaitStatus();
 				updateTimeExec();
 			}
 		});
@@ -105,8 +103,6 @@ public class GroupJoinUpdatePanel extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				cloneCount.setText(String.valueOf(cloneList.getSelectedIndices().length));
-				updateMinWaitStatus();updateMaxWaitStatus();
-				updateMinAcpStatus();updateMaxAcpStatus();
 				updateTimeExec();
 			}
 		});
@@ -147,10 +143,6 @@ public class GroupJoinUpdatePanel extends JPanel {
 		lbRam.setForeground(new Color(0, 100, 0));
 		lbRam.setBounds(685, 191, 80, 14);
 		add(lbRam);
-		
-		
-		updateMinWaitStatus();updateMaxWaitStatus();
-		updateMinAcpStatus();updateMaxAcpStatus();
 		
 		title = new JLabel("Camp Id: " + campaign.getId());
 		title.setBounds(106, 43, 311, 14);
@@ -218,30 +210,12 @@ public class GroupJoinUpdatePanel extends JPanel {
 
 	}
 	
-	private void updateMinWaitStatus() {
-		int num = Integer.parseInt(minWait.getValue().toString().trim());
-		int csize  = cloneList.getSelectedIndices().length;
-	}
-	
-	private void updateMaxWaitStatus() {
-		int num = Integer.parseInt(maxWait.getValue().toString().trim());
-		int csize  = cloneList.getSelectedIndices().length;
-	}
-	
-	private void updateMinAcpStatus() {
-		int csize  = cloneList.getSelectedIndices().length;
-	}
-	
-	private void updateMaxAcpStatus() {
-		int csize  = cloneList.getSelectedIndices().length;
-	}
-		
 	private void updateTimeExec() {
 		int mediWait = Integer.parseInt(maxWait.getValue().toString());
 		
 		int csize = this.cloneList.getSelectedIndices().length;
 		
-		int timeExecution = (csize * (mediWait + 45 + 45))/60;
+		int timeExecution = (csize * + this.groupIds.getText().split(",").length * (mediWait + 45))/60;
 		this.lbTimeExec.setText(timeExecution + " mins");
 	}
 	

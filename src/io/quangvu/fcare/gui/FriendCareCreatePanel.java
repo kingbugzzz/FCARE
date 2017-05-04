@@ -311,12 +311,11 @@ public class FriendCareCreatePanel extends JPanel {
 	}
 	
 	private void updateTimeExec() {
+		int mediReq = Integer.parseInt(maxReq.getValue().toString());
+		int mediAcp = Integer.parseInt(maxAcp.getValue().toString());
 		
-		int mediReq = NumberHelper.getRandomInt(Integer.parseInt(maxReq.getValue().toString()), Integer.parseInt(minReq.getValue().toString()));
-		int mediAcp = NumberHelper.getRandomInt(Integer.parseInt(maxAcp.getValue().toString()), Integer.parseInt(minAcp.getValue().toString()));
-		
-		int mediReqWait = NumberHelper.getRandomInt(Integer.parseInt(maxReqWait.getValue().toString()), Integer.parseInt(minReqWait.getValue().toString()));
-		int mediAcpWait = NumberHelper.getRandomInt(Integer.parseInt(maxAcpWait.getValue().toString()), Integer.parseInt(minAcpWait.getValue().toString()));
+		int mediReqWait = Integer.parseInt(maxReqWait.getValue().toString());
+		int mediAcpWait = Integer.parseInt(maxAcpWait.getValue().toString());
 				
 		int csize = this.cloneList.getSelectedIndices().length;
 		

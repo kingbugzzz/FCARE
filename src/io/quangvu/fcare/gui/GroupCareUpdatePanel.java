@@ -253,13 +253,12 @@ public class GroupCareUpdatePanel extends JPanel {
 	private void updateTimeExec() {
 		int mediMem = Integer.parseInt(maxMem.getValue().toString());
 		
-		int mediMemWait = Integer.parseInt(minWait.getValue().toString());
-		
-		int mediMemCloneWait = Integer.parseInt(maxWait.getValue().toString());
+		int mediMemWait = Integer.parseInt(maxWait.getValue().toString());
 		
 		int csize = this.cloneList.getSelectedIndices().length;
 		
-		int timeExecution = (csize * (mediMem + mediMemWait + 5 + mediMemCloneWait + 5 + 45 + 45))/60;
+		int timeExecution = (csize * this.groupIds.getText().split(",").length * (mediMem + mediMemWait + 45))/60;
+		
 		this.lbTimeExec.setText(timeExecution + " mins");
 	}
 	

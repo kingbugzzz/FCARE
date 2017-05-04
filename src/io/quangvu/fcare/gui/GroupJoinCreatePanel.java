@@ -47,7 +47,6 @@ public class GroupJoinCreatePanel extends JPanel {
 		minWait.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				updateMinReqStatus();
 				updateTimeExec();
 			}
 		});
@@ -62,7 +61,6 @@ public class GroupJoinCreatePanel extends JPanel {
 		maxWait.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				updateMaxReqStatus();
 				updateTimeExec();
 			}
 		});
@@ -112,12 +110,6 @@ public class GroupJoinCreatePanel extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				cloneCount.setText(String.valueOf(cloneList.getSelectedIndices().length));
-				updateMinReqStatus();
-				updateMaxReqStatus();
-				updateMinAcpStatus();
-				updateMaxAcpStatus();
-				updateMinShareStatus();
-				updateMaxShareStatus();
 				updateTimeExec();
 			}
 		});
@@ -158,13 +150,6 @@ public class GroupJoinCreatePanel extends JPanel {
 		lbRam.setForeground(new Color(0, 100, 0));
 		lbRam.setBounds(685, 120, 80, 14);
 		add(lbRam);
-
-		updateMinReqStatus();
-		updateMaxReqStatus();
-		updateMinAcpStatus();
-		updateMaxAcpStatus();
-		updateMinShareStatus();
-		updateMaxShareStatus();
 
 		JLabel lblGroupId = new JLabel("Group ID");
 		lblGroupId.setBounds(36, 218, 60, 14);
@@ -217,39 +202,13 @@ public class GroupJoinCreatePanel extends JPanel {
 		updateTimeExec();
 	}
 
-	private void updateMinReqStatus() {
-		int num = Integer.parseInt(minWait.getValue().toString().trim());
-		int csize = cloneList.getSelectedIndices().length;
-	}
-
-	private void updateMaxReqStatus() {
-		int num = Integer.parseInt(maxWait.getValue().toString().trim());
-		int csize = cloneList.getSelectedIndices().length;
-	}
-
-	private void updateMinAcpStatus() {
-		int csize = cloneList.getSelectedIndices().length;
-	}
-
-	private void updateMaxAcpStatus() {
-		int csize = cloneList.getSelectedIndices().length;
-	}
-
-	private void updateMinShareStatus() {
-		int csize = cloneList.getSelectedIndices().length;
-	}
-
-	private void updateMaxShareStatus() {
-		int csize = cloneList.getSelectedIndices().length;
-	}
-
 	private void updateTimeExec() {
-		int mediReq = Integer.parseInt(maxWait.getValue().toString());
-
+		int mediWait = Integer.parseInt(maxWait.getValue().toString());
+		
 		int csize = this.cloneList.getSelectedIndices().length;
-
-		int timeExecution = (csize * (mediReq + 45 + 45)) / 60;
-		this.lbTimeExec.setText(timeExecution  + " mins");
+		
+		int timeExecution = (csize * + this.groupIds.getText().split(",").length * (mediWait + 45))/60;
+		this.lbTimeExec.setText(timeExecution + " mins");
 	}
 
 	private void createJoinCampaignHandler() {
