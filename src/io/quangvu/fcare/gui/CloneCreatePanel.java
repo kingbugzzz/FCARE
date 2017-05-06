@@ -18,6 +18,7 @@ import io.quangvu.fcare.bean.Tag;
 import io.quangvu.fcare.controller.CloneController;
 import io.quangvu.fcare.controller.TagController;
 import io.quangvu.fcare.helper.IOHelper;
+import javax.swing.JScrollPane;
 
 public class CloneCreatePanel extends JPanel {
 	
@@ -48,30 +49,26 @@ public class CloneCreatePanel extends JPanel {
 		add(lblPassword);
 		
 		lblCookie = new JLabel("Cookie");
-		lblCookie.setBounds(42, 275, 77, 14);
+		lblCookie.setBounds(42, 144, 71, 14);
 		add(lblCookie);
 		
-		cookie = new JEditorPane();
-		cookie.setBounds(129, 272, 355, 66);
-		add(cookie);
-		
 		JButton btnCheckLive = new JButton("Check live");
-		btnCheckLive.setBounds(129, 366, 355, 23);
+		btnCheckLive.setBounds(129, 247, 355, 23);
 		add(btnCheckLive);
 		
 				
 		JLabel lblTags = new JLabel("Tag");
-		lblTags.setBounds(42, 454, 46, 14);
+		lblTags.setBounds(42, 461, 46, 14);
 		add(lblTags);
 		
 		status = new JComboBox();
-		status.setBounds(129, 495, 160, 20);
+		status.setBounds(129, 504, 160, 20);
 		status.addItem("active");
 		status.addItem("deactive");
 		add(status);
 		
 		JLabel lblTrngThi = new JLabel("Trạng thái");
-		lblTrngThi.setBounds(42, 495, 77, 14);
+		lblTrngThi.setBounds(42, 504, 77, 14);
 		add(lblTrngThi);
 		
 		JButton btnAdd = new JButton("Thêm");
@@ -108,20 +105,20 @@ public class CloneCreatePanel extends JPanel {
 		for(Tag tag : tags) {
 			cbTags.addItem(tag.getName());
 		}
-		cbTags.setBounds(129, 454, 355, 20);
+		cbTags.setBounds(129, 461, 355, 20);
 		add(cbTags);
 		
 		JLabel lblTnClone = new JLabel("Tên clone");
-		lblTnClone.setBounds(42, 411, 77, 14);
+		lblTnClone.setBounds(42, 423, 77, 14);
 		add(lblTnClone);
 		
 		name = new JTextField();
 		name.setColumns(10);
-		name.setBounds(129, 411, 355, 20);
+		name.setBounds(129, 423, 355, 20);
 		add(name);
 		
 		JLabel lblUseragent = new JLabel("UserAgent");
-		lblUseragent.setBounds(42, 113, 77, 14);
+		lblUseragent.setBounds(42, 116, 77, 14);
 		add(lblUseragent);
 		
 		ArrayList<String> ugentList = IOHelper.readLines("config/uagents.dat");
@@ -129,16 +126,30 @@ public class CloneCreatePanel extends JPanel {
 		for(String agent : ugentList) {
 			userAgent.addItem(agent);
 		}
-		userAgent.setBounds(129, 110, 355, 20);
+		userAgent.setBounds(129, 113, 355, 20);
 		add(userAgent);
 		
-		token = new JEditorPane();
-		token.setBounds(129, 154, 355, 94);
-		add(token);
-		
 		JLabel lblToken = new JLabel("Token");
-		lblToken.setBounds(42, 154, 77, 14);
+		lblToken.setBounds(42, 281, 77, 14);
 		add(lblToken);
+		
+		JButton btnCheckToken = new JButton("Check token");
+		btnCheckToken.setBounds(129, 377, 355, 23);
+		add(btnCheckToken);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(129, 281, 355, 85);
+		add(scrollPane);
+		
+		token = new JEditorPane();
+		scrollPane.setViewportView(token);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(129, 144, 355, 92);
+		add(scrollPane_1);
+		
+		cookie = new JEditorPane();
+		scrollPane_1.setViewportView(cookie);
 
 	}
 }
