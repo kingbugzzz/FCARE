@@ -16,7 +16,7 @@ public class CloneCareRunningDialog extends JDialog {
 	}
 
 	public void display() {
-		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}

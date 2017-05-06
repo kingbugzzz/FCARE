@@ -1,40 +1,28 @@
 package io.quangvu.fcare.gui;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
+
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.JSpinner;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.Vector;
-import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.sun.jna.IntegerType;
-
-import io.quangvu.fcare.bean.Clone;
 import io.quangvu.fcare.bean.CloneCareCampaign;
 import io.quangvu.fcare.controller.CloneCareCampaignController;
-import io.quangvu.fcare.controller.CloneController;
-import io.quangvu.fcare.helper.NumberHelper;
-import io.quangvu.fcare.model.CloneCareCampaignModel;
 import io.quangvu.fcare.model.CloneModel;
-
-import java.awt.Color;
-import java.awt.Font;
 
 public class CloneCareUpdatePanel extends JPanel {
 

@@ -11,6 +11,7 @@ import javax.swing.JProgressBar;
 import javax.swing.border.Border;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
@@ -21,13 +22,13 @@ import io.quangvu.fcare.service.CloneCareService;
 
 public class Debugger {
 
-	String id = "100016383018168";
+	String id = "100016383018168"; //"100016496493171"; 
 	String pass = "Lol686868";
-
+	
 	// String id = "nguyenbao.duong.102";
 	// String pass = "Lol686868";
 
-	String userAgent = "Mozilla/5.0 (Linux; Android 4.4.2; XT1028 Build/KXB20.9-1.10-1.20) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.92 Mobile Safari/537.36";
+	String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36";
 
 	PhantomJSDriver driver;
 
@@ -38,10 +39,8 @@ public class Debugger {
 	public Debugger() {
 		this.login();
 		this.friendIds = this.getFriendIds();
-
-//		this.acceptFriends(20);
-		this.addSuggesFriends(10);
-		
+		this.acceptFriends(20);
+//		this.addSuggesFriends(10);
 //		this.postTextLink("Ngày xưa có phải anh quá vội vàng... https://www.youtube.com/watch?v=n3vAvg7eI0E");
 //		this.postImageStatus(this.sourcePath + "image/tha-thinh/chum-tho-tinh-mua-thu.jpg", "mùa thu của em");
 //		this.changeAvatar(this.sourcePath + "avatar/tha-thinh/8.jpg");
@@ -53,9 +52,12 @@ public class Debugger {
 		
 		this.logout();
 	}
+	
+	private void addCookies(String cookiesString) {
+		
+	}
 
 	public void login() {
-
 		driver = WebDriverManager.getInstance().getPhantomJSDriver(userAgent);
 		System.out.println(">>>login<<<");
 		driver.get("https://mbasic.facebook.com/");
@@ -123,7 +125,6 @@ public class Debugger {
 		return listUid;
 	}
 	
-	
 	public void addSuggesFriends(int limit) {
 		System.out.println(">>>add suggest friends<<<");
 		int rounds = limit / 10;
@@ -183,7 +184,6 @@ public class Debugger {
 		System.out.println("added");
 	}
 
-	
 	public void changeAvatar(String avataPath) {
 		System.out.println(">>>change avatar<<<");
 		System.out.println(avataPath);
@@ -293,7 +293,15 @@ public class Debugger {
 	}
 
 	public static void main(String[] args) {
-//		new Debugger();
-		System.out.println(NumberHelper.getRandomInt(1, 10));
+		new Debugger();
+	}
+	
+	private String getCookies() {
+		String cookieString = "";
+		for(Cookie cookie : this.driver.manage().getCookies()) {
+			cookieString += cookie.toString() + "#";
+		}
+		System.out.println(cookieString);
+		return cookieString;
 	}
 }

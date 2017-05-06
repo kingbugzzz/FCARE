@@ -8,8 +8,12 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+
 import io.quangvu.fcare.bean.CloneCareCampaign;
 import io.quangvu.fcare.helper.NumberHelper;
+import io.quangvu.fcare.selenium.WebDriverManager;
 import io.quangvu.fcare.service.CloneCareService;
 
 public class CloneCareWorker extends SwingWorker<Void, String> {
@@ -23,6 +27,7 @@ public class CloneCareWorker extends SwingWorker<Void, String> {
 	String[] cloneIds = null;
 	ArrayList<CloneCareService> careServiceList;
 	private SimpleDateFormat dateFormat;
+	private PhantomJSDriver driver;
 	
 	private int minLike, maxLike, minComment, maxComment, minShare, maxShare;
 	private int waitLike, waitComment, waitShare, waitClone;
@@ -54,54 +59,60 @@ public class CloneCareWorker extends SwingWorker<Void, String> {
 	}
 	
 	public String care(int current) throws InterruptedException {
-				
+						
 		CloneCareService service = this.careServiceList.get(current);
 		
 		String info = service.getName() + "\n";
-
+		
 		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] turn: " + current + "\n";
 		
-//		service.login();
-		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] logged in\n";
-		Thread.sleep(500);
-		
-		for(int i=1; i<=5; i++) {
-			System.out.println(i);
-			info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "]add friends---count" + i + "\n";
-			System.out.println("sleep 3 second");
-			Thread.sleep(3000);
-		}
-		
-//		service.changeAvatar("");
-		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] changed avatar\n";
-		Thread.sleep(500);
+//		System.out.println("create phantomjs");
+//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] create phantomjs \n";
+//		driver = WebDriverManager.getInstance().getPhantomJSDriver();
 //		
+//		System.out.println("load Google");
+//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] load google web \n";
+//		driver.get("google.com");
+//		
+//		System.out.println("sleep 3 seconds");
+//		Thread.sleep(3000);
+//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] sleep 3 secon \n";
+//		
+//		System.out.println("load Facebook");
+//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] load facebook web \n";
+//		driver.get("facebook.com");
+		
+		service.login();
+		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] logged in\n";
+		Thread.sleep(NumberHelper.getRandomInt(6000, 3000));
+		
+		
 //		service.postTextLink("");
-		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] post text status\n";
-		Thread.sleep(500);
+//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] post text status\n";
+//		Thread.sleep(500);
 //		
 //		service.postImageStatus("", "");
-		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] post image status\n";
-		Thread.sleep(500);
+//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] post image status\n";
+//		Thread.sleep(500);
 //		
 //		service.like();
-		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] like\n";
-		Thread.sleep(500);
+//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] like\n";
+//		Thread.sleep(500);
 //		
 //		service.comment();
-		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] comment\n";
-		Thread.sleep(500);
+//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] comment\n";
+//		Thread.sleep(500);
 //		
 //		service.share();
-		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] shared\n";
-		Thread.sleep(500);
+//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] shared\n";
+//		Thread.sleep(500);
 //		
 //		service.logout();
-		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] logged out\n\n";
+//		info += "---[" + this.dateFormat.format(System.currentTimeMillis()) + "] logged out\n\n";
 		
 		return current + "#" + info;
 	}
-
+	
 	protected Void doInBackground() throws Exception {
 		String careInfo = null;
 		while (current <= max) {

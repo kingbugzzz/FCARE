@@ -23,41 +23,37 @@ public class CloneCareService {
 		this.cloneModel = new CloneModel();
 		this.clone = this.cloneModel.get(cloneId);
 	}
-
+		
 	public boolean login() {
-		System.out.println(clone.toString());
 		System.out.println(">>>login<<<");
-		this.driver = WebDriverManager.getInstance().getPhantomJSDriver(this.clone.getUserAgent());
-		this.driver.get("https://mbasic.facebook.com/");
-		System.out.println(this.driver.getTitle() + "-" + this.driver.getCurrentUrl());
-		this.driver.findElement(By.name("email")).clear();
-		this.driver.findElement(By.name("email")).sendKeys(this.clone.getId());
-		this.driver.findElement(By.name("pass")).clear();
-		this.driver.findElement(By.name("pass")).sendKeys(this.clone.getPassword());
-		this.driver.findElement(By.name("login")).click();
-		if (this.driver.getCurrentUrl().contains("checkpoint")) {
-			System.out.println(this.clone.getName() + "[id:" + this.clone.getId() + "] got checkpoint!");
+		driver = WebDriverManager.getInstance().getPhantomJSDriver(this.clone.getUserAgent());
+		driver.get("https://mbasic.facebook.com/");
+		System.out.println(driver.getTitle() + "-" + driver.getCurrentUrl());
+		driver.findElement(By.name("email")).clear();
+		driver.findElement(By.name("email")).sendKeys(this.clone.getId());
+		driver.findElement(By.name("pass")).clear();
+		driver.findElement(By.name("pass")).sendKeys(this.clone.getPassword());
+		driver.findElement(By.name("login")).click();
+		if (driver.getCurrentUrl().contains("checkpoint")) {
+			System.out.println("Checkpoint");
 			return false;
 		} else {
-			System.out.println(this.clone.getName() + " login successful!");
-			this.isLoggedIn = true;
+			System.out.println("login successful!");
 			return true;
 		}
 	}
 
 	public void changeAvatar(String avataPath) {
-//		System.out.println(">>>change avatar<<<");
-//		System.out.println(avataPath);
-//		this.driver.get("https://mbasic.facebook.com/profile_picture/?returnuri=profile.php");
-//		System.out.println(driver.getCurrentUrl());
-//		WebElement fileInput = driver.findElement(By.name("pic"));
-//		fileInput.sendKeys(avataPath);
-//		WebElement submit = driver
-//				.findElementByXPath("//*[@id='root']/table/tbody/tr/td/div[1]/div[3]/form/ol/li[2]/input");
-//		submit.click();
-//		System.out.println("avatar changed");
-		
-		System.out.println(this.clone.getName() + " is changing avatar...");
+		System.out.println(">>>change avatar<<<");
+		System.out.println(avataPath);
+		this.driver.get("https://mbasic.facebook.com/profile_picture/?returnuri=profile.php");
+		System.out.println(driver.getCurrentUrl());
+		WebElement fileInput = driver.findElement(By.name("pic"));
+		fileInput.sendKeys(avataPath);
+		WebElement submit = driver
+				.findElementByXPath("//*[@id='root']/table/tbody/tr/td/div[1]/div[3]/form/ol/li[2]/input");
+		submit.click();
+		System.out.println("avatar changed");
 	}
 
 	public void postTextLink(String content) {

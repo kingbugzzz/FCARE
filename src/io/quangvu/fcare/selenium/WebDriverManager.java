@@ -30,14 +30,6 @@ public class WebDriverManager {
 		return instance;
 	}
 
-	public PhantomJSDriver getNewInstanceOfPhantomJSDriver() {
-		DesiredCapabilities desireCaps = DesiredCapabilities.phantomjs();
-		desireCaps.setJavascriptEnabled(true);
-		desireCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-				AppConfig.get("phantomjs_execution_path"));
-		return new PhantomJSDriver(desireCaps);
-	}
-
 	public PhantomJSDriver getPhantomJSDriver() {
 		if (phantomjsDriver == null) {
 			DesiredCapabilities desireCaps = DesiredCapabilities.phantomjs();
@@ -51,19 +43,15 @@ public class WebDriverManager {
 	}
 
 	public PhantomJSDriver getPhantomJSDriver(String userAgent) {
-		if (phantomjsDriver == null) {
-			DesiredCapabilities desireCaps = DesiredCapabilities.phantomjs();
-			desireCaps.setJavascriptEnabled(true);
-			desireCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-					AppConfig.get("phantomjs_execution_path"));
+		DesiredCapabilities desireCaps = DesiredCapabilities.phantomjs();
+		desireCaps.setJavascriptEnabled(true);
+		desireCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+				AppConfig.get("phantomjs_execution_path"));
 
-			if (userAgent != null) {
-				desireCaps.setCapability("phantomjs.page.settings.userAgent", userAgent);
-			}
-
-			phantomjsDriver = new PhantomJSDriver(desireCaps);
+		if (userAgent != null) {
+			desireCaps.setCapability("phantomjs.page.settings.userAgent", userAgent);
 		}
-		return phantomjsDriver;
+		return new PhantomJSDriver(desireCaps);
 	}
 
 	public FirefoxDriver getFirefoxDriver(String profileName) {
