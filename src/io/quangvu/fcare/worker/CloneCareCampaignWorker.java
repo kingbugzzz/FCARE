@@ -60,7 +60,7 @@ public class CloneCareCampaignWorker implements Runnable {
 		this.textArea.append("\n" +this.name+ "---terminated");
 	}
 	
-	private void phantomJobs() {
+	public void phantomJobs() {
 		ArrayList<String> userAgents = IOHelper.readLines("config/uagents.dat");
 		String userAgent = userAgents.get(NumberHelper.getRandomInt(userAgents.size(), 0));
 		System.out.println(userAgent);

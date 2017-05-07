@@ -5,8 +5,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,7 +16,7 @@ public class IOHelper {
 
 	private IOHelper() {
 	}
-	
+
 	public static String read(String path) {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(new File(path)));
@@ -97,6 +99,19 @@ public class IOHelper {
 		}
 	}
 
+	public static void writeToFile(String content, String path, boolean append) {
+		try {
+			FileWriter fw = new FileWriter(path, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter out = new PrintWriter(bw);
+			out.println(content);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// File writing/opening failed at some stage.
+		}
+	}
+
 	public static ArrayList<String> ls(String path) {
 		try {
 			File f = new File(path);
@@ -132,12 +147,12 @@ public class IOHelper {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	public static void delete(String path) {
 		try {
 			File f = new File(path);
 			f.delete();
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
@@ -146,14 +161,14 @@ public class IOHelper {
 		try {
 			String imgPath = null;
 			File file = new File(folder);
-			if(file.isDirectory()) {
+			if (file.isDirectory()) {
 				File[] imgPaths = file.listFiles();
 				Random random = new Random();
-				int randomNumber = random.nextInt((imgPaths.length-1) - 0) + 0;
+				int randomNumber = random.nextInt((imgPaths.length - 1) - 0) + 0;
 				imgPath = imgPaths[randomNumber].getAbsolutePath();
 			}
 			return imgPath.replace("\\", "/");
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			return null;
 		}
 	}

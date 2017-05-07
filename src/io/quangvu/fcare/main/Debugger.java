@@ -2,7 +2,10 @@ package io.quangvu.fcare.main;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -16,49 +19,63 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
+import io.quangvu.fcare.helper.CookieHelper;
 import io.quangvu.fcare.helper.NumberHelper;
 import io.quangvu.fcare.selenium.WebDriverManager;
 import io.quangvu.fcare.service.CloneCareService;
 
 public class Debugger {
 
-	String id = "100016383018168"; //"100016496493171"; 
+	String id = "100016496493171";  //"100016383018168"; 
 	String pass = "Lol686868";
-	
+
 	// String id = "nguyenbao.duong.102";
 	// String pass = "Lol686868";
 
 	String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36";
 
+	String cookieString;
+
 	PhantomJSDriver driver;
 
 	private String sourcePath = "C:/Users/quang/Desktop/Temp/FCARE/sources/";
-	
+
 	private ArrayList<String> friendIds;
-	
-	public Debugger() {
-		this.login();
-		this.friendIds = this.getFriendIds();
-		this.acceptFriends(20);
-//		this.addSuggesFriends(10);
-//		this.postTextLink("Ngày xưa có phải anh quá vội vàng... https://www.youtube.com/watch?v=n3vAvg7eI0E");
-//		this.postImageStatus(this.sourcePath + "image/tha-thinh/chum-tho-tinh-mua-thu.jpg", "mùa thu của em");
-//		this.changeAvatar(this.sourcePath + "avatar/tha-thinh/8.jpg");
-//		this.likePage("thangbanben");
-//		this.commentPage("thangbanben");
-//		this.like(this.friendIds.get(NumberHelper.getRandomInt(this.friendIds.size()-1, 0)));
-//		this.comment(this.friendIds.get(NumberHelper.getRandomInt(this.friendIds.size()-1, 0)));
-//		this.share("thangbanben");
-		
-		this.logout();
+
+	public static void main(String[] args) {
+		new Debugger();
 	}
-	
+
+	public Debugger() {
+		driver = WebDriverManager.getInstance().getPhantomJSDriver(userAgent);
+		CookieHelper.cookieLogin("", driver);
+//		this.login();
+		this.friendIds = this.getFriendIds();
+		System.out.println(this.friendIds.size());
+		// this.acceptFriends(20);
+//		 this.addSuggesFriends(10);
+		// this.postTextLink("Ngày xưa có phải anh quá vội vàng...
+		// https://www.youtube.com/watch?v=n3vAvg7eI0E");
+		// this.postImageStatus(this.sourcePath +
+		// "image/tha-thinh/chum-tho-tinh-mua-thu.jpg", "mùa thu của em");
+		// this.changeAvatar(this.sourcePath + "avatar/tha-thinh/8.jpg");
+		// this.likePage("thangbanben");
+		// this.commentPage("thangbanben");
+		// this.like(this.friendIds.get(NumberHelper.getRandomInt(this.friendIds.size()-1,
+		// 0)));
+		// this.comment(this.friendIds.get(NumberHelper.getRandomInt(this.friendIds.size()-1,
+		// 0)));
+		// this.share("thangbanben");
+
+		 this.logout();
+	}
+
 	private void addCookies(String cookiesString) {
-		
+
 	}
 
 	public void login() {
-		driver = WebDriverManager.getInstance().getPhantomJSDriver(userAgent);
+
 		System.out.println(">>>login<<<");
 		driver.get("https://mbasic.facebook.com/");
 		System.out.println(driver.getTitle() + "-" + driver.getCurrentUrl());
@@ -74,13 +91,16 @@ public class Debugger {
 		}
 	}
 
-	
+	public void cookieLogin() {
+//		CookieHelper.cookieLogin(cloneId, driver);
+	}
+
 	public void acceptFriends(int limit) {
 		System.out.println(">>>accept friends<<<");
 		int count = 0;
 		int rounds = limit / 10;
 		int sleep = 0;
-		System.out.println(limit + " friends will be accepted, number rounds = " + (rounds+1));
+		System.out.println(limit + " friends will be accepted, number rounds = " + (rounds + 1));
 		if (rounds >= 1) {
 			for (int i = 0; i < rounds + 1; i++) {
 				for (String uid : this.getAcceptFriendUid()) {
@@ -88,13 +108,13 @@ public class Debugger {
 						System.out.println("reached to limit [" + limit + "]-> done!");
 						break;
 					} else {
-						
+
 						this.acceptFriendByUid(uid);
 						count++;
 						sleep = NumberHelper.getRandomInt(5000, 3000);
-						System.out.println("wait " + (sleep/1000) + "."  + (sleep % 1000) + " seconds for next one");
+						System.out.println("wait " + (sleep / 1000) + "." + (sleep % 1000) + " seconds for next one");
 						try {
-							Thread.sleep(sleep/1000);
+							Thread.sleep(sleep / 1000);
 						} catch (Exception ex) {
 							ex.printStackTrace();
 							continue;
@@ -105,7 +125,7 @@ public class Debugger {
 			}
 		}
 	}
-	
+
 	public void acceptFriendByUid(String uid) {
 		System.out.println("accept friend[" + uid + "]");
 		driver.get("https://mbasic.facebook.com/" + uid);
@@ -124,13 +144,13 @@ public class Debugger {
 		}
 		return listUid;
 	}
-	
+
 	public void addSuggesFriends(int limit) {
 		System.out.println(">>>add suggest friends<<<");
 		int rounds = limit / 10;
 		int count = 0;
 		int sleep = 0;
-		System.out.println(limit + " friends will be accepted, number rounds = " + (rounds+1));
+		System.out.println(limit + " friends will be accepted, number rounds = " + (rounds + 1));
 		for (String uid : this.getSuggestionFriendsUid()) {
 			if (count == limit) {
 				System.out.println("reached to limit [" + limit + "]-> done!");
@@ -139,9 +159,9 @@ public class Debugger {
 				this.addFriendByUid(uid);
 				count++;
 				sleep = NumberHelper.getRandomInt(5000, 3000);
-				System.out.println("wait " + (sleep/1000) + "."  + (sleep % 1000) + " seconds for next one");
+				System.out.println("wait " + (sleep / 1000) + "." + (sleep % 1000) + " seconds for next one");
 				try {
-					Thread.sleep(sleep/1000);
+					Thread.sleep(sleep / 1000);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					continue;
@@ -149,7 +169,7 @@ public class Debugger {
 			}
 		}
 	}
-	
+
 	private ArrayList<String> getSuggestionFriendsUid() {
 		this.driver.get("https://mbasic.facebook.com/friends/center/suggestions/?fb_ref=psa&_rdr");
 		ArrayList<String> suggestionListId = new ArrayList<String>();
@@ -161,7 +181,7 @@ public class Debugger {
 		}
 		return suggestionListId;
 	}
-	
+
 	public void addFriendsByUid(ArrayList<String> listId) {
 		System.out.println("Preparing to add " + listId.size() + " friends");
 		for (String uid : listId) {
@@ -176,7 +196,7 @@ public class Debugger {
 		}
 		System.out.println("finished");
 	}
-	
+
 	public void addFriendByUid(String uid) {
 		System.out.println("adding friend[" + uid + "]");
 		driver.get("https://mbasic.facebook.com/" + uid);
@@ -204,7 +224,7 @@ public class Debugger {
 		driver.findElement(By.name("view_post")).click();
 		System.out.println("post!");
 	}
-	
+
 	public void postImageStatus(String imagePath, String content) {
 		System.out.println("preparing to upload image");
 		this.driver.get("https://mbasic.facebook.com/home.php");
@@ -227,43 +247,43 @@ public class Debugger {
 	public void like(String uid) {
 		this.driver.get("https://mbasic.facebook.com/profile.php?id=" + uid);
 		List<WebElement> likeLinks = driver.findElementsByXPath("//a[starts-with(@href,'/a/like.php')]");
-		likeLinks.get(NumberHelper.getRandomInt(likeLinks.size()-1, 0)).click();
-		System.out.println("liked a post of friend <" + uid + ">" );
+		likeLinks.get(NumberHelper.getRandomInt(likeLinks.size() - 1, 0)).click();
+		System.out.println("liked a post of friend <" + uid + ">");
 	}
-	
+
 	public void likePage(String pageId) {
 		this.driver.get("https://mbasic.facebook.com/" + pageId);
 		List<WebElement> likeLinks = driver.findElementsByXPath("//a[starts-with(@href,'/a/like.php')]");
-		likeLinks.get(NumberHelper.getRandomInt(likeLinks.size()-1, 0)).click();
-		System.out.println("liked a post of page <" + pageId + ">" );
+		likeLinks.get(NumberHelper.getRandomInt(likeLinks.size() - 1, 0)).click();
+		System.out.println("liked a post of page <" + pageId + ">");
 	}
 
 	public void comment(String uid) {
 		this.driver.get("https://mbasic.facebook.com/profile.php?id=" + uid);
 		List<WebElement> commentLinks = driver.findElementsByXPath("//*[starts-with(@id,'u_0')]/div[2]/div[2]/a[1]");
-		commentLinks.get(NumberHelper.getRandomInt(commentLinks.size()-1, 0)).click();
+		commentLinks.get(NumberHelper.getRandomInt(commentLinks.size() - 1, 0)).click();
 		this.driver.findElementById("composerInput").sendKeys("it's a beautiful day!");
 		this.driver.findElementByXPath("//*[starts-with(@id,'u_0')]/tbody/tr/td[2]/div/input").click();
-		
-		System.out.println("commented on a post of friend <" + uid + ">" );
+
+		System.out.println("commented on a post of friend <" + uid + ">");
 	}
-	
+
 	public void commentPage(String pageId) {
 		this.driver.get("https://mbasic.facebook.com/" + pageId);
 		List<WebElement> commentLinks = driver.findElementsByXPath("//*[starts-with(@id,'u_0')]/div[2]/div[2]/a[1]");
-		commentLinks.get(NumberHelper.getRandomInt(commentLinks.size()-1, 0)).click();
+		commentLinks.get(NumberHelper.getRandomInt(commentLinks.size() - 1, 0)).click();
 		this.driver.findElementById("composerInput").sendKeys("a hi hi");
 		this.driver.findElementByXPath("//*[starts-with(@id,'u_0')]/tbody/tr/td[2]/div/input").click();
-		
-		System.out.println("commented on a post of friend <" + pageId + ">" );
+
+		System.out.println("commented on a post of friend <" + pageId + ">");
 	}
 
 	public void share(String pageId) {
 		this.driver.get("https://mbasic.facebook.com/" + pageId);
 		List<WebElement> shareLinks = driver.findElementsByXPath("//*[starts-with(@id,'u_0')]/div[2]/div[2]/a[2]");
-		shareLinks.get(NumberHelper.getRandomInt(shareLinks.size()-1, 0)).click();
+		shareLinks.get(NumberHelper.getRandomInt(shareLinks.size() - 1, 0)).click();
 		this.driver.findElementByXPath("//*[@id='root']/table/tbody/tr/td/div/form/input[17]").click();
-		System.out.println("shared a post of <" + pageId + ">" );
+		System.out.println("shared a post of <" + pageId + ">");
 	}
 
 	public void logout() {
@@ -292,13 +312,9 @@ public class Debugger {
 		return friendIds;
 	}
 
-	public static void main(String[] args) {
-		new Debugger();
-	}
-	
 	private String getCookies() {
 		String cookieString = "";
-		for(Cookie cookie : this.driver.manage().getCookies()) {
+		for (Cookie cookie : this.driver.manage().getCookies()) {
 			cookieString += cookie.toString() + "#";
 		}
 		System.out.println(cookieString);
