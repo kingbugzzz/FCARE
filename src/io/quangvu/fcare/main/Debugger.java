@@ -2,41 +2,55 @@ package io.quangvu.fcare.main;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.border.Border;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
+import io.quangvu.fcare.bean.Clone;
+import io.quangvu.fcare.helper.CheckLiveHelper;
 import io.quangvu.fcare.helper.CookieHelper;
+import io.quangvu.fcare.helper.DBHelper;
 import io.quangvu.fcare.helper.NumberHelper;
+import io.quangvu.fcare.model.CloneModel;
 import io.quangvu.fcare.selenium.WebDriverManager;
 import io.quangvu.fcare.service.CloneCareService;
 
 public class Debugger {
 
-	String id = "100016496493171";  //"100016383018168"; 
-	String pass = "Lol686868";
+	 String id = "100016414809043";
+	 String pass = "Lol686868";
+	 
+	 String userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Mobile/11A465 Twitter for iPhone";
 
-	// String id = "nguyenbao.duong.102";
-	// String pass = "Lol686868";
-
-	String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36";
+//	String id = "100016496493171";
+//	String pass = "Lol686868";
+//	String userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Mobile/11A465 Twitter for iPhone";
 
 	String cookieString;
 
 	PhantomJSDriver driver;
+	
+	Clone clone;
+	CloneModel cloneModel;
 
 	private String sourcePath = "C:/Users/quang/Desktop/Temp/FCARE/sources/";
 
@@ -44,16 +58,48 @@ public class Debugger {
 
 	public static void main(String[] args) {
 		new Debugger();
+//		String data = "sadfsadf#sdlfsdlkf#lsjflsdkjf#ldfjsdlfkj@dlfjsldkfjsd#dfjsdlkfjsd#sdfsldkfgdlskg#slgflskdfjglk@lfdgjldfkjgdflg3fggdf#sdlfsdlkf#lsdfkjdlfk";
+//		String dat[] = data.split("@");
+//		
+//		for(String s : dat) {
+//			System.out.println(s);
+//		}
 	}
 
 	public Debugger() {
-		driver = WebDriverManager.getInstance().getPhantomJSDriver(userAgent);
-		CookieHelper.cookieLogin("", driver);
-//		this.login();
-		this.friendIds = this.getFriendIds();
-		System.out.println(this.friendIds.size());
+		DBHelper.cnt();
+		cloneModel = new CloneModel();
+		clone = cloneModel.get("100016414809043");
+		System.out.println(clone.toString());
+		driver = WebDriverManager.getInstance().getPhantomJSDriver(clone.getUserAgent());
+		CookieHelper.cookieLogin(clone, driver);
+		driver.get("https://mbasic.facebook.com/");
+		
+		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+
+		try {
+			FileUtils.copyFile(scrFile, new File("cookie-login.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		this.changeAvatar(this.sourcePath + "avatar/tha-thinh/8.jpg");
+//		this.postTextLink("Ngày xưa có phải anh quá vội vàng...");
+//		this.likePage("thangbanben");
+		System.out.println(driver.getCurrentUrl());
+		System.out.println(driver.getTitle());
+		DBHelper.disconnect();
+		
+//		System.out.println(CheckLiveHelper.check(id, pass, userAgent));
+		
+//		driver = WebDriverManager.getInstance().getPhantomJSDriver(userAgent);
+//		 this.login();
+//		 System.out.println(getCookieString(driver));
+		 
+//		 this.friendIds = this.getFriendIds();
+//		 System.out.println(this.friendIds.size());
 		// this.acceptFriends(20);
-//		 this.addSuggesFriends(10);
+		// this.addSuggesFriends(10);
 		// this.postTextLink("Ngày xưa có phải anh quá vội vàng...
 		// https://www.youtube.com/watch?v=n3vAvg7eI0E");
 		// this.postImageStatus(this.sourcePath +
@@ -67,11 +113,19 @@ public class Debugger {
 		// 0)));
 		// this.share("thangbanben");
 
-		 this.logout();
+		// this.logout();
+		 
 	}
 
-	private void addCookies(String cookiesString) {
+	public String getCookieString(PhantomJSDriver driver) {
+		String cookieString = "";
+		Set<Cookie> cookies = driver.manage().getCookies();
+		for (Cookie cookie : cookies) {
+			cookieString += cookie.getName() + "#" + cookie.getValue() + "#" + cookie.getDomain() + "#"
+					+ cookie.getPath() + "#" + cookie.getExpiry() + "$";
+		}
 
+		return cookieString.substring(0, cookieString.length() - 1);
 	}
 
 	public void login() {
@@ -92,7 +146,7 @@ public class Debugger {
 	}
 
 	public void cookieLogin() {
-//		CookieHelper.cookieLogin(cloneId, driver);
+		// CookieHelper.cookieLogin(cloneId, driver);
 	}
 
 	public void acceptFriends(int limit) {
@@ -209,7 +263,17 @@ public class Debugger {
 		System.out.println(avataPath);
 		this.driver.get("https://mbasic.facebook.com/profile_picture/?returnuri=profile.php");
 		System.out.println(driver.getCurrentUrl());
-		WebElement fileInput = driver.findElement(By.name("pic"));
+		
+		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+
+		try {
+			FileUtils.copyFile(scrFile, new File("changeAvatar.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		WebElement fileInput = driver.findElementByXPath("//*[@id='root']/table/tbody/tr/td/div[1]/div[3]/form/ol/li[1]/input");
+		System.out.println(fileInput.getAttribute("name"));
 		fileInput.sendKeys(avataPath);
 		WebElement submit = driver
 				.findElementByXPath("//*[@id='root']/table/tbody/tr/td/div[1]/div[3]/form/ol/li[2]/input");

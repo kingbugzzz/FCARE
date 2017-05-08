@@ -74,6 +74,7 @@ public class BeanPaserHelper {
 			}
 			return clone;
 		}catch(Exception ex) {
+			ex.printStackTrace();
 			return null;
 		}
 	}
