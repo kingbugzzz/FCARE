@@ -24,7 +24,22 @@ public class CloneModel {
 		System.out.println(query);
 		return BeanPaserHelper.parseClone(DBHelper.executeQuery(query));
 	}
-
+	
+	public ArrayList<Clone> get(String[] ids) {
+		
+		String stringIds = "";
+		for(String id : ids) {
+			stringIds += id + ",";
+		}
+		
+		stringIds = stringIds.substring(0, stringIds.length()-1);
+		
+		String query = "SELECT * FROM clones WHERE id IN (" + stringIds + ") AND owner = '" + SessionHelper.getSessionUser()
+		+ "' order by created_at";
+		System.out.println(query);
+		return BeanPaserHelper.parseClones(DBHelper.executeQuery(query));
+	}
+	
 	public ArrayList<Clone> all() {
 		String query = "SELECT * FROM clones WHERE owner = '" + SessionHelper.getSessionUser()
 				+ "' order by created_at";
@@ -59,7 +74,6 @@ public class CloneModel {
 		return DBHelper.execute(query);
 	}
 
-	
 	public boolean updateTags(String ids, String tag) {
 		String query = "UPDATE clones SET tag='" + tag + "' WHERE id IN(" + ids + ") AND owner = '"
 				+ SessionHelper.getSessionUser() + "'";

@@ -22,6 +22,10 @@ public class CloneController {
 		return this.model.get(id);
 	}
 	
+	public ArrayList<Clone> get(String[] ids) {
+		return this.model.get(ids);
+	}
+	
 	public ArrayList<Clone> all() {
 		return this.model.all();
 	}

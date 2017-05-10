@@ -49,7 +49,7 @@ public class CookieHelper {
 		return cookieString.substring(0, cookieString.length() - 1);
 	}
 
-	public static void cookieLogin(Clone clone, PhantomJSDriver driver) {
+	public static void login(Clone clone, PhantomJSDriver driver) {
 				
 		String[] cookieParts = clone.getCookie().split("@");
 		Cookie cookie = null;

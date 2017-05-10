@@ -36,7 +36,7 @@ import io.quangvu.fcare.service.CloneCareService;
 
 public class Debugger {
 
-	 String id = "100016414809043";
+	 String id = "100016438868228";
 	 String pass = "Lol686868";
 	 
 	 String userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Mobile/11A465 Twitter for iPhone";
@@ -67,34 +67,39 @@ public class Debugger {
 	}
 
 	public Debugger() {
-		DBHelper.cnt();
-		cloneModel = new CloneModel();
-		clone = cloneModel.get("100016414809043");
-		System.out.println(clone.toString());
-		driver = WebDriverManager.getInstance().getPhantomJSDriver(clone.getUserAgent());
-		CookieHelper.cookieLogin(clone, driver);
-		driver.get("https://mbasic.facebook.com/");
+//		DBHelper.cnt();
+//		cloneModel = new CloneModel();
+//		clone = cloneModel.get("100016414809043");
+//		System.out.println(clone.toString());
+//		driver = WebDriverManager.getInstance().getPhantomJSDriver(clone.getUserAgent());
+//		CookieHelper.cookieLogin(clone, driver);
+//		driver.get("https://mbasic.facebook.com/");
+		
+		
+		driver = WebDriverManager.getInstance().getPhantomJSDriver(userAgent);
+		this.login();
+		System.out.println(getCookieString(driver));
+
+		this.changeAvatar(this.sourcePath + "avatar/tha-thinh/6.jpg");
 		
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 
 		try {
-			FileUtils.copyFile(scrFile, new File("cookie-login.jpg"));
+			FileUtils.copyFile(scrFile, new File("C:/Users/quang/Desktop/Temp/screenshot.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		this.changeAvatar(this.sourcePath + "avatar/tha-thinh/8.jpg");
-//		this.postTextLink("Ngày xưa có phải anh quá vội vàng...");
+//		this.changeAvatar(this.sourcePath + "avatar/tha-thinh/8.jpg");
+		
 //		this.likePage("thangbanben");
-		System.out.println(driver.getCurrentUrl());
-		System.out.println(driver.getTitle());
-		DBHelper.disconnect();
+//		System.out.println(driver.getCurrentUrl());
+//		System.out.println(driver.getTitle());
+//		DBHelper.disconnect();
 		
 //		System.out.println(CheckLiveHelper.check(id, pass, userAgent));
 		
-//		driver = WebDriverManager.getInstance().getPhantomJSDriver(userAgent);
-//		 this.login();
-//		 System.out.println(getCookieString(driver));
+//		
 		 
 //		 this.friendIds = this.getFriendIds();
 //		 System.out.println(this.friendIds.size());
