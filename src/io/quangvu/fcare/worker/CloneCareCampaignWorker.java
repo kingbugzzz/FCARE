@@ -41,24 +41,21 @@ public class CloneCareCampaignWorker implements Runnable {
 	}
 	
 	public void run() {
-		System.out.println(this.name + " started");
 		while(!stop) {
-//			try {
-//				Thread.sleep(1500);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
 			this.care();
-			this.terminate();
 			this.counter.count();
 			this.progressBar.setValue(this.counter.getValue());
 		}
-		System.out.println(this.name + " finished");
 	}
 	
 	public void terminate() {
 //		this.textArea.append("\n" +this.name+ "---is terminating...");
-		stop = true;		
+		stop = true;
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		this.driver.quit();
 		this.textArea.append("\n" +this.name+ "---terminated");
 	}
@@ -67,8 +64,11 @@ public class CloneCareCampaignWorker implements Runnable {
 		this.driver = WebDriverManager.getInstance().getPhantomJSDriver(this.clone.getUserAgent());
 		try {
 			System.out.println("doing job...");
-			Thread.sleep(5000);
+			Thread.sleep(NumberHelper.getRandomInt(6000, 3000));
+			System.out.println("doing job 2....");
+			Thread.sleep(NumberHelper.getRandomInt(6000, 3000));
 			System.out.println("stop");
+			this.terminate();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

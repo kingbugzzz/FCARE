@@ -48,7 +48,6 @@ public class CloneCareRunningPanel extends JPanel {
 						"FCARE 1.0", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
 						ObjButtons, ObjButtons[1]);
 				if (PromptResult == JOptionPane.YES_OPTION) {
-					stop();
 					container.dispose();
 				}
 			}
@@ -86,7 +85,6 @@ public class CloneCareRunningPanel extends JPanel {
 						"FCARE 1.0", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
 						ObjButtons, ObjButtons[1]);
 				if (PromptResult == JOptionPane.YES_OPTION) {
-					stop();
 					container.dispose();
 				}
 			}
@@ -119,13 +117,7 @@ public class CloneCareRunningPanel extends JPanel {
 			t.start();
 		}
 	}
-	
-	private void stop() {
-		for(CloneCareCampaignWorker worker : this.workers ) {
-			worker.terminate();
-		}
-	}
-	
+		
 	private void prepareIds(String[] ids) {
 		for(int i=0; i<ids.length; i++) {
 			ids[i] = "'" + ids[i] + "'";
